@@ -1,0 +1,163 @@
+\documentclass[12pt,a4paper,oneside]{article}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\usepackage{listingsutf8}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+	basicstyle=\ttfamily, 
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{OliveGreen}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8/latin1, 
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\usepackage{verbatim}
+\usepackage{moreverb}
+
+\usepackage{longtable}
+\usepackage[nottoc,numbib]{tocbibind}
+
+\usepackage{html}   %  *always* load this for LaTeX2HTML
+\begin{htmlonly}
+\providecommand{\lstinputlisting}[2][]{\verbatiminput{#2}}
+\end{htmlonly}
+
+\bibliographystyle{unsrt}
+
+\begin{document}
+
+% Формируем титульную страницу
+\title{Программа курсов по ОС Linux}
+\author{Epam Low Level Linux Department}
+%\date{2011}
+\maketitle
+
+\renewcommand{\contentsname}{Оглавление}
+
+\tableofcontents
+%\setcounter{tocdepth}{2}
+%\newpage
+
+\section{Цель}
+%\addcontentsline{toc}{chapter}{Цель}
+
+Целью курса является обучение студентов базовыми знаниями и навыками работы в ОС Linux.
+
+Курс рассчитан на студентов, которые уже знакомы с программированием, как таковым.
+Предпочтительным языком программирования является C.
+
+\newpage
+\section{Программа}
+
+\subsection{Введение в GNU/Linux}
+
+\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+        \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endfirsthead
+		\multicolumn{4}{c}%
+		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\hline
+ 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endhead
+		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+        Введение & Дистрибутивы. Процесс загрузки ОС Linux. & 1.5 & 0.5 \\ \hline
+        Командная строка & Понятие shell, console. Окружение. Потоки ввода/вывода. Базовые утилиты. &1.5 & 2.5 \\ \hline
+        Пользовательская модель & Управление пользователями, группами & 0.5 & 0.5 \\ \hline
+        Файловая структура & FHS. Файловые объекты. Права доступа. Утилиты. & 1 & 1 \\ \hline
+        Дисковая подсистема & Блочные устройства. Файловые системы. RAID. LVM. & 1 & 1 \\ \hline
+        Сетевое администрирование & Управление интерфейсами. Iptables. Удаленный доступ. & 0.5 & 0.5 \\ \hline
+		\textbf{Итого:} & 12         & 6 & 6 \\ \hline
+
+\end{longtable}
+
+
+
+\newpage
+
+\subsection{Командная оболочка и язык сценариев Bash}
+\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+        \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endfirsthead
+		\multicolumn{4}{c}%
+		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\hline
+ 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endhead
+		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+
+
+        Синтаксис \cite{abs01} & Переменные. Операторы. Экранирование. Коды возврата. Тесты и сравнения.	Ветвления. Циклы. Арифметические операции. Массивы & 2 & 3 \\ \hline
+        Регулярные выражения \cite{abs01} & Использование. Awk. & 1 & 1 \\ \hline
+        Сценарии \cite{abs01} & Функции. Встроенные и внешние команды. Подстановка результатов выполнения команд. Фильтры. Перенаправление ввода/вывода.	exec & 2 & 3 \\ \hline
+		\textbf{Итого:} & 12         & 5 & 7 \\ \hline
+
+\end{longtable}
+
+\cite{abs01}
+
+\newpage
+\subsection{Инструменты разработчика}
+\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+        \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endfirsthead
+		\multicolumn{4}{c}%
+		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\hline
+ 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endhead
+		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+
+        GNU Toolchain  & Компилятор. Линкер. Статические и динамические приложения и библиотеки. & 1 & 1 \\ \hline
+        Управление сборкой проекта & Make. Введение в синтаксис makefile. Обзор autotools. & 1 & 1 \\ \hline
+        Базовый инструментарий & Работа с исходным кодом. Анализ исполняемого файла. Утилиты. Изоляция процесса. & 1 & 2 \\ \hline
+	    Профайлинг \cite{best2006linux}, \cite{tgs-perftools01} & Определение узких мест. Утилиты для определения узких мест. & 1.5 & 1 \\ \hline
+	    Отладка \cite{best2006linux}, \cite{gdb01} & GDB. Valgrind. Дампы. & 1.5 & 2 \\ \hline
+        Совместная разработка & Централизованные и распределенные системы контроля версий. SVN. GIT. История изменений. Бранчи, слияния, тэги. & 1.5 & 1.5 \\ \hline
+        Установка ПО & Установка из исходников. Введение в пакетирование RPM. Run-time и build-time окружения. & 1.5 & 1.5 \\ \hline
+		\textbf{Итого:} & 20         & 8 & 10 \\ \hline
+
+
+\end{longtable}
+
+\cite{best2006linux}
+\cite{tgs-perftools01}
+\cite{gdb01}
+
+\newpage
+%\addcontentsline{toc}{section}{Литература}
+%\bibliographystyle{plain-annote}
+\bibliography{biblio}
+
+\end{document}
+
