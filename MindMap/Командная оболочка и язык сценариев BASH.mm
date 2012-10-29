@@ -1,7 +1,7 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1345456896530" ID="ID_1728301447" LINK="LinuxCourses.mm" MODIFIED="1350398521849" TEXT="&#x41a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;&#x43d;&#x430;&#x44f; &#x43e;&#x431;&#x43e;&#x43b;&#x43e;&#x447;&#x43a;&#x430; &#x438; &#x44f;&#x437;&#x44b;&#x43a; &#x441;&#x446;&#x435;&#x43d;&#x430;&#x440;&#x438;&#x435;&#x432; BASH">
-<node CREATED="1350399367285" ID="ID_1582474779" MODIFIED="1350399737427" POSITION="right" TEXT="&#x421;&#x438;&#x43d;&#x442;&#x430;&#x43a;&#x441;&#x438;&#x441;">
+<node CREATED="1350399367285" ID="ID_1582474779" MODIFIED="1351513970260" POSITION="right" TEXT="&#x421;&#x438;&#x43d;&#x442;&#x430;&#x43a;&#x441;&#x438;&#x441;">
 <node CREATED="1350399372941" ID="ID_1161777192" MODIFIED="1350399410702" STYLE="fork" TEXT="&#x41f;&#x435;&#x440;&#x435;&#x43c;&#x435;&#x43d;&#x43d;&#x44b;&#x435;"/>
 <node CREATED="1350399413478" ID="ID_115935282" MODIFIED="1350399417492" TEXT="&#x41e;&#x43f;&#x435;&#x440;&#x430;&#x442;&#x43e;&#x440;&#x44b;"/>
 <node CREATED="1350399463089" ID="ID_726343154" MODIFIED="1350399474053" TEXT="&#x42d;&#x43a;&#x440;&#x430;&#x43d;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x43d;&#x438;&#x435;"/>
@@ -12,10 +12,10 @@
 <node CREATED="1350399596813" ID="ID_1054879595" MODIFIED="1350399604832" TEXT="&#x410;&#x440;&#x438;&#x444;&#x43c;&#x435;&#x442;&#x438;&#x447;&#x435;&#x441;&#x43a;&#x438;&#x435; &#x43e;&#x43f;&#x435;&#x440;&#x430;&#x446;&#x438;&#x438;"/>
 <node CREATED="1350399955699" ID="ID_1572541197" MODIFIED="1350399958713" TEXT="&#x41c;&#x430;&#x441;&#x441;&#x438;&#x432;&#x44b;"/>
 </node>
-<node CREATED="1350400410568" ID="ID_881472820" MODIFIED="1350400423872" POSITION="right" TEXT="&#x420;&#x435;&#x433;&#x443;&#x43b;&#x44f;&#x440;&#x43d;&#x44b;&#x435; &#x432;&#x44b;&#x440;&#x430;&#x436;&#x435;&#x43d;&#x438;&#x44f;">
+<node CREATED="1350400410568" ID="ID_881472820" MODIFIED="1351513978434" POSITION="right" TEXT="&#x420;&#x435;&#x433;&#x443;&#x43b;&#x44f;&#x440;&#x43d;&#x44b;&#x435; &#x432;&#x44b;&#x440;&#x430;&#x436;&#x435;&#x43d;&#x438;&#x44f;">
 <node CREATED="1350400427160" ID="ID_359964452" MODIFIED="1350400431940" TEXT="awk"/>
 </node>
-<node CREATED="1350399619999" ID="ID_1578780409" MODIFIED="1350400028685" POSITION="right" TEXT="&#x421;&#x446;&#x435;&#x43d;&#x430;&#x440;&#x438;&#x438;">
+<node CREATED="1350399619999" ID="ID_1578780409" MODIFIED="1351513978964" POSITION="right" TEXT="&#x421;&#x446;&#x435;&#x43d;&#x430;&#x440;&#x438;&#x438;">
 <node CREATED="1350400032770" ID="ID_301318246" MODIFIED="1350400039278" TEXT="&#x424;&#x443;&#x43d;&#x43a;&#x446;&#x438;&#x438;"/>
 <node CREATED="1350399655673" ID="ID_618856615" MODIFIED="1350399671471" TEXT="&#x412;&#x441;&#x442;&#x440;&#x43e;&#x435;&#x43d;&#x43d;&#x44b;&#x435; &#x438; &#x432;&#x43d;&#x435;&#x448;&#x43d;&#x438;&#x435; &#x43a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;&#x44b;"/>
 <node CREATED="1350399672741" ID="ID_255814658" MODIFIED="1350399693255" TEXT="&#x41f;&#x43e;&#x434;&#x441;&#x442;&#x430;&#x43d;&#x43e;&#x432;&#x43a;&#x430; &#x440;&#x435;&#x437;&#x443;&#x43b;&#x44c;&#x442;&#x430;&#x442;&#x43e;&#x432; &#x432;&#x44b;&#x43f;&#x43e;&#x43b;&#x43d;&#x435;&#x43d;&#x438;&#x44f; &#x43a;&#x43e;&#x43c;&#x430;&#x43d;&#x434;"/>
