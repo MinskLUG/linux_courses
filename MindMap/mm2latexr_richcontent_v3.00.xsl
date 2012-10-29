@@ -38,7 +38,7 @@ See: http://freemind.sourceforge.net/
 -->
 
 <xsl:stylesheet xmlns:xsl='http://www.w3.org/1999/XSL/Transform' version='1.0'>  
-<xsl:output omit-xml-declaration="yes" encoding="ISO-8859-1"/>
+<xsl:output omit-xml-declaration="yes" encoding="UTF-8"/>
 
 <xsl:template match="map">
 
