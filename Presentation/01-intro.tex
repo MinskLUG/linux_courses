@@ -1,18 +1,61 @@
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
 
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
 
-
-\documentclass[usepdftitle=false,professionalfonts,compress ]{beamer}
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}	
 
 %Packages to be included
-\usepackage[utf8]{inputenc}
+
+\usepackage{textcomp}
+
 \usepackage[russian]{babel}
-\usepackage{beamerthemesplit}
-\usepackage{graphics,epsfig, subfigure}
-\usepackage{url}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
 \usepackage{listings}
-\RequirePackage{eurosym}
-\usepackage{hyperref}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8x,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% PDF meta data inserted here %%%%%%%%%%
@@ -28,13 +71,9 @@
 
 %%%%%% Beamer Theme %%%%%%%%%%%%%
 
-\usetheme{Copenhagen}
-\usecolortheme{wolverine}
-		
+	
 \title{Введение в GNU/Linux}
-
-
-
+\author{Epam/LLPD}
 
 
 
@@ -46,7 +85,11 @@
 
 
 \begin{document}
-\frame[plain]{
+
+\section{Введение}
+
+
+\frame{
 	\frametitle{}
 	\titlepage
 	\vspace{-0.5cm}
@@ -55,7 +98,8 @@
 	\end{center}
 }
 \frame{
-	\tableofcontents[hideallsubsections]
+	\tableofcontents
+%	[hideallsubsections]
 }
 
 
@@ -75,19 +119,109 @@
 
 
 
-\section{Введение.}
-
-
 \subsection{Введение}
 
-
 \begin{frame}{Цель курса}
+	\begin{center}
+		\Huge
+		Увеличение популярности GNU/Linux среди программистов.
 
+		\hrulefill
+
+		\normalsize
+		Воспитание потенциальных сотрудников ;-)
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Состав курса}
+	\begin{itemize}
+		\item Представление об архитектуре GNU/Linux дистрибутива
+			\pause
+		\item "Ежедневные" навыки работы в консоли
+			\pause
+		\item Введение в shell-программирование
+			\pause
+		\item Работа с классическими средствами разработки
+			\pause
+		\item Все, чего вы не знали и боялись спросить
+	\end{itemize}
 \end{frame}
 
 
 
+
 \subsection{GNU/Linux}
+
+\begin{frame}{Терминология}
+	\begin{itemize}
+		\item GNU -- GNU's Not Unix!
+		\begin{itemize}
+			\item 1983. Ричард Столлман. Свободное ПО.
+		\end{itemize}
+
+		\pause
+
+		\item POSIX
+		\begin{itemize}
+			\item 1988. Portable Operating System Interface for Unix. 
+		\end{itemize}
+
+		\pause
+
+		\item Linux
+		\begin{itemize}
+			\item 1991. Линус Торвальдс. Ядро.
+		\end{itemize}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Лицензии: открытые и свободные}
+
+	\begin{block}{ Р.Столлман: 4 свободы}
+
+		\begin{itemize}
+			\item Свобода 0: Свобода запускать программу в любых целях.
+			\item Свобода 1: Свобода изучения работы программы и адаптация её к вашим нуждам. 
+				Доступ к исходным текстам является необходимым условием.
+			\item Свобода 2: Свобода распространять копии,  так что вы можете помочь вашему товарищу.
+			\item Свобода 3: Свобода улучшать программу и публиковать ваши улучшения,
+				так что всё общество выиграет от этого.
+				Доступ к исходным текстам является необходимым условием.
+		\end{itemize}
+	\end{block}
+
+
+\end{frame}
+
+\begin{frame}{Copyleft }
+
+	\begin{block}{ \textcopyleft  -- ``Копилефт''}
+	Авторское лево -- концепция и практика использования законов авторского права для обеспечения 
+	невозможности ограничить любому человеку право использовать,  изменять и распространять как 
+	исходное произведение,  так и произведения,  производные от него.
+	\end{block}
+
+
+	При копилефте все производные произведения должны распространяться под той же лицензией,
+	что и оригинальное произведение.
+
+\end{frame}
+
+
+\begin{frame}{Лицензии}
+	\begin{itemize}
+		\item GPL
+		\item LGPL
+		\item AGPL
+		\item BSD
+		\item Creative Commons *
+		\item MIT
+		\item Mozilla Public License
+	\end{itemize}
+\end{frame}
+
 
 
 
