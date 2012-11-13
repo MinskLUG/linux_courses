@@ -98,7 +98,8 @@
 	\end{center}
 }
 \frame{
-	\tableofcontents[hideallsubsections]
+	\tableofcontents
+%	[hideallsubsections]
 }
 
 
@@ -110,15 +111,6 @@
 %%%%%%%%%% Content starts here %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
-
-
-
-
-\subsection{Введение}
 
 \begin{frame}{Цель курса}
 	\begin{center}
@@ -176,7 +168,7 @@
 	\end{itemize}
 \end{frame}
 
-\section{Лицензии}
+\subsection{Лицензии}
 
 \begin{frame}{Лицензии: открытые и свободные}
 
@@ -290,6 +282,148 @@
 			\item BackTrack
 		\end{columns}
 	\end{itemize}
+\end{frame}
+
+\section{Процесс загрузки ОС Linux}
+
+\begin{frame}{Процесс загрузки GNU/Linux}
+
+	\begin{enumerate}
+		\item BIOS
+		\item MBR
+			\pause
+		\item Загрузка загрузчика
+		\begin{itemize}
+			\item Stage 1 -- Первичный загрузчик
+			\item Stage 1,5 -- Загрузка ядра загрузчика и драйвера ФС
+			\item Stage 2 -- Чтение конфигурации
+		\end{itemize}
+			\pause
+
+		\item Загрузка ядра в память
+		\item Загрузка initrd в память
+			\pause
+		\item Передача управления ядру
+		\begin{itemize}
+			\item Распаковка
+			\item Инициализация
+		\end{itemize}
+
+		\item Монтирование initrd
+		\item Запуск программы инициализации в initrd
+			\pause
+		\item Нахождение и монтирование корневого раздела
+			\pause
+		\item Запуск программы init
+		\begin{itemize}
+			\item Монтирование оставшихся разделов ФС
+			\item Инициализация оборудования
+			\item Запуск демонов
+		\end{itemize}
+
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Наиболее распространенные загрузчики}
+	\begin{itemize}
+		\item GRUB
+		\item LILO
+		\item syslinux (isolinux, pxelinux)
+		\item u-boot
+	\end{itemize}
+\end{frame}
+
+\subsection{Ядро Linux}
+
+\begin{frame}{Задачи ядра Linux}
+	\begin{itemize}
+		\item Инициализация системы
+		\item Управление процессами и потоками
+		\item Управление памятью
+		\item Управление файлами
+		\item IPC
+		\item Разграничение доступа
+		\item Сетевые возможности
+		\item Интерфейс доступа к возможностям ядра
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ядро}
+
+	Ядро ОС Linux является модульным. 
+
+	\begin{block}{Модули}
+		\begin{itemize}
+			\item В виде отдельных файлов
+			\item "Вкомпилированные" в ядро
+		\end{itemize}
+	\end{block}
+
+	\bigskip
+
+	Список загруженных модулей: {\tt /proc/modules}
+\end{frame}
+
+
+\begin{frame}{Параметры ядра}
+	
+	Полный список: {\tt Documentation/kernel-parameters.txt}
+
+	\begin{block}{Некоторые часто применяемые параметры}
+		\begin{itemize}
+			\begin{columns}
+			\column{0.3\textwidth}
+				\item console=ttyS0,115200
+				\item debug
+				\item init=/sbin/init
+				\item loglevel=[0-7]
+				\item maxcpus=[num]
+			\column{0.3\textwidth}
+				\item mem=nn[KMG]
+				\item noacpi
+				\item noapic
+				\item panic=nn (sec)
+				\item resume=/dev/sda2
+			\column{0.3\textwidth}
+				\item ro
+				\item rw
+				\item root=/dev/sda1
+				\item rootdelay=nn (sec)
+				\item rootwait
+				\item vga=<num>|ask
+			\end{columns}
+		\end{itemize}
+	\end{block}
+
+	Модулям можно передавать параметры используя синтаксис: {\tt module.param=value}
+
+	Параметры переданные ядру во время загрузки: {\tt /proc/cmdline}
+\end{frame}
+
+\subsection{}
+
+\begin{frame}{initrd}
+\end{frame}
+
+\begin{frame}{init}
+\end{frame}
+
+\section{Практика}
+
+\begin{frame}{Практическое задание}
+	\begin{enumerate}
+		\item Загрузить ОС по умолчанию
+		\item Посмотреть используемые параметры ядра 
+		\item Посмотреть список загруженных модулей
+			\pause
+		\item Переопределить init на sh
+		\item Загрузить ядро с "урезанным" количеством памяти
+		\item Отключить 1 или несколько процессоров
+			\pause
+		\item Переопределить загрузочное устройство
+	\end{enumerate}
 \end{frame}
 
 
