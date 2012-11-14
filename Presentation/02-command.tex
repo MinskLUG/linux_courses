@@ -188,50 +188,12 @@ man -a printf
 \end{block}
 \end{columns}
 \end{frame}
-\begin{frame}[fragile]{Базовые команды}
-\begin{columns}
-  \column{0.7\textwidth}
-  \begin{itemize}
-    \item Навигация по файловой системе
+\begin{frame}{Навигация по файловой системе}
       \begin{itemize}
-        \item Список файлов в (текущей по умолчанию) директории \pause \textbf{ls} (man ls)
-          \begin{itemize}
-            \item {\tt ls -l} Расширенная информация о файлах
-          \end{itemize}
-        \pause
-        \item Смена текущей директории \pause \textbf{cd} (help cd)
-        \item Имя текущей директории \pause \textbf{pwd} (help pwd)
+        \item Список файлов в (текущей по умолчанию) директории  \textbf{ls} (man ls)
+        \item Смена текущей директории \textbf{cd} (help cd)
+        \item Имя текущей директории  \textbf{pwd} (help pwd)
       \end{itemize}
-      \pause
-    \item Работа с файлами и директориями
-      \begin{itemize}
-        \item Создание пустого файла \textbf{touch} (man touch)
-        \item Копирование файла \textbf{cp} (man cp)
-        \item Удаление файла \textbf{rm} (man rm) \textbf{DANGER!!!}
-          \begin{itemize}
-            \item Опции {\tt -r -f -i}  
-          \end{itemize}
-        \item Создание директории \textbf{mkdir} (man mkdir)
-            \begin{itemize}
-              \item Опция {\tt -p}
-            \end{itemize}
-        \item Удаление директории \textbf{rmdir} (man rmdir)
-      \end{itemize}
-  \end{itemize}
-  \column{0.25\textwidth}
-   \begin{block}{Упражнение}
-     Создать иерархию директорий
-\begin{lstlisting}
-dir1/dir1.1/dir1.1.1
-dir1/dir1.2/dir1.2.1
-dir1/dir1.2/dir1.2.2
-\end{lstlisting}
-
-Внутри каждой создать файл
-
-Удалить все созданное
-   \end{block}
- \end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Команды для работы с файлами}
@@ -272,8 +234,8 @@ dir1/dir1.2/dir1.2.2
   \begin{itemize}
     \item Для директорий
     \begin{itemize}
-      \item {\tt ~} Домашняя директория
-      \item {\tt ~<username>} Домашняя директория пользователя
+      \item {\tt $\sim$} Домашняя директория
+      \item {\tt $\sim$<username>} Домашняя директория пользователя
       \item {\tt ../} Родительская директория
     \end{itemize}
   \pause  
@@ -348,7 +310,7 @@ cat /etc/udev/rules.d/* | wc -l
 {\tt command > file} Например {\tt cat file1 file2 > file3}
 \item С дополнением существующего
 
-{\tt command >>file}
+{\tt command > >file}
 \end{itemize}
 \pause
 \item Перенаправления stdin
@@ -356,7 +318,7 @@ cat /etc/udev/rules.d/* | wc -l
 {\tt command < file}
 \pause
 \item Перенаправления stderr
- 
+
 {\tt command1 2>\&1 | command2}
 
 {\tt command 1>file 2>\&1}
