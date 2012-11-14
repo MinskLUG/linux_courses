@@ -301,7 +301,33 @@ dir1/dir1.2/dir1.2.2
 ls  | wc -l # подсчет числа файлов
 man uniq | tr  '[:space:]' '\n' | sort | uniq -c | sort -n | less # подсчет количества слов в тексте man uniq
 history | wc -l # подсчет ранее введенных команд
+cat /etc/udev/rules.d/* | wc -l
 \end{lstlisting}
+\end{frame}
+\begin{frame}{Перенаправления в файл}
+\begin{itemize}
+\item Перенаправление stdout 
+\begin{itemize}
+\item С созданием нового файла
+
+{\tt command > file} Например {\tt cat file1 file2 > file3}
+\item С дополнением существующего
+
+{\tt command >>file}
+\end{itemize}
+\pause
+\item Перенаправления stdin
+
+{\tt command < file}
+\pause
+\item Перенаправления stderr
+ 
+{\tt command1 2>\&1 | command2}
+
+{\tt command 1>file 2>\&1}
+
+{\tt command 2>file 1>\&2}
+\end{itemize}
 \end{frame}
 \begin{frame}{Кастомизация bash}
 \end{frame}
