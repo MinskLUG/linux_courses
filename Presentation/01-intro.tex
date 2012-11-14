@@ -402,12 +402,58 @@
 	Параметры переданные ядру во время загрузки: {\tt /proc/cmdline}
 \end{frame}
 
-\subsection{}
+\begin{frame}{Магия SysRq}
+
+	{\tt CONFIG\_MAGIC\_SYSRQ=y}
+
+	{\tt /proc/sysrq-trigger}
+
+	\begin{block}{{\bf R}eboot {\bf E}ven {\bf I}f {\bf S}ystem {\bf U}tterly {\bf B}roken}
+		{\bf Ctrl+Alt+SysRq+?}
+
+		\begin{itemize}
+			\item h -- вывести список сочетаний на консоль
+			\item b -- перезагрузка
+			\item o -- выключение
+			\item e -- послать сигнал SIGTERM всем процессам кроме init
+			\item i -- послать сигнал SIGKILL всем процессам кроме init
+			\item s -- синхронизировать все ФС 
+			\item u -- переподключить все ФС в режиме RO
+		\end{itemize}
+		
+	\end{block}
+
+
+\end{frame}
+
+\subsection{Userspace}
 
 \begin{frame}{initrd}
+
+	Система первичной загрузки.
+
+	\begin{block}{Задача}
+		Основная задача -- подготовить и проинициализировать
+		устройство, на котором располагается корневая ФС.
+	\end{block}
 \end{frame}
 
 \begin{frame}{init}
+	Менеджер управления работой системой и сервисами.
+	
+	\bigskip
+
+	\center{\large PID = 1}
+
+	\bigskip
+
+	\begin{block}{Наиболее известные}
+		\begin{itemize}
+			\item SysVInit
+			\item systemd
+			\item upstart
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 \section{Практика}
@@ -419,6 +465,8 @@
 		\item Посмотреть список загруженных модулей
 			\pause
 		\item Переопределить init на sh
+		\item SysRq. {\bf R}eboot {\bf E}ven {\bf I}f {\bf S}ystem {\bf U}tterly {\bf B}roken
+			\pause
 		\item Загрузить ядро с "урезанным" количеством памяти
 		\item Отключить 1 или несколько процессоров
 			\pause
