@@ -1,0 +1,266 @@
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
+
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}	
+
+%Packages to be included
+
+\usepackage{textcomp}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
+\usepackage{listings}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8x,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% PDF meta data inserted here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={Введение в GNU/Linux},
+	pdfauthor={Epam/LLPD}
+}
+
+
+
+
+
+%%%%%% Beamer Theme %%%%%%%%%%%%%
+
+	
+\title{Введение в GNU/Linux}
+\author{Epam/LLPD}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\section{Командная строка}
+
+
+\frame{
+	\frametitle{}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+}
+\frame{
+	\tableofcontents
+%	[hideallsubsections]
+}
+
+\subsection{Командная оболочка}
+\begin{frame}[fragile]{Определение(не совсем формальное)}
+\textbf{Shell} -- приложение, обеспечивающее выполнение других приложений и их взаимодействие, а также представляющая услуги командной строки. 
+\begin{center}
+  или
+\end{center}
+\textbf{Shell} -- приложение, обеспечивающее доступ к основным функциям ядра.
+
+\pause
+\vspace{0.5in}
+Пример shell из Windows-world -- cmd.exe
+\vspace{0.5in}
+
+Минимальный дистрибутив Linux -- ядро + shell 
+
+\end{frame}
+\begin{frame}[fragile]{Основные типы shell в Unix}
+  \begin{itemize}
+    \item Bourne shell совместимые
+      \begin{itemize}
+        \item \textbf{sh} исходная bourne shell (Steve Bourne, 1978)
+        \item \textbf{ksh} Korn shell (David Korn, 1983)
+        \item \textbf{ash} $[$BSD$]$ Almquist shell (Kenneth Almquist,1989)  
+        \item \textbf{bash} $[$GPL$]$ Bourne-again shell (Brian Fox, 1989)
+        \item \textbf{zsh} $[$BSD$]$ Z shell (Paul Falstad,1990)
+        \item \textbf{/bin/sh} Указывает на POSIX-совместимую shell
+      \end{itemize}
+  \item C shell совместимые
+      \begin{itemize}
+        \item \textbf{csh}  Исходная С shell (Bill Joy, 1978)
+        \item \textbf{tcsh} $[$BSD$]$ TENEX C shell (Ken Greer, 1981)
+       \end{itemize}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Маленькое упражнение}
+\begin{lstlisting}[language=bash]
+cat /etc/shells
+ls -l <filename> # для каждого элемента /etc/shells
+readlink -e <filename> 
+\end{lstlisting}
+\end{frame}
+\subsection{bash -- Работа в командной строке}
+\begin{frame}[fragile]{Получение помощи}
+  \begin{itemize}
+    \pause
+    \item \textbf{man} - помощь по внешним командам
+    \pause
+    \item \textbf{help} - помощь по внутренним командам bash (также man bash)
+    \pause
+    \item \textbf{info} - расширенная помощь по некоторым командам (texinfo format)
+      \begin{itemize}
+       \item   Попробовать {\tt info coreutils}
+       \item   Справка по навигации -- нажать h
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+\begin{frame}[fragile]{Основное о man}
+\begin{columns}
+  \column{2.2in}
+  \begin{itemize}
+        \item Прочитайте {\tt man man} !
+        \item Apropos {\tt man -k <слово>}
+        \item Разделы (sections)
+          \begin{itemize}
+            \item[1] Основная секция(юзерские программы) 
+            \item[2] Syscalls
+            \item[3] С library
+            \item[5] Конфигурационные файлы
+            \item[8] Системные службы
+          \end{itemize}
+  \end{itemize}
+  \textbf{Замечание}
+
+  Обычно внутри страницы работает поиск с помощью '/'
+ \pause 
+ \column{1in}
+ \begin{block}{Попробовать}
+\begin{lstlisting}
+man -k printf
+man 3 printf
+man 1 printf
+man -a printf
+\end{lstlisting}
+\end{block}
+\end{columns}
+\end{frame}
+\begin{frame}[fragile]{Базовые команды}
+\begin{columns}
+  \column{0.7\textwidth}
+  \begin{itemize}
+    \item Навигация по файловой системе
+      \begin{itemize}
+        \item Список файлов в (текущей по умолчанию) директории \pause \textbf{ls} (man ls)
+          \begin{itemize}
+            \item {\tt ls -l} Расширенная информация о файлах
+          \end{itemize}
+        \pause
+        \item Смена текущей директории \pause \textbf{cd} (help cd)
+        \item Имя текущей директории \pause \textbf{pwd} (help pwd)
+      \end{itemize}
+      \pause
+    \item Работа с файлами и директориями
+      \begin{itemize}
+        \item Создание пустого файла \textbf{touch} (man touch)
+        \item Копирование файла \textbf{cp} (man cp)
+        \item Удаление файла \textbf{rm} (man rm) \textbf{DANGER!!!}
+          \begin{itemize}
+            \item Опции {\tt -r -f -i}  
+          \end{itemize}
+        \item Создание директории \textbf{mkdir} (man mkdir)
+            \begin{itemize}
+              \item Опция {\tt -p}
+            \end{itemize}
+        \item Удаление директории \textbf{rmdir} (man rmdir)
+      \end{itemize}
+  \end{itemize}
+  \column{0.25\textwidth}
+   \begin{block}{Упражнение}
+     Создать иерархию директорий
+\begin{lstlisting}
+dir1/dir1.1/dir1.1.1
+dir1/dir1.2/dir1.2.1
+dir1/dir1.2/dir1.2.2
+\end{lstlisting}
+
+Внутри каждой создать файл
+
+Удалить все созданное
+   \end{block}
+ \end{columns}
+\end{frame}
+\begin{frame}{Важные аббревиатуры внутри командной строки}
+  \begin{itemize}
+    \item {\tt ~} Домашняя директория
+    \item {\tt ~<username>} Домашняя директория пользователя
+    \item {\tt ../} Родительская директория
+  \end{itemize}
+\end{frame}       
+\begin{frame}{Горячие клавиши}
+  \begin{itemize}
+    \item \textbf{Tab} -- дополнение текущей команды
+     \pause
+    \item История команд
+      \begin{itemize}
+        \item Клавиши курсора -- навигация по истории
+        \item Ctrl-R -- поиск в истории по фрагменту
+        \item Ctrl-O (после выполнения вставить следующую команду из истории)
+       \end{itemize}
+    \item Навигация
+   \end{itemize}
+\end{frame}
+
+\subsection{Взаимодействие процессов}
+\begin{frame}{Unix way}
+  \textbf{Цель} -- максимальная модульность: большое количество простых приложений, взаимодействующих друг с другом для решения задач
+  \begin{itemize}
+    \item Каждое приложение открывает 3 стандартных файловых дескриптора stdin (fd 0), stdout(fd 1), stderr (fd 2)
+    \item Приложения могут работать как фильтр из STDIN в STDOUT, можно объединять несколько приложений в конвейер
+    \item Синтаксис {\tt <app1> | <app2>}
+  \end{itemize}
+\end{frame}
+\end{document}
