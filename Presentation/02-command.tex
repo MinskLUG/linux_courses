@@ -241,10 +241,12 @@ dir1/dir1.2/dir1.2.2
       \item {\tt ~<username>} Домашняя директория пользователя
       \item {\tt ../} Родительская директория
     \end{itemize}
+  \pause  
   \item Wildcards
     \begin{itemize}
       \item {\tt *} Любой набор символов {\tt file*txt : file1.txt filefilefiletxt}
-      \item {\tt $[$<список>$]$ } символ из заданного набора
+      \item {\tt $[$<список>$]$ } символ из заданного набора {\tt }
+      \item {\tt ?} любой один символ
      \end{itemize}
 
   \end{itemize}
@@ -258,12 +260,13 @@ dir1/dir1.2/dir1.2.2
         \item Клавиши курсора -- навигация по истории
         \item Ctrl-R -- поиск в истории по фрагменту
         \item Ctrl-O (после выполнения вставить следующую команду из истории)
+        \item Команда {\tt history}
        \end{itemize}
     \item Навигация
    \end{itemize}
 \end{frame}
 
-\subsection{Взаимодействие процессов}
+\section{Взаимодействие процессов}
 \begin{frame}{Unix way}
   \textbf{Цель} -- максимальная модульность: большое количество простых приложений, взаимодействующих друг с другом для решения задач
   \begin{itemize}
@@ -271,5 +274,35 @@ dir1/dir1.2/dir1.2.2
     \item Приложения могут работать как фильтр из STDIN в STDOUT, можно объединять несколько приложений в конвейер
     \item Синтаксис {\tt <app1> | <app2>}
   \end{itemize}
+\end{frame}
+\begin{frame}{Дополнительный набор команд}
+ \begin{itemize}
+  \item {\tt cat} - Вывод файла в stdout, соединение нескольких файлов в stdout
+  \item {\tt wc} - подсчет статистики символов в файле или в stdin 
+    \begin{itemize}
+      \item[-l] считать только строки
+    \end{itemize}
+  \item {\tt sort} - сортировка строк файла
+    \begin{itemize}
+      \item[-n] -по числам в начале строки
+      \item[-r] - обратный порядок
+    \end{itemize}
+  \item {\tt uniq} - объединение одинаковых строк в одну
+    \begin{itemize}
+      \item[-c] считать одинаковые строки
+      \item[-d] выводить только повторяющиеся строки
+    \end{itemize}
+  \item {\tt tr} - замена набора символов
+  \item {\tt less} - программа-пейджер
+ \end{itemize}
+\end{frame}
+\begin{frame}{Некоторые примеры использования}
+\begin{lstlisting}[language=bash]
+ls  | wc -l # подсчет числа файлов
+man uniq | tr  '[:space:]' '\n' | sort | uniq -c | sort -n | less # подсчет количества слов в тексте man uniq
+history | wc -l # подсчет ранее введенных команд
+\end{lstlisting}
+\end{frame}
+\begin{frame}{Кастомизация bash}
 \end{frame}
 \end{document}
