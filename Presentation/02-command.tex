@@ -298,6 +298,13 @@ dir1/dir1.2/dir1.2.2
         \item Команда {\tt history}
        \end{itemize}
     \item Навигация
+	\item Управление процессами
+		Команды управления процессами в bash: {\tt jobs}, {\tt fg, \tt bg}
+	  \begin{itemize}
+		\item Ctrl-C -- оборвать выполнение процесса (SIGINT)
+		\item Ctrl-Z -- остановить выполнение команды (SIGTSTP)
+		\item Ctrl-D -- завершить ввод
+	  \end{itemize}
    \end{itemize}
 \end{frame}
 
@@ -364,6 +371,28 @@ cat /etc/udev/rules.d/* | wc -l
 {\tt command 2>file 1>\&2}
 \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]{Мультистрочный ввод}
+
+\begin{verbatim}
+programm <<LABEL
+Тут
+    много
+	     строк
+LABEL
+\end{verbatim}
+	
+	\begin{block}{Пример}
+	Передадим несколько строк в COM-порт 1
+\begin{lstlisting}[language=bash]
+cat >/dev/ttyS0 <<E_O_F
+ATZ
+ATDT 8w0170123456
+E_O_F
+\end{lstlisting}
+	\end{block}
+\end{frame}
+
 \begin{frame}{Кастомизация bash}
 \end{frame}
 \end{document}
