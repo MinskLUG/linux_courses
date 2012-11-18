@@ -261,18 +261,99 @@ dir1/dir1.2/dir1.2.2
         \item Команда {\tt history}
        \end{itemize}
     \item Навигация
-	\item Управление процессами
-		Команды управления процессами в bash: {\tt jobs}, {\tt fg, \tt bg}
-	  \begin{itemize}
-		\item Ctrl-C -- оборвать выполнение процесса (SIGINT)
-		\item Ctrl-Z -- остановить выполнение команды (SIGTSTP)
-		\item Ctrl-D -- завершить ввод
-	  \end{itemize}
+
    \end{itemize}
 \end{frame}
 
 \section{Взаимодействие процессов}
+\begin{frame}{Процессы в UNIX}
+\begin{itemize}
+  \item Создание процессов
+   \begin{itemize}
+      \item fork
+       \item exec
+   \end{itemize}
+\item Атрибуты процесса
+  \begin{itemize}
+   \item pid 
+   \item файловые дескрипторы
+   \item environment
+   \item Рабочая директория (cwd)
+   \item прочее в директории {\tt /proc/<pid>}
+  \end{itemize}
+\end{itemize}
+\begin{frame}{Управление процессами}
+\begin{itemize}
+        \item kill (killall)
+        \item top
+        \item pstree
+	\item Команды управления процессами в bash: 
+	  \begin{itemize}
+                \item {\tt jobs}, {\tt fg, \tt bg}
+		\item Ctrl-C -- оборвать выполнение процесса (SIGINT)
+		\item Ctrl-Z -- остановить выполнение команды (SIGTSTP)
+		\item Ctrl-D -- завершить ввод
+	  \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Упражнения}
+\begin{block}{Посмотреть вывод pstree}
+{\tt pstree}
+\end{block}
+\pause
+\begin{block}{Ctrl-C, Ctrl-Z}
+\end{block}
+\pause
+\begin{block}{fork bomb}
+{\tt ulimit -u 200}
+{\tt bomb(){ (bomb; bomb) \& }
+top
+killall bash
+\end{block}
+\end{frame}
+
+\begin{frame}{Переменные окружения}
+\begin{itemize}
+\item {\tt HOME}
+\item {\tt PWD}
+\item {\tt LANG}
+\item {\tt LD_LIBRARY_PATH}
+\item {\tt SHELL}
+\item {\tt TERM}
+\item {\tt DISPLAY}
+\end{itemize}
+
+Контроль
+
+\begin{itemize}
+\item export {\tt export VAR=value}
+\item declare -x
+\item echo 
+\end{itemize}
+
+Переменные окружения наследуются при создании нового процесса
+\end{frame}
 \begin{frame}{Unix way}
+\begin{enumerate}
+  \item Пишите программы, которые делают одну вещь и делают её хорошо.
+  \item Пишите программы, которые бы работали вместе.
+  \item Пишите программы, которые бы поддерживали текстовые потоки, поскольку это универсальный интерфейс. 
+\end{enumerate}
+\end{frame}
+\begin{frame}{Unix way}
+\begin{enumerate}
+ \item   Маленькое прекрасно.
+ \item   Пусть каждая программа делает одну вещь, но хорошо.
+ \item   Собирайте прототип как можно раньше.
+ \item   Предпочитайте переносимость эффективности.
+ \item   Храните данные в простых текстовых файлах.
+ \item   Используйте программные рычаги для достижения цели.
+ \item   Используйте сценарии командной строки для улучшения функционала и переносимости.
+ \item   Избегайте <<связывающего>> (captive) пользовательского интерфейса.
+ \item   Делайте каждую программу «фильтром».
+\end{enumerate}
+\end{frame}
+\begin{frame}{Конвееры}
   \textbf{Цель} -- максимальная модульность: большое количество простых приложений, взаимодействующих друг с другом для решения задач
   \begin{itemize}
     \item Каждое приложение открывает 3 стандартных файловых дескриптора stdin (fd 0), stdout(fd 1), stderr (fd 2)
@@ -295,17 +376,19 @@ dir1/dir1.2/dir1.2.2
 \end{frame}
 \begin{frame}[fragile]{Некоторые примеры использования}
 \begin{lstlisting}[language=bash]
+cat /proc/1/environ | tr '\0' '\n' | less
 ls  | wc -l # подсчет числа файлов
 man uniq | tr  '[:space:]' '\n' | sort | uniq -c | sort -n | less # подсчет количества слов в тексте man uniq
 history | wc -l # подсчет ранее введенных команд
 cat /etc/udev/rules.d/* | wc -l
-ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=$1};END{print s}'
+ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=$1};END{print s}' #$
 \end{lstlisting}
 \pause
 \begin{block}{Упражнение}
 Посчитать статистику использования команд в history
 \end{block}
 \end{frame}
+
 \begin{frame}{Перенаправления в файл}
 \begin{itemize}
 \item Перенаправление stdout 
@@ -354,7 +437,30 @@ E_O_F
 	\end{block}
 \end{frame}
 
-\begin{frame}{Кастомизация bash}
+
+
+
+\begin{frame}{Настройки bash и кастомизация}
+\begin{itemize}
+  \item Login shell
+   \begin{itemize}
+      \item {\tt /etc/profile}
+      \item {\tt $\sim$/.profile
+   \end{itemize}
+  \item Обычная интерактивная shell
+  \begin{itemize}
+  \item {\tt /etc/bash.bashrc}
+  \item {\tt $\sim$/.bashrc}
+  \end{itemize}
+\end{itemize}
+
+Полезные команды
+\begin{itemize}
+\item {\tt alias}
+\item {\tt export PATH=}
+\item {\tt Определение функции}
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}[fragile]{Практика}
