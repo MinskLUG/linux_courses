@@ -266,6 +266,28 @@ dir1/dir1.2/dir1.2.2
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Переменные окружения}
+  \begin{itemize}
+    \item {\tt HOME}
+    \item {\tt PWD}
+    \item {\tt LANG}
+    \item {\tt LD\_LIBRARY\_PATH}
+    \item {\tt SHELL}
+    \item {\tt TERM}
+    \item {\tt DISPLAY}
+  \end{itemize}
+
+  Контроль
+
+  \begin{itemize}
+    \item export {\tt export VAR=value}
+    \item declare -x
+    \item echo 
+  \end{itemize}
+
+  Переменные окружения наследуются при создании нового процесса
+\end{frame}
+
 \section{Взаимодействие процессов}
 \begin{frame}{Процессы в UNIX}
   \begin{itemize}
@@ -307,6 +329,13 @@ dir1/dir1.2/dir1.2.2
   \end{block}
   \pause
   \begin{block}{Ctrl-C, Ctrl-Z}
+    В графическом режиме запустить из терминала emacs
+
+    Ctrl-Z
+
+    jobs -l
+
+    bg +
   \end{block}
   \pause
   \begin{block}{fork bomb}
@@ -322,27 +351,6 @@ dir1/dir1.2/dir1.2.2
   \end{block}
 \end{frame}
 
-\begin{frame}{Переменные окружения}
-  \begin{itemize}
-    \item {\tt HOME}
-    \item {\tt PWD}
-    \item {\tt LANG}
-    \item {\tt LD\_LIBRARY\_PATH}
-    \item {\tt SHELL}
-    \item {\tt TERM}
-    \item {\tt DISPLAY}
-  \end{itemize}
-
-  Контроль
-
-  \begin{itemize}
-    \item export {\tt export VAR=value}
-    \item declare -x
-    \item echo 
-  \end{itemize}
-
-  Переменные окружения наследуются при создании нового процесса
-\end{frame}
 
 \begin{frame}{Unix way}
   \begin{enumerate}
@@ -367,11 +375,21 @@ dir1/dir1.2/dir1.2.2
 \end{frame}
 
 \begin{frame}{Конвееры}
-  \textbf{Цель} -- максимальная модульность: большое количество простых приложений, взаимодействующих друг с другом для решения задач
+%  \textbf{Цель} -- максимальная модульность: большое количество простых приложений, взаимодействующих друг с другом для решения задач
+  \only<1>{
+  \begin{center}
+    \includegraphics[width=1.2in]{process}
+  \end{center}
+  }
+  \only<2>{
+    \begin{center}
+      \includegraphics[width=3.6in]{processes}
+    \end{center}
+  }
   \begin{itemize}
-    \item Каждое приложение открывает 3 стандартных файловых дескриптора stdin (fd 0), stdout(fd 1), stderr (fd 2)
-    \item Приложения могут работать как фильтр из STDIN в STDOUT, можно объединять несколько приложений в конвейер
-    \item Синтаксис {\tt <app1> | <app2>}
+    \item <1-> Каждое приложение открывает 3 стандартных файловых дескриптора stdin (fd 0), stdout(fd 1), stderr (fd 2)
+    \item <2-> Приложения могут работать как фильтр из STDIN в STDOUT, можно объединять несколько приложений в конвейер
+    \item <2-> Синтаксис {\tt <app1> | <app2>}
   \end{itemize}
 \end{frame}
 
