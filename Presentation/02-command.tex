@@ -86,7 +86,7 @@
 
 \begin{document}
 
-\section{Командная строка}
+%\section{Командная строка}
 
 
 \frame{
@@ -102,7 +102,7 @@
 %	[hideallsubsections]
 }
 
-\subsection{Командная оболочка}
+%\subsection{Командная оболочка}
 \begin{frame}[fragile]{Определение(не совсем формальное)}
 \textbf{Shell} -- приложение, обеспечивающее выполнение других приложений и их взаимодействие, а также представляющая услуги командной строки. 
 \begin{center}
@@ -143,7 +143,7 @@ ls -l <filename> # для каждого элемента /etc/shells
 readlink -e <filename> 
 \end{lstlisting}
 \end{frame}
-\subsection{bash -- Работа в командной строке}
+%\subsection{bash -- Работа в командной строке}
 \begin{frame}[fragile]{Получение помощи}
   \begin{itemize}
     \pause
@@ -288,7 +288,7 @@ dir1/dir1.2/dir1.2.2
   Переменные окружения наследуются при создании нового процесса
 \end{frame}
 
-\section{Взаимодействие процессов}
+%\section{Взаимодействие процессов}
 \begin{frame}{Процессы в UNIX}
   \begin{itemize}
     \item Создание процессов
@@ -432,7 +432,7 @@ ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=\$1};END{print s}'
         {\tt command > file} Например {\tt cat file1 file2 > file3}
       \item С дополнением существующего
 
-        {\tt command > >file}
+		  {\tt command >\phantom{}>  file}
     \end{itemize}
     \pause
   \item Перенаправления stdin
@@ -472,27 +472,21 @@ E_O_F
 	\end{block}
 \end{frame}
 
-
-
-
-
-\begin{frame}[fragile]{Практика}
-	\begin{enumerate}
-		\item Создать директорию в /tmp и перейти в нее
-		\item Создать файл1 состоящий из нескольких строк
-		\item Cкопировать файл1 в файл2
-		\item Добиться того, чтобы файл2 состоял из 3 одинаковых копий файла1
-		\item Создать жесткую ссылку на файл1
-		\item Создать символическую ссылку на файл2
-		\item Вывести на экран список всех файлов
-		\item Добавить вывод команды {\tt date} в файл1
-		\item Вывести на экран список всех файлов
-		\item Вывести на экран содержимое файла1 и жесткой ссылки
-		\item Создать PIPE
-		\item Запустить одну команду {\tt cat} на чтение из PIPE
-		\item Записать содержимое файла1 и файла2 в PIPE
-		\item Удалить временную директорию
-	\end{enumerate}
+\begin{frame}{Дополнительный набор команд для работы с текстом}
+	\begin{itemize}
+	  \item {\tt head} -- вывести первые строки
+	  \item {\tt tail} -- вывести последние строки
+		\begin{itemize}
+			\item {\tt -f} -- отслеживать добавление данных в файл 
+		\end{itemize}
+	  \item {\tt tee} -- копировать стандартный вывод в файл
+	  \item {\tt grep} -- печать текста, соответствующего шаблону
+		\begin{itemize}
+			\item {\tt -i}	
+			\item {\tt -v}
+			\item {\tt -o}
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Редакторы}
@@ -506,37 +500,275 @@ E_O_F
  \item vim
  \item emacs
  \end{itemize}
- \item Поточные {\tt sed}
+ \item Поточные
+	 \begin{itemize}
+		 \item {\tt ed}
+		 \item {\tt sed}
+		 \item {\tt awk}
+	\end{itemize}
  \end{itemize}
 \end{frame}
 
-\begin{frame}{Задание}
+\begin{frame}[fragile]{Метасимволы}
+	\begin{block}{grep, sed, awk}
+	\end{block}
+	\begin{itemize}
+		\item {\tt .} -- любой символ за исключением пустой строки
+		\item {\tt *} -- любоe количество символов, которые стоят перед {\tt *}
+		\item {\tt \^{}} -- начало строки
+		\item {\tt \$} -- конец строки
+		\item {\tt [...]} -- любой символ из заключенных в скобки
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{sed}
+	\begin{block}{Сценарии}
+		{\tt [ addr [ ,  addr ] ] cmd [ args ]}
+	\end{block}
+
+	\small
+	\begin{block}{Команды}
+		\begin{itemize}
+		  \item {\tt a, i} -- добавить строку после (перед) текущей
+			  \begin{verbatim} who | sed -e 'a Text' \end{verbatim}
+		  \item {\tt c} -- удалить строку и заменить на текст
+			  \begin{verbatim} who | sed -e '/altlinux/ c Юзверь' \end{verbatim}
+		  \item {\tt d} -- удалить строку
+			  \begin{verbatim} who | sed -e '2,4 d' \end{verbatim}
+			  \begin{verbatim} who | sed -e '/pts/ d' \end{verbatim}
+		  \item {\tt s} -- замена по регулярному выражению
+			  \begin{verbatim} who | sed -e 's/pts/консолька/g' \end{verbatim}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Практика: работа с текстовыми файлами}
+  \begin{enumerate}
+	  \item Посмотреть вывод команды {\tt dmesg}
+	  \item Вывести на экран первые 10 строк 
+		  \pause
+	  \item Создать директорию в {\tt /tmp} и перейти в нее
+	  \item Скопировать в файл1 последние 100 строк из {\tt /var/log/messages}
+	  \item Запустить отслеживание изменений в файле1 на отдельной консоли
+	  \item Дописать в файл1 из файла {\tt /etc/services}) все строки,
+		  содержащие слова {\tt mail} или {\tt cache}
+		  \pause
+	  \item Запустить отслеживание изменений одновременно в файле1 и в {\tt /var/log/messages}\\
+		  \pause
+			повторить предыдущий пункт, убрав все комментарии при помощи {\tt sed}\\
+		  \pause
+		  ... и добиться параллельного вывода результатов на экран и во временный файл
+	  \item
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Практика: работа с файловыми объектами}
+	\begin{enumerate}
+		\item Cкопировать файл1 в файл2
+			\pause
+		\item Добиться того, чтобы файл2 состоял из 3 одинаковых копий файла1
+		\item Создать жесткую ссылку на файл1
+		\item Создать символическую ссылку на файл2
+		\item Вывести на экран список всех файлов
+			\pause
+		\item Добавить вывод команды {\tt date} в файл1
+		\item Вывести на экран список всех файлов
+		\item Вывести на экран содержимое файла1 и жесткой ссылки
+		\item Создать именованный канал (PIPE)
+		\item Запустить одну команду {\tt cat} на чтение из PIPE
+		\item Записать содержимое файла1 и файла2 в PIPE
+		\item Удалить временную директорию
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{VI}
+	\begin{block}<1>{Два режима работы}
+		\begin{itemize}
+			\item все портить
+			\item бибикать
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}<2->{Два режима работы}
+		\begin{itemize}
+			\item командный 
+			\item текстового ввода
+		\end{itemize}
+	\end{block}
+
+	\begin{block}<2->{Переход между режимами}
+		\begin{itemize}
+			\item из командного в текстовый: i, a, R (вставка, добавление, замена)
+			\item из текстового в командный: ESC или Ctrl-[
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{VI: command mode}
+
+	\begin{block}{Перемещение курсора}
+		\begin{itemize}
+			\item h, j, k, l -- влево, вниз, вверх, вправо (1 элемент)
+			\item \^{} или 0 -- в начало строки
+			\item \$ -- в конец строки
+			\item w, b -- вперед, назад на слово
+			\item gg, G -- начало, конец текста (<num>G -- на строку <num>)
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Редактирование}
+		\begin{itemize}
+			\item d -- удалить (d -- текущую строку, w -- слово)
+			\item u -- отмена предыдущего изменения
+			\item . -- повтор
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{VI: command mode}
+
+	\begin{block}{Работа с неименованым буфером}
+		\begin{itemize}
+			\item y -- удалить (d -- текущую строку, w -- слово)
+			\item p -- вставить из буфера
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Командная строка}
+		: -- переход в режим командной строки
+		\begin{itemize}
+			\item :q или :q! -- выход без сохранения
+			\item :w -- сохранить изменения
+			\item :x -- выйти с сохранением (:wq)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Задание на дом}
 \begin{block}{}
 vimtutor ru
 \end{block}
 \end{frame}
 
-\begin{frame}{Настройки bash и кастомизация}
-  \begin{itemize}
-    \item Login shell
-      \begin{itemize}
-        \item {\tt /etc/profile}
-        \item {\tt $\sim$/.profile }
-      \end{itemize}
-    \item Обычная интерактивная shell
-      \begin{itemize}
-        \item {\tt /etc/bash.bashrc}
-        \item {\tt $\sim$/.bashrc}
-      \end{itemize}
-  \end{itemize}
+%\begin{frame}{Настройки bash и кастомизация}
+%  \begin{itemize}
+%    \item Login shell
+%      \begin{itemize}
+%        \item {\tt /etc/profile}
+%        \item {\tt $\sim$/.profile }
+%      \end{itemize}
+%    \item Обычная интерактивная shell
+%      \begin{itemize}
+%        \item {\tt /etc/bash.bashrc}
+%        \item {\tt $\sim$/.bashrc}
+%      \end{itemize}
+%  \end{itemize}
+%
+%  Полезные команды
+%  \begin{itemize}
+%    \item {\tt alias}
+%    \item {\tt export PATH=}
+%    \item {\tt Определение функции}
+%    \item {\tt shopts}
+%  \end{itemize}
+%
+%\end{frame}
 
-  Полезные команды
-  \begin{itemize}
-    \item {\tt alias}
-    \item {\tt export PATH=}
-    \item {\tt Определение функции}
-    \item {\tt shopts}
-  \end{itemize}
+\begin{frame}{Архивация}
+	\begin{block}{Архивация: tar}
+		\begin{itemize}
+			\item {\tt -c} -- создать архив
+			\item {\tt -x} -- извлечь из архива
+				\begin{itemize}
+					\item {\tt -C} -- перейти в директорию
+				\end{itemize}
+			\item {\tt -f} -- запись в файл
+		\end{itemize}
+	\end{block}
 
+	\begin{block}{Сжатие: gzip, bzip, xz}
+		\begin{itemize}
+			\item {\tt -[1-9]} -- изменить уровень сжатия
+			\item {\tt -d} -- распаковать
+			\item {\tt -c} -- вывод на консоль
+		\end{itemize}
+	\end{block}
 \end{frame}
+
+\begin{frame}[fragile]{Архивация: примеры}
+
+	Создать сжатый архив:
+	\begin{verbatim}
+tar -czf archive.tar.gz *
+	\end{verbatim}
+	\pause
+	Распаковать сжатый архив в директорию {\tt /tmp}:
+	\begin{verbatim}
+tar -C /tmp/ -xzf archive.tar.gz 
+	\end{verbatim}
+	\pause
+	Создать сжатый архив:
+	\begin{verbatim}
+tar -czf archive.tar.gz *
+	\end{verbatim}
+	\pause
+	Создать копию текущей директории в директории {\tt /tmp/copy/}:
+	\begin{verbatim}
+tar -c * | tar -C /tmp/copy -x
+	\end{verbatim}
+	\pause
+	Создать копию текущей директории на другом хосте:
+	\begin{verbatim}
+HostDest: netcat -l 2222 | gzip -dc | tar -C /tmp/copy/ -x
+HostSrc:  tar -c * | gzip -9 | netcat HostDest 2222
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Поиск файлов}
+	\begin{block}{find}
+		\begin{itemize}
+			\item {\tt -type} -- тип файлового объекта
+			\item {\tt -size} -- размер
+			\item {\tt -maxdepth} -- глубина рекурсии
+			\item {\tt -exec} -- выполнить команду
+			\item {\tt -printf} -- форматированный вывод
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size +100k  -exec ls -l {} \;
+		\end{verbatim}
+
+		\begin{verbatim}
+find -type d -user altlinux
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{xargs}
+	\begin{block}{xargs}
+			Утилита для создания и запуска команд из стандартного потока ввода:
+		\begin{verbatim}
+xargs [options] command [command options]
+		\end{verbatim}
+	
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size -100k | xargs tar -czf /tmp/archive-100k.tar.gz
+		\end{verbatim}
+
+		\begin{verbatim}
+find /etc -type f | xargs -I {} echo "Найден {} файл"
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+
 \end{document}
