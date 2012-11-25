@@ -1,0 +1,206 @@
+
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
+
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}	
+
+%Packages to be included
+
+\usepackage{textcomp}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
+\usepackage{listings}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8x,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% PDF meta data inserted here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={Введение в GNU/Linux},
+	pdfauthor={Epam/LLPD}
+}
+
+
+
+
+
+%%%%%% Beamer Theme %%%%%%%%%%%%%
+
+	
+\title{Введение в GNU/Linux}
+\author{Epam/LLPD}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\frame{
+	\frametitle{}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+}
+\frame{
+	\tableofcontents
+%	[hideallsubsections]
+}
+\begin{frame}{Многопользовательская модель}   
+ \begin{itemize}
+   \item Linux -- многопользовательская система
+   \item Привилегии пользователей
+     \begin{itemize}
+       \item root
+       \item other users
+      \end{itemize}
+     \end{itemize}
+\end{frame}
+\section{Механизмы разделения привилегий}
+\subsection{Классический UNIX}
+\begin{frame}{Пользователи, группы и файлы}
+\begin{itemize}
+  \item Каждый пользователь принадлежит одной или нескольким \textbf{группам}
+  \item Каждый файл и директория принадлежит
+    \begin{itemize}
+      \item Одному пользователю 
+      \item Одной группе
+    \end{itemize}
+  \pause
+  \item  Разрешения что либо делать с файлом определяются по отношению к
+    \begin{enumerate}
+      \item Пользователю-владельцу файла
+      \item Группе владеющей файлом
+      \item Всем остальным пользователям
+    \end{enumerate}
+
+\end{itemize}
+\pause
+\begin{columns}
+  \column{0.48\textwidth}
+  \begin{itemize}
+    \item {\tt ls -l} 3,4 поле 
+    \item {\tt groups}
+   \end{itemize}
+  \column{0.48\textwidth}
+  \begin{block}{Попробовать}
+    {\tt ls -l /usr/bin/}
+
+    {\tt groups}
+
+    {\tt groups root}
+  \end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Типы разрешений для файлов}
+\begin{columns}
+\column{0.48\textwidth}
+\begin{center}
+  \textbf{Разрешения для файла}
+\end{center}
+\begin{itemize}
+  \item Три типа разрешений
+    \begin{enumerate}
+      \item чтение read(r)
+      \item запись write(w)
+      \item выполнение execute(x)
+    \end{enumerate}
+\end{itemize}
+\column{0.48\textwidth}
+\begin{center}
+  \textbf{Разрешения для директорий}
+\end{center}
+\begin{itemize}
+  \item Три типа разрешений
+    \begin{enumerate}
+      \item поиск файлов в директории read(r) 
+      \item добавление и удаление файлов write(w)
+      \item заход в директорию execute(x)
+    \end{enumerate}
+\end{itemize}
+\end{columns}
+
+\pause
+
+Попробовать {\tt ls -l /usr/bin}
+
+\pause
+
+Пересчет мнемонического разрешения в битовую маску 
+
+$r\to4, w\to2 , x\to1$ 
+
+rwxrw-r-x$\to$765
+\end{frame}
+
+\begin{frame}{Команды для управления разрешениями файлов}
+ \begin{itemize}
+   \item {\tt chown}
+   \item {\tt chmod}
+ \end{itemize}
+\begin{block}{Упражнения}
+  \begin{enumerate}
+   \item Создать директорию с без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями
+   \item Создать файл с rx разрешениями только на  группу
+  \end{enumerate}
+\end{block}
+\end{itemize}
+\subsection{Получение привилегий}
+\begin{frame}{SUID программы}
+  lll
+\end{frame}
+\end{document}
