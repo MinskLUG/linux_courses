@@ -187,20 +187,91 @@ $r\to4, w\to2 , x\to1$
 rwxrw-r-x$\to$765
 \end{frame}
 
-\begin{frame}{Команды для управления разрешениями файлов}
+\begin{frame}{Команды для управления пользователями и разрешениями файлов}
+\begin{columns}
+ \column{0.48\textwidth}
  \begin{itemize}
    \item {\tt chown}
    \item {\tt chmod}
  \end{itemize}
+ \column{0.48\textwidth}
+ \begin{itemize}
+   \item {\tt useradd, usermod, userdel}
+   \item {\tt groupadd, groupmod, groupdel}
+   \item {\tt su, sudo}
+ \end{itemize}
+\end{columns}
 \begin{block}{Упражнения}
   \begin{enumerate}
-   \item Создать директорию с без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями
-   \item Создать файл с rx разрешениями только на  группу
+   \item Создать директорию без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями (для пользователя altlinux)
+   \item Создать нового пользователя testuser.
+   \item Скопировать {\tt /bin/bash} (под именем mysh) в домашнюю директорию пользователя altlinux  и поставить r-x разрешение только для other
+   \item Попробовать выполнить скопированный файл от имени пользователя altlinux, затем от имени пользователя testuser
+   \item Создать новую группу testgroup
+   \item Изменить группу владеющую mysh на testgroup и сделать {\tt chmod 464 mysh}
+   \item Попробовать выполнить mysh от имени altlinux и root. 
+   \item Добавить пользователя altlinux в группу testgroup и попробовать выполнить mysh еще раз
+   \item Получить список групп которым принадлежат устройства в {\tt /dev}
   \end{enumerate}
 \end{block}
 \end{itemize}
-\subsection{Получение привилегий}
 \begin{frame}{SUID программы}
   lll
 \end{frame}
+
+\begin{frame}{Хранение информации о пользователях в системе}
+  \begin{itemize}
+    \item user id, group id -- это числа
+    \item Утилита id 
+    \item {\tt /etc/passwd} {\tt man 5 passwd}
+    \item {\tt /etc/group}  {\tt man 5 group}
+    \item {\tt /etc/shadow} -- многие системы, но не Altlinux
+    \item {\tt /etc/tcb/<username>/shadow} altlinux
+    \item Утилита {\tt passwd}
+  \end{itemize}
+  \pause
+  \begin{block}{Практика}
+    \begin{itemize}
+       \item Добавить пользователя и группу и посмотреть за изменениями в перечисленных файлах
+       \item[*] Домашнее упражнение: создать пользователя без использования системных утилит, редактируя passwd, group, shadow
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{Процесс аутентификации пользователя}
+  \begin{itemize}
+    \item Программы, которые зависят от правильной аутентификации
+      \begin{itemize}
+        \item login
+        \item su
+        \item sshd
+        \item ftpd (sftpd)
+        \item ...
+      \end{itemize}
+    \item Должны уметь читать /etc/passwd, .....
+    \item Должны адаптироваться к изменениям (например аутентификация через Windows AD, или kerberos)
+   \end{itemize}
+   \pause
+   \begin{center}
+      And the answer is \pause PAM (pluggable authentication modules)  
+   \end{center}
+\end{frame}
+
+\begin{frame}{Немного о PAM}
+  \begin{itemize}
+    \item PAM это динамическая библиотека (попробовать {\tt ldd /bin/login})
+    \item Конфигурация PAM
+      \begin{itemize}
+        \item {\tt /etc/pam.conf}
+        \item {\tt /etc/pam.d/...}
+          \begin{itemize}
+            \item Сервисы
+            \item system\_auth
+          \end{itemize}
+        \item {\tt /etc/nsswitch.conf}
+       \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \end{document}
