@@ -201,6 +201,9 @@ rwxrw-r-x$\to$765
    \item {\tt su, sudo}
  \end{itemize}
 \end{columns}
+\end{frame}
+
+\begin{frame}
 \begin{block}{Упражнения}
   \begin{enumerate}
    \item Создать директорию без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями (для пользователя altlinux)
@@ -217,7 +220,73 @@ rwxrw-r-x$\to$765
 \end{frame}
 
 \begin{frame}{SUID программы}
-  lll
+ \begin{block}{Попробовать}
+   {\tt id}
+
+   {\tt ls -l `which su`}
+ \end{block}
+ \pause
+ \begin{itemize}
+   \item Некоторые программы должны выполняться от имени обычного пользователя, но иметь больше привилегий
+   \item Для этого у них устанавливается suid или sgid биты
+   \item Установка suid (например {\tt chmod 4710 <file>})
+ \end{itemize}
+ \pause
+ \begin{block}{Упражнение}
+   \begin{itemize}
+     \item Под root создать копию утилиты {\tt id} (назвать, например, {\tt id2}) в директории /usr/bin/
+     \item Установить suid бит для этой утилиты
+     \item Запустить {\tt id2} от имени пользователя altlinux
+     \item То же с sgid битом
+    \end{itemize}
+ \end{block}
+\end{frame}
+
+\begin{frame}{Опасности SUID}
+  \begin{itemize}
+    \item Возможность backdoor через suid программу
+      \begin{itemize}
+        \item Shell игнорирует effective uid
+        \item Скрипты обычно тоже игнорируют
+        \item nosuid mount option
+       \end{itemize}
+     \item Атака через buffer overflow в существующей suid программе
+       \begin{itemize}
+         \item не использовать strcpy, sprintf, ... в security critical
+         \item А если все же не уследили
+           \begin{itemize}
+             \item рандомизация стека
+             \item grsecurity
+             \item частично selinux
+           \end{itemize}
+       \end{itemize}
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}{SUID, SGID и sticky bit для директорий}
+  \begin{itemize}
+    \item sgid для директорий -- все поддиректории и файлы внутри имеют тот же group id
+    \item suid -- игнорируется
+    \item Зато есть sticky bit 
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Дополнительные атрибуты файлов(ext2,ext3 filesystem)}
+  \begin{itemize}
+    \item Команды
+      \begin{itemize}
+        \item chattr
+        \item lsattr
+       \end{itemize}
+     \item Важные дополнительные атрибуты
+       \begin{itemize}
+         \item i (immutable)
+         \item A (noatime)
+         \item a (append-only)
+         \item S (sync)
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Хранение информации о пользователях в системе}
