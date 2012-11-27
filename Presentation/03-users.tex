@@ -99,6 +99,25 @@
 	\tableofcontents
 %	[hideallsubsections]
 }
+
+\begin{frame}{Практика: работа с файловыми объектами}
+	\begin{enumerate}
+		\item Cкопировать файл1 в файл2
+			\pause
+		\item Добиться того, чтобы файл2 состоял из 3 одинаковых копий файла1
+		\item Создать жесткую ссылку на файл1
+		\item Создать символическую ссылку на файл2
+		\item Вывести на экран список всех файлов
+			\pause
+		\item Добавить вывод команды {\tt date} в файл1
+		\item Вывести на экран список всех файлов
+		\item Вывести на экран содержимое файла1 и жесткой ссылки
+		\item Создать именованный канал (PIPE)
+		\item Запустить одну команду {\tt cat} на чтение из PIPE
+		\item Записать содержимое файла1 и файла2 в PIPE
+		\item Удалить временную директорию
+	\end{enumerate}
+\end{frame}
 \begin{frame}{Многопользовательская модель}   
  \begin{itemize}
    \item Linux -- многопользовательская система
@@ -343,5 +362,32 @@ rwxrw-r-x$\to$765
        \end{itemize}
     \end{itemize}
 \end{frame}
+
+\begin{frame}{Структура system-auth}
+
+\begin{columns}
+  \column{0.245\textwidth}
+ \textbf{module type}
+ \begin{itemize}
+   \item auth
+   \item account
+   \item session
+   \item password
+  \end{itemize}
+  \column{0.245\textwidth}
+   \textbf{control flag}
+   \begin{itemize}
+     \item requisite
+     \item required
+     \item sufficient
+     \item optional
+   \end{itemize}
+  \column{0.245\textwidth}
+   \textbf{module name}
+  \column{0.245\textwidth}
+   \textbf{module options}
+  \end{columns}
+\end{frame}
+
 
 \end{document}
