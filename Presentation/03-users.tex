@@ -291,103 +291,130 @@ rwxrw-r-x$\to$765
    \end{itemize}
 \end{frame}
 
-\begin{frame}{Дополнительные атрибуты файлов(ext2,ext3 filesystem)}
-  \begin{itemize}
-    \item Команды
-      \begin{itemize}
-        \item chattr
-        \item lsattr
-       \end{itemize}
-     \item Важные дополнительные атрибуты
-       \begin{itemize}
-         \item i (immutable)
-         \item A (noatime)
-         \item a (append-only)
-         \item S (sync)
-        \end{itemize}
-    \end{itemize}
-\end{frame}
+% End of 5-th lecture
 
 \begin{frame}{Хранение информации о пользователях в системе}
-  \begin{itemize}
-    \item user id, group id -- это числа
-    \item Утилита id 
-    \item {\tt /etc/passwd} {\tt man 5 passwd}
-    \item {\tt /etc/group}  {\tt man 5 group}
-    \item {\tt /etc/shadow} -- многие системы, но не Altlinux
-    \item {\tt /etc/tcb/<username>/shadow} altlinux
-    \item Утилита {\tt passwd}
-  \end{itemize}
-  \pause
-  \begin{block}{Практика}
+
+	\begin{block}{\tt /etc/group}
+		{\tt  group\_name:password:GID:user\_list}
+	\end{block}
+	
+	\pause
+
+	\begin{block}{\tt /etc/passwd}
+		{\tt account:password:UID:GID:GECOS:directory:shell}
+
+		\begin{itemize}
+			\item {\tt *} -- пароль не задан
+			\item {\tt x} -- пароль задан в файле {\tt /etc/shadows}
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{\tt /etc/shadow}
+		\begin{enumerate}
+			\begin{columns}
+			\column{0.3\textwidth}
+
+			\item login name
+			\item encrypted password
+			\item date of last password change
+
+			\column{0.3\textwidth}		
+			\item minimum password age 
+			\item maximum password age
+			\item password warning period
+
+			\column{0.3\textwidth}
+			\item password inactivity period
+			\item account expiration date
+			\item reserved field
+
+			\end{columns}
+		\end{enumerate}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{Практическое задание}
     \begin{itemize}
-       \item Добавить пользователя и группу и посмотреть за изменениями в перечисленных файлах
-       \item[*] Домашнее упражнение: создать пользователя без использования системных утилит, редактируя passwd, group, shadow
+		\item Посмотреть права доступа к файлам {\tt group}, {\tt passwd}, {\tt shadow}\\
+			{\tt ls -l /etc/{group, passwd, shadow}}
+		\item Добавить пользователя и группу и посмотреть изменения в перечисленных файлах
+		\item Cоздать пользователя без использования системных утилит
     \end{itemize}
-  \end{block}
-\end{frame}
-
-
-\begin{frame}{Процесс аутентификации пользователя}
-  \begin{itemize}
-    \item Программы, которые зависят от правильной аутентификации
-      \begin{itemize}
-        \item login
-        \item su
-        \item sshd
-        \item ftpd (sftpd)
-        \item ...
-      \end{itemize}
-    \item Должны уметь читать /etc/passwd, .....
-    \item Должны адаптироваться к изменениям (например аутентификация через Windows AD, или kerberos)
-   \end{itemize}
-   \pause
-   \begin{center}
-      And the answer is \pause PAM (pluggable authentication modules)  
-   \end{center}
-\end{frame}
-
-\begin{frame}{Немного о PAM}
-  \begin{itemize}
-    \item PAM это динамическая библиотека (попробовать {\tt ldd /bin/login})
-    \item Конфигурация PAM
-      \begin{itemize}
-        \item {\tt /etc/pam.conf}
-        \item {\tt /etc/pam.d/...}
-          \begin{itemize}
-            \item Сервисы
-            \item system\_auth
-          \end{itemize}
-        \item {\tt /etc/nsswitch.conf}
-       \end{itemize}
+	\pause
+	 \begin{itemize}
+		\item Изменить пароль пользователю с помощью утилиты {\tt passwd}\\
+			Hint: {\tt /etc/passwdqc.conf}
+		\item Сбросить пароль пользователю\\
+			Hint: {\tt usermod}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Структура system-auth}
 
-\begin{columns}
-  \column{0.245\textwidth}
- \textbf{module type}
- \begin{itemize}
-   \item auth
-   \item account
-   \item session
-   \item password
-  \end{itemize}
-  \column{0.245\textwidth}
-   \textbf{control flag}
-   \begin{itemize}
-     \item requisite
-     \item required
-     \item sufficient
-     \item optional
-   \end{itemize}
-  \column{0.245\textwidth}
-   \textbf{module name}
-  \column{0.245\textwidth}
-   \textbf{module options}
-  \end{columns}
+\begin{frame}{PAM}
+	% http://www.opennet.ru/base/net/pam_linux.txt.html
+	\begin{itemize}
+		\item PAM это динамическая библиотека
+		\item Конфигурация PAM
+			\begin{itemize}
+				\item {\tt /etc/pam.conf}
+				\item {\tt /etc/pam.d/...}
+					\begin{itemize}
+						\item Сервисы
+						\item system\_auth
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Формат записи}
+		\begin{columns}
+			\column{0.245\textwidth}
+			\textbf{module type}
+			 \begin{itemize}
+				 \item auth
+				 \item account
+				 \item session
+				 \item password
+			 \end{itemize}
+			 \column{0.245\textwidth}
+			 \textbf{control flag}
+			 \begin{itemize}
+				 \item requisite
+				 \item required
+				 \item sufficient
+				 \item optional
+			 \end{itemize}
+			 \column{0.245\textwidth}
+			 \textbf{module name}
+			 \column{0.245\textwidth}
+			 \textbf{module options}
+		 \end{columns}
+	 \end{block}
 \end{frame}
+
+\begin{frame}{Диспетчер службы имен (NSS)}
+
+	Важная информация для системы:
+		
+	\begin{itemize}
+		\item Информация о пользователях (логин, группа, пароль и т.д.)
+		\item Информация о сетевых ресурсах (имена хостов, протоколов, сервисов)
+    \end{itemize}
+
+	\pause
+
+	\begin{block}{NSS}
+		\begin{itemize}
+			\item Конфигурация: {\tt /etc/nsswitch.conf}
+			\item Динамические библиотеки сервисов: {\tt ls -1 /lib*/libnss\_*}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
 
 
 \end{document}
