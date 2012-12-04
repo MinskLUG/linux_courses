@@ -251,4 +251,136 @@
 	\end{enumerate}
 \end{frame}
 
+
+\begin{frame}{Программный RAID}
+  \begin{center}
+    \textbf{Уровни RAID поддерживающиеся софтверно}
+   \end{center}
+   \begin{enumerate}
+     \item RAID 0 (длинный диск)
+     \pause
+     \item RAID 1 (зеркалирование)
+     \pause 
+     \item RAID 4 (отдельный диск на проверку четности)
+     \pause
+     \item RAID 5 (данные о четности распределены по дискам)
+     \pause
+     \item RAID 6 (устойчив при потере двух дисков из 4+)
+     \pause
+     \item RAID 10 (RAID0 поверх RAID1)
+     \pause
+     \item RAID 0+1 (RAID1 поверх RAID0)
+   \end{enumerate}
+   \pause
+   Утилита для работы с RAID --\textbf{\tt mdadm}
+\end{frame}
+
+\begin{frame}{Упражнения с mdadm}
+  \begin{block}{Упражнения}
+    \begin{enumerate}
+      \item Создать 4 файла по 20Mb из нулей и привязать их к /dev/loop0.. /dev/loop3
+      \item {\tt mdadm --create /dev/md0 --level=mirror --raid-devices=2 /dev/loop0 /dev/loop1}
+      \item Создать файловую систему ext3 на /dev/md0. Создать несколько файлов на ней.
+      \item {\tt mdadm --detail /dev/md0}
+      \item {\tt mdadm --manage /dev/md0 --fault /dev/loop0 } Проверить доступность файловой системы
+      \item {\tt mdadm --manage /dev/md0 --add /dev/loop2} Проверить доступность файлов на файловой системе
+      \item {\tt mdadm --manage /dev/md0 --fault /dev/loop1} Проверить доступность файлов
+      \item Добавить /dev/loop3
+      \item {\tt umount /dev/md0; mdadm --stop /dev/md0; mdadm --remove /dev/md0; mdadm --zero-superblock /dev/loop[0-2]}
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}{LVM -- управление логическими томами}
+  \begin{center}
+    \textbf{Структура LVM}
+  \end{center}
+  \includegraphics[width=0.7\textwidth]{LVM1-wiki.png}
+\end{frame}
+
+\begin{frame}{LVM -- основные команды}
+  \begin{itemize}
+    \item Создание
+      \begin{columns}
+        \column{0.2\textwidth}
+        \begin{itemize}
+          \item pvcreate
+        \end{itemize}
+        \column{0.2\textwidth}
+        \begin{itemize}
+          \item vgcreate
+        \end{itemize}
+        \column{0.2\textwidth}
+        \begin{itemize}
+          \item lvcreate
+        \end{itemize}
+     \item Информация
+       \begin{columns}
+         \column{0.2\textwidth}
+         \begin{itemize}
+           \item pvscan
+           \item lvscan
+           \item vgscan
+         \end{itemize}
+         \column{0.2\textwidth}
+         \begin{itemize}
+           \item pvdisplay
+           \item lvdisplay
+           \item vgdisplay
+         \end{itemize}
+       \end{columns}
+      \item Манипулирование
+        \begin{itemize}
+          \item vgextend/vgreduce
+          \item lvresize
+          \item pvmove
+          \item pvremove
+         \end{itemize}
+     \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Упражнение}
+  \begin{enumerate}
+    \item  Создать еще 4 {\tt /dev/loop[4-7]}
+    \item  {\tt pvcreate /dev/loop[0-7]}
+    \item  {\tt pvscan}
+    \item  {\tt vgcreate volume1 /dev/loop[0-3]}
+    \item  Проверить что говорит {\tt pvscan, vgscan, pvdisplay}
+    \item  {\tt lvcreate --size 30M -n lv1 volume1}
+    \item  Создать файловую систему ext3 на {\tt /dev/volume1/lv1}
+    \item  {\tt lvresize --size 40M -r /dev/volume/lv1}
+    \item  {\tt vgextend volume1 /dev/loop[4-7]}
+    \item  {\tt pvscan; pvmove /dev/loop0; pvscan}
+    \item  {\tt vgreduce volume1 /dev/loop0}
+  \end{enumerate}
+\end{frame}
+
+\section {Виртуализация в Linux}
+\begin{frame}{Виртуализация. Уровни виртуализации}
+  \begin{center}
+    \textbf{В порядке возрастания уровня виртуализации}
+  \end{center}
+  \begin{enumerate}
+    \item {\tt chroot}
+    \item Linux containers (LXC)
+    \item KVM (Kernel Virtual Machine) (qemu-kvm)
+    \item Xen
+    \item QEMU 
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Упражнение}
+  \begin{block}{chroot environment}
+    \begin{enumerate}
+      \item Создать файловую систему ext3 в 5G на {\tt /dev/sda}. Смонтировать ее на {\tt /mnt/sda}
+      \item Выбрать из  {\tt /media/nfs/pub/soft/linux/emulator/OpenVZ/precreated} систему по вкусу
+      \item Распаковать {\tt tgz } файл в директорию внутри {\tt /mnt/sda}
+      \item Смонтировать proc и udev файловые системы внутрь файловой иерархии {\tt /mnt/sda/<your dir>}
+      \item {\tt chroot /mnt/sda/<your dir> /bin/bash}
+      \item {\tt Попробовать запустить какое-нибудь приложение внутри chroot}
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
 \end{document}
