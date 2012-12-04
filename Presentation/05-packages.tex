@@ -100,6 +100,52 @@
 }
 
 %\section{}
-\begin{frame}{}
+\begin{frame}{Система управления пакетами: для чего это нужно}
+\begin{itemize}
+ \item DLL Hell
+ \item Dependency hell
+ \item Общие задачи пакетного менеджера
+   \begin{itemize}
+     \item Проверка целостности пакетов
+     \item Проверка зависимостей пакетов
+        \item Поддержание списка установленных пакетов
+        \item Автоматическое удаление пакетов
+     \item Предоставление доступа к репозиторию пакетов
+     \item Разрешение зависимостей
+   \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Debian,RedHat и Altlinux системы управления пакетами}
+\begin{center}
+ \textbf{Два уровня пакетных менеджеров}
+\end{center}
+\begin{columns}
+  \column{0.29\textwidth}
+  \begin{center}
+    \textbf{RedHat based}
+  \end{center}
+  \begin{itemize}
+    \item yum
+    \item rpm
+  \end{itemize}
+  \column{0.29\textwidth}
+  \begin{center}
+    \textbf{Debian based}
+  \end{center}
+  \begin{itemize}
+    \item aptitude, apt, synaptic
+    \item dpkg
+  \end{itemize}
+  \column{0.29\textwidth}
+  \begin{center}
+    \textbf{Altlinux}
+  \end{center}
+  \begin{itemize}
+    \item apt, aptitude, deepsolver (alpha)
+    \item rpm
+  \end{itemize}
+\end{columns}
+\end{frame} 
+\begin{frame}{Пакетные менеджеры нижнего уровня rpm и dpkg}
 \end{frame}
 \end{document}
