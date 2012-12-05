@@ -102,9 +102,9 @@
 %\section{}
 \begin{frame}{Система управления пакетами: для чего это нужно}
 \begin{itemize}
- \item DLL Hell
+ \item ''DLL Hell''
  \item Dependency hell
- \item Общие задачи пакетного менеджера
+ \item Общие задачи пакетного менеджера:
    \begin{itemize}
      \item Проверка целостности пакетов
      \item Проверка зависимостей пакетов
@@ -115,37 +115,132 @@
    \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}{Debian,RedHat и Altlinux системы управления пакетами}
+
+\begin{frame}{Debian-based и RedHat-based системы управления пакетами}
 \begin{center}
  \textbf{Два уровня пакетных менеджеров}
 \end{center}
 \begin{columns}
-  \column{0.29\textwidth}
+  \column{0.4\textwidth}
   \begin{center}
-    \textbf{RedHat based}
+    \textbf{RedHat-based}
   \end{center}
   \begin{itemize}
     \item yum
     \item rpm
   \end{itemize}
-  \column{0.29\textwidth}
+  \column{0.4\textwidth}
   \begin{center}
-    \textbf{Debian based}
+    \textbf{Debian-based}
   \end{center}
   \begin{itemize}
     \item aptitude, apt, synaptic
     \item dpkg
   \end{itemize}
-  \column{0.29\textwidth}
-  \begin{center}
-    \textbf{Altlinux}
-  \end{center}
-  \begin{itemize}
-    \item apt, aptitude, deepsolver (alpha)
-    \item rpm
-  \end{itemize}
 \end{columns}
-\end{frame} 
-\begin{frame}{Пакетные менеджеры нижнего уровня rpm и dpkg}
 \end{frame}
+
+\begin{frame}{RPM: структура пакета}
+	\begin{itemize}
+		\item Метаданные
+			\begin{itemize}
+				\item Имя
+				\item Версия/Релиз
+				\item Группа
+				\item Описание
+				\item ...
+			\end{itemize}
+		\item Архив с файлами
+			\begin{itemize}
+				\item cpio
+			\end{itemize}
+		\item Скрипты
+			\begin{itemize}
+				\item Pre Install
+				\item Post Install
+				\item Pre Uninstall
+				\item Post Uninstall \bigskip
+				\item Triggers
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{RPM: команды}
+	\begin{block}{Установка пакета}
+		{\tt rpm -i [rpm-file1] ... [[url://]rpm-fileN] }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt rpm -e pkgname1 ... pkgnameN }
+	\end{block}
+	\begin{block}{Обновление пакета}
+		{\tt rpm -U [rpm-file1] ... [[url://]rpm-fileN] }
+	\end{block}
+	\begin{block}{Проверка пакета}
+		{\tt rpm -V pkgname1 ... pkgnameN }
+	\end{block}
+\end{frame}
+
+\begin{frame}{RPM: часто используемые опции опроса}
+
+	\begin{itemize}
+		\item {\tt pkgname} -- выбор пакета, установленного в системе
+		\item {\tt -a} -- все пакеты, установленные в системе
+		\item {\tt -p} -- использовать файл RPM
+	\end{itemize}
+
+
+	\begin{itemize}
+		\item {\tt -i} -- показать информацию пакета\\
+			{\tt rpm -q -i glibc }
+		\item {\tt -l} -- показать список файлов пакета \\
+			{\tt rpm -q -l glibc }
+		\item {\tt --whatprovides} -- \\
+			{\tt rpm -q --whatprovides java}
+		\item {\tt --whatrequires} -- \\
+			{\tt rpm -q --whatrequires /bin/bash}
+		\item {\tt --queryformat} -- формат вывода\\
+			{\tt rpm -q --whatrequires /bin/bash --queryformat ''\%\{name\} ''}
+
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Репозиторий}
+	\begin{block}{Репозиторий пакетов}
+		Место, где хранятся и поддерживаются пакеты, а также сопутствующая мета-информация, предназначенное для использования пакетным менеджером.
+	\end{block}
+	\begin{block}{Пример: Fedora Core}
+		\begin{itemize}
+			\item Packages/*.rpm
+			\item RPM-GPG-KEY-*
+			\item repodata
+			\begin{itemize}
+				\item множество сжатых и несжатых XML файлов для YUM
+			\end{itemize}
+		\end{itemize}
+
+		Описание репозтория для YUM на локальной системе хранится по пути
+		{\tt /etc/yum.repos.d/*.repo}
+	\end{block}
+		
+\end{frame}
+
+\begin{frame}{YUM: команды}
+	\begin{block}{Установка/обновление пакета}
+		{\tt yum install pkgname }
+	\end{block}
+	\begin{block}{Обновление всех пакетов}
+		{\tt yum update }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt yum remove pkgname }
+	\end{block}
+	\begin{block}{Поиск}
+		{\tt yum list pkgname }\\
+		{\tt yum search pkgname }
+	\end{block}
+\end{frame}
+
+
 \end{document}
