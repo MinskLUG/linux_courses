@@ -278,14 +278,14 @@
 \begin{frame}{Упражнения с mdadm}
     \begin{enumerate}
       \item Создать 4 файла по 20Mb из нулей и привязать их к /dev/loop[0-3]
-      \item {\tt mdadm --create /dev/md0 --level=mirror --raid-devices=2 /dev/loop0 /dev/loop1}
+      \item {\tt mdadm -\phantom{}-create /dev/md0 -\phantom{}-level=mirror -\phantom{}-raid-devices=2 /dev/loop0 /dev/loop1}
       \item Создать файловую систему ext3 на /dev/md0. Создать несколько файлов на ней.
-      \item {\tt mdadm --detail /dev/md0}
-      \item {\tt mdadm --manage /dev/md0 --fault /dev/loop0 } Проверить доступность файловой системы
-      \item {\tt mdadm --manage /dev/md0 --add /dev/loop2} Проверить доступность файлов на файловой системе
-      \item {\tt mdadm --manage /dev/md0 --fault /dev/loop1} Проверить доступность
+      \item {\tt mdadm -\phantom{}-detail /dev/md0}
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-fault /dev/loop0 } Проверить доступность файловой системы
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-add /dev/loop2} Проверить доступность файлов на файловой системе
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-fault /dev/loop1} Проверить доступность
       \item Добавить /dev/loop3
-      \item {\tt umount /dev/md0; mdadm --stop /dev/md0; mdadm --remove /dev/md0; mdadm --zero-superblock /dev/loop[0-2]}
+      \item {\tt umount /dev/md0; mdadm -\phantom{}-stop /dev/md0; mdadm -\phantom{}-remove /dev/md0; mdadm -\phantom{}-zero-superblock /dev/loop[0-2]}
     \end{enumerate}
 \end{frame}
 
@@ -390,7 +390,7 @@
     \begin{enumerate}
       \item Выбрать из {\tt /media/nfs/pub/soft/linux/emulator/OpenVZ/precreated} систему по вкусу и распаковать {\tt tgz } файл в {\tt /mnt/myfs}
       \item Смонтировать proc и dev файловые системы в новом окружении {\tt /mnt/myfs} \\
-		  Hints: {\tt procfs}, опция {\tt --bind}
+		  Hints: {\tt procfs}, опция {\tt -\phantom{}-bind}
       \item {\tt chroot /mnt/myfs /bin/bash}
 	  \item {\tt cat /etc/*release}
 	  \item {\tt uname -a}
@@ -400,7 +400,7 @@
 
 \begin{frame}{Упражнение: Создание снимка LVM}
   \begin{enumerate}
-    \item  {\tt lvcreate --snapshot -l 10\%VG -n snap /dev/VG0/lv1}
+    \item  {\tt lvcreate -\phantom{}-snapshot -l 10\%VG -n snap /dev/VG0/lv1}
     \item  {\tt lvdisplay, lvs, lvscan}
 	\item Смонтировать снимок в {\tt /mnt/snap}
 		\pause
@@ -408,7 +408,7 @@
 	\item Отмонтировать снимок и оригинал\\
 		Hint: помним про {\tt proc, dev}
 		\pause
-	\item Объединяем снимок с оригиналом {\tt lvconvert --merge VG0/snap}
+	\item Объединяем снимок с оригиналом {\tt lvconvert -\phantom{}-merge VG0/snap}
 	\item Монтируем {\tt /dev/VG0/lv1} в {\tt /mnt/myfs} и проверяем изменения
   \end{enumerate}
 \end{frame}
