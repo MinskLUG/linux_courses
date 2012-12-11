@@ -100,6 +100,12 @@
 }
 
 \begin{frame}{Что нужно реализовать}
+  \begin{itemize}
+    \item Возможность устанавливать ip адреса различным сетевым интерфейсам
+    \item Возможность настраивать таблицу маршрутизации
+    \item Возможность настраивать разрешение имен (DNS)
+    \item Возможность соединять разные сетевые интерфейсы разными способами
+  \end{itemize}
 \begin{itemize}
 \item
 \end{itemize}
@@ -112,6 +118,25 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Словарик базовых команд}
+  \begin{small}
+  \begin{tabular}{|l|l|l|}
+    Действие & ifconfig/route & iproute2 \\
+    Включение интерфейса & {\tt ifconfig <iface> up} & {\tt ip link set <iface> up} \\
+  Выключение интерфейса & {\tt ifconfig <iface> down}  & {\tt ip link set <iface> down} \\
+          Добавление адреса & {\tt ifconfig eth0 192.168.1.17 netmask 255.255.254.0 up} & {\tt ip addr add 192.168.1.17/23 dev eth0} \\
+     Добавление дополнительного адреса & {\tt ifconfig eth0:1 10.9.8.2 netmask 255.255.255.0 up} & {\tt ip addr add 10.9.8.2/24 label eth0:1 dev eth0}\\
+     Добавление дефолтного пути & {\tt route add default gw 192.168.1.1} & {\tt ip route add default via 192.168.1.1} \\
+  \end{tabular}
+\end{small}
+\end{frame}
 \begin{frame}{Упражнение}
+\end{frame}
+\begin{frame}{Конфигурация сети в Altlinux, RedHat, Fedora}
+  \begin{itemize}
+    \item {\tt /etc/sysconfig/network}
+    \item {\tt /etc/sysconfig/network-scripts}
+    \item {\tt service network restart}
+  \end{itemize}
 \end{frame}
 \end{document}
