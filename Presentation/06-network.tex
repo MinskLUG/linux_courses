@@ -99,44 +99,164 @@
 %	[hideallsubsections]
 }
 
-\begin{frame}{Что нужно реализовать}
+\begin{frame}{Сетевая подсистема Linux}
+
+	\begin{block}{Cетевой интерфейс}
+
+		Сетевой интерфейс в Linux -– это абстрактный именованный объект,  используемый для передачи 
+		данных через некоторую линию связи без привязки к ее (линии связи) реализации.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Сетевая подсистема Linux}
+
+	\center\includegraphics[height=0.8\textheight]{06-netstack.png}
+
+\end{frame}
+
+\begin{frame}{Команды управления настройками сети}
+	\begin{itemize}
+	  \item ifconfig/route
+	  \item iproute2
+	\end{itemize}
+
+	\begin{itemize}
+		\item Список интерфейсов
+			\begin{itemize}
+				\item {\tt ifconfig -a}
+				\item {\tt ip link show}
+			\end{itemize}
+		\item Включение интерфейса 
+			\begin{itemize}
+				\item {\tt ifconfig <iface> up}
+				\item {\tt ip link set <iface> up}
+			\end{itemize}
+	  \item Выключение интерфейса
+			\begin{itemize}
+				\item {\tt ifconfig <iface> down}
+				\item {\tt ip link set <iface> down}
+			\end{itemize}
+	  \item Назначение адреса
+			\begin{itemize}
+				\item {\tt ifconfig eth0 192.168.1.17 netmask 255.255.254.0 up}
+				\item {\tt ip addr add 192.168.1.17/23 dev eth0}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Конфигурационные файлы}
   \begin{itemize}
-    \item Возможность устанавливать ip адреса различным сетевым интерфейсам
-    \item Возможность настраивать таблицу маршрутизации
-    \item Возможность настраивать разрешение имен (DNS)
-    \item Возможность соединять разные сетевые интерфейсы разными способами
+    \item {\tt /etc/resolv.conf}
+    \item {\tt /etc/hosts}
+	\item {\tt /etc/sysconfig/network}
+    \item {\tt /etc/sysconfig/network-scripts}\\
+		{\tt /etc/sysconfig/network-scripts/ifcfg-eth0}
   \end{itemize}
-\begin{itemize}
-\item
-\end{itemize}
 \end{frame}
 
-\begin{frame}{Нижний уровень: команды управления настройками сети}
-\begin{itemize}
-  \item ifconfig
-  \item iproute2
-\end{itemize}
+\begin{frame}{Дополнительные интерфейсы}
+	\begin{block}{Алиасы}
+		\begin{itemize}
+			\item ifconfig <iface>:<alias> <ip> up
+			\item ifconfig <iface> add <ip> up
+			\item ip addr add <ip> {\bf label} <iface>:<alias> dev <iface>
+		\end{itemize}
+	\end{block}
 \end{frame}
 
-\begin{frame}{Словарик базовых команд}
-  \begin{small}
-  \begin{tabular}{|l|l|l|}
-    Действие & ifconfig/route & iproute2 \\
-    Включение интерфейса & {\tt ifconfig <iface> up} & {\tt ip link set <iface> up} \\
-  Выключение интерфейса & {\tt ifconfig <iface> down}  & {\tt ip link set <iface> down} \\
-          Добавление адреса & {\tt ifconfig eth0 192.168.1.17 netmask 255.255.254.0 up} & {\tt ip addr add 192.168.1.17/23 dev eth0} \\
-     Добавление дополнительного адреса & {\tt ifconfig eth0:1 10.9.8.2 netmask 255.255.255.0 up} & {\tt ip addr add 10.9.8.2/24 label eth0:1 dev eth0}\\
-     Добавление дефолтного пути & {\tt route add default gw 192.168.1.1} & {\tt ip route add default via 192.168.1.1} \\
-  \end{tabular}
-\end{small}
+\begin{frame}{''Виртуальные'' интерфейсы}
+	\begin{block}{TUN/TAP}
+
+		{\tt modprobe tun}
+
+		\begin{itemize}
+			\item Добавить -- {\tt tunctl -t <ifacename>}
+			\item Удалить -- {\tt tunctl -d <ifacename>}
+		\end{itemize}
+	\end{block}
 \end{frame}
+
+\begin{frame}{Мосты}
+	\begin{itemize}
+		\item Создать -- {\tt brctl addbr <bridge>}
+		\item Удалить -- {\tt brctl delbr <bridge>}
+		\item Добавить интерфейс -- {\tt brctl addif <bridge> <device>}
+		\item Удалить интерфейс-- {\tt brctl addif <bridge> <device>}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Полезные утилиты}
+
+	\begin{itemize}
+		\item telnet
+		\item netstat / ss
+		\item ping
+		\item traceroute
+		\item tcpdump
+		\item nmap
+		\item nslookup / dig
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Маршрутизация}
+	\begin{itemize}
+		\item netstat -r
+		\item route
+		\item ip route show
+	\end{itemize}
+
+	\begin{block}{Разрешить маршрутизацию на хосте}
+		{\tt echo 1 > /proc/sys/net/ipv4/ip\_forward}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}{Iptables}
+
+	\center\includegraphics[height=0.4\textheight]{06-iptables.png}
+
+	\begin{itemize}
+	\begin{columns}
+		\column{0.3\textwidth}
+			\item[ ] {\bf iptables -L -t <table>}
+				\bigskip
+
+			\item filter -- файерволл
+				\begin{itemize}
+					\item INPUT
+					\item FORWARD
+					\item OUTPUT
+				\end{itemize}
+		\column{0.3\textwidth}
+			\item nat -- преобразования адресов
+				\begin{itemize}
+					\item PREROUTING
+					\item INPUT
+					\item OUTPUT
+					\item POSTROUTING
+				\end{itemize}
+		\column{0.3\textwidth}
+			\item mangle -- специальные  изменения  пакетов (TOS, TTL, MARK)
+				\begin{itemize}
+					\item PREROUTING
+					\item INPUT
+					\item FORWARD
+					\item OUTPUT
+					\item POSTROUTING
+				\end{itemize}
+		\end{columns}
+	\end{itemize}
+
+\end{frame}
+
 \begin{frame}{Упражнение}
-\end{frame}
-\begin{frame}{Конфигурация сети в Altlinux, RedHat, Fedora}
   \begin{itemize}
-    \item {\tt /etc/sysconfig/network}
-    \item {\tt /etc/sysconfig/network-scripts}
-    \item {\tt service network restart}
+    \item 
   \end{itemize}
 \end{frame}
+
+
+
+
 \end{document}
