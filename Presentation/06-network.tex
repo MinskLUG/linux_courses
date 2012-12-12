@@ -1,0 +1,142 @@
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
+
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}	
+
+%Packages to be included
+
+\usepackage{textcomp}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
+\usepackage{listings}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8x,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% PDF meta data inserted here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={Введение в GNU/Linux},
+	pdfauthor={Epam/LLPD}
+}
+
+
+
+
+
+%%%%%% Beamer Theme %%%%%%%%%%%%%
+
+	
+\title{Введение в GNU/Linux}
+\author{Epam/LLPD}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\frame{
+	\frametitle{Сетевые интерфейсы Linux}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+}
+\frame{
+	\tableofcontents
+%	[hideallsubsections]
+}
+
+\begin{frame}{Что нужно реализовать}
+  \begin{itemize}
+    \item Возможность устанавливать ip адреса различным сетевым интерфейсам
+    \item Возможность настраивать таблицу маршрутизации
+    \item Возможность настраивать разрешение имен (DNS)
+    \item Возможность соединять разные сетевые интерфейсы разными способами
+  \end{itemize}
+\begin{itemize}
+\item
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Нижний уровень: команды управления настройками сети}
+\begin{itemize}
+  \item ifconfig
+  \item iproute2
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Словарик базовых команд}
+  \begin{small}
+  \begin{tabular}{|l|l|l|}
+    Действие & ifconfig/route & iproute2 \\
+    Включение интерфейса & {\tt ifconfig <iface> up} & {\tt ip link set <iface> up} \\
+  Выключение интерфейса & {\tt ifconfig <iface> down}  & {\tt ip link set <iface> down} \\
+          Добавление адреса & {\tt ifconfig eth0 192.168.1.17 netmask 255.255.254.0 up} & {\tt ip addr add 192.168.1.17/23 dev eth0} \\
+     Добавление дополнительного адреса & {\tt ifconfig eth0:1 10.9.8.2 netmask 255.255.255.0 up} & {\tt ip addr add 10.9.8.2/24 label eth0:1 dev eth0}\\
+     Добавление дефолтного пути & {\tt route add default gw 192.168.1.1} & {\tt ip route add default via 192.168.1.1} \\
+  \end{tabular}
+\end{small}
+\end{frame}
+\begin{frame}{Упражнение}
+\end{frame}
+\begin{frame}{Конфигурация сети в Altlinux, RedHat, Fedora}
+  \begin{itemize}
+    \item {\tt /etc/sysconfig/network}
+    \item {\tt /etc/sysconfig/network-scripts}
+    \item {\tt service network restart}
+  \end{itemize}
+\end{frame}
+\end{document}

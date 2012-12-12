@@ -54,7 +54,7 @@
     morecomment=[l][\color{red}]{-},
     morestring=[b]",
 }
-
+\newcounter{tmpc}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,6 +241,40 @@
 		{\tt yum search pkgname }
 	\end{block}
 \end{frame}
+
+
+\begin{frame}[fragile]{Упражнение}
+  \begin{enumerate}
+      \item Создать на {\tt /dev/sda} раздел размером примерно 10Gb
+      \item Создать на этом разделе ext3 ФС и смонтировать раздел в {\tt /mnt/chroot}
+      \item Развернуть {\tt /media/nfs/pub/CentOS/precreated/centOS.tar.gz} в {\tt /mnt/chroot}
+      \item Смонтировать {\tt proc, sysfs} а также {\tt /dev} в соответствующие места {\tt /mnt/chroot}
+      \item {\tt chroot /mnt/chroot}
+      \item Отредактировать {\tt /etc/resolv.conf} -- скопировать туда информацию из {\tt resolv.conf} основной системы
+      \item Отредактировать {\tt /etc/yum.conf} Добавить следующий раздел
+\begin{minipage}{0.5\textwidth}
+\begin{verbatim}
+[base]
+  name = CentOS 6
+  baseurl = ftp://192.168.11.15/CentOS
+  gpgcheck = 0
+\end{verbatim}
+\end{minipage}
+\setcounter{tmpc}{\theenumi}
+\end{enumerate}
+\end{frame}
+\begin{frame}{Продолжение упражнения}
+  \begin{enumerate}
+      \setcounter{enumi}{\thetmpc}
+      \item {\tt yum update}
+      \item Установить пакет vim
+      \item Посмотреть списки файлов для пакетов {\tt yum, rpm}
+      \item Найти пакет предоставляющий сервис ssh и установить его
+      \item Удалить пакет vim
+    \end{enumerate}
+\end{frame}
+
+
 
 
 \end{document}
