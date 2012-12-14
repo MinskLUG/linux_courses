@@ -36,7 +36,7 @@
 *    Скриптование.
 *    Перенаправление ввода-вывода
 
-     _Практика_: <code>|, <, >, >>, 1>&2, <<EOF </code>
+     _Практика_: <code>|, <, >, >>, 1>&2, << EOF </code>
 *    Переменные. Встроенные и пользовательские
 
      _Практика_: echo, set, unset. Модификация PATH, просмотр SHELL, PWD, HOME, OLDPWD 
@@ -140,7 +140,7 @@
      _Практика_: просмотр схем и таблиц
 *    Основы SQL 
 
-     _Практика_: SELECT .. WHERE, INSERT INTO, DELETE FROM .. WHERE )
+     _Практика_: SELECT .. WHERE, INSERT INTO, DELETE FROM .. WHERE 
 *    Backup/restore БД
 
      _Практика_: дамп/восстановление базы, таблицы
@@ -163,11 +163,11 @@
 *    Зачем и где используется 
 
      _Практика_: краткий обзор, конфигурация, установка гостевой системы:
-            ESX/ESXi/Workstation, 
-            Qemu/KVM, 
-            XEN/Citrix
-            VirtualBox
-            Hyper-V
+     * ESX/ESXi/Workstation, 
+     * Qemu/KVM, 
+     * XEN/Citrix
+     * VirtualBox
+     * Hyper-V
 
 ## 12. Базовые понятия QA 
 *    Основы тестирования
