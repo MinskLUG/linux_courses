@@ -1,0 +1,47 @@
+\begin{frame}{Процесс загрузки GNU/Linux}
+
+	\begin{enumerate}
+		\item BIOS
+		\item MBR
+			\pause
+		\item Загрузка загрузчика
+		\begin{itemize}
+			\item Stage 1 -- Первичный загрузчик
+			\item Stage 1,5 -- Загрузка ядра загрузчика и драйвера ФС
+			\item Stage 2 -- Чтение конфигурации
+		\end{itemize}
+			\pause
+
+		\item Загрузка ядра в память
+		\item Загрузка initrd в память
+			\pause
+		\item Передача управления ядру
+		\begin{itemize}
+			\item Распаковка
+			\item Инициализация
+		\end{itemize}
+
+		\item Монтирование initrd
+		\item Запуск программы инициализации в initrd
+			\pause
+		\item Нахождение и монтирование корневого раздела
+			\pause
+		\item Запуск программы init
+		\begin{itemize}
+			\item Монтирование оставшихся разделов ФС
+			\item Инициализация оборудования
+			\item Запуск демонов
+		\end{itemize}
+
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Наиболее распространенные загрузчики}
+	\begin{itemize}
+		\item GRUB
+		\item LILO
+		\item syslinux (isolinux, pxelinux)
+		\item u-boot
+	\end{itemize}
+\end{frame}
