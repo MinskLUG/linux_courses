@@ -1,0 +1,89 @@
+\begin{frame}{Задачи ядра Linux}
+	\begin{itemize}
+		\item Инициализация системы
+		\item Управление процессами и потоками
+		\item Управление памятью
+		\item Управление файлами
+		\item IPC
+		\item Разграничение доступа
+		\item Сетевые возможности
+		\item Интерфейс доступа к возможностям ядра
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Ядро}
+
+	Ядро ОС Linux является модульным. 
+
+	\begin{block}{Модули}
+		\begin{itemize}
+			\item В виде отдельных файлов
+			\item "Вкомпилированные" в ядро
+		\end{itemize}
+	\end{block}
+
+	\bigskip
+
+	Список загруженных модулей: {\tt /proc/modules}
+\end{frame}
+
+
+\begin{frame}{Параметры ядра}
+	
+	Полный список: {\tt Documentation/kernel-parameters.txt}
+
+	\begin{block}{Некоторые часто применяемые параметры}
+		\begin{itemize}
+			\begin{columns}
+			\column{0.3\textwidth}
+				\item console=ttyS0,115200
+				\item debug
+				\item init=/sbin/init
+				\item loglevel=[0-7]
+				\item maxcpus=[num]
+			\column{0.3\textwidth}
+				\item mem=nn[KMG]
+				\item noacpi
+				\item noapic
+				\item panic=nn (sec)
+				\item resume=/dev/sda2
+			\column{0.3\textwidth}
+				\item ro
+				\item rw
+				\item root=/dev/sda1
+				\item rootdelay=nn (sec)
+				\item rootwait
+				\item vga=<num>|ask
+			\end{columns}
+		\end{itemize}
+	\end{block}
+
+	Модулям можно передавать параметры используя синтаксис: {\tt module.param=value}
+
+	Параметры переданные ядру во время загрузки: {\tt /proc/cmdline}
+\end{frame}
+
+\begin{frame}{Магия SysRq}
+
+	{\tt CONFIG\_MAGIC\_SYSRQ=y}
+
+	{\tt /proc/sysrq-trigger}
+
+	\begin{block}{{\bf R}eboot {\bf E}ven {\bf I}f {\bf S}ystem {\bf U}tterly {\bf B}roken}
+		{\bf Ctrl+Alt+SysRq+?}
+
+		\begin{itemize}
+			\item h -- вывести список сочетаний на консоль
+			\item b -- перезагрузка
+			\item o -- выключение
+			\item e -- послать сигнал SIGTERM всем процессам кроме init
+			\item i -- послать сигнал SIGKILL всем процессам кроме init
+			\item s -- синхронизировать все ФС 
+			\item u -- переподключить все ФС в режиме RO
+		\end{itemize}
+		
+	\end{block}
+
+
+\end{frame}
