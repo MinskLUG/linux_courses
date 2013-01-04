@@ -12,17 +12,21 @@
   \titlepage
 \end{frame}
 
+\section{История и архитектура}
+
 % краткая историческая справка
 \begin{frame}
   \frametitle{История Linux}
 
   \begin{enumerate}
-    \item Начало. AT\&T Unix Version 2. 1971
-    \item BSD (198x) (?)
-    \item BSD 4.2. Первая реализация TCP/IP. 1982
-    \item Расцвет коммерческих Unix-подобных систем.
-    \item Проект GNU. 1985 
-    \item Linux 1.0 1992 (?)
+    \item Начало. AT\&T Unix Edition 1. 1971
+    \item AT\&T Unix Edition 5. 1975. Полностью переписана на Си. 
+    \item Появление BSD Unix (1978)
+    \item BSD 4.2. Первая реализация TCP/IP. 1983
+    \item Проект GNU. 1983 
+    \item Расцвет коммерческих Unix-подобных систем. 80-е, начало 90х.
+    \item AT\&T Unix System V Release 4. 1988
+    \item Ядро Linux 0.01 1991 
   \end{enumerate}
 
 \end{frame}
@@ -31,7 +35,7 @@
 % картинки : круговая, и прямоугольная
 \begin{frame}
   \frametitle{Архитектура классических Unix}
-    \includegraphics[height=8cm]{clipart/classic-unix-arch}
+    \includegraphics[height=8cm]{classic-unix-arch}
 \end{frame}
 
 
@@ -39,8 +43,25 @@
   \frametitle{Архитектура Linux - 2}
 
   \begin{center}
-    \includegraphics[height=7cm]{clipart/linux-software-stack}
+    \includegraphics[height=7cm]{linux-software-stack}
   \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Что такое ``Linux''?}
+  \begin{center}
+    \alert{Что же такое ``Linux''?}
+  \end{center}
+
+  \pause 
+
+  \emph{Linux : ядро ОС\footnote{ОС - операционная система}(узкое значение)}
+  \newline
+  \pause
+
+  \emph{Linux : семейство ОС на одноимённом ядре (широкое значение)}
+
 \end{frame}
 
 % основные черты
@@ -61,7 +82,189 @@
   \end{itemize}
 \end{frame}
 
-% пользовательская сессия
+\section{Сессия пользователя}
 
+% пользовательская сессия
+\begin{frame}
+  \frametitle{Пользовательская сессия}
+
+  \begin{center}
+    \begin{block}<1->{Многопользовательская система?}
+      Надо представиться системе. Логин и пароль.
+    \end{block}
+
+    \begin{block}<2->{Как может выглядеть}
+      \includegraphics[height=2.5cm]{console-login-screenshot}
+      \includegraphics[height=2.5cm]{gdm-login-screenshot}
+      \includegraphics[height=2.5cm]{putty-login-screenshot}
+    \end{block}
+
+    \begin{block}<3->{Виды сессий}
+      \begin{itemize} 
+	\item локальные и удалённые (сетевые)
+	\item текстовые и графические
+      \end{itemize}
+    \end{block}
+
+  \end{center}
+
+\end{frame}
+
+\subsection{SSH}
+
+\begin{frame}
+  \frametitle{Входим удалённо. SSH}
+
+  \begin{center}
+
+    SSH - \emph{S}ecure \emph{SH}ell
+    \newline \pause
+
+    Протокол удалённой работы по сети для Linux.
+
+    Много реализаций клиентов и серверов. 
+    \newline
+    \pause
+
+    \emph{Как может выглядеть:} 
+    \newline
+    \fbox{\includegraphics[height=3.5cm]{console-ssh-screenshot}}
+    \emph{ }
+    \fbox{\includegraphics[height=3.5cm]{putty-config-screenshot}}
+  \end{center} 
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Выход из матрицы}
+  
+  \begin{center}
+    \includegraphics[height=5.5cm]{matrix-screenshot}
+    \pause
+    \newline
+    \begin{itemize}
+      \item Команда \emph{exit}
+      \item Hotkey \emph{Ctrl+d}
+      \item Закрыть клиента
+    \end{itemize}
+  \end{center}
+
+\end{frame}
+
+\subsection{Ключи SSH}
+
+\begin{frame}
+  \frametitle{Методы авторизации SSH. Ключи}
+
+  \alert{Не хочешь вводить пароли?}
+  \pause
+
+  \alert{Не вводи!} 
+  \pause
+
+  \begin{center}
+    Aвторизация в SSH.
+    
+    Пара: открытый + секретный ключ. 
+    
+    Вместо пароля.
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ключи SSH. Создание}
+
+  \begin{center}
+
+    \begin{tabular}{ l r }
+      \hbox{Linux: ssh-keygen} & \hbox{Windows: PuTTY keygen} \\
+      \includegraphics[height=3cm]{ssh-keygen-screenshot} & \includegraphics[height=4cm]{putty-keygen-screenshot} \\
+      Ключи в папке .ssh/: & Ключи там, где сохранили \\
+      id\_rsa и id\_rsa.pub &
+    \end{tabular}
+
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ключи SSH. Копирование}
+
+  \begin{itemize}
+    \item \alert{Что копировать?} Публичный ключ (id\_rsa.pub)  \pause
+    \item \alert{Куда складывать?} в \$HOME/.ssh/authorized\_keys \newline удалённой машины \pause
+    \item \alert{Как перенести?} \pause
+      \begin{itemize} 
+	\item Linux: ssh-copy-id username@host \pause
+	\item Copy-paste в редактор \pause
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\subsection{Unix shell}
+\begin{frame}
+  \frametitle{Лирическое отступление: David Korn}
+  \begin{center}
+    Автор Korn Shell
+
+    \includegraphics[height=5cm]{korn-shell-joke} 
+
+    David Korn: ``Убирайся, или я заменю тебя очень маленьким Shell-скриптом.''
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Что такое Unix shell?}
+  
+  \alert{Что такое Unix shell?}
+
+  \begin{itemize}
+    \item Какие есть варианты у вас? \pause
+    \item Обычная программа, запускающаяся после входа в систему \pause
+    \item Интерактивный командный интерпретатор \pause
+    \item Язык программирования \pause
+    \item Платформа интеграции (для утилит) \pause
+    \item Сотни разных реализаций (bash, ksh, zsh, tcsh, \ldots ) \pause
+    \item Масса различных диалектов
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Life with Shell}
+
+  \begin{center}
+    \Large{готовьтесь жить вместе с Shell}
+    \newline
+    
+    \includegraphics[height=6cm,angle=0]{unix-power-tools-cover} 
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Получение информации о системе}
+  \begin{itemize}
+    \item \Large{who} и \Large{whoami} - информация о пользователях \pause
+    \item \Large{free} - оперативная память \pause
+    \item \Large{ps} - список процессов \pause
+    \item \Large{top} - процессы в динамике \pause
+    \item \Large{uptime} - время, срок работы, параметры нагрузки \pause
+    \item \Large{last} - список логинившихся пользователей 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Встроенная документация}
+  \begin{itemize}
+    \item \Large{man} - встроенная справка. Команды ``man'', ``apropos'', ``whatis'' \pause
+    \item info - GNU texinfo, система гипертекстовой справки \pause
+    \item /usr/share/doc/* - документация, устанавливаемая вместе с программами \pause
+    \item Google - no comments \pause
+  \end{itemize}
+
+\end{frame}
 
 \end{document}

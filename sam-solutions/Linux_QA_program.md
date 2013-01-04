@@ -30,6 +30,10 @@
 
      _Практика_: man, GNU info, /usr/share/doc/\*, гугление
 
+Software (linux): openssh-server, openssh-client, man, texinfo, procps
+
+Software (windows): putty
+
 ## 2. Bourne Shell (aka POSIX sh) 
 *    Команда, ключи, параметры
 *    Условное выполнение: <code>&& , ||</code>
