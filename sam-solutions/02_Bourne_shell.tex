@@ -1,0 +1,52 @@
+\include{linux-qa-common}
+
+
+\title[SaM Solutions. Linux QA Training]
+{
+  Занятие 2.\\
+  Bourne Shell aka POSIX sh.
+}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Что такое Unix shell?}
+  
+  \alert{Что такое Unix shell? (Назойливый повтор)}
+
+  \begin{itemize}
+    \item Обычная программа, запускающаяся после входа в систему
+    \item Интерактивный командный интерпретатор
+    \item Язык программирования
+    \item Платформа интеграции (для утилит)
+    \item Сотни разных реализаций (bash, ksh, zsh, tcsh, \ldots )
+    \item Масса различных диалектов
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Shell. Ключевые понятия - 1}
+  \framesubtitle{Определения}
+
+  \begin{itemize}
+    \item \alert{Приглашение командной строки (CMD PROMPT)}: \pause 
+      \begin{verbatim}
+	$, #, user@host:~$
+      \end{verbatim} \pause
+    \item \alert{Команда}: \pause \newline \verb+whoami; top; exit+ \pause
+    \item \alert{Параметр}: \pause \newline \verb+man bash; who am i+ \pause
+    \item \alert{Ключ}: \pause \newline \verb+ls -a; ls -al; ls -al /tmp/+ 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Shell. Ключевые понятия - 2}
+  \framesubtitle{Картинка для закрепления}
+    \hbox{\includegraphics[height=7cm]{bash-input-screenshot}}
+\end{frame}
+
+\end{document}
