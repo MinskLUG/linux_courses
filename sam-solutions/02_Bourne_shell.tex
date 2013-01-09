@@ -12,6 +12,8 @@
   \titlepage
 \end{frame}
 
+\section{Введение в Shell}
+
 \begin{frame}
   \frametitle{Что такое Unix shell?}
   
@@ -47,6 +49,224 @@
   \frametitle{Shell. Ключевые понятия - 2}
   \framesubtitle{Картинка для закрепления}
     \hbox{\includegraphics[height=7cm]{bash-input-screenshot}}
+\end{frame}
+
+\section{Интерактивная работа в Shell}
+
+\begin{frame}
+  \frametitle{Приёмы эффективной работы}
+
+  \alert{\Large{Как в Shell работать быстро?}} 
+  \pause
+
+  \begin{enumerate}
+    \item \Large{автодополнение путей и команд}
+    \item \Large{история команд}
+    \item \Large{редактирование командной строки}
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Приёмы эффективной работы}
+  \framesubtitle{Автодополнение путей и команд - 1}
+
+  \alert{\Large{Волшебная кнопка - TAB}} \newline
+  \pause
+  \begin{itemize}
+    \item \Large{Имя команды} \pause \newline
+      \small{Пример: \verb+mys[TAB]_co[TAB]+} \pause \newline
+      \small{Результат: \verb+mysql_convert_table_format+} \newline
+      \alert{8 vs 26} \pause
+    \item \Large{Пути и имена файлов} \pause \newline
+      \small{Пример: \verb+ls /u[TAB]lo[TAB]sh[TAB]/ca[TAB]+} \pause \newline
+      \small{Результат: \verb+ls /usr/local/share/ca-certificates/+} \newline
+      \alert{16 vs 36} \pause
+    \item \Large{Параметры и ключи} \footnote{Только у BASH и ZSH (если настроены)} \pause \newline
+      \small{Пример: \verb+apti[TAB]--a[TAB]sh[TAB]core[TAB][ENTER]+} \pause \newline
+      \small{Результат: \verb+aptitude --assume-yes show coreutils+} \newline
+      \alert{16 vs 37} \pause
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Приёмы эффективной работы}
+  \framesubtitle{Автодополнение путей и команд - 2}
+  
+  \Large{\alert{Единственный вариант подстановки}: \newline TAB дополняет сразу} \pause
+
+  \Large{\alert{Несколько вариантов подстановки?}} 
+
+  \Large{Ещё больше волшебства - 2 кнопки TAB!} 
+
+  \Large{\alert{2xTAB - список вариантов подстановки}}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Приёмы эффективной работы}
+  \framesubtitle{Автодополнение путей и команд - 3}
+  
+  \Huge{Примеры}
+
+  \Large{
+  \begin{itemize}
+    \item apt[TAB][TAB]
+    \item \verb+aptitude --[TAB][TAB]+\footnote{Только для BASH и ZSH}
+    \item ls /[TAB][TAB] \footnote{Можно использовать вместо команды ``ls''}
+  \end{itemize}
+      }
+\end{frame}
+  
+
+\begin{frame}
+  \frametitle{Приёмы эффективной работы}
+  \framesubtitle{История команд}
+
+  \Large{\alert{Просмотр истории}}
+
+  \begin{itemize}
+    \item ``Up'' и ``Down'' - вперёд-назад \pause
+    \item ``Ctrl+R'' - интерактивный поиск в истории \pause
+    \item повторно ''Ctrl+R`` - искать дальше
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Приёмы эффективной работы}
+  \framesubtitle{Редактирование командной строки}
+
+  \Large{\alert{Emacs editing mode}} \footnote{Только KSH-совместимые: bash, zsh, pdksh, mksh, etc}
+
+  \begin{itemize}
+    \item ``Left'' и ``Right'' - вперёд-назад по текущей строке \pause
+    \item ``Ctrl+a'' и ``Ctrl+e''  - перейти в начало и конец строки \pause
+    \item ``Ctrl+u'' - удалить от курсора до начала строки \pause
+    \item ``Ctrl+w'' - удалить слово (от курсора до разделителя, влево) 
+  \end{itemize}
+    
+\end{frame}
+
+\section{Язык shell}
+
+\begin{frame}[fragile]
+  \frametitle{Условное выполнение команд}
+
+  \Large{\alert{Код возврата (RETURN CODE)}}: \newline 
+  \normalsize{результат выполнения у любой команды Shell}
+  \newline
+
+  Shell return code:
+  \begin{itemize}
+    \item 0 - выполнень успешно
+    \item не 0 - ошибка
+  \end{itemize}
+  \pause
+
+  Операции над кодом возврата:
+  \begin{itemize}
+    \item ``\verb+&&+'' - логическое И
+    \item ``\verb+||+'' - логическое ИЛИ
+  \end{itemize}
+  \pause
+
+  Примеры:
+  \begin{itemize}
+    \item \verb+ cat /proc/1/environ || echo fail +
+    \item \verb+ find /usr/share/doc -name ``*.txt'' || echo ok+
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Скрипты}
+ 
+  \begin{block}<1->{Shell Script, определение}  
+
+    Последовательность команд Shell.
+
+    Разделитель: перевод строки, ``;''
+  \end{block}
+
+  \begin{block}<2->{shebang}
+    \verb+#!something+ или чем запускаем скрипт. 
+    
+    По умолчанию : \verb+#!/bin/sh+
+  
+    Всегда первая строка скрипта.
+
+    Фактически: \verb+/bin/sh scriptname+
+  \end{block}
+
+  \begin{block}<3->{Парадоксальные примеры}
+    \verb+#!/bin/awk -f+
+    
+    \verb+#!/bin/rm+
+
+    \verb+#!/bin/less+
+  \end{block}
+
+\end{frame}
+
+\subsection{Перенаправление ввода-вывода}
+\begin{frame}
+  \frametitle{Потоки ввода-вывода}
+  
+  Особенности архитектуры\footnote{См документацию языка программирования Си}:
+  \begin{block}<1->{У каждой запущенной программы 3 потока I/O:}
+    \begin{enumerate}
+	\setcounter{enumi}{-1}
+      \item ввода
+      \item вывода
+      \item ошибок
+    \end{enumerate}
+
+    Cвязаны с экраном и клавиатурой терминала. \pause \newline
+  \end{block}
+
+  \begin{block}<2->{Связаны с терминалом только по умолчанию}
+
+    \alert{shell позволяет переопределить весь ввод и вывод программы}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Базовый cинтаксис перенаправления}
+  \begin{itemize}    
+    \item \alert{Ввод} ``<'' \newline
+      \verb+ sort <.bash_history+ \pause
+    \item \alert{Вывод} ``>'' \footnote{Файл затрёт новым содержанием, если он существовал ранее} \newline
+      \verb+ find /usr/share/doc -name ``*.txt'' >txt-docs+    
+    \item \alert{Вывод} ``1>'' \newline
+      \verb+ find /usr/share/doc -name ``*.txt'' 1>txt-docs+ \pause
+    \item \alert{Ошибки} ``2>''\newline
+      \verb+ find /tmp 2>find.errors+ \pause
+    \item \alert{Вывод (дописать в конец)} ``\verb+1>>+'' \newline
+      \verb+ find /usr/share/doc -name ``*.txt'' >>txt-docs+
+    \item \alert{Ошибки (дописать в конец)} ``\verb+2>>+'' \newline 
+      \verb+ find /tmp 2>>find.errors+ \pause
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Расширенный синтаксис перенаправления}
+  
+  \begin{itemize}
+    \item \alert{Pipe} \footnote{Классика Unix} ``\verb+cmd1 | cmd2 +'' \newline
+      Вывод cmd1 направляется на ввод cmd2. \newline
+      \verb+man bash|grep ksh+ \pause
+    \item \alert{Склеить потоки}  ``\verb+N>&M+'' \newline
+      В примере: просмотреть одновременно и вывод и ошибки \newline
+      \verb+find /tmp 2>&1 | less+ \pause
+    \item \alert{''Ввод здесь``}\footnote{IRL используется только в скриптах} ''\verb+<<END_MARKER+`` \newline
+      \begin{verbatim}
+      sort <EOF
+      oieu
+      ak
+      zf
+      EOF
+      \end{verbatim}
+  \end{itemize}
 \end{frame}
 
 \end{document}
