@@ -39,9 +39,10 @@
       \begin{verbatim}
 	$, #, user@host:~$
       \end{verbatim} \pause
-    \item \alert{Команда}: \pause \newline \verb+whoami; top; exit+ \pause
-    \item \alert{Параметр}: \pause \newline \verb+man bash; who am i+ \pause
-    \item \alert{Ключ}: \pause \newline \verb+ls -a; ls -al; ls -al /tmp/+ 
+    \item \alert{Команда}: \newline \verb+whoami; top; exit+ \pause
+    \item \alert{Параметр}: \newline \verb+man bash; who am i+ \pause
+    \item \alert{Ключ (1 символ)}: \newline \verb+ls -a; ls -al; ls -a -l /tmp/+ \pause
+    \item \alert{Длинный ключ (GNU-style}: \newline \verb+ls --version+
   \end{itemize}
 \end{frame}
 
@@ -172,10 +173,12 @@
   Примеры:
   \begin{itemize}
     \item \verb+ cat /proc/1/environ || echo fail +
-    \item \verb+ find /usr/share/doc -name ``*.txt'' || echo ok+
+    \item \verb+ find /usr/share/doc -name ``*.txt'' && echo ok+
   \end{itemize}
 
 \end{frame}
+
+\subsection{Скрипты}
 
 \begin{frame}[fragile]
   \frametitle{Скрипты}
@@ -188,7 +191,7 @@
   \end{block}
 
   \begin{block}<2->{shebang}
-    \verb+#!something+ или чем запускаем скрипт. 
+    \verb+#!something+ или чем мы запускаем скрипт. 
     
     По умолчанию : \verb+#!/bin/sh+
   
@@ -198,13 +201,28 @@
   \end{block}
 
   \begin{block}<3->{Парадоксальные примеры}
-    \verb+#!/bin/awk -f+
-    
     \verb+#!/bin/rm+
+
+    \verb+#!/bin/awk -f+
 
     \verb+#!/bin/less+
   \end{block}
 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Запуск скриптов}
+  \begin{enumerate} 
+    \item \verb+sh scriptname+
+    \item \verb-chmod +x script- \newline \verb+./script+
+    \item из каталогов в переменной PATH 
+      \newline \verb+echo $PATH+
+      \newline \verb+~/bin+ (если есть)
+      \newline \verb+/usr/local/bin+
+    \item в текущей копии shell\footnote{ Остальные способы - запускают новый shell}
+      \newline \verb+. ./script+
+      \newline \verb+source script+\footnote{ Несовместимо с POSIX. Происходит из ksh. Добавляет текущий каталог к списку путей}
+  \end{enumerate}
 \end{frame}
 
 \subsection{Перенаправление ввода-вывода}
@@ -214,7 +232,7 @@
   Особенности архитектуры\footnote{См документацию языка программирования Си}:
   \begin{block}<1->{У каждой запущенной программы 3 потока I/O:}
     \begin{enumerate}
-	\setcounter{enumi}{-1}
+      \setcounter{enumi}{-1}
       \item ввода
       \item вывода
       \item ошибок
@@ -258,9 +276,9 @@
     \item \alert{Склеить потоки}  ``\verb+N>&M+'' \newline
       В примере: просмотреть одновременно и вывод и ошибки \newline
       \verb+find /tmp 2>&1 | less+ \pause
-    \item \alert{''Ввод здесь``}\footnote{IRL используется только в скриптах} ''\verb+<<END_MARKER+`` \newline
+    \item \alert{''Ввод здесь``}\footnote{In Real Life (IRL) используется только в скриптах} ''\verb+<<END_MARKER+`` \newline
       \begin{verbatim}
-      sort <EOF
+      sort <<EOF
       oieu
       ak
       zf
