@@ -289,7 +289,48 @@
   \end{itemize}
 \end{frame}
 
-\subsection{Переменные}
+\begin{frame}
+  \frametitle{Практика: перенаправление, скрипты - 1} 
+
+  \alert{Задание 1}
+  \begin{enumerate}
+    \item Сохранить 5 последних команд из истории в файл.
+    \item Убрать номера (редактировать любым способом)
+    \item Выполнить скрипт (не делая файл исполняемым)
+  \end{enumerate}
+  \pause
+
+  \alert{Задание 2}
+  \begin{enumerate}
+    \item Добавить заголовок, говорящий о том, что файл является shell-скриптом
+    \item Сделать файл исполняемым
+    \item выполнить скрипт как исполняемый файл
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Практика: перенаправление, скрипты - 2}
+
+  \alert{Задание 3}
+  
+  Сделать вывод сохранённой в скрипте истории команд на экран.\newline Самим скриптом\footnote{конструкция ``ввод здесь''}.
+
+  \pause
+
+  \alert{Задание 4}
+
+  Отсортировать вывод из \alert{Задания 3} в обратном порядке. \newline Не использовать временные файлы.
+  
+  \pause
+
+  \alert{Задание 5} 
+
+  Отсортировать и вывести на экран содержимое скрипта (в 1 команду), используя перенаправление ввода-вывода.
+
+
+\end{frame}
+
+\subsection{Переменные и кавычки}
 
 \begin{frame}[fragile]
   \frametitle{Переменные}
@@ -304,27 +345,233 @@
   \Large{\alert{Какие бывают?}}
   \normalsize{ }
   \begin{itemize}
-    \item встроенные (в Shell): HOME, PWD, PATH, PS1
+    \item встроенные (в Shell): 
+      \begin{itemize}
+	\item HOME - домашний каталог
+	\item PWD - текущий каталог
+	\item PATH - список каталогов, где ищут исполняемые файлы
+	\item PS1 - приглашение пользователя
+      \end{itemize}
     \item пользовательские 
   \end{itemize} 
 
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Просмотр и изменение значений}
+  \frametitle{Просмотр и изменение значений переменных}
   \normalsize{ }
   \begin{itemize}
     \item \alert{set} - просмотр списка \pause
-    \item \alert{\$VAR1} - вывести конкретную переменную \pause
+    \item \alert{\$HOME} - взять значение переменной \pause
       \begin{lstlisting}[language=sh,frame=single]
-	echo $USER $HOME $PWD
+	echo $USER $HOME
 	echo $PATH 
+	$SHELL
       \end{lstlisting} \pause 
-    \item \alert{unset} - сброс (обнуление) значения
-    \item \alert{VAR1=``значение''} - установить новое значение
+    \item \alert{unset} - сброс (обнуление) значения \pause
+    \item \alert{VAR1=``значение''} - установить новое значение \newline 
+      \emph{Примечание:} в значении можно использовать переменные (если значение присваивается через ``'')
   \end{itemize}
 
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Волшебные виды кавычек}
+
+  \begin{itemize}
+    \item \alert{Одиночные} : 'всё как было'  \newline
+      \begin{lstlisting}[language=sh,frame=single]
+	echo 'Oops: $HOME $SHELL'
+      \end{lstlisting} \pause
+    \item \alert{Двойные} :  ``раскрывает значения переменных'' \newline
+      \begin{lstlisting}[language=sh,frame=single]
+	echo "Ok: $HOME $SHELL``
+      \end{lstlisting} \pause
+    \item \alert{Обратные} : `выполняем команду` \newline
+      \begin{lstlisting}[language=sh,frame=single]
+	LISTING=`ls -a`
+	echo ''in $PWD: $LISTING"
+      \end{lstlisting}
+  \end{itemize}
+  Скобки можно сочетать друг с другом. Экранируют пробелы\footnote{пробел - разделитель параметров}.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Примеры из жизни}
+  \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+    $CHROOT_TOOL /bin/sh /tmp/`basename $hook`
+  \end{lstlisting} \pause
+
+  \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+    ROOT_UUID=`tune2fs -l $ROOT_DEV |awk '/UUID/ {print $3}'`
+  \end{lstlisting} \pause
+  
+  \begin{lstlisting}[language=sh,frame=single,basicstyle=\small,breaklines=true]
+    (echo unit B; echo print; echo quit) | \
+          parted $FLASH_IMG | \
+          awk '/^ [1-2]/ { printf "--offset=%s --sizelimit=%s /dev/loop%s\n", $2, $4, $1 }' | \
+          sed 's/B//g' | \
+          xargs -n 1 -I{} sh -c "losetup -v {} $FLASH_IMG"
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Практика: переменные и скобки}
+  
+  \normalsize{ }
+  \alert{Задание 1.}
+  Запустить скрипт с историей\footnote{из предыдущего задания по перенаправлению ввода-вывода} в новом процессе, используя тот же SHELL, в котором вы работаете сейчас.  \pause
+
+  \alert{Задание 2.}
+  Скрипт-генератор случайных чисел (RANDOM) \pause
+
+  \alert{Задание 3.} Работа с путями для поиска команд.
+    \begin{enumerate}
+      \item создать папку \verb+bin+ в домашнем каталоге
+      \item дописать в PATH полный путь к созданной папке (используя переменную HOME)
+      \item скопировать скрипт с историей в папку bin
+      \item запустить скрипт, без указания пути к нему 
+    \end{enumerate}
+
+\end{frame}
+
+\subsection{подстановочные символы}
+\begin{frame}[fragile]
+  \frametitle{Подстановочные символы путей (Wildcards)}
+
+  \alert{Wildcards} - спецсимволы в параметрах команд, раскрываемые в путь и имя файла самим интерпретатором до того, как запустить команду на выполнение. \pause
+
+
+  \begin{itemize}
+    \item \alert{*} - любое количество любых символов
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	echo /u*
+	ls /u*
+      \end{lstlisting} \pause
+    \item \alert{[]} - символ из перечисления\footnote{об интервалах - в разделе о регулярных выражениях}
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	echo .[bp]*
+      \end{lstlisting} \pause
+    \item \alert{?} - любой одиночный символ
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	echo ?i*
+      \end{lstlisting} 
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Практика: Wildcards}
+
+  \alert{Упражнение 1.} Вывести на экран имя файла или каталога, содержащего ровно 4 символа и начинающегося с точки
+  \pause
+  \alert{Упражнение 2.} -- || --  из папки /usr, содержащее 'i' или 'h'
+  \pause
+  \alert{Упражнение 3.} Написать скрипт lsa, делающий то же, что и команда ``ls -a``\footnote{вывод файлов и каталогов, включая скрытые}, не используя ''ls``.
+\end{frame}
+
+\subsection{Ветвления и условия}
+
+\begin{frame}[fragile]
+  \frametitle{Условия и ветвление. if и test(1)}
+
+  \alert{if то же самое, что и test(1)} \pause
+
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	if [ -f .bash_history ]
+	then
+	  cat .bash_history
+	fi
+      \end{lstlisting} 
+      полностью идентично по результату
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	test -f .bash_history && cat .bash_history
+      \end{lstlisting}
+      if сложнее - все пробелы значащие (часть синтаксиса).
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Часто используемые унарные параметры test(1)}
+  \begin{itemize}
+    \item \alert{-f filepath} - проверить на существование файл
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	test -f "$FILEPATH" && rm -v $FILEPATH
+      \end{lstlisting} \pause
+    \item \alert{-d directorypath} - проверить на существование каталог
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\tiny,breaklines=true]
+	if [ -d "$HOME/bin" ]
+	then 
+	  echo "file $HOME/bin present"
+	else
+	  mkdir "$HOME/bin"
+	fi
+      \end{lstlisting} \pause
+    \item \alert{-z ``value''} - строка пустая
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	test -z "$VARIABLE" && VARIABLE="value"
+      \end{lstlisting} \pause
+    \item \alert{-n ``value''} - строка ненулевая
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	test -n "$VARIABLE" && echo "$VARIABLE"
+      \end{lstlisting} 
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Часто используемые бинарные параметры test(1)}
+  \begin{itemize}
+    \item \alert{STRING1 = STRING2} строки равны
+    \item \alert{STRING1 != STRING2} строки не равны
+    \item \alert{INTEGER1 -eq INTEGER2}\footnote{Привет учившим ассемблер} числа равны
+    \item \alert{INTEGER1 -ne INTEGER2} числа не равны
+    \item \alert{INTEGER1 -gt INTEGER2} число 1 больше числа 2
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Практика: условия}
+
+  \alert{Упражнение 1} Проверить установлена ли переменная OLDPWD\footnote{передыдущая рабочая директория, меняется 'cd'}. Если установлена вывести сообщение ``your previous dir was '' и содержимое OLDPWD \pause
+
+  \alert{Упражнение 2} Скрипт, проверяющий существование файла с публичными ключами SSH. И если он существует - вывести на экран  \pause
+
+  \alert{Упражнение 3} Скрипт, проверяющий наличие папки tmp. Если её нет - создать. После - сохранить в неё все переменные окружения (в любом виде)
+\end{frame}
+
+\subsection{циклы}
+
+\begin{frame}[fragile]
+  \frametitle{Циклы ``for'' и ``while''}
+      \alert{for}
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	for i in list with spaces
+	do
+	  commands
+	done
+      \end{lstlisting}
+      В списке могут быть переменные, вызовы команд через обратные скобки, подстановочные символы (wildcards) и т.п.\pause
+  
+      \alert{while}
+      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	while command or condition like test(1)
+	do
+	  commands
+	done
+      \end{lstlisting} 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Практика: циклы}
+
+    \alert{Упражнение 1.}. Скрипт: создать папку tmp и в ней файлы userX-номер, где X - ваш номер пользователя, номер - от 1 до 99. Файл - скопировать или создать командой touch. Получение чисел - команда seq \pause
+
+    \alert{Упражнение 2.} Скрипт: переименовать все полученные файлы из Упражнения 1 в ``ex-userX-номер'' \pause
+
+    \alert{Упражнение 3.} Скрипт: создать аналог ``ls -a'' c помощью циклов \pause
+
+    \alert{Упражнение 4.} Скрипт: генератор случайных чисел на экран. Раз в секунду\footnote{для паузы можно использовать команду sleep} выводить случайное число на экран.
+\end{frame}
 
 \end{document}
+
