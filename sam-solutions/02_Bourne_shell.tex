@@ -149,6 +149,8 @@
 
 \section{Язык shell}
 
+\subsection{Код возврата}
+
 \begin{frame}[fragile]
   \frametitle{Условное выполнение команд}
 
@@ -286,5 +288,43 @@
       \end{verbatim}
   \end{itemize}
 \end{frame}
+
+\subsection{Переменные}
+
+\begin{frame}[fragile]
+  \frametitle{Переменные}
+
+  \Large{\alert{Переменные:}}
+  
+  \normalsize{настройки окружения пользователя для процесса}
+  \footnote{Смотри environ(7) о подробностях реализации} \newline
+
+  \pause 
+
+  \Large{\alert{Какие бывают?}}
+  \normalsize{ }
+  \begin{itemize}
+    \item встроенные (в Shell): HOME, PWD, PATH, PS1
+    \item пользовательские 
+  \end{itemize} 
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Просмотр и изменение значений}
+  \normalsize{ }
+  \begin{itemize}
+    \item \alert{set} - просмотр списка \pause
+    \item \alert{\$VAR1} - вывести конкретную переменную \pause
+      \begin{lstlisting}[language=sh,frame=single]
+	echo $USER $HOME $PWD
+	echo $PATH 
+      \end{lstlisting} \pause 
+    \item \alert{unset} - сброс (обнуление) значения
+    \item \alert{VAR1=``значение''} - установить новое значение
+  \end{itemize}
+
+\end{frame}
+
 
 \end{document}
