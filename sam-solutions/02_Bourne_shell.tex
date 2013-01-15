@@ -52,7 +52,7 @@
     \hbox{\includegraphics[height=7cm]{bash-input-screenshot}}
 \end{frame}
 
-\section{Интерактивная работа в Shell}
+\subsection{Интерактивная работа в Shell}
 
 \begin{frame}
   \frametitle{Приёмы эффективной работы}
@@ -147,7 +147,7 @@
     
 \end{frame}
 
-\section{Язык shell}
+\section{Выполнение команд и скриптов}
 
 \subsection{Код возврата}
 
@@ -227,7 +227,7 @@
   \end{enumerate}
 \end{frame}
 
-\subsection{Перенаправление ввода-вывода}
+\section{Перенаправление ввода-вывода}
 \begin{frame}
   \frametitle{Потоки ввода-вывода}
   
@@ -330,7 +330,9 @@
 
 \end{frame}
 
-\subsection{Переменные и кавычки}
+\section{Язык программирования Shell}
+
+\subsection{Переменные}
 
 \begin{frame}[fragile]
   \frametitle{Переменные}
@@ -416,7 +418,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Практика: переменные и скобки}
+  \frametitle{Практика: переменные и кавычки}
   
   \normalsize{ }
   \alert{Задание 1.}
@@ -435,7 +437,8 @@
 
 \end{frame}
 
-\subsection{подстановочные символы}
+\subsection{Подстановочные символы}
+
 \begin{frame}[fragile]
   \frametitle{Подстановочные символы путей (Wildcards)}
 
@@ -539,10 +542,10 @@
   \alert{Упражнение 3} Скрипт, проверяющий наличие папки tmp. Если её нет - создать. После - сохранить в неё все переменные окружения (в любом виде)
 \end{frame}
 
-\subsection{циклы}
+\subsection{Циклы}
 
 \begin{frame}[fragile]
-  \frametitle{Циклы ``for'' и ``while''}
+  \frametitle{Циклы ``for'', ``while'', ``until''}
       \alert{for}
       \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	for i in list with spaces
@@ -552,7 +555,7 @@
       \end{lstlisting}
       В списке могут быть переменные, вызовы команд через обратные скобки, подстановочные символы (wildcards) и т.п.\pause
   
-      \alert{while}
+      \alert{while , until}
       \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	while command or condition like test(1)
 	do
@@ -571,6 +574,25 @@
     \alert{Упражнение 3.} Скрипт: создать аналог ``ls -a'' c помощью циклов \pause
 
     \alert{Упражнение 4.} Скрипт: генератор случайных чисел на экран. Раз в секунду\footnote{для паузы можно использовать команду sleep} выводить случайное число на экран.
+\end{frame}
+
+\section{Дополнительные возможности}
+
+\begin{frame}[fragile]
+  \frametitle{Параметры скрипта}
+
+  Сохраняются shell в специальных переменных окружения:
+  \begin{itemize}
+    \item \alert{\$\#} - количество параметров (аргументов) скрипта
+    \item \alert{\$1, \$2, \ldots \$9}\footnote{По POSIX гарантирована поддержка 9 переменных, в конкретных реализациях может быть больше} - параметры скрипта
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=false]
+  ./script aa bb # $1="aa" $2="bb" $# = 2
+  ./script "dd ee ff" # $1="dd ee ff" $# = 1
+\end{lstlisting} \pause
+    \item \alert{\$0} - имя самого скрипта
+    \item \alert{\$@ , \$*} - все параметры скрипта списком 
+  \end{itemize}
+
 \end{frame}
 
 \end{document}
