@@ -381,21 +381,21 @@
   \frametitle{Волшебные виды кавычек}
 
   \begin{itemize}
-    \item \alert{Одиночные} : 'всё как было'  \newline
+    \item \alert{Одиночные} : 'всё как было'
 \begin{lstlisting}[language=sh,frame=single]
 	echo 'Oops: $HOME $SHELL'
 \end{lstlisting} \pause
-    \item \alert{Двойные} :  ``раскрывает значения переменных'' \newline
+    \item \alert{Двойные} :  \verb+"раскрывает значения переменных"+
 \begin{lstlisting}[language=sh,frame=single]
-	echo "Ok: $HOME $SHELL``
+	echo "Ok: $HOME $SHELL"
 \end{lstlisting} \pause
-    \item \alert{Обратные} : `выполняем команду` \newline
+    \item \alert{Обратные} : `выполняем команду`
 \begin{lstlisting}[language=sh,frame=single]
 	LISTING=`ls -a`
 	echo ''in $PWD: $LISTING"
 \end{lstlisting}
   \end{itemize}
-  Скобки можно сочетать друг с другом. Экранируют пробелы\footnote{пробел - разделитель параметров}.
+  Одиночные и двойные экранируют пробелы\footnote{пробел - разделитель параметров}.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -611,14 +611,79 @@
     \item \alert{\$@ , \$*}\footnote{Обрабатываются по-разному, в зависимости от значения в IFS} - все параметры скрипта списком 
   \end{itemize} \pause
   Встроенная команда \alert{shift}: сдвигает параметры влево. 
-  Уменьшет \alert{\$\#} на 1, перемещая \alert{\$2} в \alert{\$1}, \alert{\$3} в \alert{\$2} и т.д.
+  Уменьшит \alert{\$\#} на 1, перемещая \alert{\$2} в \alert{\$1}, \alert{\$3} в \alert{\$2} и т.д.
 
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Практика: параметры скрипта}
+
+  \alert{Упражнение 1} Скрипт, выводящий своё имя и параметры в обратном порядке.
+
+  Пример:
+  \begin{verbatim}
+    $ ./reverse_arg_script 1 jka 45 ыыы
+    ./reverse_arg_script ыы 45 jka 1
+  \end{verbatim}
+
+\end{frame}
+
+\subsection{Конфигурирование shell}
+\begin{frame}
+  \frametitle{Конфигурационные файлы}
+  Многообразие конфигурационных файлов и их использования в разных Shell.
+
+  Все конфиги - скрипты на языке Shell, выполняются при старте интерпретатора и служат для дополнительной настройки окружения пользователя. 
+
+  \begin{itemize}
+    \item \alert{/etc/profile} глобальный profile\footnote{Bourne-совместимые шелы: bash(1), ksh(1), dash(1)}
+    \item \alert{\$HOME/.profile} profile пользователя \pause
+    \item Cм man на свой shell, раздел FILES. \newline
+      \alert{Внимание!} Поведение интерактивных и неинтерактивных (скрипты) запусков shell может отличаться набором запускаемых профайлов. 
+  \end{itemize}
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Практика: параметры скрипта}
+  \frametitle{Практика: конфигурационные файлы}
+
+  \alert{Упражнение 1} Включить цветное приглашение командной строки (color prompt) в bash(1), отредактировав свой локальный профайл.
+
+  \alert{Упражнение 2} Создать alias (псевдоним) lsall для команды ls в локальном профайле, добавив параметры рекурсивного просмотра всех файлов, включая скрытые.
+
+  \alert{Упражнение 3} Добавить к пути поиска (PATH) произвольный каталог через редактирование локального профайла.
+
+  \alert{Упражнение 4} Переопределить системную команду ``editor'' через alias в профайле, вписав туда тот редактор, которым вы обычно пользуетесь на занятиях.
+
+  \alert{Упражнение 5} Добавить текущее время в приглашение командной строки (PS1) \footnote{Подсказка: раздел PROMPTING в мане на bash}
+
 \end{frame}
+
+\subsection{Арифметические вычисления}
+\begin{frame}[fragile]
+  \frametitle{Арифметические вычисления}
+  \begin{itemize}
+    \item \alert{\$((выражение))} - простая арифметика POSIX shell 
+      \begin{verbatim}
+      num=8
+      echo $((num + 7))   # shows: 15
+
+      echo "3 + 4 = $((3+4))"  # shows: 3 + 4 = 7
+      
+      : $((w = 2 + 3)); echo $w  # shows: 5
+      : $((x = w - 1)); echo $x  # shows: 4
+      \end{verbatim} \pause
+    \item внешняя утилита \alert{bc} - более сложные вычисления\newline
+      Пример: синус от 1.4, вывод в hex, 4 знака после запятой
+      \begin{verbatim}
+      $ echo "obase=16; scale=4; s(1.4)"|bc -l 
+     .FC466EFA270812AC3
+      \end{verbatim}
+  \end{itemize}
+
+\end{frame}
+
 
 \end{document}
 
