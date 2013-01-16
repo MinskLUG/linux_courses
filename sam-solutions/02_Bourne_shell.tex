@@ -365,11 +365,11 @@
   \begin{itemize}
     \item \alert{set} - просмотр списка \pause
     \item \alert{\$HOME} - взять значение переменной \pause
-      \begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}[language=sh,frame=single]
 	echo $USER $HOME
 	echo $PATH 
 	$SHELL
-      \end{lstlisting} \pause 
+\end{lstlisting} \pause 
     \item \alert{unset} - сброс (обнуление) значения \pause
     \item \alert{VAR1=``значение''} - установить новое значение \newline 
       \emph{Примечание:} в значении можно использовать переменные (если значение присваивается через ``'')
@@ -382,39 +382,39 @@
 
   \begin{itemize}
     \item \alert{Одиночные} : 'всё как было'  \newline
-      \begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}[language=sh,frame=single]
 	echo 'Oops: $HOME $SHELL'
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{Двойные} :  ``раскрывает значения переменных'' \newline
-      \begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}[language=sh,frame=single]
 	echo "Ok: $HOME $SHELL``
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{Обратные} : `выполняем команду` \newline
-      \begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}[language=sh,frame=single]
 	LISTING=`ls -a`
 	echo ''in $PWD: $LISTING"
-      \end{lstlisting}
+\end{lstlisting}
   \end{itemize}
   Скобки можно сочетать друг с другом. Экранируют пробелы\footnote{пробел - разделитель параметров}.
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Примеры из жизни}
-  \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
     $CHROOT_TOOL /bin/sh /tmp/`basename $hook`
-  \end{lstlisting} \pause
+\end{lstlisting} \pause
 
-  \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
     ROOT_UUID=`tune2fs -l $ROOT_DEV |awk '/UUID/ {print $3}'`
-  \end{lstlisting} \pause
+\end{lstlisting} \pause
   
-  \begin{lstlisting}[language=sh,frame=single,basicstyle=\small,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\small,breaklines=true]
     (echo unit B; echo print; echo quit) | \
           parted $FLASH_IMG | \
           awk '/^ [1-2]/ { printf "--offset=%s --sizelimit=%s /dev/loop%s\n", $2, $4, $1 }' | \
           sed 's/B//g' | \
           xargs -n 1 -I{} sh -c "losetup -v {} $FLASH_IMG"
-  \end{lstlisting}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -442,23 +442,23 @@
 \begin{frame}[fragile]
   \frametitle{Подстановочные символы путей (Wildcards)}
 
-  \alert{Wildcards} - спецсимволы в параметрах команд, раскрываемые в путь и имя файла самим интерпретатором до того, как запустить команду на выполнение. \pause
+  \alert{Wildcards} - спецсимволы в параметрах команд, раскрываемые в путь и имя файла самим интерпретатором перед тем, как запустить команду на выполнение. \pause
 
 
   \begin{itemize}
     \item \alert{*} - любое количество любых символов
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	echo /u*
 	ls /u*
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{[]} - символ из перечисления\footnote{об интервалах - в разделе о регулярных выражениях}
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	echo .[bp]*
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{?} - любой одиночный символ
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	echo ?i*
-      \end{lstlisting} 
+\end{lstlisting} 
   \end{itemize}
 
 \end{frame}
@@ -480,16 +480,16 @@
 
   \alert{if то же самое, что и test(1)} \pause
 
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	if [ -f .bash_history ]
 	then
 	  cat .bash_history
 	fi
-      \end{lstlisting} 
+\end{lstlisting} 
       полностью идентично по результату
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	test -f .bash_history && cat .bash_history
-      \end{lstlisting}
+\end{lstlisting}
       if сложнее - все пробелы значащие (часть синтаксиса).
 \end{frame}
 
@@ -497,26 +497,26 @@
   \frametitle{Часто используемые унарные параметры test(1)}
   \begin{itemize}
     \item \alert{-f filepath} - проверить на существование файл
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	test -f "$FILEPATH" && rm -v $FILEPATH
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{-d directorypath} - проверить на существование каталог
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\tiny,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\tiny,breaklines=true]
 	if [ -d "$HOME/bin" ]
 	then 
 	  echo "file $HOME/bin present"
 	else
 	  mkdir "$HOME/bin"
 	fi
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{-z ``value''} - строка пустая
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	test -z "$VARIABLE" && VARIABLE="value"
-      \end{lstlisting} \pause
+\end{lstlisting} \pause
     \item \alert{-n ``value''} - строка ненулевая
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
 	test -n "$VARIABLE" && echo "$VARIABLE"
-      \end{lstlisting} 
+\end{lstlisting} 
   \end{itemize}
 
 \end{frame}
@@ -547,21 +547,21 @@
 \begin{frame}[fragile]
   \frametitle{Циклы ``for'', ``while'', ``until''}
       \alert{for}
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
-	for i in list with spaces
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	for i in ``list''
 	do
 	  commands
 	done
-      \end{lstlisting}
+\end{lstlisting}
       В списке могут быть переменные, вызовы команд через обратные скобки, подстановочные символы (wildcards) и т.п.\pause
   
       \alert{while , until}
-      \begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
-	while command or condition like test(1)
+\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+	while ``list''
 	do
 	  commands
 	done
-      \end{lstlisting} 
+\end{lstlisting} 
 \end{frame}
 
 \begin{frame}
@@ -576,7 +576,27 @@
     \alert{Упражнение 4.} Скрипт: генератор случайных чисел на экран. Раз в секунду\footnote{для паузы можно использовать команду sleep} выводить случайное число на экран.
 \end{frame}
 
-\section{Дополнительные возможности}
+\section{Расширенные возможности}
+
+\subsection{Аргументы скрипта}
+\begin{frame}[fragile]
+  \frametitle{IFS - internal field separator}
+
+  \alert{IFS}
+
+  Переменная, регулирующая разделение параметров (аргументов) на слова. 
+  
+  Используется:
+  \begin{itemize}
+    \item во время раскрытия параметров командной строки перед выполнением
+    \item редактирование командной строки (удаление слова, Ctrl+W)
+    \item чтение ввода пользователя командной \alert{read}
+  \end{itemize}
+
+  Значение по умолчанию: ``<пробел><табуляция><перевод строки>''
+
+
+\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Параметры скрипта}
@@ -584,15 +604,20 @@
   Сохраняются shell в специальных переменных окружения:
   \begin{itemize}
     \item \alert{\$\#} - количество параметров (аргументов) скрипта
-    \item \alert{\$1, \$2, \ldots \$9}\footnote{По POSIX гарантирована поддержка 9 переменных, в конкретных реализациях может быть больше} - параметры скрипта
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=false]
-  ./script aa bb # $1="aa" $2="bb" $# = 2
-  ./script "dd ee ff" # $1="dd ee ff" $# = 1
-\end{lstlisting} \pause
+    \item \alert{\$1, \$2, \ldots \$9}\footnote{По POSIX гарантирована поддержка 9 переменных} - параметры скрипта
+      \lstinputlisting[language=sh,frame=single,basicstyle=\normalsize,breaklines=false]{samples/script-arguments.sh}
+\pause
     \item \alert{\$0} - имя самого скрипта
-    \item \alert{\$@ , \$*} - все параметры скрипта списком 
-  \end{itemize}
+    \item \alert{\$@ , \$*}\footnote{Обрабатываются по-разному, в зависимости от значения в IFS} - все параметры скрипта списком 
+  \end{itemize} \pause
+  Встроенная команда \alert{shift}: сдвигает параметры влево. 
+  Уменьшет \alert{\$\#} на 1, перемещая \alert{\$2} в \alert{\$1}, \alert{\$3} в \alert{\$2} и т.д.
 
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Практика: параметры скрипта}
 \end{frame}
 
 \end{document}
