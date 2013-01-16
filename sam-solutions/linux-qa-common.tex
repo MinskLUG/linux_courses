@@ -10,10 +10,22 @@
 \usepackage{pdfpages}
 \usepackage{soul}
 \usepackage{ucs}
-\usepackage[utf8x]{inputenc}
-\usepackage[TS1,T2A]{fontenc}
-\usepackage[english,russian]{babel}
-\usepackage{times}
+
+% encoding settings
+\usepackage[T2A]{fontenc}
+\usepackage{xltxtra}
+\usepackage{hyperref}
+\usepackage{polyglossia}
+\usepackage{xecyr}
+
+\setdefaultlanguage{russian}
+
+% fonts settings
+\usepackage{fontspec}
+\setmainfont{CMU Serif}                 % Computer Modern Unicode font
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
 \usepackage{listings}
 
 \author[Author, Vlad Shakhov]{Влад 'mend0za' Шахов\\Linux \& Embedded Team Leader}

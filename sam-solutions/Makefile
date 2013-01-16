@@ -10,8 +10,8 @@ all: $(HTML) $(PDF)
 	markdown $< >$@
 
 %.pdf: %.tex $(OUTDIR) $(COMMON) clipart/*.png clipart/*.jpg samples/*
-	pdflatex -output-directory=$(OUTDIR) -output-format=pdf $<
-	pdflatex -output-directory=$(OUTDIR) -output-format=pdf $<
+	#pdflatex -mktex=pk -output-directory=$(OUTDIR) -output-format=pdf $<
+	xelatex -mktex=pk -output-directory=$(OUTDIR) -output-format=pdf $<
 	cp -v "$(OUTDIR)/$@" .
 
 $(OUTDIR):
