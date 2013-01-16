@@ -1,0 +1,46 @@
+% common part for every lection
+
+\documentclass{beamer}
+
+\usetheme{Warsaw}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{pdfpages}
+\usepackage{soul}
+\usepackage{ucs}
+
+% encoding settings
+\usepackage[T2A]{fontenc}
+\usepackage{xltxtra}
+\usepackage{hyperref}
+\usepackage{polyglossia}
+\usepackage{xecyr}
+
+\setdefaultlanguage{russian}
+
+% fonts settings
+\usepackage{fontspec}
+\setmainfont{CMU Serif}                 % Computer Modern Unicode font
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+\usepackage{listings}
+
+\author[Author, Vlad Shakhov]{Влад 'mend0za' Шахов\\Linux \& Embedded Team Leader}
+
+\institute[SaM Solutions]
+{
+  Linux \& Embedded Department
+}
+
+\date[Dec 2012]
+
+\subject{Linux QA training}
+
+\pgfdeclareimage[height=1.5cm]{sam-solutions-logo}{clipart/sam-solutions-elinux}
+
+\logo{\pgfuseimage{sam-solutions-logo}}
+
+\graphicspath{{./clipart/}}

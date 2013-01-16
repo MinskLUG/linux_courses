@@ -1,0 +1,14 @@
+Host update-server
+Port 8022
+User k9repo
+IdentityFile ~/.ssh/git_rsa
+
+Host mailtunnel
+HostName mail.my_isp.net
+LocalForward 2525:localhost:25
+GatewayPorts no
+
+Host elinux
+User MINSK\vshakhov
+ForwardX11 yes
+PreferredAuthentications publickey
