@@ -13,7 +13,7 @@
 \end{frame}
 
 \section{Общие сведения}
-\begin{frame}{Определения}[fragile]
+\begin{frame}{Определения}
   \begin{itemize}
     \item В UNIX (и Linux) файлы организованы в виде \emph{единой древовидной структуры} (дерева), называемой \alert{файловой системой}.
     \item \alert{Каждый файл имеет имя}, определяющее его расположение в дереве FS.
@@ -29,6 +29,19 @@
 
 \end{frame}
 
+\subsection{Навигация по FS}
+\begin{frame}{Навигация в командной строке (shell)}
+  Для каждой запущенной программы (в том числе и shell) в системе определен \alert{текущий каталог}. 
+  \begin{itemize} 
+    \item \alert{pwd}\footnote{см также переменные окружения \alert{PWD} и \alert{OLDPWD}} - получить текущий каталог
+    \item \alert{cd [папка]}\footnote{\alert{cd} без параметров - возврат в домашний каталог} - сменить каталог
+    \item \alert{ls [папка]}\footnote{\alert{ls} без параметров - просмотр текущего каталога} - просмотр списка файлов
+    \item \alert{ls -l [папка]} - длинный листинг (c подробностями)
+  \end{itemize}
+\end{frame}
+
+\subsection{Примеры деревьев Unix FS}
+
 \begin{frame}{Дерево файловой системы - простое}
 \includegraphics[height=8cm]{filesystem} 
 \end{frame}
@@ -41,7 +54,54 @@
 \includegraphics[height=7cm]{filesystem3} 
 \end{frame}
 
-\begin{frame}{Навигация}
+\subsection{VFS}
+
+\begin{frame}{Детали реализации}
+  \begin{itemize}
+    \item \alert{VFS - virtual file system} - файлы и каталоги отображаются в единое дерево, независимо от их физического расположения.
+  \end{itemize}
+  \includegraphics[height=3.5cm]{vfs-and-devices}
 \end{frame}
+
+\begin{frame}{Монтирование}
+  \begin{itemize}
+    \item \alert{Монтирование} - процесс отображения содержимого устройства в указанную папку файловой системы.
+    \item Команды:
+      \begin{itemize}
+	\item монтировать - ( \alert{mount} ) 
+	\item размонтировать ( \alert{umount} )
+      \end{itemize}
+    \item \alert{mount} без параметров - вывести список уже подключенных файловых систем
+  \end{itemize}
+  
+\end{frame}
+
+\section{Типы файлов}
+
+\begin{frame}{Типы файлов в Unix}
+  Для пользователя:
+  \begin{itemize}
+    \item \alert{Обычные файлы (regular file)}: .bashrc, /bin/bash
+    \item \alert{Каталоги (directory)}: /home/user1, /usr, /, /usr/local  \pause
+    \item \alert{Символические ссылки (symbolic links)}: /bin/sh, /dev/stdout
+  \end{itemize} \pause
+  Для администратора:
+  \begin{itemize}
+    \item \alert{Файлы устройств (device special file)}: 
+      \begin{itemize}
+	\item \alert{блочные}: /dev/sda5, /dev/loop0, /dev/sr0
+	\item \alert{символьные}: /dev/null, /dev/mem, /dev/tty
+      \end{itemize}
+  \end{itemize} \pause 
+
+  Для программиста:
+  \begin{itemize}
+    \item \alert{FIFO (named pipe)}: /dev/xconsole
+    \item \alert{Socket}: /dev/log
+  \end{itemize}
+
+\end{frame}
+
+
 
 \end{document}
