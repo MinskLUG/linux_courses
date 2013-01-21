@@ -1,6 +1,6 @@
 
 HTML=README.html Linux_QA_program.html
-PDF=01_Intro_to_linux.pdf 02_Bourne_shell.pdf
+PDF=01_Intro_to_linux.pdf 02_Bourne_shell.pdf 03_Filesystem_intro.pdf
 OUTDIR=out
 COMMON=linux-qa-common.tex
 

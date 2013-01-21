@@ -1,0 +1,47 @@
+\include{linux-qa-common}
+
+
+\title[SaM Solutions. Linux QA Training]
+{
+  Часть 3.\\
+  Файловая система, введение
+}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Общие сведения}
+\begin{frame}{Определения}[fragile]
+  \begin{itemize}
+    \item В UNIX (и Linux) файлы организованы в виде \emph{единой древовидной структуры} (дерева), называемой \alert{файловой системой}.
+    \item \alert{Каждый файл имеет имя}, определяющее его расположение в дереве FS.
+    \item Корнем дерева является \alert{корневой каталог} (root directory), имеющий имя \alert{"/"}.
+  \end{itemize} \pause
+
+  \begin{itemize}
+    \item \alert{полный путь} начинается с \alert{/}(корневого каталога), каталоги разделяются также \alert{/}. \newline
+      Пример: /home/user/.ssh/authorized\_key
+    \item \alert{относительный путь} - от текущего каталога \newline
+      Примеры: ../user10/.bashrc; ./script; ls script
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Дерево файловой системы - простое}
+\includegraphics[height=8cm]{filesystem} 
+\end{frame}
+
+\begin{frame}{Дерево файловой системы - среднее}
+\includegraphics[height=7cm]{filesystem2} 
+\end{frame}
+
+\begin{frame}{Дерево файловой системы - сложное}
+\includegraphics[height=7cm]{filesystem3} 
+\end{frame}
+
+\begin{frame}{Навигация}
+\end{frame}
+
+\end{document}
