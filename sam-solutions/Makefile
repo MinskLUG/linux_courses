@@ -35,4 +35,11 @@ clean:
 	  grep -l "$$name" *.tex| xargs -n 1 -I{} sh -c "echo '`basename {} .tex`.pdf: $$file\n'>>$@";  \
 	done
 
+connect:
+	xrandr --output LVDS1 --mode 1024x768
+	xrandr --output VGA1 --auto
+
+disconnect:
+	xrandr --output VGA1 --off
+	xrandr --output LVDS1 --auto
 
