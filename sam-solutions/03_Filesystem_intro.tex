@@ -102,6 +102,7 @@
 
 \end{frame}
 
+
 \begin{frame}{Практика: определение типа файла}
 
   \begin{itemize}
@@ -125,9 +126,13 @@
 	\item \alert{more} - вывести, разбив на страницы
 	\item \alert{less}\footnote{может отсутствововать в стандартной поставке} - \alert{more} на стероидах, с прокруткой, поиском 
       \end{itemize} \pause
-    \item Просмотр двоичных данных:\newline \alert{od} - дамп файла в не-текстовых форматах
-  \end{itemize}
+    \item Просмотр двоичных данных:
+      \begin{itemize} 
+	\item \alert{od} - дамп файла в не-текстовых форматах
 \lstinputlisting[frame=single,basicstyle=\tiny]{samples/od}
+        \item \alert{strings} - извлечь текстовые строки из двоичных файлов
+      \end{itemize}
+  \end{itemize}
 
 \end{frame}
 
@@ -144,8 +149,36 @@ echo какой-то текст >file
     \item \alert{touch} - создать пустой файл
 \begin{lstlisting}[frame=single]
 ~$ touch file4
+~$
 \end{lstlisting}
   \end{enumerate}
 \end{frame}
+
+\subsection{Операции над каталогами}
+
+\begin{frame}[fragile]{Операции над каталогами (и файлами)}
+  \begin{itemize}
+    \item \alert{mkdir} - создать каталог
+\begin{lstlisting}[frame=single,]
+~$ mkdir dir1 /tmp/somedir
+~$ mkdir -p dir/and/existant/parts/in/path
+\end{lstlisting} \pause
+    \item \alert{rmdir} - удалить (пустой) каталог
+\begin{lstlisting}[frame=single]
+~$ rmdir dir1 /tmp/somedir
+~$ rmdir -p deep/empty/dir/structure/
+\end{lstlisting} \pause
+    \item \alert{cp} - копирование файлов\footnotemark[8]
+    \item \alert{mv} - перемещение и переименование файлов
+    \item \alert{rm} - удаление файлов\footnotemark[17] 
+\begin{lstlisting}[frame=single]
+~$ rm -rf dir1 /tmp/somedir
+~$ rm f*
+\end{lstlisting} \pause
+  \end{itemize}
+\footnotetext[8]{с ключом \alert{-r}) и каталогов}
+\end{frame}
+
+% TODO - слайд про hardlinks и symlinks
 
 \end{document}
