@@ -1,0 +1,128 @@
+\include{linux-qa-common}
+
+
+\title[SaM Solutions. Linux QA Training]
+{
+  Часть 4.\\
+  Обработка текста.
+}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Введение в Unix-Way}
+  
+  Заповедь номер 3:\newline 
+  \begin{center}
+    \alert{\Huge{Всё есть текст}}\footnote{cм \href{http://www.freesource.info/wiki/Stat'ja\_Klassicheskijj\_Unix\_Way}{статью Дениса Смирнова 'Классический Unix-way'} }\newline
+  \end{center} \pause
+  
+  Заповедь номер 4:\newline
+  \begin{center}
+    \alert{\Huge{Пускайте данные по трубам}}\newline
+  \end{center} \pause
+
+  Заповедь номер 5:\newline
+  \begin{center}
+    \alert{\Huge{Всё есть файл}}\newline
+  \end{center}
+
+\end{frame}
+
+\begin{frame}{Текст в Unix-Way}
+  В Unix (и Linux) в виде обычного текста или \alert{plain text} представлены:\pause
+  \begin{itemize}
+    \item \alert{конфигурационные файлы}, как локальные\footnote{в каталоге \$HOME} , так и общесистемные\footnote{в каталоге /etc} \pause
+    \item \alert{системные логи}\footnote{справедливо для \alert{syslog} и совместимых систем}
+    \item \alert{исходные тексты программ}, включая скрипты на Shell
+    \item \alert{основной формат ввода и (или) вывода данных} для множества программ и утилит
+  \end{itemize} \pause
+
+  Богатый выбор изощрённых острозаточенных инструментов для работы с текстом во всех представлениях\footnote{'Unix is toolbox' - 'Unix это ящик с инструментами'}
+
+\end{frame}
+
+\section{Операции над текстом}
+
+\input{slides/regular-files-view}
+
+\subsection{Редактирование}
+\begin{frame}{Редакторы}
+
+  \begin{itemize}
+    \item  Любой редактор, с которым вы можете справится. \pause Но его может не быть в вашей системе\ldots \pause
+    \item Редактор \alert{vi} присутствует как стандартный в любой Unix-подобной системе\footnote{В этом качестве он внесен в стандарт Single Unix Specification. Существует множество реализаций редакторов, совместимых c vi: vim, elvis, nvi, vi-mode в Emacs, Sublime Text 2, vi из busybox и т.д.} \pause
+    \item Не обязательно редактировать локально: В \alert{mc}, \alert{vim}, \alert{emacs} есть возможность удалённого редактирования файлов\footnote{С получением и сохранением данных по протоколу FTP и SSH}.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{vi и vim}
+  Перед стартом:
+
+  \begin{enumerate}
+    \item  Редактор vi изначально создавался как универсальный и переносимый\footnote{Обязан работать на любых типах терминалов и виртуальных консолей}. Все действия можно осуществить на алфавитно-цифровой части клавиатуры, без мыши. \pause
+    \item \alert{Редактор командного стиля}\footnote{Командного стиля, а не меню-ориентированный}. Действия подачей прямых управляющих команд. \pause \newline
+      3 основных режима: \sout{портить текст и противно бибикать}
+      \begin{itemize}
+	\item[-] \alert{Командный режим} (Normal mode) - по умолчанию при запуске.
+	\item[-] \alert{Режим изменения текста} (Edit mode)
+	\item[-] \alert{Режим построчного редактирования} (Ex mode) - операции над файлом целиком\footnote{сохранение, открытие файлов, выход, вставка файла в текущий и т.д.}.
+      \end{itemize}
+  \end{enumerate} \pause
+  \alert{Упражнение}: проходим \alert{vimtutor}, встроенный в vim учебник\footnote{ export LANG='ru\_RU.UTF-8' - на русском языке }
+\end{frame}
+
+\subsection{Программы-фильтры}
+
+\begin{frame}{Текстовый фильтр}
+
+  Определение:\newline \alert{Текстовый фильтр} - программа, обрабатывающая и преобразующая текст. \newline
+
+  Примеры: \alert{sort}, \alert{cat}, \alert{tac}, \alert{rev} \pause
+  \begin{itemize}
+    \item Фильтр, запущенный без параметров - читает стандартный ввод. 
+    \item Параметры фильтра - интерпретируются как имена файлов
+    \item Ключи фильтра - управляют режимами работы
+  \end{itemize} \pause
+
+  Фильтр почти всегда используется совместно с перенаправлением ввода-вывода Shell (особенно '|', pipes).
+
+\end{frame}
+
+\input{slides/simple-text-filters}
+
+\begin{frame}{Простые фильтры - упражнения}
+  \alert{Упражнение 1}: посчитать сколько файлов в папке /bin\footnote{подсказка - \alert{wc} и \alert{ls}}
+
+  \alert{Упражнение 2}: сколько слов в первых 15 строках .basrc\footnote{подсказка - \alert{head} и \alert{ls}}
+
+  \alert{Упражнение 3}: найти, в каких файлах (и сколько их вообще) в области системных логов (каталог \alert{/var/log}) была записана информация о входе вашего пользователя в систему. \footnote{подсказка - \alert{grep} и, возможно, но необязательно, \alert{uniq}}
+
+  \alert{Упражнение 4}: сколько было входов в систему от имени вашего пользователя? в какое время был первый? последний? \footnote{подсказка - \alert{grep}, \alert{head}, \alert{tail}}
+
+  \alert{Упражнение 5}: то же, что и 5. Только для выходов. Дополнительно сохранить записи о ваших выходах в отдельный файл. \footnote{подсказка: + \alert{tee}}
+
+
+
+
+
+\end{frame}
+
+\begin{frame}{Изощрённые фильтры }
+  \begin{itemize}
+    \item \alert{diff} (и \alert{diff -u}\footnote{Формат \alert{diff -u} : индустриальный стандарт пересылки списка изменений между версиями текстовых данных.}) - сравнить 2 файла и получить patch (изменения между ними)
+    \item \alert{patch} - утилита применения изменений от diff \pause
+    \item \alert{sed} - не-интерактивный поточный редактор текста 
+    \item \alert{awk} - язык и утилита сканирования и обработки текста
+  \end{itemize}
+\end{frame}
+
+
+\section{Поиск в тексте. Регулярные выражения}
+
+% file /bin/*|grep symbolic
+
+\end{document}
