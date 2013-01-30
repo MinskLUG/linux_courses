@@ -174,23 +174,21 @@
       \end{enumerate} \pause
     \item \alert{[:class:]} - дополнительные POSIX-классы для символов, \alert{внутри символьного класса}\footnote{Да, на редкость уродливый синтаксис} \newline
 	Примеры классов: \alert{[:alnum:]}, \alert{[:alpha:]} \alert{[:digit:]} \alert{[:space:]} \alert{[:lower:]}, \alert{[:upper:]}, \alert{[:print:]} \newline
-	Примеры regexp с POSIX классами: \regex{[ы[:digit]]}
+	Примеры regexp с POSIX классами: \regex{[ы[:digit:]]}
   \end{itemize} 
 
   \alert{Упражнение 1}: Из /var/log/messages вывести все слова, состоящие из одного символа(любого). Без повторов.
   
   \alert{Упражнение 2}: То же, что 1, но вывести слова из двух букв.
 
-  \alert{Упражнение 3}: Извлечь все метки времени из /var/log/messages
+  \alert{Упражнение 3}: Извлечь все метки времени из файла
 
 \end{frame}
 
-\begin{frame}[fragile]{Группировка и квантификаторы - регулируем повторы}
+
+\begin{frame}[fragile]{квантификаторы - регулируем повторы}
 
   \alert{Квантификаторы} указывают, сколько раз может повторяться символ или выражение, после которого указаны.  Не являются шаблонами текста.
-
-  \alert{Группировка выражений} - осуществляется круглыми скобками \regex{(выражение)}\footnotemark[22] 
-  \footnotetext[22]{POSIX Extended RE: grep -e или egrep}
 
   \begin{itemize}
     \item \alert{?}\footnotemark[22] - необязательный символ \newline
@@ -201,13 +199,54 @@
       примеры: \regex{[a-d]+}, \regex{(02:)+}
   \end{itemize}
 
-  \alert{Упражнение 1} - извлечь все слова из 1 или 2 букв из /var/log/messages
+  \alert{Упражнение 1} - извлечь все слова из 1 или 2 букв из файла
   
   \alert{Упражнение 2} - все слова, начинающиеся на a из /var/log/messages
   
-  \alert{Упражнение 3} - все цифры из /var/log/messages
+  \alert{Упражнение 3} - все числа из /var/log/messages
+\end{frame}
+
+\begin{frame}{Интервалы (интервальные квантификаторы)}
+  \begin{itemize}
+    \item \alert{\{число\}} - количество повторов выражения перед
+    \item \alert{\{число1,число2\}}
+    \item \alert{\{число,\}}
+  \end{itemize}
+
+  \alert{Упражнение}: Найти все строки, длиннее 30 символов в \$HOME/.bashrc.
+\end{frame}
+
+\begin{frame}{Группировка и обратные ссылки}
+  \alert{Группировка} - поместить выражение в скобки \regex{(выражение)}\footnotemark[22] 
+  \footnotetext[22]{Только в POSIX Extended RE: egrep} \newline \pause
+
+  \alert{Обратные ссылки}\footnotemark[22] - способ обратиться к уже найденному тексту по регулярному выражению в круглых скобках.
+
+  Пример: \regex{([a-z])([[:digit:]])\tbs 2\tbs 1} - совпадёт с 'a11a', но не с 'a12b'  \newline
   
-  
+  Вычисление для подстановки и сравнения значения на месте обратной ссылки - производится прямо во время сравнения с регулярным выражением\newline\pause
+
+  \alert{Нумерация групп} - слева-направо, от 1. \newline
+
+  Широко применяется в операциях замены текста.
+
+  {Упражнение}: найти все повторяющиеся (идущие подряд) символы в /var/log/syslog
+
+\end{frame}
+
+\begin{frame}{Якоря (anchors) или указатели позиции}
+
+  \begin{itemize}
+    \item \alert{\textasciicircum{}}
+    \item \alert{\$} \newline
+      Пример: \pause
+    \item \alert{\tbs <} и \alert{\tbs >}
+  \end{itemize}
+
+  \alert{Упражнение 1}: Найти все действующие определения псевдонимов (alias) в .bashrc, с учётом синтаксиса объявления alias.
+
+  \alert{Упражнение 2}: Найти все закомментаренные  определения псевдонимов (alias) в .bashrc
+
 \end{frame}
 
 \end{document}
