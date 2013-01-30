@@ -1,0 +1,158 @@
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
+
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}	
+
+%Packages to be included
+
+\usepackage{textcomp}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
+\usepackage{listings}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8x,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% PDF meta data inserted here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={Введение в GNU/Linux},
+	pdfauthor={Epam/LLPD}
+}
+
+
+
+
+
+%%%%%% Beamer Theme %%%%%%%%%%%%%
+
+	
+\title{Введение в GNU/Linux}
+\author{Epam/LLPD}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\frame{
+	\frametitle{Скрипты на Bash: основы}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+}
+
+\begin{frame}[fragile]
+  \frametitle{Скрипты}
+ 
+  \begin{block}<1->{Shell Script, определение}  
+
+    Последовательность команд Shell.
+
+    Разделитель: перевод строки, ``;''
+  \end{block}
+
+  \begin{block}<2->{shebang}
+    \verb+#!something+ или чем мы запускаем скрипт. 
+    
+    По умолчанию : \verb+#!/bin/sh+
+  
+    Всегда первая строка скрипта.
+
+    Фактически: \verb+/bin/sh scriptname+
+  \end{block}
+
+  \begin{block}<3->{Парадоксальные примеры}
+    \verb+#!/bin/rm+
+
+    \verb+#!/bin/awk -f+
+
+    \verb+#!/bin/less+
+  \end{block}
+
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Переменные shell}
+  Какие бывают
+  \begin{itemize}
+    \item встроенные (в Shell)
+      \begin{itemize}
+        \item Environment (наследуются дочерними процессами)
+      \item Внутренние (PS1,PS2,...)
+      \end{itemize}
+    \item пользовательские 
+  \end{itemize} 
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Работа с переменными}
+  \begin{itemize}
+    \item \alert{set} Список всех переменных (use grep!)
+    \item \alert{\$VAR} взять значение переменной VAR
+    \item \alert{''\${VAR}blah-blah''} подстановка переменной внутрь строки
+    \item \alert{unset} - сброс значения 
+    \item \alert{VAR=<выражение>} (без пробелов!)
+   \end{itemize}
+ \end{frame}
+\begin{frame}[fragile]
+  \frametitle{Дефолтные переменные скрипта}
+  \begin{itemize}
+    \item \alert{\$1,\$2,...,\$9,\${10},\${11}...}
+    \item 
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
