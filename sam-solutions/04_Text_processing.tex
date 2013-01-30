@@ -155,4 +155,59 @@
 \end{lstlisting}
 \end{frame}
 
+\newcommand{\tbs}{\tt\char`\\}
+\newcommand{\regex}[1]{ %
+\expandafter{$\ulcorner{\color{blue}\texttt{#1}}\lrcorner$} %
+}
+
+
+\subsection{Метасимволы}
+\begin{frame}{Класс на 1 символ}
+  \begin{itemize}
+    \item \alert{.} (точка)  - заменяет любой символ \newline
+      Пример: \regex{us.r.} = 'user0', 'us rX', 'us9r ' и т.д. \pause
+    \item \alert{[ ]} символьный класс - заменяет любой символ из перечисленных в скобках
+      \begin{enumerate}
+	\item \regex{user[0-9]} = 'user0', 'user5', но не равно 'user'
+	\item \regex{-[abc-]} = '--', '-a', '-b', '-c', но не равно '--a' 
+	\item \regex{[\textasciicircum{}abc]1}\footnote{инвертировать символьный класс} = 'd1', '11', но не равно 'a1'
+      \end{enumerate} \pause
+    \item \alert{[:class:]} - дополнительные POSIX-классы для символов, \alert{внутри символьного класса}\footnote{Да, на редкость уродливый синтаксис} \newline
+	Примеры классов: \alert{[:alnum:]}, \alert{[:alpha:]} \alert{[:digit:]} \alert{[:space:]} \alert{[:lower:]}, \alert{[:upper:]}, \alert{[:print:]} \newline
+	Примеры regexp с POSIX классами: \regex{[ы[:digit]]}
+  \end{itemize} 
+
+  \alert{Упражнение 1}: Из /var/log/messages вывести все слова, состоящие из одного символа(любого). Без повторов.
+  
+  \alert{Упражнение 2}: То же, что 1, но вывести слова из двух букв.
+
+  \alert{Упражнение 3}: Извлечь все метки времени из /var/log/messages
+
+\end{frame}
+
+\begin{frame}[fragile]{Группировка и квантификаторы - регулируем повторы}
+
+  \alert{Квантификаторы} указывают, сколько раз может повторяться символ или выражение, после которого указаны.  Не являются шаблонами текста.
+
+  \alert{Группировка выражений} - осуществляется круглыми скобками \regex{(выражение)}\footnotemark[22] 
+  \footnotetext[22]{POSIX Extended RE: grep -e или egrep}
+
+  \begin{itemize}
+    \item \alert{?}\footnotemark[22] - необязательный символ \newline
+      пример: \regex{a.?b} - совпадёт с 'ab', 'a9b', 'a b' \pause
+    \item \alert{*} - любое количество символов, включая нулевое \newline
+      примеры: \regex{.*}, \regex{[[:digit:]]*} \pause
+    \item \alert{+}\footnotemark[22] - не менее одного символа \newline
+      примеры: \regex{[a-d]+}, \regex{(02:)+}
+  \end{itemize}
+
+  \alert{Упражнение 1} - извлечь все слова из 1 или 2 букв из /var/log/messages
+  
+  \alert{Упражнение 2} - все слова, начинающиеся на a из /var/log/messages
+  
+  \alert{Упражнение 3} - все цифры из /var/log/messages
+  
+  
+\end{frame}
+
 \end{document}
