@@ -1,0 +1,7 @@
+~$ ls -l -n /var/cache
+drwxr-xr-x 5   0   0 4096 Dec 28 18:50 apt
+drwxrwsr-x 2 100 101 4096 Dec 28 17:24 libuuid
+drwx------ 3 104 106 4096 Jan 29 20:45 mysql
+drwxr-xr-x 5 102   0 4096 Dec 28 17:29 nfs
+drwxr-xr-x 3 105 108 4096 Dec 28 17:36 postgresql
+drwxr-xr-x 3   0   0 4096 Dec 28 17:24 vim
