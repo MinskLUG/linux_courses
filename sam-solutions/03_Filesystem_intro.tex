@@ -107,11 +107,11 @@
 
   \begin{itemize}
     \item Используем \alert{ls -l}
-      \lstinputlisting[frame=single]{samples/ls-l}
+      \lstinputlisting{samples/ls-l}
       Первая колонка, первый символ \pause
 
     \item Определение типа файла: \alert{file}
-      \lstinputlisting[frame=single]{samples/file-usage}
+      \lstinputlisting{samples/file-usage}
   \end{itemize} 
 \end{frame}
 
@@ -124,13 +124,13 @@
   \begin{enumerate}
     \item Любимым редактором: \alert{vi/vim}, \alert{nano}, \alert{mcedit} \pause
     \item \alert{echo}
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 echo какой-то текст >file
 \end{lstlisting}\pause
     \item \alert{cat} с перенаправлением\footnote{До ``конца ввода'', т.е. нажатия Ctrl+D}
-\lstinputlisting[frame=single,basicstyle=\small]{samples/cat-input-file} \pause
+\lstinputlisting[basicstyle=\small]{samples/cat-input-file} \pause
     \item \alert{touch} - создать пустой файл
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 ~$ touch file4
 ~$
 \end{lstlisting}
@@ -142,19 +142,19 @@ echo какой-то текст >file
 \begin{frame}[fragile]{Операции над каталогами (и файлами)}
   \begin{itemize}
     \item \alert{mkdir} - создать каталог
-\begin{lstlisting}[frame=single,]
+\begin{lstlisting}
 ~$ mkdir dir1 /tmp/somedir
 ~$ mkdir -p dir/and/existant/parts/in/path
 \end{lstlisting} \pause
     \item \alert{rmdir} - удалить (пустой) каталог
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 ~$ rmdir dir1 /tmp/somedir
 ~$ rmdir -p deep/empty/dir/structure/
 \end{lstlisting} \pause
     \item \alert{cp} - копирование файлов\footnotemark[8]
     \item \alert{mv} - перемещение и переименование файлов
     \item \alert{rm} - удаление файлов\footnotemark[17] 
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 ~$ rm -rf dir1 /tmp/somedir
 ~$ rm f*
 \end{lstlisting} \pause

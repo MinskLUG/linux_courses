@@ -27,8 +27,19 @@
 \setmonofont{CMU Typewriter Text}
 
 \usepackage{listings}
+\lstset{frame=single,breaklines=true,language=sh}
+
 % for strike-out text
 \usepackage[normalem]{ulem}
+
+% tabulation aka \tbs
+\newcommand{\tbs}{\tt\char`\\}
+
+% \regex for regular expressions
+\newcommand{\regex}[1]{ %
+\expandafter{$\ulcorner{\color{blue}\texttt{#1}}\lrcorner$} %
+}
+
 
 \author[Author, Vlad Shakhov]{Влад 'mend0za' Шахов\\Linux \& Embedded Team Leader}
 
