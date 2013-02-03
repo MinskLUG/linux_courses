@@ -1,9 +1,73 @@
-\include{linux-qa-common}
-
-\qatrainingtitle{6}{Процессы и потоки}
+\include{linux-qa-common} \qatrainingtitle{6}{Процессы и потоки} \lstset{basicstyle=\tiny}
 
 \begin{document}
 
 \firstframe
+
+\section{Процессы}
+
+\begin{frame}{Процессы. Общая информация}
+  \begin{block}{Процесс}
+    \begin{itemize}
+      \item Программа запускает 1 или более процессов. 
+      \item Процесс состоит из инструкций, выполняемых процессором, данных и информации о выполняемой задаче (данные в памяти и стеке, открытые файлы и статус процесса).
+    \end{itemize} 
+  \end{block} \pause
+
+  \begin{block}{Изоляция процессов}
+    \begin{itemize}
+      \item Процессы изолированы друг от друга\footnote{нет доступа к памяти и стеку, открытым файлам и порядку выполения}.
+      \item Процессы могут обмениваться данными через систему межпроцессного взаимодействия (IPC)
+      \item Следствие: пользователи могут запускать несколько экземпляров одной и той же программы. 
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Файлы и процессы. Права доступа}
+
+  Процессы запускаются из файлов (двоичных программ или скриптов).
+
+  Процессы работают с правами пользователя, их запустившего\footnote{Если не установлены SUID или SGID биты на файле программы}
+
+\end{frame}
+
+\begin{frame}{Виды процессов}
+% TODO картинку с демоном
+  \begin{block}{Демоны}
+    Неинтерактивные процессы, выполняются в фоновом режиме. Не связаны ни с одним пользовательским сеансом и не могут непосредственно управляться пользователем. \newline
+    Примеры: \alert{sshd}, \alert{apache}, \alert{cron}, \alert{samba}
+  \end{block} \pause
+
+  \begin{block}{Системные процессы}
+    Часть ядра и всегда расположены в оперативной памяти. \newline
+    Примеры: диспечер подкачки памяти ( \alert{[kswapd0]} )
+  \end{block} \pause
+
+  \begin{block}{Прикладные процессы}
+    все остальные процессы. Запускаются в рамках пользовательского сеанса. \newline
+    Примеры: \alert{ls}, \alert{bash}, \alert{vim}, \alert{find}, \alert{mysql}
+
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Практика: утилиты просмотр процессов}
+    \begin{itemize}
+      \item \alert{ps} - список запущенных процессов.\newline
+	Популярные ключи: \alert{-u username}, 
+	\alert{ax}\footnote{ \alert{ax} для BSD, \alert{-e} в SystemV}, 
+	\alert{aux}\footnote{ \alert{aux} для BSD, \alert{-ef} в SystemV}
+\lstinputlisting{samples/ps-ax
+      \item \alert{top} - интерактивный список процессов
+\lstinputlisting{samples/top}
+    \end{itemize}
+\end{frame}
+
+\section{Сигналы}
+
+\section{Shell и фоновые задания}
+
+\section{Init-система}
 
 \end{document}

@@ -1,0 +1,153 @@
+  PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:01 init [2]  
+    2 ?        S      0:00 [kthreadd]
+    3 ?        S      0:00 [ksoftirqd/0]
+    6 ?        S      0:00 [migration/0]
+    8 ?        S      0:00 [migration/1]
+   10 ?        S      0:00 [ksoftirqd/1]
+   13 ?        S      0:00 [migration/2]
+   15 ?        S      0:00 [ksoftirqd/2]
+   17 ?        S      0:00 [migration/3]
+   19 ?        S      0:00 [ksoftirqd/3]
+   21 ?        S<     0:00 [cpuset]
+   22 ?        S<     0:00 [khelper]
+   23 ?        S      0:00 [kdevtmpfs]
+   24 ?        S<     0:00 [netns]
+   25 ?        S      0:00 [sync_supers]
+   26 ?        S      0:00 [bdi-default]
+   27 ?        S<     0:00 [kintegrityd]
+   28 ?        S<     0:00 [kblockd]
+   30 ?        S      0:00 [khungtaskd]
+   31 ?        S      0:00 [kswapd0]
+   32 ?        SN     0:00 [ksmd]
+   33 ?        SN     0:00 [khugepaged]
+   34 ?        S      0:00 [fsnotify_mark]
+   35 ?        S<     0:00 [crypto]
+   38 ?        S      0:00 [kworker/1:1]
+  136 ?        S      0:00 [khubd]
+  139 ?        S<     0:00 [ata_sff]
+  168 ?        S      0:00 [scsi_eh_0]
+  169 ?        S      0:00 [scsi_eh_1]
+  170 ?        S      0:00 [scsi_eh_2]
+  171 ?        S      0:00 [scsi_eh_3]
+  172 ?        S      0:00 [scsi_eh_4]
+  174 ?        S      0:00 [kworker/u:2]
+  176 ?        S      0:00 [kworker/u:4]
+  229 ?        S<     0:00 [md]
+  246 ?        S      0:00 [jbd2/sda3-8]
+  247 ?        S<     0:00 [ext4-dio-unwrit]
+  374 ?        Ss     0:00 udevd --daemon
+  605 ?        S<     0:00 [kpsmoused]
+  606 ?        S      0:00 [kworker/0:2]
+  613 ?        S      0:00 [kworker/2:3]
+  664 ?        S      0:00 [ips-adjust]
+  665 ?        S      0:00 [ips-monitor]
+  682 ?        S<     0:00 [cfg80211]
+  701 ?        S<     0:00 [hci0]
+  740 ?        S<     0:00 [iwlwifi]
+  766 ?        S<     0:00 [ktpacpid]
+  774 ?        S      0:00 [ktpacpi_nvramd]
+  803 ?        S<     0:00 [hd-audio0]
+ 1196 ?        S<     0:00 [kvm-irqfd-clean]
+ 1646 ?        S      0:00 [flush-8:0]
+ 1966 ?        S<     0:00 [kdmflush]
+ 1987 ?        S<     0:00 [kcryptd_io]
+ 1988 ?        S<     0:00 [kcryptd]
+ 2185 ?        S      0:00 [jbd2/sda7-8]
+ 2186 ?        S<     0:00 [ext4-dio-unwrit]
+ 2190 ?        S      0:00 [jbd2/dm-0-8]
+ 2191 ?        S<     0:00 [ext4-dio-unwrit]
+ 2481 ?        Ss     0:00 /sbin/wpa_supplicant -s -B -P /var/run/wpa_supplicant.wlan1.pid -i wlan1 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf
+ 2490 ?        S      0:00 [flush-253:0]
+ 2556 ?        Ss     0:00 /sbin/rpcbind -w
+ 2588 ?        Ss     0:00 /sbin/rpc.statd
+ 2593 ?        S<     0:00 [rpciod]
+ 2595 ?        S<     0:00 [nfsiod]
+ 2602 ?        Ss     0:00 /usr/sbin/rpc.idmapd
+ 2966 ?        Ss     0:00 /usr/sbin/privoxy --pidfile /var/run/privoxy.pid --user privoxy /etc/privoxy/config
+ 3010 ?        Sl     0:00 /usr/sbin/rsyslogd -c5
+ 3083 ?        S      0:00 [lockd]
+ 3084 ?        S<     0:00 [nfsd4]
+ 3085 ?        S<     0:00 [nfsd4_callbacks]
+ 3086 ?        S      0:00 [nfsd]
+ 3087 ?        S      0:00 [nfsd]
+ 3088 ?        S      0:00 [nfsd]
+ 3089 ?        S      0:00 [nfsd]
+ 3090 ?        S      0:00 [nfsd]
+ 3091 ?        S      0:00 [nfsd]
+ 3092 ?        S      0:00 [nfsd]
+ 3093 ?        S      0:00 [nfsd]
+ 3114 ?        Ss     0:00 /usr/sbin/acpi_fakekeyd
+ 3138 ?        S      0:00 /usr/bin/timidity -Os -iAD
+ 3207 ?        Ss     0:00 /usr/sbin/rpc.mountd --manage-gids
+ 3255 ?        Ss     0:00 /usr/sbin/acpid --logevents --netlink
+ 3451 ?        Ss     0:00 /usr/sbin/apache2 -k start
+ 3454 ?        S      0:00 /usr/sbin/apache2 -k start
+ 3457 ?        Sl     0:00 /usr/sbin/apache2 -k start
+ 3458 ?        Sl     0:00 /usr/sbin/apache2 -k start
+ 3580 ?        Ss     0:00 /usr/sbin/atd
+ 3601 ?        Ssl    0:04 /usr/sbin/cpufreqd -f /etc/cpufreqd.conf
+ 3631 ?        Ss     0:00 /sbin/mdadm --monitor --pid-file /var/run/mdadm/monitor.pid --daemonise --scan --syslog
+ 3724 ?        Ss     0:00 /usr/bin/gdomap -I /var/run/gdomap.pid -p
+ 3733 ?        Ss     0:00 /usr/sbin/cron
+ 3766 ?        S      0:00 /usr/sbin/vsftpd
+ 3767 ?        Ss     0:00 /usr/bin/dbus-daemon --system
+ 3792 ?        S      0:03 /usr/sbin/tor --defaults-torrc /usr/share/tor/tor-service-defaults-torrc --hush
+ 3810 ?        Ss     0:00 /usr/sbin/sshd
+ 3840 ?        Sl     0:00 /usr/sbin/lightdm
+ 3862 ?        Ss     0:00 /usr/sbin/bluetoothd
+ 3893 ?        S<     0:00 [krfcommd]
+ 3923 ?        S      0:00 udevd --daemon
+ 3934 ?        S      0:00 /bin/sh /usr/bin/mysqld_safe
+ 3943 tty7     Rs+    0:12 /usr/bin/X :0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+ 4078 ?        Ss     0:00 /usr/sbin/cupsd -C /etc/cups/cupsd.conf
+ 4285 ?        Sl     0:01 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib/mysql/plugin --user=mysql --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/run/mysqld/mysqld.sock --port=3306
+ 4286 ?        S      0:00 logger -t mysqld -p daemon.error
+ 4317 ?        Ss     0:00 /usr/sbin/nmbd -D
+ 4332 ?        Ss     0:00 /usr/sbin/smbd -D
+ 4360 ?        S      0:00 /usr/sbin/smbd -D
+ 4379 ?        Sl     0:00 /usr/lib/accountsservice/accounts-daemon
+ 4383 ?        Sl     0:00 /usr/lib/policykit-1/polkitd --no-debug
+ 4423 ?        Sl     0:00 /usr/sbin/console-kit-daemon --no-daemon
+ 5135 tty1     Ss+    0:00 /sbin/getty 38400 tty1
+ 5136 tty2     Ss+    0:00 /sbin/getty 38400 tty2
+ 5137 tty3     Ss+    0:00 /sbin/getty 38400 tty3
+ 5138 ?        S      0:00 udevd --daemon
+ 5215 ?        Sl     0:00 lightdm --session-child 12 19
+ 5237 ?        Ss     0:00 /usr/lib/WindowMaker/wmaker
+ 5258 ?        S      0:00 /usr/bin/xscreensaver -no-splash
+ 5284 ?        Ss     0:00 /usr/bin/gpg-agent --daemon --sh --write-env-file=/home/mend0za/.gnupg/gpg-agent-info-ak79 /usr/bin/dbus-launch --exit-with-session /usr/bin/wmaker
+ 5287 ?        S      0:00 /usr/bin/dbus-launch --exit-with-session /usr/bin/wmaker
+ 5288 ?        Ss     0:04 /usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+ 5289 ?        S      0:01 /usr/lib/WindowMaker/wmaker --for-real
+ 5296 ?        S      0:00 urxvt -cd /home/mend0za
+ 5301 ?        Ss     0:00 docker -wmaker -iconsize 16
+ 5302 ?        Ss     0:00 wmcalclock -24
+ 5303 ?        Ss     0:00 wmWeather
+ 5304 ?        Ss     0:02 wmauda -c audacious
+ 5305 ?        Ss     0:00 wmbiff
+ 5306 ?        Ss     0:00 wmcpuload
+ 5307 ?        Ss     0:00 wmbattery -e
+ 5318 pts/3    Ss     0:01 -bash
+ 5319 ?        Ssl    0:01 /usr/sbin/hald
+ 5320 ?        Sl     0:00 hald-runner
+ 5366 ?        S      0:00 hald-addon-input: Listening on /dev/input/event12 /dev/input/event7 /dev/input/event0 /dev/input/event6 /dev/input/event2 /dev/input/event8 /dev/input/event3 /dev/input/event1
+ 5460 ?        S      0:00 /usr/lib/hal/hald-addon-generic-backlight
+ 5500 ?        S      0:00 /usr/lib/hal/hald-addon-generic-backlight
+ 5506 ?        S      0:00 /usr/lib/hal/hald-addon-rfkill-killswitch
+ 5536 ?        S      0:00 /usr/lib/hal/hald-addon-leds
+ 5549 ?        S      0:00 /usr/lib/hal/hald-addon-cpufreq
+ 5550 ?        S      0:00 hald-addon-acpi: listening on acpid socket /var/run/acpid.socket
+ 5798 ?        S      0:00 /usr/lib/gvfs/gvfsd
+ 6036 ?        Ss     0:00 /bin/sh -c /usr/bin/vim.athena -g -f
+ 6037 ?        Sl     0:33 /usr/bin/vim.athena -g -f
+ 6251 ?        S      0:00 [kworker/2:0]
+ 6259 pts/3    Sl     0:03 evince 06_Processes.pdf
+ 6263 ?        Sl     0:00 /usr/lib/evince/evinced
+ 6273 ?        S      0:00 /usr/lib/gvfs/gvfsd-metadata
+ 6274 ?        S      0:00 [kworker/3:1]
+ 6474 ?        S      0:00 [kworker/1:2]
+ 6475 ?        S      0:00 [kworker/0:1]
+ 6477 ?        S      0:00 [kworker/3:2]
+ 6867 ?        S      0:00 [kworker/0:0]
+ 6877 pts/3    R+     0:00 ps ax
