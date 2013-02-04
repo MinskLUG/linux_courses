@@ -1,0 +1,52 @@
+
+\begin{frame}
+	\frametitle{Позиционные параметры}
+
+	\begin{itemize}
+		\item \$0-9
+		\item \$\#
+		\item \$* -- представляется,  как одна строка
+		\item \$@ -- каждый параметр,  как отдельная строка
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{shift}
+
+	Встроенная команда сдвига параметров влево.
+
+	В качестве параметра может принимать число -- на сколько параметров сдвигать.
+
+	\begin{lstlisting}
+shift [num]
+	\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Задание}
+
+	\begin{enumerate}
+		\item Написать скрипт,  который выдает количество переданных параметров
+			\pause
+		\item Вывести на экран имя команды
+			\pause
+		\item Сделать symlink на скрипт и запустить
+			\pause
+		\item Вывести на экран первых 3 параметра
+			\pause
+		\item Передать строку "I am user \$USER" в качестве параметра
+			\begin{itemize}
+				\item Без экранирования
+				\item С экранированием ''
+				\item С экранированием '
+			\end{itemize}
+			\pause
+		\item Добавить shift перед выводом параметров
+	\end{enumerate}
+\end{frame}
+
+
