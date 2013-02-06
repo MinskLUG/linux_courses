@@ -1,35 +1,87 @@
 \begin{frame}
 \frametitle{Основные конструкции для циклов}
-\begin{itemize}
- \item while
- \item for
- \item until
- \item break, continue 
-\end{itemize}
+  \begin{itemize}
+   \item while
+   \item for
+   \item until
+   \item break, continue 
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Циклы for}
-\begin{block}{Форма 1}
-\begin{lstlisting}
-  for x in list do
+\begin{frame}[fragile]
+  \frametitle{Циклы for}
+  \begin{enumerate}
+    \item Стандартная форма
+\begin{lstlisting}[language=sh,frame=single]
+  for x in list 
+  do
     op1
     op2
   done
 \end{lstlisting}
-\end{block}
-\begin{block}{Арифметическая форма}
-\begin{lstlisting}
-  for ((i=0;i<10;i++)) do
+    \item Арифметическая форма
+\begin{lstlisting}[language=sh,frame=single]
+  for ((i=0;i<10;i++)) 
+  do
     op1
     op2
   done
 \end{lstlisting}
+  \end{enumerate}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{}
+  \begin{block}{Примеры}
+\begin{lstlisting}[language=sh,frame=single]
+for file in *
+ do md5sum $file
+done
+
+for ((i=0;i<10;i++))
+ do echo $i
+done
+\end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Циклы while,until}
+\begin{lstlisting}[language=sh,frame=single]
+while expr1; ... exprN
+do
+ op
+done
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{}
+\begin{block}{Пример}
+\begin{lstlisting}[language=sh,frame=single]
+while ((i++))
+     read y
+do
+ echo $i $y
+done
+\end{lstlisting}
 \end{block}
-\begin{block}{Примеры}
+\begin{block}{Пример}
+\begin{lstlisting}[language=sh,frame=single]
+while :
+do
+ x=$RANDOM
+ echo $x
+ [[ $x -gt 1100 ]] && break
+done
+\end{lstlisting}
 \end{block}
 \end{frame}
 
-\begin{frame}
-\frametitle{Циклы while}
+\begin{frame}[fragile]
+\frametitle{Упражнения}
+\begin{enumerate}
+\item Посчитать сумму кубов чисел от 1 до 100
+\item Вывести в файл 10 случайных чисел от 0 до 80
+\item Построить гистограмму данных из предыдущего файла файла {\bf Hint:} {\tt while read, echo -n }
+\end{enumerate}
 \end{frame}
