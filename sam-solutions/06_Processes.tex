@@ -1,0 +1,149 @@
+\include{linux-qa-common} \qatrainingtitle{6}{Процессы и потоки} \lstset{basicstyle=\tiny}
+
+\begin{document}
+
+\firstframe
+
+\section{Процессы}
+
+\begin{frame}{Процессы. Общая информация}
+  \begin{block}{Процесс}
+    \begin{itemize}
+      \item Программа запускает 1 или более процессов. 
+      \item Процесс состоит из инструкций, выполняемых процессором, данных и информации о выполняемой задаче (данные в памяти и стеке, открытые файлы и статус процесса).
+    \end{itemize} 
+  \end{block} \pause
+
+  \begin{block}{Изоляция процессов}
+    \begin{itemize}
+      \item Процессы изолированы друг от друга\footnote{нет доступа к памяти и стеку, открытым файлам и порядку выполения}.
+      \item Процессы могут обмениваться данными через систему межпроцессного взаимодействия (IPC)
+      \item Следствие: пользователи могут запускать несколько экземпляров одной и той же программы. 
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Файлы и процессы. Права доступа}
+
+  \begin{block}{Связь с файлами}
+    Процессы запускаются из файлов (двоичных программ или скриптов).
+  \end{block}
+
+  \begin{block}{Права доступа}
+    Процессы работают с правами пользователя, их запустившего\footnote{Если не установлены SUID или SGID биты на файле программы}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Виды процессов}
+% TODO картинку с демоном
+  \begin{block}{Демоны}
+    Неинтерактивные процессы, выполняются в фоновом режиме. Не связаны ни с одним пользовательским сеансом и не могут непосредственно управляться пользователем. \newline
+    Примеры: \alert{sshd}, \alert{apache}, \alert{cron}, \alert{samba}
+  \end{block} \pause
+
+  \begin{block}{Системные процессы}
+    Часть ядра и всегда расположены в оперативной памяти. \newline
+    Примеры: диспечер подкачки памяти ( \alert{[kswapd0]} )
+  \end{block} \pause
+
+  \begin{block}{Прикладные процессы}
+    все остальные процессы. Запускаются в рамках пользовательского сеанса. \newline
+    Примеры: \alert{ls}, \alert{bash}, \alert{vim}, \alert{find}, \alert{mysql}
+
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Практика: утилиты просмотр процессов}
+    
+  \begin{itemize}
+      \item \alert{ps} - список запущенных процессов.\newline
+	Популярные ключи: \alert{-u username}, 
+	\alert{ax}\footnote{ \alert{ax} для BSD, \alert{-e} в SystemV}, 
+	\alert{aux}\footnote{ \alert{aux} для BSD, \alert{-ef} в SystemV}
+\lstinputlisting{samples/ps-ax}
+      \item \alert{top} - интерактивный список процессов
+\lstinputlisting{samples/top}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Состояния процесса}
+  % TODO
+\end{frame}
+
+\begin{frame}{Виды межпроцессного взаимодействия (IPC)}
+
+  \begin{block}{Пользовательские IPC}
+    \begin{enumerate}
+      \item \alert{файлы}
+      \item \alert{каналы (трубы)} - именованные (FIFO) и неименованные (в Shell)\pause
+      \item \alert{сигналы} - уведомление о возникновении события
+    \end{enumerate}
+  \end{block}\pause
+
+  \begin{block}{IPC Для программистов}
+    \begin{enumerate}
+      \item \alert{разделяемая память}
+      \item \alert{семафоры}
+      \item \alert{очереди сообщений}
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+\section{Сигналы}
+
+
+\begin{frame}{Сигналы}
+  \begin{block}{Сигнал}
+    \begin{enumerate}
+      \item Cпособ передачи уведомления о возникновении какого-либо события.
+      \item Сигнал может идти от одного процесса другому или от ядра ОС какому-либо процессу.
+      \item Номер сигнала - единственная информация, которую он передаёт.
+    \end{enumerate}
+  \end{block} \pause
+
+  \begin{block}{Права доступа}
+    \begin{itemize}
+      \item Пользователь может посылать сигналы только тем процессам, владельцем которых он является.
+      \item \alert{root} может посылать сигналы любому процессу.
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Работа с сигналами}
+  \small Информация о сигналах: \alert{man 7 signal}, \alert{kill -l}
+  \begin{block}{Популярные сигналы}
+    \tiny
+    \begin{tabular}{l|c|c|l}
+      Сигнал & Значение & Действие
+      .умолч.& Комментарий \\ \hline 
+      SIGHUP &    1     &  Term   &  Обрыв соед. терминала или смерть упр. процесса \\
+      SIGINT &    2     &  Term   & Прерывание с клавиатуры (Ctrl+C) \\
+      SIGKILL &   9    &  Term   & Убить процесс \\
+      SIGSEGV &   11    &  Core   & Segmentation fault \\
+      SIGPIPE &   13    &  Term   & Broken pipe: запись в канал без читателей\\
+      SIGTERM &   15    &  Term   & Прекратить процесс \\
+      SIGCONT &  19,18,25 &  Cont & Продолжить выполнение \\
+      SIGSTOP &  17,19,23 &  Stop & Остановить 
+    \end{tabular}
+  \end{block} \pause
+
+  \begin{block}{Утилиты управления}
+    \begin{itemize}
+      \item \alert{kill} - послать сигнал процессу (по PID)
+      \item \alert{killall} - послать сигнал процессам по имени
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\section{Shell и фоновые задания}
+
+\section{Init-система}
+
+\end{document}

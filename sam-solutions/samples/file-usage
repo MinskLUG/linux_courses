@@ -1,0 +1,6 @@
+~$ file /dev/null
+/dev/null: character special
+~$ file .
+.: directory
+~$ file /usr/include/stdio.h 
+/usr/include/stdio.h: ASCII C program text

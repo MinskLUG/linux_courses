@@ -1,0 +1,241 @@
+\include{linux-qa-common}
+
+\qatrainingtitle{4}{Обработка текста}
+
+\begin{document}
+
+\firstframe
+
+\begin{frame}{Введение в Unix-Way}
+  
+  Заповедь номер 3:\newline 
+  \begin{center}
+    \alert{\Huge{Всё есть текст}}\footnote{cм \href{http://www.freesource.info/wiki/Stat'ja\_Klassicheskijj\_Unix\_Way}{статью Дениса Смирнова 'Классический Unix-way'} }\newline
+  \end{center} \pause
+  
+  Заповедь номер 4:\newline
+  \begin{center}
+    \alert{\Huge{Пускайте данные по трубам}}\newline
+  \end{center} \pause
+
+  Заповедь номер 5:\newline
+  \begin{center}
+    \alert{\Huge{Всё есть файл}}\newline
+  \end{center}
+
+\end{frame}
+
+\begin{frame}{Текст в Unix-Way}
+  В Unix (и Linux) в виде обычного текста или \alert{plain text} представлены:\pause
+  \begin{itemize}
+    \item \alert{конфигурационные файлы}, как локальные\footnote{в каталоге \$HOME} , так и общесистемные\footnote{в каталоге /etc} \pause
+    \item \alert{системные логи}\footnote{справедливо для \alert{syslog} и совместимых систем}
+    \item \alert{исходные тексты программ}, включая скрипты на Shell
+    \item \alert{основной формат ввода и (или) вывода данных} для множества программ и утилит
+  \end{itemize} \pause
+
+  Богатый выбор изощрённых острозаточенных инструментов для работы с текстом во всех представлениях\footnote{'Unix is toolbox' - 'Unix это ящик с инструментами'}
+
+\end{frame}
+
+\section{Операции над текстом}
+
+\input{slides/regular-files-view}
+
+\subsection{Редактирование}
+\begin{frame}{Редакторы}
+
+  \begin{itemize}
+    \item  Любой редактор, с которым вы можете справится. \pause Но его может не быть в вашей системе\ldots \pause
+    \item Редактор \alert{vi} присутствует как стандартный в любой Unix-подобной системе\footnote{В этом качестве он внесен в стандарт Single Unix Specification. Существует множество реализаций редакторов, совместимых c vi: vim, elvis, nvi, vi-mode в Emacs, Sublime Text 2, vi из busybox и т.д.} \pause
+    \item Не обязательно редактировать локально: В \alert{mc}, \alert{vim}, \alert{emacs} есть возможность удалённого редактирования файлов\footnote{С получением и сохранением данных по протоколу FTP и SSH}.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{vi и vim}
+  Перед стартом:
+
+  \begin{enumerate}
+    \item  Редактор vi изначально создавался как универсальный и переносимый\footnote{Обязан работать на любых типах терминалов и виртуальных консолей}. Все действия можно осуществить на алфавитно-цифровой части клавиатуры, без мыши. \pause
+    \item \alert{Редактор командного стиля}\footnote{Командного стиля, а не меню-ориентированный}. Действия подачей прямых управляющих команд. \pause \newline
+      3 основных режима: \sout{портить текст и противно бибикать}
+      \begin{itemize}
+	\item[-] \alert{Командный режим} (Normal mode) - по умолчанию при запуске.
+	\item[-] \alert{Режим изменения текста} (Edit mode)
+	\item[-] \alert{Режим построчного редактирования} (Ex mode) - операции над файлом целиком\footnote{сохранение, открытие файлов, выход, вставка файла в текущий и т.д.}.
+      \end{itemize}
+  \end{enumerate} \pause
+  \alert{Упражнение}: проходим \alert{vimtutor}, встроенный в vim учебник\footnote{ export LANG='ru\_RU.UTF-8' - на русском языке }
+\end{frame}
+
+\subsection{Программы-фильтры}
+
+\begin{frame}{Текстовый фильтр}
+
+  Определение:\newline \alert{Текстовый фильтр} - программа, обрабатывающая и преобразующая текст. \newline
+
+  Примеры: \alert{sort}, \alert{cat}, \alert{tac}, \alert{rev} \pause
+  \begin{itemize}
+    \item Фильтр, запущенный без параметров - читает стандартный ввод. 
+    \item Параметры фильтра - интерпретируются как имена файлов
+    \item Ключи фильтра - управляют режимами работы
+  \end{itemize} \pause
+
+  Фильтр почти всегда используется совместно с перенаправлением ввода-вывода Shell (особенно '|', pipes).
+
+\end{frame}
+
+\input{slides/simple-text-filters}
+
+\begin{frame}{Простые фильтры - упражнения}
+  \alert{Упражнение 1}: посчитать сколько файлов в папке /bin\footnote{подсказка - \alert{wc} и \alert{ls}}
+
+  \alert{Упражнение 2}: сколько слов в первых 15 строках .bashrc\footnote{подсказка - \alert{head} и \alert{ls}}
+
+  \alert{Упражнение 3}: найти, в каких файлах (и сколько их вообще) в области системных логов (каталог \alert{/var/log}) была записана информация о входе вашего пользователя в систему. \footnote{подсказка - \alert{grep} и, возможно, но необязательно, \alert{uniq}}
+
+  \alert{Упражнение 4}: сколько было входов в систему от имени вашего пользователя? в какое время был первый? последний? \footnote{подсказка - \alert{grep}, \alert{head}, \alert{tail}}
+
+  \alert{Упражнение 5}: то же, что и 4. Только для выходов. Дополнительно сохранить записи о ваших выходах в отдельный файл. \footnote{подсказка: + \alert{tee}}
+
+\end{frame}
+
+\begin{frame}{Изощрённые фильтры }
+  \begin{itemize}
+    \item \alert{diff} (и \alert{diff -u}\footnote{Формат \alert{diff -u} : индустриальный стандарт пересылки списка изменений между версиями текстовых данных. Активно используется в частности в различных системах хранения и управления исходным кодом}) - сравнить 2 файла и получить описание разницы (изменения между ними)
+    \item \alert{patch} - утилита применения изменений от diff \pause
+    \item \alert{sed} - не-интерактивный поточный редактор текста 
+    \item \alert{awk} - язык и утилита сканирования и обработки текста \pause
+  \end{itemize}
+  
+  \alert{Упражнение 1}: с помощью \alert{diff} получить разницу между своим профайлом .bashrc и пользователя ``user'' (/home/user/.bashrc)
+  
+  \alert{Упражнение 2}: создать файл патча в unified формате, на основе Упражнения 1.
+
+  \alert{Упражнение 3}: создать Unified-патч между домашним каталогом другого пользователя (например user) и вашим домашним каталогом. Включить в патч все подкаталоги и файлы. 
+\end{frame}
+
+
+
+\section{Поиск в тексте. Регулярные выражения}
+
+\begin{frame}{Описываем текст}
+
+  \begin{block}{Как описать текст?}
+    Необходим инструмент и формат описания текста
+  \end{block} \pause
+
+  \begin{block}{Регулярные выражения}
+    \alert{Регулярные выражения (regular expression или regexp)} -  специальные строки символов, которые задаются для поиска совпадающих фрагментов. Иначе говоря это способ описания наборов букв. 
+  \end{block} \pause
+
+  \begin{block}{Универсальный язык описания текста}
+    Все Unix-программы, осуществляющие поиск в тексте, используют регулярные выражения.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Элементы регулярных выражений}
+    \begin{itemize}
+      \item \alert{литералы} - обычные символы (буквы и цифры) \pause
+      \item \alert{метасимволы} - спецсимволы (количество повторов, группировка фрагментов, позиция в тексте).
+    \end{itemize} \pause 
+
+    Примеры регулярных выражений:\newline
+\begin{lstlisting}
+~$ file /bin/*|grep symbolic
+~$ grep -o 'user[0-9]*' /var/log/auth.log
+\end{lstlisting}
+\end{frame}
+
+
+\subsection{Метасимволы}
+\begin{frame}{Класс на 1 символ}
+  \begin{itemize}
+    \item \alert{.} (точка)  - заменяет любой символ \newline
+      Пример: \regex{us.r.} = 'user0', 'us rX', 'us9r ' и т.д. \pause
+    \item \alert{[ ]} символьный класс - заменяет любой символ из перечисленных в скобках
+      \begin{enumerate}
+	\item \regex{user[0-9]} = 'user0', 'user5', но не равно 'user'
+	\item \regex{-[abc-]} = '--', '-a', '-b', '-c', но не равно '--a' 
+	\item \regex{[\textasciicircum{}abc]1}\footnote{инвертировать символьный класс} = 'd1', '11', но не равно 'a1'
+      \end{enumerate} \pause
+    \item \alert{[:class:]} - дополнительные POSIX-классы для символов, \alert{внутри символьного класса}\footnote{Да, на редкость уродливый синтаксис} \newline
+	Примеры классов: \alert{[:alnum:]}, \alert{[:alpha:]} \alert{[:digit:]} \alert{[:space:]} \alert{[:lower:]}, \alert{[:upper:]}, \alert{[:print:]} \newline
+	Примеры regexp с POSIX классами: \regex{[ы[:digit:]]}
+  \end{itemize} 
+
+  \alert{Упражнение 1}: Из /var/log/messages вывести все слова, состоящие из одного символа(любого). Без повторов.
+  
+  \alert{Упражнение 2}: То же, что 1, но вывести слова из двух букв.
+
+  \alert{Упражнение 3}: Извлечь все метки времени из файла
+
+\end{frame}
+
+
+\begin{frame}[fragile]{квантификаторы - регулируем повторы}
+
+  \alert{Квантификаторы} указывают, сколько раз может повторяться символ или выражение, после которого указаны.  Не являются шаблонами текста.
+
+  \begin{itemize}
+    \item \alert{?}\footnotemark[22] - необязательный символ \newline
+      пример: \regex{a.?b} - совпадёт с 'ab', 'a9b', 'a b' \pause
+    \item \alert{*} - любое количество символов, включая нулевое \newline
+      примеры: \regex{.*}, \regex{[[:digit:]]*} \pause
+    \item \alert{+}\footnotemark[22] - не менее одного символа \newline
+      примеры: \regex{[a-d]+}, \regex{(02:)+}
+  \end{itemize}
+
+  \alert{Упражнение 1} - извлечь все слова из 1 или 2 букв из файла
+  
+  \alert{Упражнение 2} - все слова, начинающиеся на a из /var/log/messages
+  
+  \alert{Упражнение 3} - все числа из /var/log/messages
+\end{frame}
+
+\begin{frame}{Интервалы (интервальные квантификаторы)}
+  \begin{itemize}
+    \item \alert{\{число\}} - количество повторов выражения перед
+    \item \alert{\{число1,число2\}}
+    \item \alert{\{число,\}}
+  \end{itemize}
+
+  \alert{Упражнение}: Найти все строки, длиннее 30 символов в \$HOME/.bashrc.
+\end{frame}
+
+\begin{frame}{Группировка и обратные ссылки}
+  \alert{Группировка} - поместить выражение в скобки \regex{(выражение)}\footnotemark[22] 
+  \footnotetext[22]{Только в POSIX Extended RE: egrep} \newline \pause
+
+  \alert{Обратные ссылки}\footnotemark[22] - способ обратиться к уже найденному тексту по регулярному выражению в круглых скобках.
+
+  Пример: \regex{([a-z])([[:digit:]])\tbs 2\tbs 1} - совпадёт с 'a11a', но не с 'a12b'  \newline
+  
+  Вычисление для подстановки и сравнения значения на месте обратной ссылки - производится прямо во время сравнения с регулярным выражением\newline\pause
+
+  \alert{Нумерация групп} - слева-направо, от 1. \newline
+
+  Широко применяется в операциях замены текста.
+
+  {Упражнение}: найти все повторяющиеся (идущие подряд) символы в /var/log/syslog
+
+\end{frame}
+
+\begin{frame}{Якоря (anchors) или указатели позиции}
+
+  \begin{itemize}
+    \item \alert{\textasciicircum{}}
+    \item \alert{\$} \newline
+      Пример: \pause
+    \item \alert{\tbs <} и \alert{\tbs >}
+  \end{itemize}
+
+  \alert{Упражнение 1}: Найти все действующие определения псевдонимов (alias) в .bashrc, с учётом синтаксиса объявления alias.
+
+  \alert{Упражнение 2}: Найти все закомментаренные  определения псевдонимов (alias) в .bashrc
+
+\end{frame}
+
+\end{document}
