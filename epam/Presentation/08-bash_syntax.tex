@@ -1,0 +1,130 @@
+\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
+
+
+\title[bash]{Bourne again shell}
+\author[Epam]{{\bf Epam}\\Embedded solutions department}
+
+%Packages to be included
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
+
+
+\usepackage{textcomp}
+
+
+\usepackage{beamerthemesplit}
+
+\usepackage{ulem}
+
+\usepackage{verbatim}
+
+\usepackage{ucs}
+
+
+\usepackage{listings}
+\lstloadlanguages{bash}
+
+\lstset{escapechar=`,
+	extendedchars=false,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+%	basicstyle=\scriptsize,
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{green}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8,
+	keepspaces=true,
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\definecolor{darkgreen}{cmyk}{0.7, 0, 1, 0.5}
+
+\lstdefinelanguage{diff}
+{
+    morekeywords={+, -},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morecomment=[l][\color{darkgreen}]{+},
+    morecomment=[l][\color{red}]{-},
+    morestring=[b]",
+}
+
+
+
+
+\begin{document}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}
+	\frametitle{BASH}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\tableofcontents
+%	[hideallsubsections]
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Тесты и сравнения}
+
+\mode<all>{\input{../../slides/bash/tests}}
+
+\section{Операторы}
+
+\mode<all>{\input{../../slides/bash/operators}}
+
+\section{Арифметические операции}
+
+\mode<all>{\input{../../slides/bash/arithmetic}}
+
+\section{Ветвления}
+
+\mode<all>{\input{../../slides/bash/branching}}
+
+\section{Циклы}
+
+\mode<all>{\input{../../slides/bash/loops}}
+
+\section{Массивы}
+
+\mode<all>{\input{../../slides/bash/arrays}}
+
+\section{Функции}
+
+\mode<all>{\input{../../slides/bash/functions}}
+
+\end{document}
