@@ -1,0 +1,3 @@
+~$ id user
+uid=1000(user) gid=1000(user) groups=1000(user),4(adm),44(video),46(plugdev)
+

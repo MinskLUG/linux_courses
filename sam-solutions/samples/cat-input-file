@@ -1,0 +1,6 @@
+~$ cat >>file3
+ladsfa
+134097
+
+~$ ls -l file3                                                  
+-rw-r--r-- 1 user user 25 Янв 23 17:13 file3

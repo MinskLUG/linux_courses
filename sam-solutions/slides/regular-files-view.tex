@@ -1,0 +1,19 @@
+
+\begin{frame}{Просмотр обычных файлов}
+  %\frametitle{Просмотр обычных файлов}
+  \begin{itemize}
+    \item Просмотр текста:
+      \begin{itemize} 
+	\item \alert{cat} - вывести на stdout\footnote{Для двоичных файлов: чревато порчей настроек терминала} \pause
+	\item \alert{more} - вывести, разбив на страницы
+	\item \alert{less}\footnote{может отсутствововать в стандартной поставке} - \alert{more} на стероидах, с прокруткой, поиском 
+      \end{itemize} \pause
+    \item Просмотр двоичных данных:
+      \begin{itemize} 
+	\item \alert{od} - дамп файла в не-текстовых форматах
+\lstinputlisting[frame=single,basicstyle=\tiny]{samples/od}
+        \item \alert{strings} - извлечь текстовые строки из двоичных файлов
+      \end{itemize}
+  \end{itemize}
+
+\end{frame}

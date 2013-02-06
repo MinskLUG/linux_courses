@@ -1,0 +1,10 @@
+  PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:01 init [2]  
+   31 ?        S      0:00 [kswapd0]
+ 3451 ?        Ss     0:00 /usr/sbin/apache2 -k start
+ 3766 ?        S      0:00 /usr/sbin/vsftpd
+ 3767 ?        Ss     0:00 /usr/bin/dbus-daemon --system
+ 3810 ?        Ss     0:00 /usr/sbin/sshd
+ 5318 pts/3    Ss     0:01 -bash
+ 6259 pts/3    Sl     0:03 evince 06_Processes.pdf
+ 6877 pts/3    R+     0:00 ps ax

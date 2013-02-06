@@ -1,16 +1,11 @@
 \include{linux-qa-common}
 
 
-\title[SaM Solutions. Linux QA Training]
-{
-  Часть 2.\\
-  Bourne Shell aka POSIX sh.
-}
+\qatrainingtitle{2}{Bourne Shell aka POSIX sh}
 
 \begin{document}
-\begin{frame}
-  \titlepage
-\end{frame}
+
+\firstframe
 
 \section{Введение в Shell}
 
@@ -365,7 +360,7 @@
   \begin{itemize}
     \item \alert{set} - просмотр списка \pause
     \item \alert{\$HOME} - взять значение переменной \pause
-\begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}
 	echo $USER $HOME
 	echo $PATH 
 	$SHELL
@@ -382,15 +377,15 @@
 
   \begin{itemize}
     \item \alert{Одиночные} : 'всё как было'
-\begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}
 	echo 'Oops: $HOME $SHELL'
 \end{lstlisting} \pause
     \item \alert{Двойные} :  \verb+"раскрывает значения переменных"+
-\begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}
 	echo "Ok: $HOME $SHELL"
 \end{lstlisting} \pause
     \item \alert{Обратные} : `выполняем команду`
-\begin{lstlisting}[language=sh,frame=single]
+\begin{lstlisting}
 	LISTING=`ls -a`
 	echo ''in $PWD: $LISTING"
 \end{lstlisting}
@@ -400,15 +395,15 @@
 
 \begin{frame}[fragile]
   \frametitle{Примеры из жизни}
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
     $CHROOT_TOOL /bin/sh /tmp/`basename $hook`
 \end{lstlisting} \pause
 
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
     ROOT_UUID=`tune2fs -l $ROOT_DEV |awk '/UUID/ {print $3}'`
 \end{lstlisting} \pause
   
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\small,breaklines=true]
+\begin{lstlisting}[basicstyle=\small]
     (echo unit B; echo print; echo quit) | \
           parted $FLASH_IMG | \
           awk '/^ [1-2]/ { printf "--offset=%s --sizelimit=%s /dev/loop%s\n", $2, $4, $1 }' | \
@@ -447,16 +442,16 @@
 
   \begin{itemize}
     \item \alert{*} - любое количество любых символов
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	echo /u*
 	ls /u*
 \end{lstlisting} \pause
     \item \alert{[]} - символ из перечисления\footnote{об интервалах - в разделе о регулярных выражениях}
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	echo .[bp]*
 \end{lstlisting} \pause
     \item \alert{?} - любой одиночный символ
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	echo ?i*
 \end{lstlisting} 
   \end{itemize}
@@ -480,14 +475,14 @@
 
   \alert{if то же самое, что и test(1)} \pause
 
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	if [ -f .bash_history ]
 	then
 	  cat .bash_history
 	fi
 \end{lstlisting} 
       полностью идентично по результату
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	test -f .bash_history && cat .bash_history
 \end{lstlisting}
       if сложнее - все пробелы значащие (часть синтаксиса).
@@ -497,11 +492,11 @@
   \frametitle{Часто используемые унарные параметры test(1)}
   \begin{itemize}
     \item \alert{-f filepath} - проверить на существование файл
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	test -f "$FILEPATH" && rm -v $FILEPATH
 \end{lstlisting} \pause
     \item \alert{-d directorypath} - проверить на существование каталог
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\tiny,breaklines=true]
+\begin{lstlisting}[basicstyle=\tiny]
 	if [ -d "$HOME/bin" ]
 	then 
 	  echo "file $HOME/bin present"
@@ -510,11 +505,11 @@
 	fi
 \end{lstlisting} \pause
     \item \alert{-z ``value''} - строка пустая
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	test -z "$VARIABLE" && VARIABLE="value"
 \end{lstlisting} \pause
     \item \alert{-n ``value''} - строка ненулевая
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	test -n "$VARIABLE" && echo "$VARIABLE"
 \end{lstlisting} 
   \end{itemize}
@@ -547,7 +542,7 @@
 \begin{frame}[fragile]
   \frametitle{Циклы ``for'', ``while'', ``until''}
       \alert{for}
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	for i in ``list''
 	do
 	  commands
@@ -556,7 +551,7 @@
       В списке могут быть переменные, вызовы команд через обратные скобки, подстановочные символы (wildcards) и т.п.\pause
   
       \alert{while , until}
-\begin{lstlisting}[language=sh,frame=single,basicstyle=\normalsize,breaklines=true]
+\begin{lstlisting}[basicstyle=\normalsize]
 	while ``list''
 	do
 	  commands
@@ -605,7 +600,7 @@
   \begin{itemize}
     \item \alert{\$\#} - количество параметров (аргументов) скрипта
     \item \alert{\$1, \$2, \ldots \$9}\footnote{По POSIX гарантирована поддержка 9 переменных} - параметры скрипта
-      \lstinputlisting[language=sh,frame=single,basicstyle=\normalsize,breaklines=false]{samples/script-arguments.sh}
+      \lstinputlisting[basicstyle=\normalsize,breaklines=false]{samples/script-arguments.sh}
 \pause
     \item \alert{\$0} - имя самого скрипта
     \item \alert{\$@ , \$*}\footnote{Обрабатываются по-разному, в зависимости от значения в IFS} - все параметры скрипта списком 

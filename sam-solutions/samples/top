@@ -1,0 +1,9 @@
+~$ top
+top - 18:55:42 up 29 min,  0 users,  load average: 0.17, 0.24, 0.24
+Tasks: 152 total,   1 running, 151 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.9 us,  0.7 sy,  0.0 ni, 94.0 id,  2.4 wa,  0.0 hi,  0.0 si,  0.0 st
+
+  PID USER      PR  NI  VIRT  RES  SHR S  %CPU %MEM    TIME+  COMMAND
+    1 root      20   0 10648  836  696 S   0.0  0.0   0:01.20 init
+    ......
+ 7494 mend0za   20   0 25452 1444 1076 R   0.0  0.0   0:00.01 top
