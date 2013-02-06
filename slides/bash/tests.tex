@@ -7,6 +7,7 @@
 	\begin{itemize}
 		\item Exit status любой программы
 		\item test или $[$ 
+                \item $[[$
 		\item Двойные скобки {\bf (( ... ))} и конструкция {\bf let}
 	\end{itemize}
 
@@ -95,6 +96,16 @@ test -z "$DISPLAY" && echo "text mode" || echo "graphical mode"
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Двойные квадратные скобки}
+\begin{itemize}
+\item Ведет себя не как команда, а как особая конструкция
+\item Доступны дополнительные сравнения (на соответствие регулярному выражению)
+\item Нет необходимости закавычивать переменные
+\item Внутри можно использовать логические связки
+\item 
+\end{itemize}
+\end{frame}
 %\begin{frame}[fragile]{}
 
 %\end{frame}
