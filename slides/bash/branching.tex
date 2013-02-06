@@ -1,19 +1,31 @@
+
 \begin{frame}[fragile]
-\frametitle{Условные операторы: if}
-\begin{itemize}
-\item {\tt if;then;else;fi}
-\begin{lstlisting}[language=sh,frame=single]
-if CONDITIONS
-then 
- OPS
-[elif] CONDITIONS
-[then]
- OPS
-[else]
- OPS
+\frametitle{Синтаксис {\bf if}}
+
+	\begin{columns}
+		\column{0.4\textwidth}
+	
+	\begin{lstlisting}[language=bash]
+if [ условие1 ]
+then
+   . . .
+elif [ условие2 ]
+then
+   . . .
+else
+   . . .
 fi
 \end{lstlisting}
-\end{itemize}
+		\column{0.6\textwidth}
+	{\bf Практическое задание:} \\
+	\begin{itemize}
+
+		\item с помощью конструкции {\bf if} проверить существует ли файловый объект передаваемый в качестве параметра скрипту
+		\item если нет, то создать директорию с таким именем
+		\item если cуществует и файл является shell-скриптом, то запустить его
+		\item если существует и является директорией, то вывести на экран первых 5 файлов в этой директории
+	\end{itemize}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]

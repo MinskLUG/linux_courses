@@ -1,6 +1,7 @@
 %%
 
-\begin{frame}{Общий синтаксис}
+\begin{frame}
+\frametitle{Общий синтаксис}
 
 	Условие:
 	\begin{itemize}
@@ -18,33 +19,9 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Двойные скобки и {\bf let}}
 
-	Позволяют производить арифметические вычисления!
-
-	\pause
-	Пример:
-\begin{lstlisting}[language=bash]
-a=$(( 5 + 3 ))
-let "b = (( a + 10 ))"
-echo $a $b
-\end{lstlisting}
-
-	\pause
-	Операции:
-	\begin{itemize}
-		\item (( 0 \&\& 1 )) -- логическое "И"
-		\item (( 0 || 1 )) -- логическое "ИЛИ"
-		\item (( 0 \& 1 )) -- побитовое "И"
-		\item (( 0 | 1 )) -- побитовое "ИЛИ"
-	\end{itemize}
-
-	{\bf Практическое задание:} \\
-	написать скрипт, которому в качестве параметров передается 2 значения. Вывести на экран результаты логических и побитовых операций. 
-\end{frame}
-
-
-\begin{frame}[fragile]{test}
+\begin{frame}[fragile]
+\frametitle{test}
 
 	\begin{itemize}
 	    \item ! -- отрицание
@@ -61,8 +38,9 @@ echo $a $b
 
 \end{frame}
 
+
 \begin{frame}[fragile]
-	\frametitle{Пример}
+\frametitle{Пример}
 
 	Написать скрипт сравнивающий переменную окружения с заранее заданным значением:
 	
@@ -95,7 +73,8 @@ exit
 
 \end{frame}
 
-\begin{frame}[fragile]{\&\& и ||}
+\begin{frame}[fragile]
+\frametitle{\&\& и ||}
 	Синтаксис:
 \begin{verbatim}
 условие && true || false
@@ -115,37 +94,6 @@ test -z "$DISPLAY" && echo "text mode" || echo "graphical mode"
 	    \item В случае неуспеха вывести "неудача"
 	\end{itemize}
 \end{frame}
-
-
-
-\begin{frame}[fragile]{Синтаксис {\bf if}}
-
-	\begin{columns}
-		\column{0.4\textwidth}
-	
-	\begin{lstlisting}[language=bash]
-if [ условие1 ]
-then
-   . . .
-elif [ условие2 ]
-then
-   . . .
-else
-   . . .
-fi
-\end{lstlisting}
-		\column{0.6\textwidth}
-	{\bf Практическое задание:} \\
-	\begin{itemize}
-
-		\item с помощью конструкции {\bf if} проверить существует ли файловый объект передаваемый в качестве параметра скрипту
-		\item если нет, то создать директорию с таким именем
-		\item если cуществует и файл является shell-скриптом, то запустить его
-		\item если существует и является директорией, то вывести на экран первых 5 файлов в этой директории
-	\end{itemize}
-	\end{columns}
-\end{frame}
-
 
 %\begin{frame}[fragile]{}
 
