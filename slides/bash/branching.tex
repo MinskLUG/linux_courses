@@ -1,0 +1,60 @@
+\begin{frame}[fragile]
+\frametitle{Условные операторы: if}
+\begin{itemize}
+\item {\tt if;then;else;fi}
+\begin{lstlisting}[language=sh,frame=single]
+if CONDITIONS
+then 
+ OPS
+[elif] CONDITIONS
+[then]
+ OPS
+[else]
+ OPS
+fi
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Условные операторы: case}
+\begin{itemize}
+\item {\tt case}
+\begin{lstlisting}[language=sh,frame=single]
+case "$variable" in 
+ pattern1) command1
+           command2
+          ;;
+ pattern2|pattern3)
+         command3
+         command4
+        ;;
+esac
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Использование case вместе с getopts}
+\begin{lstlisting}[language=sh,frame=single]
+while getopts "af:h" Option
+do
+  case $Option in 
+    a) OPTA=1 ;;
+    f) OPTFILE=1
+       FILENAME=$OPTARG
+       ;;
+    h) echo "Usage: $0 [-ah] -f <filename>";;
+  esac  
+done
+shift $((OPTIND-1))
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Упражнение}
+\begin{enumerate}
+\item Написать программу, которая по опции {\tt -h } выводит помощь, без опций выводит время в stdout,
+с опцией -f выводит время в указаный файл
+\end{enumerate}
+\end{frame}
