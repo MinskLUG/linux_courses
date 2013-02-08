@@ -130,8 +130,26 @@ Software (windows): putty
 
      _Практика_: sysvinit (RHEL, SLES, Debian), Upstart (Ubuntu), Systemd (может попасться)
 
+## 7. Основы виртуализации и эмуляции 
+*    Что такое виртуализация
+*    Кратко по типам и видам
+*    Зачем и где используется 
 
-## 7. Администрирование Linux-систем 
+     _Практика_: краткий обзор, конфигурация, установка гостевой системы:
+     * ESX/ESXi/Workstation, 
+     * Qemu/KVM, 
+     * XEN/Citrix
+     * VirtualBox
+     * Hyper-V
+
+## 8. Отладка приложений  
+*    Задание лимитов ( ulimit )
+*    Создание Coredump
+
+     _Практика_: gdb (run, backtrace)
+*    strace, ltrace 
+
+## 9. Администрирование Linux-систем 
 *    Администраторы (root), получение, права
 
      _Практика_: su, sudo
@@ -146,14 +164,7 @@ Software (windows): putty
 
      _Практика:_ чтение и анализ dmesg, /var/log/*
 
-## 8. Отладка приложений  
-*    Задание лимитов ( ulimit )
-*    Создание Coredump
-
-     _Практика_: gdb (run, backtrace)
-*    strace, ltrace 
-
-## 9. Работа с базами данных 
+## 10. Работа с базами данных 
 На примерах Postgresql, MySQL, SQlite
 
 *    Getting started
@@ -170,7 +181,7 @@ Software (windows): putty
 
      _Практика_: дамп/восстановление базы, таблицы
 
-## 10. Прочее 
+## 11. Прочее 
 *    Continuous integration (CI). Jenkins and friend. Зачем нужны
 
      _Практика_: завести задачи в CI
@@ -182,17 +193,6 @@ Software (windows): putty
 
 *    Стандартизация Linux: POSIX, FHS, SUSv3, LSB
 
-## 11. Основы виртуализации и эмуляции 
-*    Что такое виртуализация
-*    Кратко по типам и видам
-*    Зачем и где используется 
-
-     _Практика_: краткий обзор, конфигурация, установка гостевой системы:
-     * ESX/ESXi/Workstation, 
-     * Qemu/KVM, 
-     * XEN/Citrix
-     * VirtualBox
-     * Hyper-V
 
 ## 12. Базовые понятия QA 
 *    Основы тестирования
