@@ -1,0 +1,230 @@
+
+
+\begin{frame}[fragile]
+	\frametitle{Введение}
+
+	\begin{block}{Sha-Bang}
+		\begin{lstlisting}
+#!/bin/bash
+		\end{lstlisting}
+	\end{block}
+
+	\begin{block}{Режим совместимости с POSIX}
+		\begin{lstlisting}
+#!/bin/sh
+		\end{lstlisting}
+
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Спецсимволы}
+
+	\begin{itemize}
+		\item \# -- Вся строка после \# является комментарием
+		\item ; -- Разделение команд
+		\item : -- NOP оператор (похож на встроенный вызов true)
+		\item {\tt source} или {\bf .} -- скрипт выполняется в текущем экземпляре shell
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Спецсимволы}
+
+	\begin{block}{Фигурные скобки и склеивание с помощью ``,``}
+		\begin{itemize}
+			\item Посмотреть на результат выполнения команды \\
+				{\tt echo \{A,B,C\}:\{1,2,3\}}
+				\pause
+			\item Посмотреть на результат выполнения команды \\
+				{\tt ls -l \{,/usr\}/\{bin,sbin\}/*sh}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Экранирование}
+
+	\begin{columns}
+		\column{0.5\textwidth}
+		\begin{itemize}
+			\item Экранирование одного символа \textbackslash 
+			\item Частичное экранирование ''
+			\item Полное экранирование '
+		\end{itemize}
+		\pause
+		\column{0.5\textwidth}
+		Спецзначения для echo и sed
+		\begin{itemize}
+			\item \textbackslash{n} -- новая строка
+			\item \textbackslash{r} -- возврат каретки
+			\item \textbackslash{t} -- табуляция
+			\item \textbackslash{v} -- вертикальная табуляция \\
+				\small\begin{lstlisting}
+echo -e "test \v test \v test"
+				\end{lstlisting}
+			\item \textbackslash{b} -- перемещение на 1 символ назад
+			\item \textbackslash{a} -- звуковой сигнал
+			\item \textbackslash{0xxx} -- 8-миричное число
+			\item \textbackslash{xXXX} -- 16-ричное число
+		\end{itemize}
+	\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Подстановка команд}
+	
+	Синтаксис:
+
+	\begin{itemize}
+		\item \`{}command\`{}
+		\item \$(command)
+	\end{itemize}
+	\pause
+	\begin{block}{Задание}
+
+		Присвоить переменной LIST результат выполнения команды {\tt ls -1} \\
+		Вывести на экран переменную LIST
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Коды возврата}
+
+	Согласно POSIX: 0 -- успех
+
+	Код возврата доступен через переменную \$?
+
+	\pause
+	\begin{block}{Пример}
+		\begin{lstlisting}
+/bin/true; echo $?
+/bin/false; echo $?
+		\end{lstlisting}
+	\end{block}
+
+	Скрипт возвращает код последней команды, поэтому для корректного выхода необходимо использовать {\tt exit}.
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{exec}
+
+	Заменяет текущий shell переданной командой. 
+
+	Часто используется для переназначения файловых дескрипторов.
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Группировка}
+	
+	\begin{block}{Пример}
+		\begin{lstlisting}
+( echo 1; echo 2) | tee file
+		\end{lstlisting}
+	\end{block}
+
+	\pause
+	\begin{block}{( cmd1; cmd2)}
+	    Запускается новый shell
+	\end{block}
+
+	\begin{block}{Пример}
+		\begin{lstlisting}
+TEST=42; (echo $TEST; TEST=0; echo $TEST ); echo $TEST
+		\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+		\item ``>'' -- Перенаправление в файл
+			\begin{block}{Пример}
+				\begin{lstlisting}
+echo stdout > test.txt
+				\end{lstlisting}
+			\end{block}
+		\item ``>\&'' -- Перенаправление в другой дескриптор
+			\begin{block}{Пример}
+				\begin{lstlisting}
+(echo stdout; echo stderr >&2) > test.txt
+				\end{lstlisting}
+			\end{block}
+	\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+
+		\item ``\&>''
+			\begin{block}{Пример}
+				\begin{lstlisting}
+(echo stdout; echo stderr >&2) &> test.txt
+				\end{lstlisting}
+			\end{block}
+		
+		\item ``>>'' -- Добавление в файл
+			\begin{block}{Пример}
+				\begin{lstlisting}
+echo stdout >> test.txt
+				\end{lstlisting}
+			\end{block}
+																										                
+		\item ``<'' -- Чтение из файла
+			\begin{block}{Пример}
+				\begin{lstlisting}
+cat < test.txt
+				\end{lstlisting}
+			\end{block}
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+
+		\item ``<<'' -- Here-документ
+
+		\item ``<>'' -- Открывает файловый дескриптор из файла/другого дескритора
+			\begin{block}{Пример}
+				\begin{lstlisting}
+exec 3<>test.txt; echo test >&3;  cat <test.txt
+				\end{lstlisting}
+			\end{block}
+			
+		\item ``n<\&-'' -- Закрывает файловый дескриптор
+			\begin{block}{Пример}
+				\begin{lstlisting}
+exec 3<&-; echo test >&3
+				\end{lstlisting}
+			\end{block}
+			
+		\item ``|'' -- pipe
+	\end{itemize}
+
+\end{frame}
+
+

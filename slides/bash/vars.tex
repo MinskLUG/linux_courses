@@ -1,0 +1,82 @@
+%% Vars
+
+
+\begin{frame}
+	\frametitle{Переменные}
+
+	\large\center{Нетипизированные!!!}
+
+	\begin{itemize}
+		\item Локальные\\
+		    Область видимости -- текущая программа или функция
+		\item Окружения
+		\item Позиционные параметры
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Внешние переменные}
+
+	\center{Наследование внешней переменной}
+
+	\begin{itemize}
+		\item  export
+		\item Переданное в командной строке \\
+			\begin{block}{Пример}
+				{\tt TEST=123 make}
+			\end{block}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Обращения к переменной}
+
+	\begin{itemize}
+		\item Прямые \\
+	    С использованием имени переменной и символа \$\\
+			\begin{block}{Пример}
+				{\tt TEST=test ; echo \$TEST}
+			\end{block}
+		\item Косвенные \\
+			\begin{block}{Пример}
+				\begin{lstlisting}
+#!/bin/bash 
+num=$# 
+lastarg=${!num} 
+echo $num $lastarg
+				\end{lstlisting}
+			\end{block}
+	\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Специальные переменные}
+
+	Часто используемые в скриптах:
+
+	\begin{itemize}
+		\item Разделитель \$IFS
+		\item Локализация
+			\begin{itemize}
+				\item Используемый язык \$LANG
+				\item Локализация \$LC\_ALL
+					\begin{block}{Пример}
+						\begin{lstlisting}
+ls -l 
+LC_ALL=C ls -l
+						\end{lstlisting}
+					\end{block}
+			\end{itemize}
+		\item ID процесса -- \$\$
+	\end{itemize}
+
+\end{frame}
+
+
+

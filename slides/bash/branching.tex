@@ -1,0 +1,72 @@
+
+\begin{frame}[fragile]
+\frametitle{Синтаксис {\bf if}}
+
+	\begin{columns}
+		\column{0.4\textwidth}
+	
+	\begin{lstlisting}[language=bash]
+if [ условие1 ]
+then
+   . . .
+elif [ условие2 ]
+then
+   . . .
+else
+   . . .
+fi
+\end{lstlisting}
+		\column{0.6\textwidth}
+	{\bf Практическое задание:} \\
+	\begin{itemize}
+
+		\item с помощью конструкции {\bf if} проверить существует ли файловый объект передаваемый в качестве параметра скрипту
+		\item если нет, то создать директорию с таким именем
+		\item если cуществует и файл является shell-скриптом, то запустить его
+		\item если существует и является директорией, то вывести на экран первых 5 файлов в этой директории
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Условные операторы: case}
+\begin{itemize}
+\item {\tt case}
+\begin{lstlisting}[language=sh,frame=single]
+case "$variable" in 
+ pattern1) command1
+           command2
+          ;;
+ pattern2|pattern3)
+         command3
+         command4
+        ;;
+esac
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Использование case вместе с getopts}
+\begin{lstlisting}[language=sh,frame=single]
+while getopts "af:h" Option
+do
+  case $Option in 
+    a) OPTA=1 ;;
+    f) OPTFILE=1
+       FILENAME=$OPTARG
+       ;;
+    h) echo "Usage: $0 [-ah] -f <filename>";;
+  esac  
+done
+shift $((OPTIND-1))
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Упражнение}
+\begin{enumerate}
+\item Написать программу, которая по опции {\tt -h } выводит помощь, без опций выводит время в stdout,
+с опцией -f выводит время в указаный файл
+\end{enumerate}
+\end{frame}

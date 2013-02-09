@@ -1,0 +1,48 @@
+%% Arithmetic
+
+\begin{frame}
+  \frametitle{}
+  \begin{itemize}
+   \item  Конструкция {\tt ((...))}
+    \begin{block}{Примеры}
+     {\tt (( a=10 )); echo \$(( a++ )); echo \$a; } 
+    \end{block}
+   \item  {\tt let}
+    \begin{block}{Примеры}
+     {\tt let a=10; echo \$a; let a+=-2; echo \$a; echo \$(( $--$a)); echo \$a} 
+    \end{block}
+   \item  {\tt expr } внешняя команда 
+    \begin{block}{Пример}
+       { \tt x=\`{}expr \$x + 1\`{} }
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Операторы в арифметических выражениях}
+\begin{enumerate}
+\item Инкременты, декременты {\tt id++, id$--$, ++id, $--$id } 
+\item Арифметические операторы {\tt **,*,/,\%,+,-} 
+\item Побитовые операторы {\verb+ ~,>>,<<,^,&,|+}
+\item Операторы сравнения {\tt <=,>=,<,>, ==, !=}
+\item Логические операторы {\tt \&\&, || } 
+\item Тернарный оператор {\tt expr ? expr : expr }
+\item Операторы присваивания
+\begin{lstlisting}[language=C]
+=, *=, /=, %=,
++=, -=, <<=, >>=,
+&=, ^=, |=  
+\end{lstlisting}
+\end{enumerate} 
+
+  
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Упражнение}
+ \begin{enumerate}
+   \item {\bf Конец света:} Вывести дату конца юниксовых времен ( время $2^{31}-1$) {\tt date -d @<seconds> } 
+   \item Проверить результат арифметической операции (( 5>10 ))
+ \end{enumerate}
+\end{frame}

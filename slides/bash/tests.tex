@@ -1,0 +1,101 @@
+%%
+
+\begin{frame}
+\frametitle{Общий синтаксис}
+
+	Условие:
+	\begin{itemize}
+		\item Exit status любой программы
+		\item test или $[$ 
+		\item Двойные скобки {\bf (( ... ))} и конструкция {\bf let}
+	\end{itemize}
+
+
+	Конструкция для сравнения:
+	\begin{itemize}
+		\item \&\& и ||
+		\item if/then/else
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{test}
+
+	\begin{itemize}
+	    \item ! -- отрицание
+	    \item -z СТРОКА
+	    \item СТРОКА1 = СТРОКА2
+	    \item СТРОКА1 != СТРОКА2
+	    \item ЦЕЛОЕ1 -eq ЦЕЛОЕ2
+	    \item ЦЕЛОЕ1 -ge ЦЕЛОЕ2
+	    \item ЦЕЛОЕ1 -lt ЦЕЛОЕ2
+	    \item -d ФАЙЛ
+	    \item -e ФАЙЛ
+	    \item -f ФАЙЛ
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Пример}
+
+	Написать скрипт сравнивающий переменную окружения с заранее заданным значением:
+	
+	\small\begin{lstlisting}
+#!/bin/bash
+
+VAR=$1
+STRING=test
+[ $STRING == $VAR ] && echo "Строки одинаковы" || echo "Строки разные"
+exit
+	\end{lstlisting}
+    \normalsize
+	И запустить этот скрипт:
+	
+	\begin{enumerate}
+		\item {\tt sh script.sh string}
+		\item {\tt sh script.sh test}
+		\item {\tt sh script.sh}
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Пример: варианты исправления}
+
+		\begin{enumerate}
+			\item {\tt [ ``\$STRING'' == ``\$VAR'' ] }
+			\item {\tt [ z\$STRING == z\$VAR ] }
+		\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\&\& и ||}
+	Синтаксис:
+\begin{verbatim}
+условие && true || false
+\end{verbatim}
+
+	\pause
+	Пример:
+\begin{lstlisting}[language=bash]
+test -z "$DISPLAY" && echo "text mode" || echo "graphical mode"
+\end{lstlisting}
+	
+	\pause
+
+	\begin{itemize}
+	    \item Запустить команды "true" и "false"
+	    \item В случае успеха вывести "успех"
+	    \item В случае неуспеха вывести "неудача"
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}[fragile]{}
+
+%\end{frame}
+
