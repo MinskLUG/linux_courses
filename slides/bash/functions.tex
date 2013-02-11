@@ -1,0 +1,123 @@
+\begin{frame}
+	\frametitle{Функции}
+
+	\begin{itemize}
+		\item Именованные
+		\item Неименованные
+	\end{itemize}
+
+	Функции в shell могут использоваться как обычные программы, которые:
+	\begin{itemize}
+		\item Принимают позиционные параметры;
+		\item возвращают статус;
+		\item Могут использоваться в качестве источника либо приемника 
+			при перенаправлениях ввода/вывода.
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Функции: синтаксис}
+	\begin{itemize}
+		\item Классический синаксис: 
+			\begin{lstlisting}
+function function_name {
+command...
+} 
+			\end{lstlisting}
+		\item Портабельный (C-style):
+			\begin{lstlisting}
+function_name()
+{
+command...
+} 
+			\end{lstlisting}
+
+		\item Однострочный:
+			\begin{lstlisting}
+function_name () { command... ;}
+			\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример (начало)}
+	\small
+	\begin{lstlisting}
+#!/bin/bash
+
+function help {
+	echo "Использование: $0 <string>"
+	exit 1
+}
+f1(){
+	echo Вызвана функция $0 с $# аргументами
+}
+
+f2(){
+	while read str; do
+		echo $0 прочитана строка: $str
+	done
+}
+	\end{lstlisting}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Пример (окончание)}
+	\small
+	\begin{lstlisting}
+[ $# -eq 0 ] && help
+
+f1 "$@"
+
+{ for ((i=0;i<5;i++));do
+	echo $@
+done } | f2
+
+exit
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	\begin{itemize}
+		\item 
+		\item 
+		\item
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	\begin{itemize}
+		\item 
+		\item 
+		\item
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	\begin{itemize}
+		\item 
+		\item 
+		\item
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	\begin{itemize}
+		\item 
+		\item 
+		\item
+  \end{itemize}
+\end{frame}
+
+
+
