@@ -149,6 +149,15 @@ Software (windows): putty
      _Практика_: gdb (run, backtrace)
 *    strace, ltrace 
 
+## 9. FOSS software 
+*    FOSS : free and open source software.
+	* FOSS как способ производства. 
+	* Использование FOSS компонент и инструментов
+	* что такое upstream
+	* когда и как репортить баги в upstream
+
+*    Стандартизация Linux: POSIX, FHS, SUSv3, LSB
+
 ## 9. Администрирование Linux-систем 
 *    Администраторы (root), получение, права
 
@@ -181,17 +190,6 @@ Software (windows): putty
 
      _Практика_: дамп/восстановление базы, таблицы
 
-## 11. Прочее 
-*    Continuous integration (CI). Jenkins and friend. Зачем нужны
-
-     _Практика_: завести задачи в CI
-*    FOSS : free and open source software.
-	* FOSS как способ производства. 
-	* Использование FOSS компонент и инструментов
-	* что такое upstream
-	* когда и как репортить баги в upstream
-
-*    Стандартизация Linux: POSIX, FHS, SUSv3, LSB
 
 
 ## 12. Базовые понятия QA 
@@ -200,4 +198,7 @@ Software (windows): putty
 *    Уровни и типы тестирования     
 *    Тестовая документация
 *    К чему надо быть готовым психологически, работая в тестировании
+*    Continuous integration (CI). Jenkins and friend. Зачем нужны
+
+     _Практика_: завести задачи в CI
 
