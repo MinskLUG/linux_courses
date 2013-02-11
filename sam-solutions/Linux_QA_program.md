@@ -146,8 +146,11 @@ Software (windows): putty
 *    Задание лимитов ( ulimit )
 *    Создание Coredump
 
-     _Практика_: gdb (run, backtrace)
+     _Практика_: gdb (run, attach, backtrace)
 *    strace, ltrace 
+*    Получение информации об исполняемых файлах
+
+     _Практика_: nm, ldd
 
 ## 9. FOSS software 
 *    FOSS : free and open source software.
