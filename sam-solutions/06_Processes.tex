@@ -1,4 +1,8 @@
-\include{linux-qa-common} \qatrainingtitle{6}{Процессы и потоки} \lstset{basicstyle=\tiny}
+\include{linux-qa-common} 
+
+\qatrainingtitle{6}{Процессы и потоки} 
+
+\lstset{basicstyle=\tiny}
 
 \begin{document}
 
@@ -124,12 +128,12 @@
       .умолч.& Комментарий \\ \hline 
       SIGHUP &    1     &  Term   &  Обрыв соед. терминала или смерть упр. процесса \\
       SIGINT &    2     &  Term   & Прерывание с клавиатуры (Ctrl+C) \\
-      SIGKILL &   9    &  Term   & Убить процесс \\
+      SIGKILL &   9     &  Term   & Убить процесс \\
       SIGSEGV &   11    &  Core   & Segmentation fault \\
       SIGPIPE &   13    &  Term   & Broken pipe: запись в канал без читателей\\
       SIGTERM &   15    &  Term   & Прекратить процесс \\
-      SIGCONT &  19,18,25 &  Cont & Продолжить выполнение \\
-      SIGSTOP &  17,19,23 &  Stop & Остановить 
+      SIGCONT &   18    &  Cont   & Продолжить выполнение \\
+      SIGSTOP &   19    &  Stop   & Остановить 
     \end{tabular}
   \end{block} \pause
 
