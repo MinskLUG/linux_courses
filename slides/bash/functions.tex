@@ -1,0 +1,140 @@
+\begin{frame}
+	\frametitle{Функции}
+
+	\begin{itemize}
+		\item Именованные
+		\item Неименованные
+	\end{itemize}
+
+	Функции в shell могут использоваться как обычные программы, которые:
+	\begin{itemize}
+		\item Принимают позиционные параметры;
+		\item возвращают статус;
+		\item Могут использоваться в качестве источника либо приемника 
+			при перенаправлениях ввода/вывода.
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Функции: синтаксис}
+	\begin{itemize}
+		\item Классический синаксис: 
+			\begin{lstlisting}
+function function_name {
+command...
+} 
+			\end{lstlisting}
+		\item Портабельный (C-style):
+			\begin{lstlisting}
+function_name()
+{
+command...
+} 
+			\end{lstlisting}
+
+		\item Однострочный:
+			\begin{lstlisting}
+function_name () { command... ;}
+			\end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример (начало)}
+	\small
+	\begin{lstlisting}
+#!/bin/bash
+
+function help {
+	echo "Использование: $0 <string>"
+	exit 1
+}
+f1(){
+	echo Вызвана функция $0 с $# аргументами
+}
+
+f2(){
+	while read str; do
+		echo $0 прочитана строка: $str
+	done
+}
+	\end{lstlisting}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Пример (окончание)}
+	\small
+	\begin{lstlisting}
+[ $# -eq 0 ] && help
+
+f1 "$@"
+
+{ for ((i=0;i<5;i++));do
+	echo $@
+done } | f2
+
+exit
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{локальные переменные}
+
+	Переменные объявленные с префиксом {\tt local} видны только внутри объявленного блока.
+
+	\small
+	\begin{columns}
+		\column{0.5\textwidth}
+		\begin{lstlisting}
+#!/bin/bash
+
+VAR=test
+f1(){
+	local VAR=f1
+	echo $0: VAR1=$VAR
+}
+f2(){
+    VAR=f2
+    echo $0: VAR=$VAR
+}
+		\end{lstlisting}
+		\column{0.5\textwidth}	
+		\begin{lstlisting}
+
+echo Before f1: VAR=$VAR
+f1
+echo Before f2: VAR=$VAR
+f2
+echo After f2: VAR=$VAR
+
+exit
+		\end{lstlisting}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Практическое задание}
+	\begin{itemize}
+		\item Создать библиотеку функций:
+			\begin{itemize}
+				\item функция {\tt help};
+				\item функция {\tt count\_str} -- подсчитывает количество найденных строк в stdin.
+				\item функция {\tt readfile}, в которую передается имя файла в качестве 1 параметра
+					и строка, которую необходимо найти, в качестве 2-го.
+					Задача функции -- вырезать из файла все пустые строки и комментарии, 
+					и с помощью предыдущей функции вернуть количество вхождений искомой строки.
+			\end{itemize}
+		\item Создать скрипт, который обрабатывает файл переданный через параметр -f или -{}-file;
+		\item Включить библиотеку в свой скрипт с помощью {\tt source};
+		\item Найти количество сервисов {\tt tcp} в файле {\tt /etc/services};
+		\item Найти количество сервисов {\tt udp} в файле {\tt /etc/services};
+  \end{itemize}
+\end{frame}
+

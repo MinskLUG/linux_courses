@@ -30,9 +30,12 @@ fi
 
 \begin{frame}[fragile]
 \frametitle{Условные операторы: case}
-\begin{itemize}
-\item {\tt case}
-\begin{lstlisting}[language=sh,frame=single]
+
+	\small
+	\begin{columns}
+		\column{0.4\textwidth}
+
+		\begin{lstlisting}[language=sh,frame=single]
 case "$variable" in 
  pattern1) command1
            command2
@@ -41,19 +44,64 @@ case "$variable" in
          command3
          command4
         ;;
+
 esac
-\end{lstlisting}
-\end{itemize}
+		\end{lstlisting}
+		\pause
+
+		\column{0.6\textwidth}
+		{\normalsize Пример:}
+
+		\begin{lstlisting}[language=sh]
+#!/bin/bash
+
+cmd=$1; var=$2
+case "$cmd" in 
+	--print|--echo)
+		echo "Ура, печатаем!" ;;
+	abc*|xyz*)
+		echo "Странная команда $cmd" ;;
+	*)
+		echo "Я таких команд не знаю: $cmd" 1>&2
+		exit 1 ;;
+esac
+[ ! -z "$var" ] && echo "переменная \$var=$var"
+exit 0
+		\end{lstlisting}
+
+
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Case: практическое задание}
+
+	Написать скрипт, который будет создавать файл, 
+	записывать туда текущее время и переданную строку,
+	используя при этом следующие аргументы командной строки: 
+
+	\begin{enumerate}
+		\item -f или -{}-file <имя файла>\\
+			если отсутствует имя файла, то выйти с соответствующим сообщением;
+		\item -l или -{}-log <строка>\\
+			если отсутствует <строка>, то выйти с соответствующим сообщением;
+		\item -a или -{}-append \\
+			необязательный флаг, указывающий будет ли файл переписан, либо дописан.
+	\end{enumerate}
+
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Использование case вместе с getopts}
+	\frametitle{case + getopts}
+	
+	Встроенная в bash обработка командной строки.
+
 \begin{lstlisting}[language=sh,frame=single]
 while getopts "af:h" Option
 do
   case $Option in 
-    a) OPTA=1 ;;
-    f) OPTFILE=1
+    a) FLAGA=1 ;;
+    f) FILE=1
        FILENAME=$OPTARG
        ;;
     h) echo "Usage: $0 [-ah] -f <filename>";;
@@ -64,9 +112,66 @@ shift $((OPTIND-1))
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Упражнение}
-\begin{enumerate}
-\item Написать программу, которая по опции {\tt -h } выводит помощь, без опций выводит время в stdout,
-с опцией -f выводит время в указаный файл
-\end{enumerate}
+\frametitle{case + getopt}
+	
+	Внешняя команда для обработки аргументов командной строки (расширенная).
+
+	\small
+	\begin{lstlisting}
+SHORTOPTS="af:h"
+LONGOPTS="flagA, file:, help"
+OPTS=$(getopt -o "$SHORTOPTS" -l "$LONGOPTS" -- "$@")
+eval set -- "$OPTS"
+while [ $# -gt 0 ]
+do
+    -a|--flagA) FLAGA=1 ;;
+    -f|--file) FILE=1
+       FILENAME=$OPTARG ;;
+    *) echo "Usage: $0 [-a|--flagA] [-h|--help] [-f|--file <filename>]";;
+done
+	\end{lstlisting}
+
 \end{frame}
+
+\begin{frame}
+\frametitle{Практическое задание}
+Переписать скрипт из предыдущего задания с использованием {\tt getopt} либо {\tt getopts}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Условные операторы: select}
+
+	\small
+	\begin{columns}
+		\column{0.4\textwidth}
+
+		\begin{lstlisting}[language=sh,frame=single]
+select variable [in list]
+do
+	command...
+	break
+done 
+		\end{lstlisting}
+		\pause
+		\column{0.6\textwidth}
+		{\normalsize Пример:}
+
+		\begin{lstlisting}
+#!/bin/bash
+PS3="Какого вы пола? "
+select sex in "девочка" "мальчик" "еще не определилось"
+do
+  echo
+  [ "$sex" == "девочка" -o "$sex" == "мальчик" ] && break || echo "Определитесь пожалуйста!"
+done
+echo "Вы -- $sex"
+exit
+		\end{lstlisting}
+
+		\pause
+		\center{Удалить в select все [in *] и посмотреть на результат работы.}
+
+	\end{columns}
+\end{frame}
+
+
