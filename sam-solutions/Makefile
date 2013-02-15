@@ -5,7 +5,8 @@ PDF= 01_Intro_to_linux.pdf \
      03_Filesystem_intro.pdf \
      04_Text_processing.pdf \
      05_Filesystem_access_rights.pdf \
-     06_Processes.pdf
+     06_Processes.pdf \
+     08_Debugging.pdf
 
 OUTDIR=out
 COMMON=linux-qa-common.tex
@@ -45,3 +46,6 @@ disconnect:
 	xrandr --output VGA1 --off
 	xrandr --output LVDS1 --auto
 
+detach: disconnect
+
+attach: connect

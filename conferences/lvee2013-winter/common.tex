@@ -1,0 +1,58 @@
+% common preamble
+
+\documentclass{beamer}
+
+\usetheme{Warsaw}
+\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont*{frametitle}{size=\normalsize,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{pdfpages}
+\usepackage{soul}
+\usepackage{ucs}
+
+% encoding settings
+\usepackage[T2A]{fontenc}
+\usepackage{xltxtra}
+\usepackage{hyperref}
+\usepackage{polyglossia}
+\usepackage{xecyr}
+
+\setdefaultlanguage{russian}
+
+% fonts settings
+\usepackage{fontspec}
+\setmainfont{CMU Serif}                 % Computer Modern Unicode font
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+\usepackage{listings}
+\lstset{frame=single,breaklines=true,language=sh}
+
+% for strike-out text
+\usepackage[normalem]{ulem}
+
+% tabulation aka \tbs
+\newcommand{\tbs}{\tt\char`\\}
+
+% \regex for regular expressions
+\newcommand{\regex}[1]{ %
+\expandafter{$\ulcorner{\color{blue}\texttt{#1}}\lrcorner$} %
+}
+
+
+\newcommand{\firstframe}{ %
+\begin{frame} %
+  \titlepage %
+\end{frame} %
+}
+
+
+\pgfdeclareimage[height=0.5cm]{sam-solutions-logo}{clipart/sam-solutions}
+\pgfdeclareimage[height=0.3cm]{epam-logo}{clipart/epam}
+\pgfdeclareimage[height=0.5cm]{mlug-logo}{clipart/mlug}
+
+\logo{\pgfuseimage{sam-solutions-logo}\pgfuseimage{mlug-logo}\pgfuseimage{epam-logo}}
+
+\graphicspath{{./clipart/}}
+
