@@ -3,9 +3,29 @@
 \begin{itemize}
 \item Присвоение значений
  \begin{itemize}
+   \item \verb+ a=( "aaa" "bbb ccc" 2 ) +
    \item \verb+ a[1]="aaaa"; a[3]="bb bb";   +
    \item \verb+ a=( [1]="aaa" [10]="bbb"); +
  \end{itemize}
 \item Доступ к значениям \verb+ echo ${a[10]} +
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Аттрибуты переменных}
+Функция \verb+ declare +
+\begin{itemize}
+\item {\tt declare -a}
+\begin{lstlisting}[language=sh]
+declare -a # Список всех массивов
+\end{lstlisting} 
+\item {\tt declare -i}
+\begin{lstlisting}[language=sh]
+a="yyy"; echo $a; declare -i a; echo $a;
+declare +i a; echo $a
+\end{lstlisting}
+\item {\tt declare -r}
+\item {\tt declare -x}
+\item {\tt declare -f}
 \end{itemize}
 \end{frame}
