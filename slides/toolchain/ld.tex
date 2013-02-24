@@ -1,0 +1,54 @@
+\begin{frame}
+ \frametitle{Статическая и динамическая линковка}
+ \begin{itemize}
+   \item Статическая линковка
+     \begin{columns}
+       достоинства недостатки
+     \end{columns}
+   \item Динамическая линковка
+ \end{itemize}
+\end{frame}
+\begin{frame}
+ \frametitle{Создание статических библиотек}
+\begin{lstlisting}[language=sh]
+gcc -g -Wall -c  file1.c
+gcc -g -Wall -c  file2.c
+ar rcs libmylib.a file1.o file2.o
+#ranlib libmylib.a
+gcc -o file3 file3.c -L. -lmylib # Использование
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Создание динамических разделяемых библиотек}
+\begin{lstlisting}[language=sh]
+gcc -g -fpic -c -Wall   file1.c; gcc -g -Wall -fpic -c  file2.c
+gcc -g -shared -Wl,-soname,libmylib.so.0 -o libmylib.so.0.0 
+cp libmylib.so.0.0 /usr/local/lib/
+ldconfig 
+gcc -g -o file3 file3.o -lmylib
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Проблемы при линковке}
+ \begin{itemize}
+   \item Underlinking
+   \item Overlinking
+   \item Несовместимость версий (soname etc.)
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Поиск динамических библиотек}
+  \begin{itemize}
+    \item \verb+ LD_LIBRARY_PATH +
+    \item {\tt ldconfig}
+    \item {\tt /etc/ld.so.conf}
+    \item {\tt /etc/ld.so.cache}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Упражнение}
+\end{frame}

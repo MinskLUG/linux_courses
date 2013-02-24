@@ -1,19 +1,39 @@
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Компоненты gcc}
 \begin{itemize}
   \item Препроцессор
-  \item Компилятор
-  \item Ассемблер
+\begin{lstlisting}[language=sh]
+gcc -E
+\end{lstlisting}
+  \item Компилятор (+ассемблер)
+\begin{lstlisting}[language=sh]
+gcc -S, gcc -c
+\end{lstlisting}
   \item Линкер
+\begin{lstlisting}[language=sh]
+gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
+\end{lstlisting}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Запуск gcc}
+\frametitle{Упражнение}
+\begin{itemize}
+  \item Написать программу выводящую {\tt Hello world!} на C
+  \item Прогнать стадию препроцессора (helloworld.i)
+  \item Скомпилировать helloworld.i в ассемблерный код
+  \item Скомпилировать ассемблерный код helloworld.s в объектный код helloworld.o
+  \item Слинковать helloworld.o и запустить программу
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Основные флаги}
+\frametitle{Важные флаги gcc}
+\begin{itemize}
+  \item Debug {\tt -g}
+  \item Предупреждения компилятора {\tt -Wall}
+  \item Оптимизация {\tt -O -O1 -O2 -O3 -Os}
+\end{itemize}
 \end{frame}
 
