@@ -3,12 +3,48 @@
  \begin{itemize}
    \item Статическая линковка
      \begin{columns}
-       достоинства недостатки
+       \column{0.4\textwidth}
+       \begin{center}
+         Достоинства 
+       \end{center}
+       \begin{itemize}
+         \item Быстрая загрузка
+         \item Большая переносимость
+       \end{itemize}
+       \column{0.4\textwidth}
+       \begin{center}
+         Недостатки
+       \end{center}
+       \begin{itemize}
+         \item Много места на диске
+         \item Много места в памяти
+         \item Перелинковка при изменениях
+       \end{itemize}
      \end{columns}
    \item Динамическая линковка
+     \begin{columns}
+       \column{0.4\textwidth}
+       \begin{center}
+         Достоинства 
+       \end{center}
+       \begin{itemize}
+         \item Экономия памяти и диска
+         \item Не нужна перелинковка
+       \end{itemize}
+       \column{0.4\textwidth}
+       \begin{center}
+         Недостатки
+       \end{center}
+       \begin{itemize}
+         \item Медленная загрузка
+         \item Структура директорий должна совпадать
+       \end{itemize}
+        
+     \end{columns}
+    \item{Линковка во время выполнения}
  \end{itemize}
 \end{frame}
-\begin{frame}
+\begin{frame}[fragile]
  \frametitle{Создание статических библиотек}
 \begin{lstlisting}[language=sh]
 gcc -g -Wall -c  file1.c
@@ -19,7 +55,7 @@ gcc -o file3 file3.c -L. -lmylib # Использование
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Создание динамических разделяемых библиотек}
 \begin{lstlisting}[language=sh]
 gcc -g -fpic -c -Wall   file1.c; gcc -g -Wall -fpic -c  file2.c
@@ -39,7 +75,7 @@ gcc -g -o file3 file3.o -lmylib
  \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Поиск динамических библиотек}
   \begin{itemize}
     \item \verb+ LD_LIBRARY_PATH +
@@ -51,4 +87,9 @@ gcc -g -o file3 file3.o -lmylib
 
 \begin{frame}
   \frametitle{Упражнение}
+  \begin{itemize}
+    \item Оформить функцию {\tt hello(char * user) } которая приветствует пользователя в отдельный файл
+    \item Скомпилировать этот файл и создать из него разделяемую динамическую библиотеку {\tt (libhello.so)}
+    \item Создать программу вызывающую функцию {\tt hello()} и слинковать ее с динамической библиотекой
+  \end{itemize}
 \end{frame}
