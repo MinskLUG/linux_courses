@@ -70,6 +70,7 @@ gcc -g -o file3 file3.o -lmylib
  \frametitle{Проблемы при линковке}
  \begin{itemize}
    \item Underlinking
+   \item Зависимость от порядка при опции {\tt --as-needed} 
    \item Overlinking
    \item Несовместимость версий (soname etc.)
  \end{itemize}
@@ -78,6 +79,7 @@ gcc -g -o file3 file3.o -lmylib
 \begin{frame}[fragile]
   \frametitle{Поиск динамических библиотек}
   \begin{itemize}
+    \item {\tt -rpath} Опция линкера
     \item \verb+ LD_LIBRARY_PATH +
     \item {\tt ldconfig}
     \item {\tt /etc/ld.so.conf}
