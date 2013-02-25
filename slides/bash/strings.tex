@@ -1,0 +1,163 @@
+%% Strings manipulation
+
+
+\begin{frame}
+	\frametitle{Переменные -- суть строки}
+
+	\begin{center}
+	В shell существует много способов преобразования строк и значений переменной.
+	\end{center}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Длина строки}
+
+	\begin{block}{\$\{\#string\}}
+	\begin{lstlisting}
+string="Embedded Solutions Department"
+echo Length=${#string} # Length=29
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Извлечение подстроки}
+
+	\begin{block}{\$\{string:position\}}
+	\begin{lstlisting}
+string="Embedded Solutions Department"
+echo ${string:19} # Department
+	\end{lstlisting}
+	\end{block}
+
+	\pause
+	\begin{block}{\$\{string:position:length\}}
+	\begin{lstlisting}
+string="Embedded Solutions Department"
+echo ${string:9:8}  # Solution
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Удаление части строки}
+
+	\begin{block}{\$\{string\#substring\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry#*:} # x:500:500:d4s:/home/d4s:/bin/bash
+	\end{lstlisting}
+	\end{block}
+
+	\pause
+
+	\begin{block}{\$\{string\%substring\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry%:*} # d4s:x:500:500:d4s:/home/d4s 
+	\end{lstlisting}
+	\end{block}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Удаление части строки}
+
+	\large{Жадное поведение!}
+
+	\begin{block}{\$\{string\#\#substring\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry##*:} # /bin/bash
+	\end{lstlisting}
+	\end{block}
+	\pause
+	\begin{block}{\$\{string\%\%substring\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry%%:*} # d4s
+	\end{lstlisting}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Замена части строки}
+
+	\begin{block}{\$\{string/substring/replacement\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry/$USER/user} # user:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry/$USER} # :x:500:500:d4s:/home/d4s:/bin/bash
+	\end{lstlisting}
+	\end{block}
+
+	\pause
+	\begin{block}{\$\{string//substring/replacement\}}
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry//$USER/user} # user:x:500:500:user:/home/user:/bin/bash
+echo ${entry//$USER} # :x:500:500::/home/:/bin/bash
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Замена части строки}
+
+	\begin{block}{\$\{string/\#substring/replacement\}}
+		Замена, если строка начинается с искомого выражения (префикс).
+
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry/#$USER/user} # user:x:500:500:d4s:/home/d4s:/bin/bash
+	\end{lstlisting}
+	\end{block}
+
+	\pause
+	\begin{block}{\$\{string/\%substring/replacement\}}
+		Замена, если строка завершается искомым выражением (суффикс).
+
+	\begin{lstlisting}
+entry=$(cat /etc/passwd | grep "^$USER:")
+echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
+echo ${entry/%\/bin\/bash/\/bin\/sh} # user:x:500:500:user:/home/user:/bin/sh
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Получение имен переменных}
+
+	\begin{block}{ \$\{!varprefix*\} и \$\{!varprefix@\} }
+
+		Скрипт, который выводит на экран список переменных, начинающихся на {\tt BASH} и их значений:
+	\begin{lstlisting}
+#!/bin/bash
+
+VARS=${!BASH*}
+for VAR in $VARS
+do
+    eval VALUE=\$$VAR
+    echo $VAR=$VALUE
+done
+	\end{lstlisting}
+	\end{block}
+\end{frame}
+
