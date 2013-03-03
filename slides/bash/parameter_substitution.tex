@@ -1,0 +1,114 @@
+%% Parameter substitution
+
+
+\begin{frame}[fragile]
+	\frametitle{Стандартная запись}
+
+	\begin{block}{\$\{parameter\}}
+		{\tt \$parameter = \$\{parameter\}}
+
+	\begin{lstlisting}
+echo $USERtest
+echo ${USER}test
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Параметр по-умолчанию}
+
+	\begin{block}{\$\{parameter-default\} и \$\{parameter:-default\}}
+	\begin{itemize}
+		\item '-' устанавливает, если переменная не проинициализирована
+		\item ':-' устанавливает, если переменная не проинициализирована либо пустая
+	\end{itemize}
+	\begin{lstlisting}
+unset VAR
+echo ${VAR-test}  # test
+echo ${VAR:-test} # test
+VAR=""
+echo ${VAR-test}  #
+echo ${VAR:-test} # test
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Параметр по-умолчанию}
+
+	{\bf Присваивает} переменной значение по-умолчанию.
+
+	\begin{block}{\$\{parameter=default\} и \$\{parameter:=default\}}
+	\begin{itemize}
+		\item '-' устанавливает, если переменная не проинициализирована
+		\item ':-' устанавливает, если переменная не проинициализирована либо пустая
+	\end{itemize}
+	\begin{lstlisting}
+unset VAR
+${VAR=}
+echo ${VAR} # 
+${VAR=test}
+echo ${VAR} # 
+${VAR=test1}
+echo ${VAR} # test1
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Параметр по-умолчанию}
+
+	Устанавливает переменной альтернативное значение, если переменная уже проинициализирована.
+
+	\begin{block}{\$\{parameter+default\} и \$\{parameter:+default\}}
+	\begin{itemize}
+		\item '+' устанавливает, если переменная существует
+		\item ':+' устанавливает, если переменная существует и не пуста
+	\end{itemize}
+	\begin{lstlisting}
+VAR=""
+echo ${VAR:+test} # 
+echo ${VAR+test}  # test
+\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Выход с ошибкой}
+
+	Выходит с {\tt errorcode=1}.
+
+	\begin{block}{\$\{parameter?message\} и \$\{parameter:?default\}}
+	\begin{itemize}
+		\item '?' выход, если переменная не существует
+		\item ':?' выход , если переменная не существует либо пуста
+	\end{itemize}
+
+	\begin{lstlisting}
+#!/bin/bash
+${VAR?"Не проинициализирована переменная \$VAR!"}
+${VAR:?}
+echo VAR=$VAR
+exit 0
+	\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Практическое задание}
+
+	\begin{block}{Задание}
+		Удалить переменную {\tt VAR} и запустить скрипт:
+		\begin{itemize}
+			\item {\tt sh script.sh; echo \$?}
+			\item {\tt VAR="" sh script.sh; echo \$?}
+			\item {\tt VAR="test" sh script.sh; echo \$?}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
