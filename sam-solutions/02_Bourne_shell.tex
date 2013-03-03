@@ -465,7 +465,7 @@
   \pause
   \alert{Упражнение 2.} -- || --  из папки /usr, содержащее 'i' или 'h'
   \pause
-  \alert{Упражнение 3.} Написать скрипт lsa, делающий то же, что и команда \textqutedbl ls -a\textqutedbl \footnote{вывод файлов и каталогов, включая скрытые}, не используя \textqutedbl ls\textqutedbl .
+  \alert{Упражнение 3.} Написать скрипт lsa, делающий то же, что и команда \textquotedbl ls -a\textquotedbl \footnote{вывод файлов и каталогов, включая скрытые}, не используя \textquotedbl ls\textquotedbl .
 \end{frame}
 
 \subsection{Ветвления и условия}
@@ -504,11 +504,11 @@
 	  mkdir "$HOME/bin"
 	fi
 \end{lstlisting} \pause
-    \item \alert{-z \textqutedbl value\textqutedbl } - строка пустая
+    \item \alert{-z \textquotedbl value\textquotedbl } - строка пустая
 \begin{lstlisting}[basicstyle=\normalsize]
 	test -z "$VARIABLE" && VARIABLE="value"
 \end{lstlisting} \pause
-    \item \alert{-n \textqutedbl value\textqutedbl } - строка ненулевая
+    \item \alert{-n \textquotedbl value\textquotedbl } - строка ненулевая
 \begin{lstlisting}[basicstyle=\normalsize]
 	test -n "$VARIABLE" && echo "$VARIABLE"
 \end{lstlisting} 
@@ -530,7 +530,7 @@
 \begin{frame}[fragile]
   \frametitle{Практика: условия}
 
-  \alert{Упражнение 1} Проверить установлена ли переменная OLDPWD\footnote{передыдущая рабочая директория, меняется 'cd'}. Если установлена вывести сообщение \textqutedbl your previous dir was \textqutedbl\  и содержимое OLDPWD \pause
+  \alert{Упражнение 1} Проверить установлена ли переменная OLDPWD\footnote{передыдущая рабочая директория, меняется 'cd'}. Если установлена вывести сообщение \textquotedbl your previous dir was \textquotedbl\  и содержимое OLDPWD \pause
 
   \alert{Упражнение 2} Скрипт, проверяющий существование файла с публичными ключами SSH. И если он существует - вывести на экран  \pause
 
@@ -540,10 +540,10 @@
 \subsection{Циклы}
 
 \begin{frame}[fragile]
-  \frametitle{Циклы \textqutedbl for \textqutedbl , \textqutedbl while \textqutedbl , \textqutedbl until \textqutedbl}
+  \frametitle{Циклы \textquotedbl for \textquotedbl , \textquotedbl while \textquotedbl , \textquotedbl until \textquotedbl}
       \alert{for}
 \begin{lstlisting}[basicstyle=\normalsize]
-	for i in \textqutedbl list \textqutedbl
+	for i in \textquotedbl list \textquotedbl
 	do
 	  commands
 	done
@@ -552,7 +552,7 @@
   
       \alert{while , until}
 \begin{lstlisting}[basicstyle=\normalsize]
-	while \textqutedbl list \textqutedbl
+	while \textquotedbl list \textquotedbl
 	do
 	  commands
 	done
@@ -564,9 +564,9 @@
 
     \alert{Упражнение 1.}. Скрипт: создать папку tmp и в ней файлы userX-номер, где X - ваш номер пользователя, номер - от 1 до 99. Файл - скопировать или создать командой touch. Получение чисел - команда seq \pause
 
-    \alert{Упражнение 2.} Скрипт: переименовать все полученные файлы из Упражнения 1 в \textqutedbl ex-userX-номер \textqutedbl \pause
+    \alert{Упражнение 2.} Скрипт: переименовать все полученные файлы из Упражнения 1 в \textquotedbl ex-userX-номер \textquotedbl \pause
 
-    \alert{Упражнение 3.} Скрипт: создать аналог \textqutedbl ls -a \textqutedbl\ c помощью циклов \pause
+    \alert{Упражнение 3.} Скрипт: создать аналог \textquotedbl ls -a \textquotedbl\ c помощью циклов \pause
 
     \alert{Упражнение 4.} Скрипт: генератор случайных чисел на экран. Раз в секунду\footnote{для паузы можно использовать команду sleep} выводить случайное число на экран.
 \end{frame}
@@ -588,7 +588,7 @@
     \item чтение ввода пользователя командной \alert{read}
   \end{itemize}
 
-  Значение по умолчанию: \textqutedbl <пробел><табуляция><перевод строки> \textqutedbl
+  Значение по умолчанию: \textquotedbl <пробел><табуляция><перевод строки> \textquotedbl
 
 
 \end{frame}
@@ -649,7 +649,7 @@
 
   \alert{Упражнение 3} Добавить к пути поиска (PATH) произвольный каталог через редактирование локального профайла.
 
-  \alert{Упражнение 4} Переопределить системную команду \textqutedbl editor \textqutedbl\ через alias в профайле, вписав туда тот редактор, которым вы обычно пользуетесь на занятиях.
+  \alert{Упражнение 4} Переопределить системную команду \textquotedbl editor \textquotedbl\ через alias в профайле, вписав туда тот редактор, которым вы обычно пользуетесь на занятиях.
 
   \alert{Упражнение 5} Добавить текущее время в приглашение командной строки (PS1) \footnote{Подсказка: раздел PROMPTING в мане на bash}
 
