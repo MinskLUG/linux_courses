@@ -21,7 +21,16 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{The (simplified) \filenamew{configure} process}
+  \frametitle{Типичная схема установки пакета соответсвующего стандартам GNU}
+  \begin{itemize}
+    \item \texttt{configure}, возможно \texttt{configure <options>}
+    \item \texttt{make}
+    \item \texttt{sudo make install} 
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Упрощенная схема работы GNU configure}
 
 \begin{center}
 \begin{tikzpicture}
@@ -45,10 +54,11 @@
 }
 \end{tikzpicture}
 \end{center}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
 \end{frame}
 
 \begin{frame}
-\frametitle{The (real) \filenamew{configure} process}
+\frametitle{Реальная схема работы configure}
 
 
 \begin{center}
@@ -91,19 +101,70 @@
 \arr (configstatus) .. controls +(0:2cm) and +(100:.5cm) .. (configlog);
 }
 \end{tikzpicture}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
 \end{center}
 
-\only<all:1>{\textcolor{white}{config}}
-\only<all:2>{\filename{config.log} contains a trace of the configuration}
-\only<all:3-4>{\filename{config.status} will actually process the templates}
-\only<all:5>{\command{configure -C} caches results in \filename{config.cache} to speed up reconfigurations}
-\only<all:-4>{\\
-\textcolor{white}{reconfiguration}}
+\end{frame}
+
+
+
+\begin{frame}
+ \frametitle{Важные опции configure, требуемые GNU standard}
+   Директории
+    \begin{enumerate}
+     \item[prefix] По дефолту \texttt{/usr/local}
+      \begin{enumerate}
+         \item[exec-prefix] По дефолту \texttt{prefix}
+         \begin{enumerate}
+            \item[bindir] По дефолту \texttt{exec-prefix/bin}
+            \item[libdir] По дефолту \texttt{exec-prefix/lib}
+         \end{enumerate}
+         \item[includedir] \texttt{prefix/include}
+         \item[datarootdir] \texttt{prefix/share}
+         \begin{enumerate}
+            \item[mandir]
+            \item[datadir]
+         \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Generating All Template Files}
+ \frametitle{Еще важные опции \texttt{configure}}
+ \begin{itemize}
+   \item \texttt{help}
+   \item \texttt{version}
+   \item \texttt{with-smth}, \texttt{without-smth}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Опции для make}
+  \begin{itemize}
+    \item \texttt{make all} (просто \texttt{make})
+    \item \texttt{make install}
+    \item \texttt{make uninstall}
+    \item \texttt{make clean}
+    \item \texttt{make distclean}
+    \item \texttt{make check} Опционально
+    \item \texttt{make installcheck} Опционально
+    \item \texttt{make dist}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+  \begin{itemize}
+    \item Установить GNU Go в \texttt{/home/altlinux/usr/}
+    \item Удалить результаты инсталляции
+    \item Установить все файлы GNU Go в /home/altlinux/go
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Autotools: схема работы}
 
 \only<all:1-2>{\begin{center}
 \begin{tikzpicture}
@@ -163,5 +224,17 @@
 }
 \end{tikzpicture}
 \end{center}}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
 \end{frame}
 
+\begin{frame}[fragile]
+ \frametitle{Возможный алгоритм использования autotools}
+ \begin{itemize}
+  \item Запустить \texttt{autoscan}
+  \item Заполнить сгенерированный шаблон \texttt{configure.scan} и сохранить как \texttt{configure.ac}
+  \item Заполнить Makefile.am в каждой поддиректории
+  \item Запустить \texttt{autoreconf --install --force}
+  \item Починить проблемы
+  \item \verb+./configure && make && make install+
+ \end{itemize}
+\end{frame}
