@@ -18,10 +18,31 @@
  \end{itemize}
 \end{frame}
 
-\begin{frame}
- \frametitle{Наиболее важные параметры в конфигурационном файле}
+\begin{frame}[fragile]
+ \frametitle{Образец комментариев для Doxygen}
+\begin{lstlisting}[language=C]
+/**
+  \brief Краткое описание функции
+
+  Детальное описание
+  @param parameter1 Описание первого параметра
+  @see Ссылка на другую функцию
+
+*/
+int function(int parameter1) 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Некоторые важные параметры в конфигурационном файле}
  \begin{itemize}
-  \item
+  \item \verb+PROJECT_NAME+
+  \item \verb+PROJECT_NUMBER+
+  \item \verb+INPUT+  
+  \item \verb+RECURSIVE+
+  \item \verb+EXCLUDE+
+  \item \verb+EXCLUDE_PATTERNS+
+  \item \verb+EXTRACT_ALL+
  \end{itemize}
 \end{frame}
 
