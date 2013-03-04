@@ -1,0 +1,26 @@
+
+\usepackage{pgf,tikz}
+% built files
+\definecolor{bfile}{rgb}{.9,0.9,0.9}
+% distributed generated files
+\colorlet{dgfile}{yellow}
+% auto* input file
+\colorlet{afile}{green!33}
+% tools
+\definecolor{tfile}{rgb}{1.0,0.5,0.5}
+
+\tikzstyle{afile}=[draw,fill=afile,shape=rectangle,inner sep=1ex]
+\tikzstyle{bfile}=[draw,fill=bfile,shape=rectangle,inner sep=1ex]
+\tikzstyle{dgfile}=[draw,fill=dgfile,shape=rectangle,inner sep=1ex]
+\tikzstyle{tfile}=[draw,fill=tfile,shape=rectangle,inner sep=1ex]
+
+\newcommand\arr[1][]{\draw[thick,->,#1]}
+\def\afile{\node[style=afile]}
+\def\bfile{\node[style=bfile]}
+\def\dgfile{\node[style=dgfile]}
+\def\tfile{\node[style=tfile]}
+
+\newcommand{\filename}[1]{{\color{blue}{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\filenamew}[1]{{{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\command}[1]{\texttt{#1}}
+

@@ -1,0 +1,55 @@
+\begin{frame}
+ \frametitle{Системы автоматического документирования}
+ \begin{itemize}
+  \item Donald Knuth, literate programming, 1983
+  \item perldoc, etc. 1994
+  \item javadoc, 1995
+  \item Doxygen, 1997
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Как использовать}
+ \begin{itemize}
+  \item Добавить комментарии в формате Doxygen в исходники
+  \item \texttt{doxygen -g Doxyconfig}
+  \item Редактировать Doxyconfig
+  \item doxygen Doxyconfig
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Образец комментариев для Doxygen}
+\begin{lstlisting}[language=C]
+/**
+  \brief Краткое описание функции
+
+  Детальное описание
+  @param parameter1 Описание первого параметра
+  @see Ссылка на другую функцию
+
+*/
+int function(int parameter1) 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Некоторые важные параметры в конфигурационном файле}
+ \begin{itemize}
+  \item \verb+PROJECT_NAME+
+  \item \verb+PROJECT_NUMBER+
+  \item \verb+INPUT+  
+  \item \verb+RECURSIVE+
+  \item \verb+EXCLUDE+
+  \item \verb+EXCLUDE_PATTERNS+
+  \item \verb+EXTRACT_ALL+
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+  \begin{itemize}
+    \item В проекте helloworld откомментировать каждую функцию в стиле doxygen
+    \item Сгенерировать документацию в формате pdf
+  \end{itemize}
+\end{frame} 

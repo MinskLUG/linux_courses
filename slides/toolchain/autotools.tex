@@ -1,0 +1,380 @@
+\begin{frame}
+ \frametitle{Иерархия инструментов поддержки проекта}
+ \begin{itemize}
+   \item \texttt{gcc -c , gcc -o program file1.o file2.o}
+     \pause
+   \item \texttt{make programm}
+     \begin{enumerate}
+       \item[Цель] Автоматизация процесса сборки
+      \end{enumerate}
+     \pause
+   \item \texttt{./configure; make; sudo make install}
+     \begin{enumerate}
+       \item[Цель] Переносимость между платформами
+      \end{enumerate}
+     \pause
+   \item \texttt{autoreconf, automake, libtool, etc.}
+     \begin{enumerate}
+       \item[Цель] Автоматизация создания переносимых приложений
+      \end{enumerate}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Типичная схема установки пакета соответсвующего стандартам GNU}
+  \begin{itemize}
+    \item \texttt{configure}, возможно \texttt{configure <options>}
+    \item \texttt{make}
+    \item \texttt{sudo make install} 
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Упрощенная схема работы GNU configure}
+
+\begin{center}
+\begin{tikzpicture}
+
+\dgfile (Makefilein) at (1,5) {\filenamew{Makefile.in}};
+\dgfile (src/Makefilein) at (4,5) {\filenamew{src/Makefile.in}};
+\dgfile (confighin) at (7,5) {\filenamew{config.h.in}};
+\dgfile (configure) at (4,3) {\filenamew{configure}};
+\uncover<2->{
+\bfile (Makefile) at (1,1) {\filenamew{Makefile}};
+\bfile (src/Makefile) at (4,1) {\filenamew{src/Makefile}};
+\bfile (configh) at (7,1) {\filenamew{config.h}};
+
+\arr (Makefilein) .. controls +(-90:1cm) and +(180:3cm) .. (configure);
+\arr (src/Makefilein) .. controls +(-90:1cm) and +(175:3cm) .. (configure);
+\arr (confighin) .. controls +(-90:1cm) and +(170:3cm) .. (configure);
+
+\arr (configure) .. controls +(-10:2.5cm) and +(80:1cm) .. (Makefile);
+\arr (configure) .. controls +(-5:2.2cm) and +(85:1cm) .. (src/Makefile);
+\arr (configure) .. controls +(0:2cm) and +(90:1cm) .. (configh);
+}
+\end{tikzpicture}
+\end{center}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\end{frame}
+
+\begin{frame}
+\frametitle{Реальная схема работы configure}
+
+
+\begin{center}
+\begin{tikzpicture}
+
+\dgfile (Makefilein) at (1,5) {\filenamew{Makefile.in}};
+\dgfile (src/Makefilein) at (4,5) {\filenamew{src/Makefile.in}};
+\dgfile (confighin) at (7,5) {\filenamew{config.h.in}};
+\dgfile (configure) at (-.7,4) {\filenamew{configure}};
+\uncover<all:2->{\bfile (configlog) at (5.5,2) {\filenamew{config.log}};}
+\uncover<all:3->{\bfile (configstatus) at (2.5,3) {\filenamew{config.status}};}
+
+\uncover<all:4->{\bfile (Makefile) at (1,1) {\filenamew{Makefile}};
+\bfile (src/Makefile) at (4,1) {\filenamew{src/Makefile}};
+\bfile (configh) at (7,1) {\filenamew{config.h}};}
+\uncover<all:5->{\bfile (configcache) at (0,2) {\filenamew{config.cache}};}
+
+\uncover<all:2>{\arr[color=red] (configure) .. controls +(10:2cm) and +(80:2cm) .. (configlog);}
+\uncover<all:3->{\arr (configure) .. controls +(10:2cm) and +(80:2cm) .. (configlog);}
+\uncover<all:3>{\arr[color=red] (configure) .. controls +(0:1cm) and +(90:1cm) .. (configstatus);}
+\uncover<all:4->{\arr (configure) .. controls +(0:1cm) and +(90:1cm) .. (configstatus);}
+\uncover<all:5>{\arr[color=red] (configure) .. controls +(-10:1.5cm) and +(80:1cm) .. (configcache);
+              \arr[color=red] (configcache) .. controls +(-140:2cm) and +(-170:2cm) .. (configure);}
+\uncover<all:4>{\arr[color=red] (Makefilein) .. controls +(-90:1cm) and +(180:2.8cm) .. (configstatus);
+\arr[color=red] (src/Makefilein) .. controls +(-90:1cm) and +(170:3cm) .. (configstatus);
+\arr[color=red] (confighin) .. controls +(-90:1cm) and +(170:3cm) .. (configstatus);
+
+\arr[color=red] (configstatus) .. controls +(-10:3cm) and +(70:1cm) .. (Makefile);
+\arr[color=red] (configstatus) .. controls +(-5:2.5cm) and +(90:2cm) .. (src/Makefile);
+\arr[color=red] (configstatus) .. controls +(5:2cm) and +(90:2cm) .. (configh);
+\arr[color=red] (configstatus) .. controls +(0:2cm) and +(100:.5cm) .. (configlog);
+}
+\uncover<all:5->{\arr (Makefilein) .. controls +(-90:1cm) and +(180:2.8cm) .. (configstatus);
+\arr (src/Makefilein) .. controls +(-90:1cm) and +(170:3cm) .. (configstatus);
+\arr (confighin) .. controls +(-90:1cm) and +(170:3cm) .. (configstatus);
+
+\arr (configstatus) .. controls +(-10:3cm) and +(70:1cm) .. (Makefile);
+\arr (configstatus) .. controls +(-5:2.5cm) and +(90:2cm) .. (src/Makefile);
+\arr (configstatus) .. controls +(5:2cm) and +(90:2cm) .. (configh);
+\arr (configstatus) .. controls +(0:2cm) and +(100:.5cm) .. (configlog);
+}
+\end{tikzpicture}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\end{center}
+
+\end{frame}
+
+
+
+\begin{frame}
+ \frametitle{Важные опции configure, требуемые GNU standard}
+   Директории
+    \begin{enumerate}
+     \item[prefix] По дефолту \texttt{/usr/local}
+      \begin{enumerate}
+         \item[exec-prefix] По дефолту \texttt{prefix}
+         \begin{enumerate}
+            \item[bindir] По дефолту \texttt{exec-prefix/bin}
+            \item[libdir] По дефолту \texttt{exec-prefix/lib}
+         \end{enumerate}
+         \item[includedir] \texttt{prefix/include}
+         \item[datarootdir] \texttt{prefix/share}
+         \begin{enumerate}
+            \item[mandir]
+            \item[datadir]
+         \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+ \frametitle{Еще важные опции \texttt{configure}}
+ \begin{itemize}
+   \item \texttt{help}
+   \item \texttt{version}
+   \item \texttt{with-smth}, \texttt{without-smth}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Опции для make}
+  \begin{itemize}
+    \item \texttt{make all} (просто \texttt{make})
+    \item \texttt{make install}
+    \item \texttt{make uninstall}
+    \item \texttt{make clean}
+    \item \texttt{make distclean}
+    \item \texttt{make check} Опционально
+    \item \texttt{make installcheck} Опционально
+    \item \texttt{make dist}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+  \begin{itemize}
+    \item Установить GNU Go в \texttt{/home/altlinux/usr/}
+    \item Удалить результаты инсталляции
+    \item Установить все файлы GNU Go в /home/altlinux/go
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Autotools: схема работы}
+
+\only<all:1-2>{\begin{center}
+\begin{tikzpicture}
+
+\dgfile (Makefilein) at (1,5) {\filenamew{Makefile.in}};
+\dgfile (src/Makefilein) at (4,5) {\filenamew{src/Makefile.in}};
+\dgfile (confighin) at (7,5) {\filenamew{config.h.in}};
+\dgfile (configure) at (-.7,4) {\filenamew{configure}};
+\uncover<all:1>{\bfile (config.log) at (5.5,2) {\filenamew{config.log}};
+\bfile (configstatus) at (2.5,3) {\filenamew{config.status}};
+
+\bfile (Makefile) at (1,1) {\filenamew{Makefile}};
+\bfile (src/Makefile) at (4,1) {\filenamew{src/Makefile}};
+\bfile (configh) at (7,1) {\filenamew{config.h}};
+\bfile (configcache) at (0,2) {\filenamew{config.cache}};
+
+\arr (configure) .. controls +(10:2cm) and +(80:2cm) .. (configlog);
+\arr (configure) .. controls +(0:1cm) and +(90:1cm) .. (configstatus);
+\arr (configure) .. controls +(-10:1.5cm) and +(80:1cm) .. (configcache);
+\arr (configcache) .. controls +(-140:2cm) and +(-170:2cm) .. (configure);
+
+\arr (Makefilein) .. controls +(-90:1cm) and +(180:2.8cm) .. (configstatus);
+\arr (src/Makefilein) .. controls +(-90:1cm) and +(175:3.2cm) .. (configstatus);
+\arr (confighin) .. controls +(-90:1cm) and +(170:3cm) .. (configstatus);
+
+\arr (configstatus) .. controls +(-10:3cm) and +(70:1cm) .. (Makefile);
+\arr (configstatus) .. controls +(-5:2.5cm) and +(90:1cm) .. (src/Makefile);
+\arr (configstatus) .. controls +(5:2cm) and +(90:2cm) .. (configh);
+\arr (configstatus) .. controls +(0:2cm) and +(100:.5cm) .. (configlog);
+}
+\end{tikzpicture}
+\end{center}}
+\only<all:3->{\begin{center}
+\begin{tikzpicture}{-3.5cm}{3cm}{8cm}{9cm}
+\dgfile (Makefilein) at (1,5) {\filenamew{Makefile.in}};
+\dgfile (src/Makefilein) at (4,5) {\filenamew{src/Makefile.in}};
+\dgfile (confighin) at (7,5) {\filenamew{config.h.in}};
+\dgfile (configure) at (-.5,4) {\filenamew{configure}};
+\uncover<all:4->{
+\tfile (autoreconf) at (2.5,6.5) {\command{autoreconf}};
+\afile (configureac) at (-2,8) {\filenamew{configure.ac}};
+}
+\uncover<all:5->{
+\afile (Makefileam) at (1,8) {\filenamew{Makefile.am}};
+\afile (src/Makefileam) at (4,8) {\filenamew{src/Makefile.am}};
+}
+\uncover<all:4->{
+\arr (configureac) .. controls +(-90:2cm) and +(185:4cm) .. (autoreconf);
+\arr (autoreconf) .. controls +(-10:4cm) and +(100:2.7cm) .. (configure);
+\arr (autoreconf) .. controls +(5:4cm) and +(90:1cm) .. (confighin);
+}
+\uncover<all:5->{
+\arr (Makefileam) .. controls +(-90:.8cm) and +(178:3cm) .. (autoreconf);
+\arr (src/Makefileam) .. controls +(-90:.6cm) and +(170:3cm) .. (autoreconf);
+\arr (autoreconf) .. controls +(-5:4cm) and +(55:.5cm) .. (Makefilein);
+\arr (autoreconf) .. controls +(0:3cm) and +(70:.5cm) .. (src/Makefilein);
+}
+\end{tikzpicture}
+\end{center}}
+\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\end{frame}
+
+\begin{frame}
+\frametitle{Леденящие душу подробности \command{autoreconf}}
+
+\begin{tikzpicture}
+\dgfile (configure) at (-2,3) {\filenamew{configure}};
+\dgfile (confighin) at (.8,3) {\filenamew{config.h.in}};
+\dgfile (Makefilein) at (3.6,3) {\filenamew{Makefile.in}};
+\dgfile (src/Makefilein) at (6.4,3) {\filenamew{src/Makefile.in}};
+\uncover<all:1>{
+\tfile (autoreconf) at (2.5,6.5) {\command{autoreconf}};
+}
+
+\uncover<all:3->{
+\tfile (aclocal) at (-2,7) {\command{aclocal}};
+}
+\uncover<all:5->{
+\tfile (autoconf) at (-2,5) {\command{autoconf}};
+}
+\uncover<all:7->{
+\tfile (autoheader) at (1.75,5.75) {\command{autoheader}};
+}
+\uncover<all:9->{
+\tfile (automake) at (5.5,6.5) {\command{automake}};
+}
+
+
+\afile (configureac) at (-2,9) {\filenamew{configure.ac}};
+\uncover<all:4->{\dgfile (aclocalm4) at (1,8.5) {\filenamew{aclocal.m4}};}
+\afile (Makefileam) at (3.5,9) {\filenamew{Makefile.am}};
+\afile (src/Makefileam) at (6.5,9) {\filenamew{src/Makefile.am}};
+
+
+\uncover<all:1>{
+\arr (autoreconf) .. controls +(-10:4cm) and +(40:2cm) .. (configure);
+\arr (autoreconf) .. controls +(-5:4cm) and +(55:2cm) .. (confighin);
+\arr (autoreconf) .. controls +(0:4cm) and +(70:2cm) .. (Makefilein);
+\arr (autoreconf) .. controls +(5:4cm) and +(90:2cm) .. (src/Makefilein);
+
+\arr (configureac) .. controls +(-90:2cm) and +(180:4cm) .. (autoreconf);
+\arr (Makefileam) .. controls +(-120:2cm) and +(175:4cm) .. (autoreconf);
+\arr (src/Makefileam) .. controls +(-130:2cm) and +(170:4cm) .. (autoreconf);
+}
+\uncover<all:4->{
+\arr (configureac) .. controls +(-90:.5cm) and +(170:1.7cm) .. (aclocal);
+\arr (aclocal) .. controls +(10:2cm) and +(150:2cm) .. (aclocalm4);
+}
+\uncover<all:6->{
+\arr (configureac) .. controls +(-140:2cm) and +(175:2cm) .. (autoconf);
+\arr (aclocalm4) .. controls +(-120:2cm) and +(170:2cm) .. (autoconf);
+\arr (autoconf) .. controls +(-10:2cm) and +(90:1cm) .. (configure);
+}
+\uncover<all:8->{
+\arr (configureac) .. controls +(-50:2cm) and +(175:2.5cm) .. (autoheader);
+\arr (aclocalm4) .. controls +(-110:2cm) and +(170:2cm) .. (autoheader);
+\arr (autoheader) .. controls +(-10:2.5cm) and +(90:1cm) .. (confighin);
+}
+\uncover<all:10->{
+\arr (configureac) .. controls +(-40:3cm) and +(180:4cm) .. (automake);
+\arr (aclocalm4) .. controls +(-50:2cm) and +(176:2cm) .. (automake);
+\arr (Makefileam) .. controls +(-90:2cm) and +(173:2cm) .. (automake);
+\arr (src/Makefileam) .. controls +(-110:2cm) and +(170:2cm) .. (automake);
+\arr (automake) .. controls +(-10:2cm) and +(80:1cm) .. (Makefilein);
+\arr (automake) .. controls +(-5:2cm) and +(90:1cm) .. (src/Makefilein);
+}
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Возможный алгоритм использования autotools}
+ \begin{itemize}
+  \item Запустить \texttt{autoscan}
+  \item Заполнить сгенерированный шаблон \texttt{configure.scan} и сохранить как \texttt{configure.ac}
+  \item Заполнить Makefile.am в каждой поддиректории
+  \item Запустить \texttt{autoreconf --install --force}
+  \item Починить проблемы
+  \item \verb+./configure && make && make install+
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Пример \texttt{configure.ac}}
+\begin{lstlisting}[language=sh]
+AC_PREREQ(2.60)
+AC_INIT([my-package],[1.0.0],[me@maintainer.org])
+AC_CONFIG_AUX_DIR(autotools)
+
+AC_CONFIG_SRCDIR(src/my_package_main.c)
+
+AC_CONFIG_HEADER(config.h)
+AC_CONFIG_FILES([Makefile src/Makefile])
+
+AC_PROG_CC
+AC_PROG_LIBTOOL
+
+AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+AC_OUTPUT
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Пример \texttt{Makefile.am}}
+\begin{lstlisting}[language=sh]
+bin_PROGRAMS = myprogram
+lib_LTLIBRARIES = libmylibrary.la
+myprogram_SOURCES = myprogram.c myprogram.h somefunction.c somefunction.h
+myprogramm_LDADD = libmylibrary.la 
+libmylibrary_la_SOURCES = mylibfun1.c mylibfun2.c libmylibrary.h
+include_HEADERS = libmylibrary.h
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{lib LTLIBRARIES и libtool}
+\begin{itemize}
+ \item Разные системы -- разные расширения для динамических библиотек (
+\texttt{.so, .dylib, .dll})
+ \item Некоторые системы вообще не поддерживают динамическую линковку
+ \item Ответ на все это -- \texttt{libtool}
+ \item Кроме библиотеки с системным расширением создает \texttt{libsomething.la} с которой умеет работать на всех системах
+ \item \texttt{Makefile.am} -- переменная \verb+lib_LTLIBRARY+ 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+ \begin{itemize}
+  \item Создать проект типа Hello,World с отдельным файлом, который будет содержать функцию \texttt{sayhelloworld} и \texttt{sayhello(char *user)} 
+  \item Создать configure.ac и Makefile.am для случая, когда hello компилируется сразу в один файл
+  \item То же самое, когда компилируется в динамическую разделяемую библиотеку и конечную программу
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Как работают \texttt{autotools}: \texttt{m4}}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Альтернативы autotools}
+\begin{itemize}
+  \item{Основанные на make}
+  \begin{itemize}
+    \item CMake
+    \item MakeKit
+  \end{itemize}
+  \item{Другие}
+    \begin{itemize}
+      \item SCons
+      \item rake, cabal, ant, etc.
+    \end{itemize}
+\end{itemize}
+\end{frame}
