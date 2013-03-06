@@ -30,7 +30,7 @@
 			\item {\tt objdump -{}-disassemble main-A\_B} -- получить дизассемблированный файл
 			\item {\tt objdump -{}-disassemble -j.text main-A\_B} -- 
 				получить дизассемблированную исполняемую секцию {\tt .text}
-			\item {\tt objdump -{}-disassemble -j.text main-A\_B} -- 
+			\item {\tt objdump -{}-disassemble -j.text -{}-file-offsets main-A\_B} -- 
 				получить дизассемблированную исполняемую секцию {\tt .text} 
 				и узнать где в файле располагаются инструкции
 		\end{itemize}
