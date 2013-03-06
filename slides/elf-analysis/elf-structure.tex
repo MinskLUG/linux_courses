@@ -1,6 +1,4 @@
 %%
-%% Based on "Как запускается функция main() в Linux"
-%% http://www.linuxlib.ru/prog/mainlin.htm
 
 \begin{frame}
 	\frametitle{ELF}
@@ -20,7 +18,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Запуск main()}
+	\frametitle{}
 
 	\begin{block}{Пример}
 		Для анализа понадобится пример из занятия по введению в gcc (последовательность линковки библиотек).
@@ -28,5 +26,52 @@
 
 	Пример доступен по адресу \url{https://github.com/d4s/linux\_courses/tree/master/epam/examples/make/linking}
 	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Структура ELF-файла}
+
+	\begin{block}{readelf}
+		Утилита для просмотра информации файлов в формате ELF.
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение: просмотр программных заголовков}
+		\begin{itemize}
+			\item {\tt readelf -{}-file-header main-A\_B} -- интерпретация заголовка ELF-файла
+			\item {\tt readelf -{}-sections main-A\_B} -- перечисление секций (для линковки)
+			\item {\tt readelf -{}-segments main-A\_B} -- 
+				перечисление программных сегментов (для исполнения)
+			\item {\tt readelf -{}-symbols main-A\_B} -- список таблицы символов
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Таблица символов}
+
+	\begin{block}{strings}
+		Утилита для получения символов из ELF-файла.
+	\end{block}
+
+
+	\begin{block}{strip}
+		Утилита для удаления символов из ELF-файла.
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение}
+		\begin{enumerate}
+			\item {\tt strings main-A\_B} 
+			\item {\tt ls -l main-A\_B} 
+			\item {\tt strip main-A\_B}
+			\item {\tt ls -l main-A\_B}
+			\item {\tt повторить предыдущее упражнение}
+			\item Сделать выводы
+		\end{enumerate}
+	\end{block}
+
 \end{frame}
 
