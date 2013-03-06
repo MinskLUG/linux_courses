@@ -55,19 +55,27 @@
 		Утилита для получения символов из ELF-файла.
 	\end{block}
 
-
-	\begin{block}{strip}
-		Утилита для удаления символов из ELF-файла.
+	\begin{block}{nm}
+		Утилита для получения символов из object файла.
 	\end{block}
 
-	\pause
+	\begin{block}{strip}
+		Утилита для удаления символов из object файла.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Таблица символов}
 
 	\begin{block}{Упражнение}
 		\begin{enumerate}
-			\item {\tt strings main-A\_B} 
-			\item {\tt ls -l main-A\_B} 
+			\item {\tt strings main-A\_B}
+			\item {\tt nm main-A\_B}
+			\item {\tt nm -u main-A\_B}
+			\item {\tt ls -l main-A\_B}
 			\item {\tt strip main-A\_B}
 			\item {\tt ls -l main-A\_B}
+			\item {\tt nm main-A\_B}
 			\item {\tt повторить предыдущее упражнение}
 			\item Сделать выводы
 		\end{enumerate}
