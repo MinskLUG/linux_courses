@@ -2,7 +2,7 @@ LDFLAGSLIB= -shared
 CFLAGSLIB= -fPIC
 
 CFLAGS = -I.
-LDFLAGS = -L. -Wl,-rpath,.
+LDFLAGS = -L. -Wl,-rpath,. -Wl,--no-as-needed
 
 LIBS= libtesta.so libtestb.so
 
