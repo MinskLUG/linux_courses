@@ -1,0 +1,26 @@
+%%
+%%
+
+\begin{frame}
+	\frametitle{Библиотеки и связи}
+
+	\begin{block}{Утилита ldd}
+		Просмотр списка библиотек от которых зависит программа.
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение}
+		\begin{enumerate}
+			\item Запустить {\tt ldd main-A\_B main-B\_A}
+			\item Заменить в {\tt Makefile} опцию {\tt --no-as-needed} на {\tt --as-needed}
+				и перекомпилировать пример
+			\item Повторить вызов {\tt ldd}, сравнить с предыдущим и сделать выводы
+			\item Запустить {\tt ldd libtestb.so}
+			\item Сравнить с выводом {\tt /usr/bin/java} и удивиться ;-)
+		\end{enumerate}
+	\end{block}
+
+\end{frame}
+
+
