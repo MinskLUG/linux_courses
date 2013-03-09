@@ -1,0 +1,169 @@
+\begin{frame}[fragile]
+	\frametitle{Библиотека}
+
+	\begin{columns}
+		\column{0.5\textwidth}
+		{\tt name.h}:
+
+		\begin{lstlisting}
+extern char* get_name();
+		\end{lstlisting}
+		\column{0.5\textwidth}
+
+		{\tt name.c}:
+
+		\begin{lstlisting}
+#include "name.h"
+
+char* get_name()
+{
+    return LIB_NAME;
+}
+		\end{lstlisting}
+	\end{columns}
+	
+	\begin{center}
+	Чего не хватает в хидере? А ещё?
+\end{center}
+
+	\begin{lstlisting}
+gcc --shared -o libname.so name.c -DLIB_NAME=\"libname.so\"
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Программа}
+
+	{\tt hello.с:}
+
+	\begin{lstlisting}
+#include <stdio.h>
+#include "name.h"
+
+int main(int argc, char** argv)
+{
+    printf("Hello, %s", get_name());
+    return 0;
+}
+	\end{lstlisting}
+
+	Сборка:
+
+	\begin{verbatim}
+gcc hello.c -c -fPIC -o hello.o
+gcc hello.o -L=. -lname -o hello
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Правила make}
+
+	Общий синтаксис:
+	\begin{verbatim}
+<target>: <dependency0> <dependency1>
+<TAB><command0>
+<TAB><command1>
+<TAB><command2>
+	\end{verbatim}
+
+	Абстрактные цели:
+	\begin{verbatim}
+.PHONY <target0> ... <targetN>
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Makefile}
+
+	\begin{lstlisting}[language=make]
+release: hello
+hello: hello.o libname.so
+    gcc hello.o -L=. -lname -o hello
+
+hello.o: hello.c name.h
+    gcc hello.c -c -Wall -fPIC -o hello.o
+
+libname.so: name.c
+    gcc --shared -o libname.so name.c -DLIB_NAME=\"libname.so\"
+
+name.c: name.h
+
+hello.c: name.h
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Автоматические зависимости}
+
+	Создание зависимостей средствами gcc:
+
+	\begin{verbatim}
+gcc -M -MM -MD -MMD
+	\end{verbatim}
+
+	\begin{lstlisting}[language=make]
+include $(wildcard *.d)
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Переменные в Makefile}
+	\begin{lstlisting}[language=make]
+compiler_flags = -Wall -O3
+linker_flags := -fPIC
+compiler_flags += -pipe
+
+show-flags:
+    echo $(compiler_flags)
+    echo $(linker_flags)
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Псевдонимы и шаблонные правила}
+
+	\begin{itemize}
+		\item {\tt \$@} -- Имя цели обрабатываемого правила
+		\item {\tt \$<} -- Имя первой зависимости обрабатываемого правила 
+		\item {\tt \$\^{}} -- Список всех зависимостей обрабатываемого правила
+	\end{itemize}
+
+	\begin{lstlisting}[language=make]
+%.o: %.c
+    gcc $^ -o $@
+
+VPATH := . somedir
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Функции в make}
+
+	\begin{itemize}
+		\item wildcard -- список всех файлов по паттерну,  находящихся в директории проекта
+		\item addprefix -- подстановка первого аргумента к каждому слову из второго аргумента
+		\item patsubst -- замена в списке
+		\item include -- как и {\tt \#include} в {\tt c/c++}
+	\end{itemize}
+
+	\begin{lstlisting}[language=make]
+src_dirs := core stuff generic
+src_dirs := $(addprefix ../../,  $(src_dirs))
+
+$(patsubst %.c, %.o, $(wildcard *.c))
+	\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Практическое задание}
+
+	\begin{enumerate}
+		\item добавьте цель {\tt clean}
+		\item перепишите с использованием шаблонных правил
+		\item заведите переменные {\tt CFLAGS}, {\tt LDFLAGS}
+		\item сохраняйте промежуточные файлы в каталог {\tt out/}
+		\item создайте правило {\tt debug:} для сборки в отладочном режиме
+	\end{enumerate}
+\end{frame}
+

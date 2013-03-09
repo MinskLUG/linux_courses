@@ -1,0 +1,55 @@
+%%
+%% 
+
+\begin{frame}
+	\frametitle{objdump}
+
+	\begin{block}{objdump}
+		Утилита для просмотра информации по object файлам.
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение}
+		\begin{itemize}
+			\item {\tt objdump -{}-file-headers main-A\_B} -- получить заголовок файла
+			\item {\tt objdump -{}-section-headers main-A\_B} -- перечисление секций (для линковки)
+			\item {\tt objdump -{}-syms main-A\_B} -- список таблицы символов
+			\item {\tt objdump -{}-dynamic-syms main-A\_B} -- список динамических символов (как nm -u)
+		\end{itemize}
+
+	\end{block}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Дизассемблер objdump}
+
+	\begin{block}{Упражнение: внутренниий мир программы}
+		\begin{itemize}
+			\item {\tt objdump -{}-disassemble main-A\_B} -- получить дизассемблированный файл
+			\item {\tt objdump -{}-disassemble -j.text main-A\_B} -- 
+				получить дизассемблированную исполняемую секцию {\tt .text}
+			\item {\tt objdump -{}-disassemble -j.text main-A\_B} -- 
+				получить дизассемблированную исполняемую секцию {\tt .text} 
+				и узнать где в файле располагаются инструкции
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Что же наделал компилятор?}
+
+	\begin{block}{Упражнение: анализируем вместе с исходником}
+		\begin{itemize}
+			\item Добавить в исходник {\tt main.c} объявление переменной и пустой цикл
+			\item Добавить в {\tt Makefile} опции {\tt -g -O0}
+			\item {\tt objdump -{}-source -{}-line-numbers main-A\_B}
+			\item {\tt objdump -{}-source -{}-line-numbers -{}-file-offsets main.o}
+			\item Изменить в {\tt Makefile} опцию {\tt -O0} на {\tt -O3}
+			\item {\tt objdump -{}-source -{}-line-numbers -{}-file-offsets main.o}
+			\item Сделать выводы ;-)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
