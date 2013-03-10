@@ -1,16 +1,25 @@
 \begin{frame}
   \frametitle{Базовые команды gdb}
   \begin{columns}
-    \begin{column}{width=0.5\textwidth}
+    \begin{column}{width=0.3\textwidth}
       \begin{itemize}
         \item help
         \item b (break)
         \item c (continue)
         \item s (step)
-        \item p (print)
       \end{itemize}
     \end{column}
-    \begin{column}{width=0.5\textwidth}
+    
+    \begin{column}{width=0.3\textwidth}
+      \begin{itemize}
+        \item p (print)
+        \item l (list)
+        \item (pt) ptype
+        \item watch
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{width=0.3\textwidth}
       \begin{itemize}
         \item bt (backtrace)
         \item finish
@@ -20,3 +29,43 @@
     \end{column}
   \end{columns}
 \end{frame}
+
+\begin{frame}
+ \frametitle{Обращение с точками останова}
+ \begin{itemize}
+   \item{Варианты установки}
+    \begin{itemize}
+     \item break
+     \item break <line>
+     \item break <file>:<line>
+     \item break <function>
+     \item break <> if <condition>
+    \end{itemize}
+    \item Удаление
+     \begin{itemize}
+       \item clear 
+       \item delete
+     \end{itemize}
+     \item Временное отключение
+     \begin{itemize}
+       \item disable
+       \item enable
+       \item ignore <n>
+     \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Упражнение}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Отладка внешнего процесса}
+%attach, detach
+\end{frame}
+
+\begin{frame}
+ \frametitle{gdb server}
+\end{frame}
+
+
