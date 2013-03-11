@@ -92,9 +92,9 @@
   \begin{enumerate}
    \item Скомпилировать \texttt{segfault.c}
    \item Установить \texttt{ulimit -c 1000}\\
-	   {\small Для некоторых дистрибутивов: {\tt sysctl -w kernel.core\_pattern=core}}
+	   {\small Для некоторых дистрибутивов:\\ {\tt sysctl -w kernel.core\_pattern=/tmp/core-\%e-\%p}}
    \item Запустить segfault, дождаться segmentation fault
-   \item Запустить \texttt{gdb ./segfault ./core}
+   \item Запустить \texttt{gdb ./segfault /tmp/core-....}
    \item Изучить значения переменных в текущем стековом фрейме
    \item Изучить значения переменных в предыдущем стековом фрейме
    \item Исправить код
