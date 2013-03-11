@@ -13,6 +13,8 @@ void fill_random_ascii_buffer(char *buffer,size_t size){
 int main(int argc, char *argv[]){
   char *buf;
   int j=0;
+  char *message = "Program finished";
+
   buf=malloc(BUF_SIZE*sizeof(char));
   if(buf=NULL){
     printf("Buffer allocation failed!\n");
@@ -28,6 +30,7 @@ int main(int argc, char *argv[]){
     }
   }
   putchar('\n');
+  puts(message);
   return(0);
 }
 
