@@ -96,10 +96,31 @@
    \item Запустить \texttt{gdb ./segfault ./core}
    \item Изучить значения переменных в текущем стековом фрейме
    \item Изучить значения переменных в предыдущем стековом фрейме
+   \item Исправить код
   \end{enumerate}
 %+core dump
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Отладочная информация в отдельных файлах (dbg)}
+  \begin{center}
+    Последовательность создания отдельного файла с отладочными символами
+  \end{center}
+  \begin{itemize}
+    \item \verb+ objcopy --only-keep-debug <exec file> <dbg file>+
+    \item \verb+ strip -g <exec file>+
+    \item \verb+ objcopy  --add-gnu-debuglink=<dbg file> <exec file> + 
+    \item \texttt{gdb: set debug-files-directory}
+  \end{itemize} 
+\pause
+  \begin{center}
+   Упражнение
+  \end{center}
+  \begin{itemize}
+    \item Добавить к Makefile дополнительную цель counter.dbg, которая создаст \texttt{counter} (stripped) и \texttt{counter.dbg}
+    \item Запустить gdb на файле counter и убедиться, что все работает
+  \end{itemize}
+\end{frame}  
 
 %\begin{frame}
 % \frametitle{gdb server}
