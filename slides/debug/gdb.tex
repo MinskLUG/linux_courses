@@ -32,45 +32,77 @@
 
 \begin{frame}
  \frametitle{Обращение с точками останова}
+ \begin{columns}
+ \column{0.5\textwidth}
  \begin{itemize}
    \item{Варианты установки}
-    \begin{itemize}
-     \item break
-     \item break <line>
-     \item break <file>:<line>
-     \item break <function>
-     \item break <> if <condition>
-    \end{itemize}
+   \begin{itemize}
+     \item \texttt{break}
+     \item \texttt{break <line>}
+     \item \texttt{break <file>:<line>}
+     \item \texttt{break <function>}
+     \item \texttt{break <address>}
+     \item \texttt{break <somewhere> if <condition>}
+   \end{itemize}
+\end{itemize}
+\column{0.5\textwidth}
+  \begin{itemize}   
     \item Удаление
      \begin{itemize}
-       \item clear 
-       \item delete
+       \item \texttt{clear} 
+       \item \texttt{delete}
      \end{itemize}
      \item Временное отключение
      \begin{itemize}
-       \item disable
-       \item enable
-       \item ignore <n>
+       \item \texttt{disable}
+       \item \texttt{enable}
+       \item \texttt{ignore <n>}
      \end{itemize}
   \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Упражнение}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Работа со стеком}
-%+core dump
+\end{columns}
 \end{frame}
 
 \begin{frame}
  \frametitle{Отладка внешнего процесса}
-%attach, detach
+ \begin{itemize}
+   \item \texttt{gdb <file> -p pid}
+   \item \texttt{attach} внутри gdb 
+ \end{itemize} 
 \end{frame}
 
 \begin{frame}
- \frametitle{gdb server}
+  \frametitle{Упражнение}
+  \begin{enumerate}
+    \item Собрать программку counter и запустить ее с начальным значением 100
+    \item Найти pid запущенной программки и подключиться к ней с gdb
+    \item Установить breakpoint внутри цикла
+    \item Продолжить выполнение
+    \item Удалить breakpoint внутри цикла
+    \item Установить breakpoint при i==20
+    \item После остановки на breakpoint'е изменить значение howmany из gdb на 30
+    \item Продолжить выполнение
+  \end{enumerate}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Работа со стеком и core dump.}
+  \begin{center}
+    Упражнение
+  \end{center}
+  \begin{enumerate}
+   \item Скомпилировать \texttt{segfault.c}
+   \item Установить \texttt{ulimit -c 1000}
+   \item Запустить segfault, дождаться segmentation fault
+   \item Запустить \texttt{gdb ./segfault ./core}
+   \item Изучить значения переменных в текущем стековом фрейме
+   \item Изучить значения переменных в предыдущем стековом фрейме
+  \end{enumerate}
+%+core dump
+\end{frame}
+
+
+%\begin{frame}
+% \frametitle{gdb server}
+%\end{frame}
 
 
