@@ -1,5 +1,7 @@
-CFLAGS = -g -Wall -Werror
+CFLAGS = -g -Wall 
 counter: counter.c
 
+segfault: segfault.c
+
 .PHONY: all
-all: counter
+all: counter segfault
