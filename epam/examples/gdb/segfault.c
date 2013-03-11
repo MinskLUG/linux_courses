@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 
   for(j=0;j<BUF_SIZE;j++){
     putchar(buf[j]);
-    if(j%50){
+    if(j%50==0 && j>0){
       putchar('\n');
     }
   }
