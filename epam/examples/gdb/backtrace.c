@@ -50,7 +50,7 @@ void fill_random_ascii_buffer(char *buffer,size_t size){
 }
 
 int main(int argc, char *argv[]){
-  char *buf;
+  const char *buf;
   int j=0;
   char *message = "Program finished";
   struct sigaction sigact;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
   sigemptyset(&sigset);
 
   buf=malloc(BUF_SIZE*sizeof(char));
-  if(buf=NULL){
+  if(buf==NULL){
     printf("Buffer allocation failed!\n");
     exit(1);
   }

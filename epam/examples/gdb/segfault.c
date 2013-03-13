@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
   char *message = "Program finished";
 
   buf=malloc(BUF_SIZE*sizeof(char));
+
   if(buf=NULL){
     printf("Buffer allocation failed!\n");
     exit(1);
