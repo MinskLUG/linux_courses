@@ -1,0 +1,149 @@
+%%
+%% 
+
+\begin{frame}
+	\frametitle{Valgrind}
+
+	\begin{block}{Что умеет Valgrind}
+		\begin{itemize}
+			\item Утечки памяти
+			\item Использование неинициализированной памяти
+			\item Чтение/запись за пределами выделенной {\tt malloc} памяти
+			\item Чтение/запись в некорректные области стека
+			\item Использование неправильных пар вуделения/удаления блоков памяти:\\
+				{\tt malloc/new/new[]} и {\tt free/delete/delete[]}
+			\item Перекрытие участков памяти при использованиии {\tt memcpy()} и др.
+			\item "Злоупотребления" {\tt API pthreads}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Valgrind}
+
+	\begin{block}{Valgrind Tools}
+		\begin{enumerate}
+			\item {\bf Memcheck} -- определяет ошибки при работе с памятью.
+			\item {\bf Cachegrind} -- профайлер работы с кэшем и ветвлений.
+			\item {\bf Callgrind} -- еще один кэш-профайлер.
+			\item {\bf Helgrind} -- определяет ошибки в потоках.
+			\item {\bf DRD} -- и еще один детектор ошибок в потоках.
+			\item {\bf Massif} -- профайлер "кучи".
+			\item {\bf DHAT} -- ...вы не поверите, но да, еще один.
+			\item {\bf SGcheck} -- детектор работы со стеком и глобальными массивами.
+			\item {\bf BBV} -- генератор блок-схем.
+		\end{enumerate}
+	\end{block}
+\end{frame}
+			
+\begin{frame}[fragile]
+	\frametitle{Упражнение: некорректный указатель}
+
+	\begin{lstlisting}
+#include <stdlib.h>
+
+main(void)
+{
+char *array;
+
+    array = (char *) malloc(10*sizeof(char));
+    array[10] = 'x';
+    free( array);
+    exit(0);
+}
+	\end{lstlisting}
+
+	Пример: {\tt inv\_ptr.c}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: утечки памяти}
+
+	\begin{lstlisting}
+char *array;
+int i;
+
+for( i=0; i<100; i++)
+    array = (char *) malloc(10*sizeof(char));
+
+free( array);
+	\end{lstlisting}
+
+	\begin{block}{Детализация}
+		{\tt -{}-leak-check=full}
+	\end{block}
+
+	Пример: {\tt leaks.c}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: объем выделенной памяти}
+
+	\begin{lstlisting}
+array = (char *) malloc(1<<31);
+array[10000] = 0;
+	\end{lstlisting}
+
+	Пример: {\tt huge\_size.c}
+	
+	\bigskip
+	\pause
+
+	Задание:
+	\begin{enumerate}
+		\item изменить объем запрошенной памяти на больший, чем доступно в системе
+	\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: использование переменной вместо указателя}
+
+	\begin{lstlisting}
+    int i;
+    scanf("%d", i);
+	\end{lstlisting}
+
+	Пример: {\tt inv\_type.c}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: неинициализированные переменные}
+
+	\begin{lstlisting}
+    int a;
+    if ( a)
+        (...};
+	\end{lstlisting}
+
+	Пример: {\tt uninit\_var.c}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{GDB + Valgrind}
+
+	Valgrind запускет программы на "синтетическом" процессоре, поэтому GDB не работает!
+
+	Для отладки используется {\tt vgdb}: \\
+
+	\begin{verbatim}
+valgrind -vgdb=yes --vgdb-error=0 prog
+	\end{verbatim}
+
+
+	а {\tt gdb} запустить:
+	\begin{verbatim}
+gdb prog
+(gdb) target remote | vgdb
+	\end{verbatim}
+
+	\pause
+	\begin{block}{Упражнение}
+		Попробовать провести отладку программы {\tt segfault.c} с помощью связки Valgrind и GDB.
+	\end{block}
+\end{frame}
+
+
+
