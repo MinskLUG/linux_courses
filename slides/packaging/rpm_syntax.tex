@@ -1,0 +1,142 @@
+\begin{frame}
+	\frametitle{Инфраструктура для разработчика}
+	
+	\begin{itemize}
+		\item Конфигурация
+			\begin{enumerate}
+				\item {\tt \~/.rpmmacros} -- информация о пакетировщике, локальные настройки
+				\item {\tt \~/RPM} -- дерево для внутреннего использования RPM
+					\begin{enumerate}
+						\item {\tt SOURCES}
+						\item {\tt SPECS}
+						\item {\tt BUILD}
+						\item {\tt RPMS/\{\%arch\}}
+						\item {\tt SRPMS}
+					\end{enumerate}
+			\end{enumerate}
+		\item Исходники
+			\begin{enumerate}
+				\item Исходный код ПО 
+				\item {\tt spec} -- файл описания процесса сборки, установки, а также метаинформация
+			\end{enumerate}
+
+		\item На выходе
+			\begin{enumerate}
+				\item {\tt *.\{\%arch\}.rpm} -- пакеты, готовые для установки
+				\item {\tt *.srpm} -- пакет с исходниками
+			\end{enumerate}
+
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Структура типового spec-файла}
+
+	\begin{itemize}
+		\item Макросы -- {\tt \%define FOO bar}
+		\item Заголовок (Тэги) -- {\tt Tag: value}
+		\item Подготовка -- {\tt \%prep + \%setup}
+		\item Сборка -- {\tt \%build}
+		\item Установка -- {\tt \%install}
+		\item Секция {\tt \%files}
+		\item Скрипты, выполняемые в различных условиях\\
+			{\tt pre-,post-install, uninstall, trigger}
+		\item Список изменений -- {\tt \%changelog }
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Зависимости}
+
+	\begin{block}{ Зависимости}
+		\begin{itemize}
+			\item {\tt BuildReq:}
+			\item {\tt Requires:}
+			\item {\tt Provides:}
+			\item {\tt Conflicts:}
+			\item {\tt Obsoletes:}
+			\item {\tt AutoReq: (0|1)}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{версии}
+
+	\Large{Чтение полиси соответствующего дистрибутива строго обязательно!}
+
+	Hint: {\tt rpmvercmp}
+
+	\begin{block}{ Версия -- составная}
+
+		{\tt \%name-\%version-\%release}
+
+		\begin{itemize}
+			\item {\tt \%name}
+			\item {\tt \%version}
+			\item {\tt \%release}
+			\begin{itemize}
+				\item release
+				\item dist tag
+				\item rebuild number -- автоматически (при использовании нормальных билд-систем)
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Hello, World!}
+
+	\begin{block}{Упражнение: hello.spec}
+		\begin{itemize}
+			\item Собрать пакет с помощью {\tt rpmbuild -ba hello.spec}
+			\item Посмотреть список зависимостей {\tt rpm -qRp hello*.rpm}
+			\item Установить полученный пакет
+			\item Удалить исходники и spec-файл
+			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.srpm}
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение: расширяем функционал}
+		Добавить компиляцию, установку и пакетирование для CPP-примера.
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Пример2}
+
+
+	\begin{block}{Субпакеты, скрипты, зависимости и апгрейд}
+		На примере {\tt template.spec}.
+
+		\begin{itemize}
+			\item Собрать пакет с помощью {\tt rpmbuild -ba template.spec}
+			\item Посмотреть список зависимостей {\tt rpm -qRp template*.rpm}
+			\item Установить полученные пакеты
+			\item Изменить версию, пересобрать и обновить в системе
+			\item Удалить полученные пакеты
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Упражнение}
+
+	\begin{block}{Задача:}
+		Создать и установить пакеты для примера с созданием библиотек
+		и их импользования из предедущих лекций.
+	\end{block}
+
+	Hint: libtestA, libtestB, libtestA-devel, libtestB-devel, mainpkg
+
+\end{frame}
+
