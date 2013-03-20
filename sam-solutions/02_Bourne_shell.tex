@@ -79,9 +79,9 @@
       \small{Результат: \verb+ls /usr/local/share/ca-certificates/+} \newline
       \alert{16 vs 36} \pause
     \item \Large{Параметры и ключи} \footnote{Только у BASH и ZSH (если настроены)} \pause \newline
-      \small{Пример: \verb+apti[TAB]--a[TAB]sh[TAB]core[TAB][ENTER]+} \pause \newline
+      \small{Пример: \verb+apti[TAB] --a[TAB]sh[TAB]core[TAB][ENTER]+} \pause \newline
       \small{Результат: \verb+aptitude --assume-yes show coreutils+} \newline
-      \alert{16 vs 37} \pause
+      \alert{18 vs 37} \pause
   \end{itemize}
 \end{frame}
 
@@ -121,9 +121,9 @@
   \Large{\alert{Просмотр истории}}
 
   \begin{itemize}
-    \item ``Up'' и ``Down'' - вперёд-назад \pause
-    \item ``Ctrl+R'' - интерактивный поиск в истории \pause
-    \item повторно ''Ctrl+R`` - искать дальше
+    \item \textquotedbl Up \textquotedbl и \textquotedbl Down \textquotedbl - вперёд-назад \pause
+    \item \textquotedbl Ctrl+R \textquotedbl - интерактивный поиск в истории \pause
+    \item повторно \textquotedbl Ctrl+R \textquotedbl - искать дальше
   \end{itemize}
 \end{frame}
 
@@ -134,10 +134,10 @@
   \Large{\alert{Emacs editing mode}} \footnote{Только KSH-совместимые: bash, zsh, pdksh, mksh, etc}
 
   \begin{itemize}
-    \item ``Left'' и ``Right'' - вперёд-назад по текущей строке \pause
-    \item ``Ctrl+a'' и ``Ctrl+e''  - перейти в начало и конец строки \pause
-    \item ``Ctrl+u'' - удалить от курсора до начала строки \pause
-    \item ``Ctrl+w'' - удалить слово (от курсора до разделителя, влево) 
+    \item \textquotedbl Left \textquotedbl и \textquotedbl Right \textquotedbl - вперёд-назад по текущей строке \pause
+    \item \textquotedbl Ctrl+a \textquotedbl и \textquotedbl Ctrl+e \textquotedbl  - перейти в начало и конец строки \pause
+    \item \textquotedbl Ctrl+u  \textquotedbl- удалить от курсора до начала строки \pause
+    \item \textquotedbl Ctrl+w \textquotedbl- удалить слово (от курсора до разделителя, влево) 
   \end{itemize}
     
 \end{frame}
@@ -162,15 +162,15 @@
 
   Операции над кодом возврата:
   \begin{itemize}
-    \item ``\verb+&&+'' - логическое И
-    \item ``\verb+||+'' - логическое ИЛИ
+    \item \textquotedbl \verb+&&+ \textquotedbl - логическое И
+    \item \textquotedbl \verb+||+ \textquotedbl - логическое ИЛИ
   \end{itemize}
   \pause
 
   Примеры:
   \begin{itemize}
     \item \verb+ cat /proc/1/environ || echo fail +
-    \item \verb+ find /usr/share/doc -name ``*.txt'' && echo ok+
+    \item \verb+ find /usr/share/doc -name \textquotedbl *.txt \textquotedbl && echo ok+
   \end{itemize}
 
 \end{frame}
@@ -184,7 +184,7 @@
 
     Последовательность команд Shell.
 
-    Разделитель: перевод строки, ``;''
+    Разделитель: перевод строки, \textquotedbl ; \textquotedbl
   \end{block}
 
   \begin{block}<2->{shebang}
@@ -248,17 +248,17 @@
 \begin{frame}[fragile]
   \frametitle{Базовый cинтаксис перенаправления}
   \begin{itemize}    
-    \item \alert{Ввод} ``<'' \newline
+    \item \alert{Ввод} \textquotedbl < \textquotedbl \newline
       \verb+ sort <.bash_history+ \pause
-    \item \alert{Вывод} ``>'' \footnote{Файл затрёт новым содержанием, если он существовал ранее} \newline
-      \verb+ find /usr/share/doc -name ``*.txt'' >txt-docs+    
-    \item \alert{Вывод} ``1>'' \newline
-      \verb+ find /usr/share/doc -name ``*.txt'' 1>txt-docs+ \pause
-    \item \alert{Ошибки} ``2>''\newline
+    \item \alert{Вывод} \textquotedbl > \textquotedbl \footnote{Файл затрёт новым содержанием, если он существовал ранее} \newline
+      \verb+ find /usr/share/doc -name \textquotedbl *.txt \textquotedbl >txt-docs+    
+    \item \alert{Вывод} \textquotedbl 1> \textquotedbl \newline
+      \verb+ find /usr/share/doc -name \textquotedbl *.txt \textquotedbl 1>txt-docs+ \pause
+    \item \alert{Ошибки} \textquotedbl 2> \textquotedbl \newline
       \verb+ find /tmp 2>find.errors+ \pause
-    \item \alert{Вывод (дописать в конец)} ``\verb+1>>+'' \newline
-      \verb+ find /usr/share/doc -name ``*.txt'' >>txt-docs+
-    \item \alert{Ошибки (дописать в конец)} ``\verb+2>>+'' \newline 
+    \item \alert{Вывод (дописать в конец)} \textquotedbl \verb+1>>+ \textquotedbl \newline
+      \verb+ find /usr/share/doc -name \textquotedbl *.txt \textquotedbl >>txt-docs+
+    \item \alert{Ошибки (дописать в конец)} \textquotedbl \verb+2>>+ \textquotedbl \newline 
       \verb+ find /tmp 2>>find.errors+ \pause
   \end{itemize}
 \end{frame}
@@ -267,13 +267,13 @@
   \frametitle{Расширенный синтаксис перенаправления}
   
   \begin{itemize}
-    \item \alert{Pipe} \footnote{Классика Unix} ``\verb+cmd1 | cmd2 +'' \newline
+    \item \alert{Pipe} \footnote{Классика Unix} \textquotedbl``\verb+cmd1 | cmd2+ \textquotedbl \newline
       Вывод cmd1 направляется на ввод cmd2. \newline
       \verb+man bash|grep ksh+ \pause
-    \item \alert{Склеить потоки}  ``\verb+N>&M+'' \newline
+    \item \alert{Склеить потоки} \textquotedbl \verb+N>&M+ \textquotedbl \newline
       В примере: просмотреть одновременно и вывод и ошибки \newline
       \verb+find /tmp 2>&1 | less+ \pause
-    \item \alert{''Ввод здесь``}\footnote{In Real Life (IRL) используется только в скриптах} ''\verb+<<END_MARKER+`` \newline
+    \item \alert{\textquotedbl Ввод здесь \textquotedbl}\footnote{In Real Life (IRL) используется только в скриптах} \textquotedbl \verb+<<END_MARKER+ \textquotedbl \newline
       \begin{verbatim}
       sort <<EOF
       oieu
@@ -308,7 +308,7 @@
 
   \alert{Задание 3}
   
-  Сделать вывод сохранённой в скрипте истории команд на экран.\newline Самим скриптом\footnote{конструкция ``ввод здесь''}.
+  Сделать вывод сохранённой в скрипте истории команд на экран.\newline Самим скриптом\footnote{конструкция \textquotedbl ввод здесь \textquotedbl}.
 
   \pause
 
@@ -366,8 +366,8 @@
 	$SHELL
 \end{lstlisting} \pause 
     \item \alert{unset} - сброс (обнуление) значения \pause
-    \item \alert{VAR1=``значение''} - установить новое значение \newline 
-      \emph{Примечание:} в значении можно использовать переменные (если значение присваивается через ``'')
+    \item \alert{VAR1=\textquotedbl значение \textquotedbl} - установить новое значение \newline 
+      \emph{Примечание:} в значении можно использовать переменные (если значение присваивается через \textquotedbl \textquotedbl )
   \end{itemize}
 
 \end{frame}
@@ -465,7 +465,7 @@
   \pause
   \alert{Упражнение 2.} -- || --  из папки /usr, содержащее 'i' или 'h'
   \pause
-  \alert{Упражнение 3.} Написать скрипт lsa, делающий то же, что и команда ``ls -a``\footnote{вывод файлов и каталогов, включая скрытые}, не используя ''ls``.
+  \alert{Упражнение 3.} Написать скрипт lsa, делающий то же, что и команда \textquotedbl ls -a\textquotedbl \footnote{вывод файлов и каталогов, включая скрытые}, не используя \textquotedbl ls\textquotedbl .
 \end{frame}
 
 \subsection{Ветвления и условия}
@@ -504,11 +504,11 @@
 	  mkdir "$HOME/bin"
 	fi
 \end{lstlisting} \pause
-    \item \alert{-z ``value''} - строка пустая
+    \item \alert{-z \textquotedbl value\textquotedbl } - строка пустая
 \begin{lstlisting}[basicstyle=\normalsize]
 	test -z "$VARIABLE" && VARIABLE="value"
 \end{lstlisting} \pause
-    \item \alert{-n ``value''} - строка ненулевая
+    \item \alert{-n \textquotedbl value\textquotedbl } - строка ненулевая
 \begin{lstlisting}[basicstyle=\normalsize]
 	test -n "$VARIABLE" && echo "$VARIABLE"
 \end{lstlisting} 
@@ -530,7 +530,7 @@
 \begin{frame}[fragile]
   \frametitle{Практика: условия}
 
-  \alert{Упражнение 1} Проверить установлена ли переменная OLDPWD\footnote{передыдущая рабочая директория, меняется 'cd'}. Если установлена вывести сообщение ``your previous dir was '' и содержимое OLDPWD \pause
+  \alert{Упражнение 1} Проверить установлена ли переменная OLDPWD\footnote{передыдущая рабочая директория, меняется 'cd'}. Если установлена вывести сообщение \textquotedbl your previous dir was \textquotedbl\  и содержимое OLDPWD \pause
 
   \alert{Упражнение 2} Скрипт, проверяющий существование файла с публичными ключами SSH. И если он существует - вывести на экран  \pause
 
@@ -540,10 +540,10 @@
 \subsection{Циклы}
 
 \begin{frame}[fragile]
-  \frametitle{Циклы ``for'', ``while'', ``until''}
+  \frametitle{Циклы \textquotedbl for \textquotedbl , \textquotedbl while \textquotedbl , \textquotedbl until \textquotedbl}
       \alert{for}
 \begin{lstlisting}[basicstyle=\normalsize]
-	for i in ``list''
+	for i in \textquotedbl list \textquotedbl
 	do
 	  commands
 	done
@@ -552,7 +552,7 @@
   
       \alert{while , until}
 \begin{lstlisting}[basicstyle=\normalsize]
-	while ``list''
+	while \textquotedbl list \textquotedbl
 	do
 	  commands
 	done
@@ -564,9 +564,9 @@
 
     \alert{Упражнение 1.}. Скрипт: создать папку tmp и в ней файлы userX-номер, где X - ваш номер пользователя, номер - от 1 до 99. Файл - скопировать или создать командой touch. Получение чисел - команда seq \pause
 
-    \alert{Упражнение 2.} Скрипт: переименовать все полученные файлы из Упражнения 1 в ``ex-userX-номер'' \pause
+    \alert{Упражнение 2.} Скрипт: переименовать все полученные файлы из Упражнения 1 в \textquotedbl ex-userX-номер \textquotedbl \pause
 
-    \alert{Упражнение 3.} Скрипт: создать аналог ``ls -a'' c помощью циклов \pause
+    \alert{Упражнение 3.} Скрипт: создать аналог \textquotedbl ls -a \textquotedbl\ c помощью циклов \pause
 
     \alert{Упражнение 4.} Скрипт: генератор случайных чисел на экран. Раз в секунду\footnote{для паузы можно использовать команду sleep} выводить случайное число на экран.
 \end{frame}
@@ -588,7 +588,7 @@
     \item чтение ввода пользователя командной \alert{read}
   \end{itemize}
 
-  Значение по умолчанию: ``<пробел><табуляция><перевод строки>''
+  Значение по умолчанию: \textquotedbl <пробел><табуляция><перевод строки> \textquotedbl
 
 
 \end{frame}
@@ -649,7 +649,7 @@
 
   \alert{Упражнение 3} Добавить к пути поиска (PATH) произвольный каталог через редактирование локального профайла.
 
-  \alert{Упражнение 4} Переопределить системную команду ``editor'' через alias в профайле, вписав туда тот редактор, которым вы обычно пользуетесь на занятиях.
+  \alert{Упражнение 4} Переопределить системную команду \textquotedbl editor \textquotedbl\ через alias в профайле, вписав туда тот редактор, которым вы обычно пользуетесь на занятиях.
 
   \alert{Упражнение 5} Добавить текущее время в приглашение командной строки (PS1) \footnote{Подсказка: раздел PROMPTING в мане на bash}
 
