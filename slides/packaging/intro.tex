@@ -1,0 +1,74 @@
+\begin{frame}
+	\frametitle{И еще раз про "DLL hell"}
+	
+	\begin{block}{Устанавливаем программу}
+	А что же с библиотеками?
+	\end{block}
+
+	\pause
+
+	\begin{columns}
+		\column{0.5\textwidth}
+		\begin{block}{"В системе все есть!"}
+		\begin{itemize}
+			\item Oh, really???
+			\item И нужной версии?
+			\item А API и ABI точно не менялись?
+			\item А если библиотек несколько версий?
+			\item А если нужны дополнительные программы?
+		\end{itemize}
+		\end{block}
+		\pause
+		\column{0.5\textwidth}
+		\begin{block}{"Всё своё, ношу с собой!"}
+		\begin{itemize}
+			\item А как насчет объема?
+			\item Использование памяти.
+			\item А что насчет лицензий?
+			\item И все-таки порядок загрузки...
+			\item Не спасает от проблем с 3rd-party ПО.
+		\end{itemize}
+		\end{block}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Большая свалка}
+
+	\begin{center}
+		"Даешь каждой платформе по собственной системе управления пакетами!"
+	\end{center}
+
+	\begin{block}{Увы, мы не в идеальном мире}
+		\begin{itemize}
+			\item Дистрибутив: rpm... или deb... или еще что-нибудь...
+			\item Дополнительный софт: {\tt ./configure; make; make install}
+			\item Java: {\tt maven, ant, ivy} 
+			\item Ruby: rubygem
+			\item Perl: CPAN
+			\item Python: pip + PyPi
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Разработка и использование в реальной системе}
+	
+	\begin{block}{Build-time vs Run-time}
+
+		\begin{enumerate}
+			\item Не все, что нужно во время компиляции, должно быть установлено в конечной системе.
+			\item Не все, что нужно для работы программы, необходимо устанавливать на сборочной системе.
+		\end{enumerate}
+	\end{block}
+
+	\begin{block}{Чистое сборочное окружение}
+		\begin{itemize}
+			\item Воспроизводимость сборки 
+			\item Контроль зависимостей
+			\item Контроль автоматически "подхваченных" зависимостей
+		\end{itemize}
+	\end{block}
+\end{frame}
+

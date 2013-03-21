@@ -23,7 +23,6 @@ clean:
 	@rm -f *.out
 	@rm -f *.toc
 	@rm -f *.nav
-	@rm -f *.pdf
 	@rm -f $(TARGET)
 
 bib: programm.aux

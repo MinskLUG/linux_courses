@@ -1,0 +1,44 @@
+\begin{frame}[fragile]
+  \frametitle{strace, ltrace}
+  \begin{center}
+   Основные опции 
+  \end{center}
+  \begin{itemize}
+   \item \texttt{-e <expression>}
+\begin{lstlisting}[language=sh]
+  strace -e read,write -e read=50 
+\end{lstlisting}
+   \item \texttt{-p <pid>}
+\begin{lstlisting}[language=sh]
+  ltrace -p 1021
+\end{lstlisting}
+   \item \texttt{-c}
+   \item \texttt{-f} следить за дочерними процессами
+   \item \texttt{-o <filename>}
+   \item \texttt{-t, -T}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Некоторые возможные применения}
+ \begin{itemize}
+  \item Обнаружение файлов, открываемых приложением (\texttt{-e open})
+    \begin{itemize}
+      \item библиотек, подключаемых в реальном времени
+      \item конфигурационных файлов
+    \end{itemize}
+   \item Обнаружение сетевых соединений \texttt{connect, accept, recvfrom, sendto, poll, read, write} 
+   \item Чем занято приложение в текущий момент
+   \item Почему приложение сейчас тормозит
+   \item Профилирование
+   \item Получение дампов записей в устройства, сокеты и т.п.
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+ \begin{enumerate}
+   \item Выяснить, какие конфигурационные файлы пытается открыть \texttt{vim}
+   \item В каком системном вызове проводит больше всего времени \texttt{ls /usr/bin/}. То же для \texttt{ls -l /usr/bin}
+ \end{enumerate}
+\end{frame}

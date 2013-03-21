@@ -1,0 +1,30 @@
+\begin{frame}
+ \frametitle{Использование printf и логов}
+ \begin{columns}
+   \column{0.45\textwidth}
+    \begin{center}
+     Преимущества 
+    \end{center}
+    \begin{itemize}
+     \item Работает везде и всегда
+     \begin{itemize}
+       \item В многопоточных программах
+       \item При вызове из других программ
+       \item Внутри ядра (printk)
+       \item В реальном времени
+       \item В разных языках
+      \end{itemize}
+    \end{itemize}
+   \column{0.45\textwidth}
+    \begin{center}
+     Недостататки
+    \end{center}
+    \begin{itemize}
+     \item Нужна перекомпиляция
+     \item Нет интерактивности
+     \item Нужно вычищать
+     \item Трудно печатать сложные структуры
+     \item Нет backtrace
+    \end{itemize}
+ \end{columns}
+\end{frame}

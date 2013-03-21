@@ -1,0 +1,31 @@
+\begin{frame}[fragile]
+ \frametitle{Gprof}
+ \begin{itemize}
+   \item Компилировать с опцией \texttt{-pg}
+\begin{lstlisting}[language=sh]
+ gcc -g -pg -o program program.c
+\end{lstlisting}
+   \item Создается файл gmon.out
+   \item Просмотр статистики (плоский профиль, flat profile) 
+\begin{lstlisting}[language=sh]
+gprof program -p
+\end{lstlisting}
+    \item Просмотр графа вызовов со статистикой
+\begin{lstlisting}[language=sh]
+gprof program -q
+\end{lstlisting}
+    \item Аннотация исходного кода
+\begin{lstlisting}[language=sh]
+gprof program -A
+\end{lstlisting}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Упражнение}
+  \begin{enumerate}
+    \item Изменить Makefile для primefactors.c, так, чтобы включить профилирование
+    \item Просмотреть информацию профайлером
+  \end{enumerate}
+\end{frame}
+
