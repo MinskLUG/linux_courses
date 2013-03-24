@@ -1,0 +1,78 @@
+\begin{frame}
+ \frametitle{Базовые команды для работы с svn клиентом}
+  \begin{itemize}
+   \item svn help
+   \item svn checkout 
+   \item svn import
+   \item svn update
+   \item svn commit
+   \item svn status
+   \item svn copy
+   \item svn switch
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Типичная последовательность действий при работе с svn}
+ \begin{itemize}
+  \item svn import my_project svn://myhost.com/my_project/trunk
+  \item $\dots$
+  \item svn checkout svn://myhost.com/my_project/trunk myproject
+  \item Редактируем файлы в директории myproject
+  \item svn status -- смотрим изменения
+  \item svn diff
+  \item svn update 
+  \item Разрешаем конфликты
+  \item svn commit --user me --password mypass -m "Some changes"
+  \item svn update
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Типичная структура svn репозитория}
+ \begin{itemize}
+  \item project1
+    \begin{itemize}
+      \item trunk
+        \begin{itemize}
+          \item file1.txt
+          \item $\dots$
+        \end{itemize}
+      \item tags
+      \item branches
+         \begin{itemize}
+            \item branch1
+            \item branch2
+         \end{itemize}
+     \end{itemize}
+  \item project2
+
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Как создавать svn репозиторий}
+ \begin{itemize}
+   \item svnadmin
+     \begin{itemize}
+       \item svnadmin help
+       \item svnadmin create <путь к директории>
+     \end{itemize}
+    \item svnserve
+      \begin{itemize}
+        \item svnserve -d -r <путь к репозиторию>
+        \item Файлы настройки: conf/passwd, conf/svnserve.conf
+      \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Упражнение}
+  \begin{itemize}
+    \item Поднять svn репозиторий на localhost
+    \item Внести в него файлы из проекта rpm
+    \item Сделать svn checkout всего проекта в отдельную директорию
+    \item Отредактировать несколько файлов в созданной директории
+    \item Закоммитить изменения в центральный репозиторий
+    \item Создать ветку от исходной ревизии
+  \end{itemize}
+\end{frame}

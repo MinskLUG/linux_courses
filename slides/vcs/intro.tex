@@ -1,0 +1,55 @@
+\begin{frame}
+ \frametitle{История систем контроля версий}
+ \begin{enumerate}
+  \item[1972] SCCS
+  \item[1982] RCS (Revision control system)
+  \item[1990] CVS Concurrent version system
+  \item[2000] Subversion(SVN)
+  \item[2000] BitKeeper(proprietary)
+  \item[2003] Monotone, darcs
+  \item[2005] Git, Bazaar, Mercurial
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Распределенные и централизованные системы контроля версий}
+ \begin{columns}
+  \column{0.5\textwidth}
+   \begin{center}
+     Централизованные (CVS,SVN)
+   \end{center}
+   \begin{itemize}
+    \item Достоинства
+     \begin{itemize}
+       \item Линейная история изменений
+       \item Не надо хранить весь репозиторий
+       \item Лучшая поддержка бинарных файлов
+     \end{itemize}
+    \item Недостатки
+     \begin{itemize}
+       \item Single point of failure
+       \item Трудно работать без доступа к сети
+       \item Общая тормознутость
+     \end{itemize}
+   \end{itemize}
+  \column{0.5\textwidth}
+   \begin{center}
+     Распределенные
+   \end{center}
+   \begin{itemize}
+    \item Достоинства
+     \begin{itemize}
+       \item Не задушишь, не убьешь
+       \item Часто быстрее
+       \item Более гибкая работа в команде
+       \item Не требуют сети для основной работы
+     \end{itemize}
+    \item Недостатки
+     \begin{itemize}
+       \item Большой репозиторий на локальной машине
+       \item Невозможность замка на бинарном файле
+       \item Зоопарк версий
+     \end{itemize}
+   \end{itemize}
+ \end{columns}
+\end{frame}
