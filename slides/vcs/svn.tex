@@ -15,9 +15,9 @@
 \begin{frame}
  \frametitle{Типичная последовательность действий при работе с svn}
  \begin{itemize}
-  \item svn import my_project svn://myhost.com/my_project/trunk
+  \item svn import my-project svn://myhost.com/my-project/trunk
   \item $\dots$
-  \item svn checkout svn://myhost.com/my_project/trunk myproject
+  \item svn checkout svn://myhost.com/my-project/trunk myproject
   \item Редактируем файлы в директории myproject
   \item svn status -- смотрим изменения
   \item svn diff
@@ -44,7 +44,7 @@
             \item branch1
             \item branch2
          \end{itemize}
-     \end{itemize}
+    \end{itemize}
   \item project2
 
  \end{itemize}
@@ -63,6 +63,7 @@
         \item svnserve -d -r <путь к репозиторию>
         \item Файлы настройки: conf/passwd, conf/svnserve.conf
       \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
