@@ -3,28 +3,261 @@
 \end{frame}
 
 \begin{frame}
- \frametitle{Типичные действия в git}
- \begin{itemize}
-  \item git init
-  \item git add file1 file2 file3
-  \item git commit -m "First revision"
-  \item $\dots$
-  \item git branch new-branch
-  \item git checkout new-branch
-  \item Редактируем файлы в новой ветке
-  \item git commit -a -m "Какое-то изменение"
-  \item Повторить по вкусу
-  \item git checkout master 
-  \item git merge new-branch master
-  \item git rebase 
-  \item git push origin master
- \end{itemize}
+	\frametitle{Создание нового репозитория git}
+	\begin{itemize}
+		\item git init [-{}-bare]
+		\item git add file1 file2 file3
+		\item git commit -m "First revision"
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Создание локальной копии репозитория git}
+	\begin{itemize}
+		\item git clone <url> 
+	\end{itemize}
+
+	\begin{verbatim}
+git clone ~/work/linux_courses 
+	\end{verbatim}
+
+	\begin{verbatim}
+git clone git://github.com/d4s/linux_courses.git
+	\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Кто автор?}
+	\begin{itemize}
+		\item git config [-{}-list] [-{}-add] [-{}-get] [-{}-set] $\dots$
+	\end{itemize}
+
+	\begin{verbatim}
+git config --local --add user.name "Denis Pynkin"
+git config --local --add user.email "denis_pynkin@epam.com"
+git config --local --list
+	\end{verbatim}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Отслеживание множества копий репозитория git}
+	\begin{itemize}
+		\item git remote [<cmd> [opts]]
+	\end{itemize}
+
+	\begin{itemize}
+		\item git remote add <name> <url>
+		\item git remote del <name>
+		\item git remote show <name>
+		\item git remote update
+	\end{itemize}
+
+	\begin{verbatim}
+git remote add github git://github.com/d4s/linux_courses.git 
+	\end{verbatim}
+
+	\begin{block}{Задача}
+		Добавить репозиторий соседа для отслеживания.
+
+		Hint: доcтуп через ssh (ip:/path/to/repository)
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Checkout}
+
+	\begin{itemize}
+		\item git checkout <revision> [ -{}- path]
+	\end{itemize}
+
+	\begin{itemize}
+		\item "Перемещение" по коммитам и не только
+		\item Восстановление файлов
+	\end{itemize}
+
+	\begin{verbatim}
+git checkout HEAD -- file
+	\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Ежедневные команды}
+
+	Скачать-закачать изменения:
+	\begin{itemize}
+		\item git pull
+		\item git fetch
+		\item git push [-{}-all] [-{}-tags]
+	\end{itemize}
+
+	Полезные мелочи:
+	\begin{itemize}
+		\item git log
+		\item git status
+		\item git tag <name> [-m "comment"]
+		\item git diff <from> <to>
+		\item git stash [pop]
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Бранчи}
+
+	Создание:
+
+	\begin{itemize}
+		\item git branch <old> <newname>
+		\item git checkout <rev> -B <branchname> 
+	\end{itemize}
+
+	Удаление:
+
+	\begin{itemize}
+		\item git branch -D <name>
+	\end{itemize}
+
+	Переименование:
+
+	\begin{itemize}
+		\item git branch -M <oldname> <name>
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: бранчуемся}
+
+
+	\begin{block}{Задача}
+		\begin{itemize}
+			\item Создать бранч {\tt my}
+			\item В бранче {\tt my} изменить любой файл в директории {\tt epam/examples}
+			\item Сделать коммит
+			\item Обновить в локальной копии состояние репозитория соседа
+			\item Создать бранч {\tt neigh}, соответствующий бранчу {\tt my} соседа
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Merge, rebase и cherry-pick}
+
+	\begin{itemize}
+		\item git merge [-s <strategy>] <rev>
+		\item git rebase <rev> 
+		\item git cherry-pick <rev> 
+	\end{itemize}
+
+	Merge:
+
+	\begin{verbatim}
+      A---B---C topic          A---B---C topic
+     /                        /         \
+D---E---F---G master     D---E---F---G---H master
+	\end{verbatim}
+
+	Rebase:
+
+	\begin{verbatim}
+      A---B---C topic                 A'--B'--C' topic
+     /                               /         
+D---E---F---G master    D---E---F---G master
+	\end{verbatim}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: слияние}
+
+		   
+	\begin{block}{Задача}
+		\begin{itemize}
+			\item Добавить изменения соседа в свой бранч c помощью {\tt cherry-pick} 
+			\item Запустить {\tt gitk}
+			\item Сделать {\tt merge} с бранчем соседа
+			\item Запустить {\tt gitk}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: найти "гаденыша"}
+
+	Понадобится скрипт {\tt cutter.sh} и любая книга в txt формате.
+
+	\begin{verbatim}
+cat book.txt | sh cutter.sh
+	\end{verbatim}
+
+	Задача: найти -- кто и в каком коммите испортил книгу фразой:
+	\begin{verbatim}
+Some anonymous crap from nobody :-E~~~
+	\end{verbatim}
+	
+	\begin{block}{Вопрос}
+		\Large{KAK ?}
+	\end{block}
 \end{frame}
 
 \begin{frame}
- \frametitle{Внутреннее устройство git}
+	\frametitle{git bisect}
+
+	\begin{itemize}
+		\item git bisect start [<bad> [<good>...]
+		\item git bisect good <last known commit>
+		\item git bisect bad
+		\item git bisect good
+		\item git bisect skip
+		\item git bisect reset
+		\item git bisect log
+		\item git bisect replay
+			\pause
+		\item git bisect run <command>
+	\end{itemize}
 \end{frame}
 
-\begin{frame}
- \frametitle{Упражнение}
+\begin{frame}[fragile]
+	\frametitle{blame}
+
+	Метод попроще:
+
+	\begin{itemize}
+		\item git blame 
+	\end{itemize}
+
+	\begin{verbatim}
+git blame -L 1224, 1224 -- text.txt
+	\end{verbatim}
+	
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Взаимодействуем с upstream}
+
+	Создать серию патчей:
+	\begin{itemize}
+		\item git format-patch <ref>
+	\end{itemize}
+
+	\begin{verbatim}
+git format-patch HEAD~5
+	\end{verbatim}
+
+	Применить серию патчей:
+	\begin{itemize}
+		\item git am <mbox|mdir|files>
+	\end{itemize}
+\end{frame}
+
