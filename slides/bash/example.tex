@@ -1,0 +1,114 @@
+%% Strings manipulation
+
+\begin{frame}[fragile]
+	\frametitle{Практическая задача}
+
+	Чтение табличных данных и их преобразование.
+
+	\pause
+
+	Hint: {\tt man 5 passwd}
+
+	\begin{enumerate}
+		\item Прочитать все записи из файла {\tt /etc/passwd}
+		\item Вывести на экран всех пользователей у которых 
+			домашняя директория не {\tt /dev/null} в формате:\\
+			"account = homedir"
+		\item Оставить от "homedir" только последнее имя
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 1: Чтение из файла}
+
+	\begin{lstlisting}
+cat /etc/passwd | ./script.sh
+./script.sh < /etc/passwd
+	\end{lstlisting}
+
+	\begin{lstlisting}
+#!/bin/bash
+
+exec < /etc/passwd
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 2: Построчное чтение}
+
+	\begin{lstlisting}
+while read string
+do
+    echo $string
+done
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 3: Разбиваем строку в таблице на элементы}
+
+	\begin{lstlisting}
+IFS=':'
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 4: поэлементное чтение}
+
+	\begin{lstlisting}
+while read account password uid gid gecos homedir shell
+do
+    echo $account = $homedir
+done
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 5: выводим не {\tt /dev/null}}
+
+	\begin{lstlisting}
+while read account password uid gid gecos homedir shell
+do
+    [ -z "${homedir/#\/dev\/null}" ] || echo $account = ${homedir}
+done
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример решения}
+
+	\begin{block}{Шаг 5: выводим не {\tt /dev/null}}
+
+	\begin{lstlisting}
+while read account password uid gid gecos homedir shell
+do
+    [ -z "${homedir/#\/dev\/null}" ] || echo $account = ${homedir##*/}
+done
+	\end{lstlisting}
+
+	\end{block}
+\end{frame}
+
+
