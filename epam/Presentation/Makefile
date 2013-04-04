@@ -19,6 +19,8 @@ TARGET += 18-profile.pdf
 TARGET += 19-packaging.pdf
 TARGET += 20-version_control.pdf
 
+TARGET += epam-Linux_courses_handbook.pdf
+
 
 %.dvi: %.tex
 	latex $<
