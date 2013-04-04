@@ -1,0 +1,39 @@
+\begin{frame}{Iptables}
+
+	\center\includegraphics[height=0.4\textheight]{../../slides/networking/06-iptables.png}
+
+	\begin{itemize}
+	\begin{columns}
+		\column{0.3\textwidth}
+			\item[ ] {\bf iptables -L -t <table>}
+				\bigskip
+
+			\item filter -- файерволл
+				\begin{itemize}
+					\item INPUT
+					\item FORWARD
+					\item OUTPUT
+				\end{itemize}
+		\column{0.3\textwidth}
+			\item nat -- преобразования адресов
+				\begin{itemize}
+					\item PREROUTING
+					\item INPUT
+					\item OUTPUT
+					\item POSTROUTING
+				\end{itemize}
+		\column{0.3\textwidth}
+			\item mangle -- специальные  изменения  пакетов (TOS, TTL, MARK)
+				\begin{itemize}
+					\item PREROUTING
+					\item INPUT
+					\item FORWARD
+					\item OUTPUT
+					\item POSTROUTING
+				\end{itemize}
+		\end{columns}
+	\end{itemize}
+
+\end{frame}
+
+

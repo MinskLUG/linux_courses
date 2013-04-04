@@ -1,0 +1,13 @@
+\begin{frame}{Маршрутизация}
+	\begin{itemize}
+		\item netstat -r
+		\item route
+		\item ip route show
+	\end{itemize}
+
+	\begin{block}{Разрешить маршрутизацию на хосте}
+		{\tt echo 1 > /proc/sys/net/ipv4/ip\_forward}
+	\end{block}
+\end{frame}
+
+

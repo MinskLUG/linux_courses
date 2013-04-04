@@ -1,0 +1,63 @@
+\begin{frame}{Команды управления настройками сети}
+	\begin{itemize}
+	  \item ifconfig/route
+	  \item iproute2
+	\end{itemize}
+
+	\begin{itemize}
+		\item Список интерфейсов
+			\begin{itemize}
+				\item {\tt ifconfig -a}
+				\item {\tt ip link show}
+			\end{itemize}
+		\item Включение интерфейса 
+			\begin{itemize}
+				\item {\tt ifconfig <iface> up}
+				\item {\tt ip link set <iface> up}
+			\end{itemize}
+	  \item Выключение интерфейса
+			\begin{itemize}
+				\item {\tt ifconfig <iface> down}
+				\item {\tt ip link set <iface> down}
+			\end{itemize}
+	  \item Назначение адреса
+			\begin{itemize}
+				\item {\tt ifconfig eth0 192.168.1.17 netmask 255.255.254.0 up}
+				\item {\tt ip addr add 192.168.1.17/23 dev eth0}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Конфигурационные файлы}
+  \begin{itemize}
+    \item {\tt /etc/resolv.conf}
+    \item {\tt /etc/hosts}
+	\item {\tt /etc/sysconfig/network}
+    \item {\tt /etc/sysconfig/network-scripts}\\
+		{\tt /etc/sysconfig/network-scripts/ifcfg-eth0}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Дополнительные интерфейсы}
+	\begin{block}{Алиасы}
+		\begin{itemize}
+			\item ifconfig <iface>:<alias> <ip> up
+			\item ifconfig <iface> add <ip> up
+			\item ip addr add <ip> {\bf label} <iface>:<alias> dev <iface>
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{''Виртуальные'' интерфейсы}
+	\begin{block}{TUN/TAP}
+
+		{\tt modprobe tun}
+
+		\begin{itemize}
+			\item Добавить -- {\tt tunctl -t <ifacename>}
+			\item Удалить -- {\tt tunctl -d <ifacename>}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+

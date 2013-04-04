@@ -1,0 +1,41 @@
+\begin{frame}{Практика: создание тестовой среды}
+	\begin{itemize}
+		\item Подготовка диска
+			\begin{itemize}
+				\item Создать пустой файл размером в 1GB и отобразить на устройство
+					/dev/loop ({\tt dd, losetup})
+				\item Создать группу томов на базе этого устройства ({\tt pvcreate, vgcreate})
+				\item Выделить 75\% объема под логический диск ({\tt lvcreate})
+				\item Скопировать содержимое виртуального диска в полученный логический том ({\tt dd})
+				\item Создать снимок логического тома на 20\% размера ({\tt lvcreate})
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Практика: создание тестовой среды}
+	\begin{itemize}
+		\item Запуск виртуальных машин
+			\begin{itemize}
+				\item {\tt modprobe kvm-intel} 
+				\item {\tt modprobe tun} 
+				\item {\tt kvm -m 512 -boot c -net nic -net tap,ifname=tap0,script=no,downscript=no /dev/VG0/origin } 
+				\item {\tt kvm -m 512 -boot c -net nic -net tap,ifname=tap1,script=no,downscript=no /dev/VG0/snap } 
+			\end{itemize}
+			\pause
+		\item Настройка сети на хосте
+			\begin{itemize}
+				\item Создать мост {\tt brctl} и назначить ему адрес {\tt ifconfig/ip}
+				\item Поднять виртуальные интерфейсы {\tt ifconfig/ip}
+				\item Добавить дополнительный интерфейс и виртуальные интерфейсы к мосту {\tt brctl}
+			\end{itemize}
+			\pause
+		\item Настройка сети на виртуалках
+			\begin{itemize}
+				\item Назначить адрес устройству eth0 {\tt ifconfig/ip}
+				\item Проверить {\tt ping}
+			\end{itemize}
+
+	\end{itemize}
+\end{frame}
+
+
