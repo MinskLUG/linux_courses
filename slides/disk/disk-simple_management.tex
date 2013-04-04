@@ -1,0 +1,92 @@
+\begin{frame}{Полезные утилиты}
+	\begin{columns}
+		\column{0.25\textwidth}
+		\begin{itemize}
+			\item {\tt fdisk}
+			\item {\tt parted}
+			\item {\tt kpartx}
+		\end{itemize}
+		\column{0.25\textwidth}
+		\begin{itemize}
+			\item {\tt dd}
+			\item {\tt losetup}
+		\end{itemize}
+		\column{0.25\textwidth}
+		\begin{itemize}
+			\item {\tt mkfs}
+			\item {\tt fsck}
+		\end{itemize}
+		\column{0.25\textwidth}
+		\begin{itemize}
+			\item {\tt mount}
+			\item {\tt umount}
+			\item {\tt df}
+		\end{itemize}
+	\end{columns}
+
+	\bigskip
+	Понадобятся для упражнений:
+	\begin{itemize}
+			\item[*] {\tt chroot}
+			\item[*] {\tt kvm}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Практика: отображение файла на loop-устройство}
+	\begin{enumerate}
+		\item Создать пустой файл размером 100MB: \\
+			dd if=/dev/zero of=test bs=1M count=100
+			\pause
+		\item Найти неиспользуемое loop-устройство и отобразить на него файл:\\
+			losetup -f \\
+			losetup loop0 test
+			\pause
+		\item Посмотреть структуру loop-устройства, создать разделы и посмотреть результаты:\\
+			fdisk -l /dev/loop0 \\
+			fdisk /dev/loop0 \\
+			fdisk -l /dev/loop0
+			\pause
+		\item Дать команду ядру перечитать разделы и создать устройства для разделов:\\
+			ls -l /dev/mapper/* \\
+			kpartx -a /dev/loop0 \\
+			ls -l /dev/mapper/* \\
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Практика: создание файловой системы}
+	\begin{enumerate}
+		\item Форматируем файловую систему на устройстве: \\
+			mkfs.ext2 /dev/mapper/loop0p1
+			\pause
+		\item и монтируем:\\
+			mkdir -p /mnt/fs\\
+			mount\\
+			mount /dev/mapper/loop0p1 /mnt/fs\\
+			mount\\
+			df
+			\pause
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Практика: чистимся}
+	\begin{enumerate}
+		\item Найти смонтированные разделы и отмонтировать их: \\
+			mount \\
+			umount /dev/mapper/loop0p1
+			\pause
+		\item Найти используемые loop-устройства\\
+			losetup -a \\
+			\pause
+		\item Корректно удалить устройства для разделов:\\
+			ls -l /dev/mapper/* \\
+			kpartx -d /dev/loop0 \\
+			ls -l /dev/mapper/* \\
+			\pause
+		\item Удалить отображение файла на loop-устройство: \\
+			losetup -d /dev/loop0
+	\end{enumerate}
+\end{frame}
+
+
