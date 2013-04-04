@@ -1,0 +1,71 @@
+\newcounter{tmpc}
+
+\begin{frame}{Репозиторий}
+	\begin{block}{Репозиторий пакетов}
+		Место, где хранятся и поддерживаются пакеты, а также сопутствующая мета-информация, предназначенное для использования пакетным менеджером.
+	\end{block}
+	\begin{block}{Пример: Fedora Core}
+		\begin{itemize}
+			\item Packages/*.rpm
+			\item RPM-GPG-KEY-*
+			\item repodata
+			\begin{itemize}
+				\item множество сжатых и несжатых XML файлов для YUM
+			\end{itemize}
+		\end{itemize}
+
+		Описание репозтория для YUM на локальной системе хранится по пути
+		{\tt /etc/yum.repos.d/*.repo}
+	\end{block}
+		
+\end{frame}
+
+\begin{frame}{YUM: команды}
+	\begin{block}{Установка/обновление пакета}
+		{\tt yum install pkgname }
+	\end{block}
+	\begin{block}{Обновление всех пакетов}
+		{\tt yum update }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt yum remove pkgname }
+	\end{block}
+	\begin{block}{Поиск}
+		{\tt yum list pkgname }\\
+		{\tt yum search pkgname }
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Упражнение}
+  \begin{enumerate}
+      \item Создать на {\tt /dev/sda} раздел размером примерно 10Gb
+      \item Создать на этом разделе ext3 ФС и смонтировать раздел в {\tt /mnt/chroot}
+      \item Развернуть {\tt /media/nfs/pub/CentOS/precreated/centOS.tar.gz} в {\tt /mnt/chroot}
+      \item Смонтировать {\tt proc, sysfs} а также {\tt /dev} в соответствующие места {\tt /mnt/chroot}
+      \item {\tt chroot /mnt/chroot}
+      \item Отредактировать {\tt /etc/resolv.conf} -- скопировать туда информацию из {\tt resolv.conf} основной системы
+      \item Отредактировать {\tt /etc/yum.conf} Добавить следующий раздел
+\begin{minipage}{0.5\textwidth}
+\begin{verbatim}
+[base]
+  name = CentOS 6
+  baseurl = ftp://192.168.11.15/CentOS
+  gpgcheck = 0
+\end{verbatim}
+\end{minipage}
+\setcounter{tmpc}{\theenumi}
+\end{enumerate}
+\end{frame}
+\begin{frame}{Продолжение упражнения}
+  \begin{enumerate}
+      \setcounter{enumi}{\thetmpc}
+      \item {\tt yum update}
+      \item Установить пакет vim
+      \item Посмотреть списки файлов для пакетов {\tt yum, rpm}
+      \item Найти пакет предоставляющий сервис ssh и установить его
+      \item Удалить пакет vim
+    \end{enumerate}
+\end{frame}
+
+

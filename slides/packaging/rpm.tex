@@ -1,0 +1,41 @@
+\begin{frame}{RPM: команды}
+	\begin{block}{Установка пакета}
+		{\tt rpm -i [rpm-file1] ... [[url://]rpm-fileN] }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt rpm -e pkgname1 ... pkgnameN }
+	\end{block}
+	\begin{block}{Обновление пакета}
+		{\tt rpm -U [rpm-file1] ... [[url://]rpm-fileN] }
+	\end{block}
+	\begin{block}{Проверка пакета}
+		{\tt rpm -V pkgname1 ... pkgnameN }
+	\end{block}
+\end{frame}
+
+\begin{frame}{RPM: часто используемые опции опроса}
+
+	\begin{itemize}
+		\item {\tt pkgname} -- выбор пакета, установленного в системе
+		\item {\tt -a} -- все пакеты, установленные в системе
+		\item {\tt -p} -- использовать файл RPM
+	\end{itemize}
+
+
+	\begin{itemize}
+		\item {\tt -i} -- показать информацию пакета\\
+			{\tt rpm -q -i glibc }
+		\item {\tt -l} -- показать список файлов пакета \\
+			{\tt rpm -q -l glibc }
+		\item {\tt --whatprovides} -- \\
+			{\tt rpm -q --whatprovides java}
+		\item {\tt --whatrequires} -- \\
+			{\tt rpm -q --whatrequires /bin/bash}
+		\item {\tt --queryformat} -- формат вывода\\
+			{\tt rpm -q --whatrequires /bin/bash --queryformat ''\%\{name\} ''}
+
+	\end{itemize}
+
+\end{frame}
+
+
