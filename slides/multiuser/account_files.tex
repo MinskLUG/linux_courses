@@ -1,0 +1,61 @@
+\begin{frame}{Хранение информации о пользователях в системе}
+
+	\begin{block}{\tt /etc/group}
+		{\tt  group\_name:password:GID:user\_list}
+	\end{block}
+	
+	\pause
+
+	\begin{block}{\tt /etc/passwd}
+		{\tt account:password:UID:GID:GECOS:directory:shell}
+
+		\begin{itemize}
+			\item {\tt *} -- пароль не задан
+			\item {\tt x} -- пароль задан в файле {\tt /etc/shadows}
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{\tt /etc/shadow}
+		\begin{enumerate}
+			\begin{columns}
+			\column{0.3\textwidth}
+
+			\item login name
+			\item encrypted password
+			\item date of last password change
+
+			\column{0.3\textwidth}		
+			\item minimum password age 
+			\item maximum password age
+			\item password warning period
+
+			\column{0.3\textwidth}
+			\item password inactivity period
+			\item account expiration date
+			\item reserved field
+
+			\end{columns}
+		\end{enumerate}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{Практическое задание}
+    \begin{itemize}
+		\item Посмотреть права доступа к файлам {\tt group}, {\tt passwd}, {\tt shadow}\\
+			{\tt ls -l /etc/{group, passwd, shadow}}
+		\item Добавить пользователя и группу и посмотреть изменения в перечисленных файлах
+		\item Cоздать пользователя без использования системных утилит
+    \end{itemize}
+	\pause
+	 \begin{itemize}
+		\item Изменить пароль пользователю с помощью утилиты {\tt passwd}\\
+			Hint: {\tt /etc/passwdqc.conf}
+		\item Сбросить пароль пользователю\\
+			Hint: {\tt usermod}
+    \end{itemize}
+\end{frame}
+
+

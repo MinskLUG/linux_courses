@@ -1,0 +1,63 @@
+\begin{frame}{PAM}
+	% http://www.opennet.ru/base/net/pam_linux.txt.html
+	\begin{itemize}
+		\item PAM это динамическая библиотека
+		\item Конфигурация PAM
+			\begin{itemize}
+				\item {\tt /etc/pam.conf}
+				\item {\tt /etc/pam.d/...}
+					\begin{itemize}
+						\item Сервисы
+						\item system\_auth
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
+
+	\begin{block}{Формат записи}
+		\begin{columns}
+			\column{0.245\textwidth}
+			\textbf{module type}
+			 \begin{itemize}
+				 \item auth
+				 \item account
+				 \item session
+				 \item password
+			 \end{itemize}
+			 \column{0.245\textwidth}
+			 \textbf{control flag}
+			 \begin{itemize}
+				 \item requisite
+				 \item required
+				 \item sufficient
+				 \item optional
+			 \end{itemize}
+			 \column{0.245\textwidth}
+			 \textbf{module name}
+			 \column{0.245\textwidth}
+			 \textbf{module options}
+		 \end{columns}
+	 \end{block}
+\end{frame}
+
+\begin{frame}{Диспетчер службы имен (NSS)}
+
+	Важная информация для системы:
+		
+	\begin{itemize}
+		\item Информация о пользователях (логин, группа, пароль и т.д.)
+		\item Информация о сетевых ресурсах (имена хостов, протоколов, сервисов)
+    \end{itemize}
+
+	\pause
+
+	\begin{block}{NSS}
+		\begin{itemize}
+			\item Конфигурация: {\tt /etc/nsswitch.conf}
+			\item Динамические библиотеки сервисов: {\tt ls -1 /lib*/libnss\_*}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+

@@ -1,0 +1,50 @@
+\begin{frame}{Многопользовательская модель}   
+ \begin{itemize}
+   \item Linux -- многопользовательская система
+   \item Привилегии пользователей
+     \begin{itemize}
+       \item root
+       \item other users
+      \end{itemize}
+     \end{itemize}
+\end{frame}
+
+\section{Механизмы разделения привилегий}
+\subsection{Классический UNIX}
+
+\begin{frame}{Пользователи, группы и файлы}
+\begin{itemize}
+  \item Каждый пользователь принадлежит одной или нескольким \textbf{группам}
+  \item Каждый файл и директория принадлежит
+    \begin{itemize}
+      \item Одному пользователю 
+      \item Одной группе
+    \end{itemize}
+  \pause
+  \item  Разрешения что либо делать с файлом определяются по отношению к
+    \begin{enumerate}
+      \item Пользователю-владельцу файла
+      \item Группе владеющей файлом
+      \item Всем остальным пользователям
+    \end{enumerate}
+
+\end{itemize}
+\pause
+\begin{columns}
+  \column{0.48\textwidth}
+  \begin{itemize}
+    \item {\tt ls -l} 3,4 поле 
+    \item {\tt groups}
+   \end{itemize}
+  \column{0.48\textwidth}
+  \begin{block}{Попробовать}
+    {\tt ls -l /usr/bin/}
+
+    {\tt groups}
+
+    {\tt groups root}
+  \end{block}
+\end{columns}
+\end{frame}
+
+
