@@ -1,0 +1,95 @@
+\begin{frame}{Архивация}
+	\begin{block}{Архивация: tar}
+		\begin{itemize}
+			\item {\tt -c} -- создать архив
+			\item {\tt -x} -- извлечь из архива
+				\begin{itemize}
+					\item {\tt -C} -- перейти в директорию
+				\end{itemize}
+			\item {\tt -f} -- запись в файл
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Сжатие: gzip, bzip, xz}
+		\begin{itemize}
+			\item {\tt -[1-9]} -- изменить уровень сжатия
+			\item {\tt -d} -- распаковать
+			\item {\tt -c} -- вывод на консоль
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Архивация: примеры}
+
+	Создать сжатый архив:
+	\begin{verbatim}
+tar -czf archive.tar.gz *
+	\end{verbatim}
+	\pause
+	Распаковать сжатый архив в директорию {\tt /tmp}:
+	\begin{verbatim}
+tar -C /tmp/ -xzf archive.tar.gz 
+	\end{verbatim}
+	\pause
+	Создать сжатый архив:
+	\begin{verbatim}
+tar -czf archive.tar.gz *
+	\end{verbatim}
+	\pause
+	Создать копию текущей директории в директории {\tt /tmp/copy/}:
+	\begin{verbatim}
+tar -c * | tar -C /tmp/copy -x
+	\end{verbatim}
+	\pause
+	Создать копию текущей директории на другом хосте:
+	\begin{verbatim}
+HostDest: netcat -l 2222 | gzip -dc | tar -C /tmp/copy/ -x
+HostSrc:  tar -c * | gzip -9 | netcat HostDest 2222
+	\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Поиск файлов}
+	\begin{block}{find}
+		\begin{itemize}
+			\item {\tt -type} -- тип файлового объекта
+			\item {\tt -size} -- размер
+			\item {\tt -maxdepth} -- глубина рекурсии
+			\item {\tt -exec} -- выполнить команду
+			\item {\tt -printf} -- форматированный вывод
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size +100k  -exec ls -l {} \;
+		\end{verbatim}
+
+		\begin{verbatim}
+find -type d -user altlinux
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{xargs}
+	\begin{block}{xargs}
+			Утилита для создания и запуска команд из стандартного потока ввода:
+		\begin{verbatim}
+xargs [options] command [command options]
+		\end{verbatim}
+	
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size -100k | xargs tar -czf /tmp/archive-100k.tar.gz
+		\end{verbatim}
+
+		\begin{verbatim}
+find /etc -type f | xargs -I {} echo "Найден {} файл"
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+

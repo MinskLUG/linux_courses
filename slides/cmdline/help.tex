@@ -1,0 +1,47 @@
+\begin{frame}[fragile]{Получение помощи}
+  \begin{itemize}
+    \pause
+    \item \textbf{man} - помощь по внешним командам
+    \pause
+    \item \textbf{help} - помощь по внутренним командам bash (также man bash)
+    \pause
+    \item \textbf{info} - расширенная помощь по некоторым командам (texinfo format)
+      \begin{itemize}
+       \item   Попробовать {\tt info coreutils}
+       \item   Справка по навигации -- нажать h
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Основное о man}
+\begin{columns}
+	\column{2.2in}
+		\begin{itemize}
+			\item Прочитайте {\tt man man} !
+			\item Apropos {\tt man -k <слово>}
+			\item Разделы (sections)
+				\begin{itemize}
+					\item[1] Основная секция(юзерские программы)
+					\item[2] Syscalls
+					\item[3] С library
+					\item[5] Конфигурационные файлы
+					\item[8] Системные службы
+				\end{itemize}
+		\end{itemize}
+	  \textbf{Замечание}
+
+	  Обычно внутри страницы работает поиск с помощью '/'
+	\pause 
+	\column{1in}
+		\begin{block}{Попробовать}
+			\begin{lstlisting}
+man -k printf
+man 3 printf
+man 1 printf
+man -a printf
+			\end{lstlisting}
+		\end{block}
+	\end{columns}
+\end{frame}
+
+

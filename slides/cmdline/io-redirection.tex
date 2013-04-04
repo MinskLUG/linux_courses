@@ -1,0 +1,52 @@
+\begin{frame}{Перенаправления в файл}
+
+\begin{itemize}
+  \item Перенаправление stdout 
+    \begin{itemize}
+      \item С созданием нового файла
+
+        {\tt command > file}\\
+		Например {\tt cat file1 file2 > file3}
+      \item С дополнением существующего
+
+		  {\tt command >\phantom{}>  file}
+    \end{itemize}
+    \pause
+  \item Перенаправления stdin
+
+    {\tt command < file}
+    \pause
+  \item Перенаправления stderr
+
+    {\tt command1 2>\&1 | command2}
+
+   {\tt command 1>file 2>\&1}
+
+   {\tt command 2>file 1>\&2}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Мультистрочный ввод}
+
+\begin{verbatim}
+program <<LABEL
+Тут
+    много
+	     строк
+LABEL
+\end{verbatim}
+
+	\pause
+	\begin{block}{Пример}
+	Передадим несколько строк в COM-порт 1
+\begin{lstlisting}[language=bash]
+cat >/dev/ttyS0 <<E_O_F
+ATZ
+ATDT 8w0170123456
+E_O_F
+\end{lstlisting}
+	\end{block}
+\end{frame}
+
+

@@ -1,0 +1,42 @@
+\begin{frame}{Навигация по файловой системе}
+      \begin{itemize}
+		  \item {\tt ls} -- список файлов в (текущей по умолчанию) директории (man ls)
+		  \item {\tt cd} -- смена текущей директории (help cd)
+		  \item {\tt pwd} -- имя текущей директории (help pwd)
+      \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Команды для работы с файлами}
+	\begin{itemize}
+		\begin{columns}
+		\column{0.2\textwidth}
+			\item touch
+			\item ln
+			\item mkdir
+			\item mknod
+			\item mkfifo
+		\column{0.2\textwidth}
+			\item cp
+			\item mv
+			\item install
+			\item rm
+			\item rmdir
+			\item file
+		\column{0.4\textwidth}
+			\begin{block}{Упражнение}
+				\begin{enumerate}
+					\item Создать иерархию директорий
+						\begin{lstlisting}
+dir1/dir1.1/dir1.1.1
+dir1/dir1.2/dir1.2.1
+dir1/dir1.2/dir1.2.2
+						\end{lstlisting}
+					\item Внутри каждой создать файл
+					\item Удалить все созданное
+				\end{enumerate}
+			\end{block}
+		\end{columns}
+	\end{itemize}
+\end{frame}
+
+

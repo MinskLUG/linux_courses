@@ -1,0 +1,44 @@
+\begin{frame}[fragile]{Определение(не совсем формальное)}
+	\textbf{Shell} -- приложение, обеспечивающее выполнение других приложений и их взаимодействие, а также представляющая услуги командной строки. 
+	\begin{center}
+	 или
+	\end{center}
+	\textbf{Shell} -- приложение, обеспечивающее доступ к основным функциям ядра.
+
+	\pause
+	\vspace{0.5in}
+	Пример shell из Windows-world -- cmd.exe
+	\vspace{0.5in}
+
+	Минимальный дистрибутив Linux -- ядро + shell 
+
+\end{frame}
+
+\begin{frame}[fragile]{Основные типы shell в Unix}
+  \begin{itemize}
+    \item Bourne shell совместимые
+      \begin{itemize}
+        \item \textbf{sh} исходная bourne shell (Steve Bourne, 1978)
+        \item \textbf{ksh} Korn shell (David Korn, 1983)
+        \item \textbf{ash} $[$BSD$]$ Almquist shell (Kenneth Almquist,1989)  
+        \item \textbf{bash} $[$GPL$]$ Bourne-again shell (Brian Fox, 1989)
+        \item \textbf{zsh} $[$BSD$]$ Z shell (Paul Falstad,1990)
+        \item \textbf{/bin/sh} Указывает на POSIX-совместимую shell
+      \end{itemize}
+  \item C shell совместимые
+      \begin{itemize}
+        \item \textbf{csh}  Исходная С shell (Bill Joy, 1978)
+        \item \textbf{tcsh} $[$BSD$]$ TENEX C shell (Ken Greer, 1981)
+       \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Маленькое упражнение}
+\begin{lstlisting}[language=bash]
+cat /etc/shells
+ls -l <filename> # для каждого элемента /etc/shells
+readlink -e <filename> 
+\end{lstlisting}
+\end{frame}
+
+

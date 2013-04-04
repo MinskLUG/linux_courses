@@ -1,0 +1,46 @@
+\begin{frame}{Дополнительный набор команд}
+  \begin{itemize}
+    \item {\tt cat} - Вывод файла в stdout, соединение нескольких файлов в stdout
+    \item {\tt wc} - подсчет статистики символов в файле или в stdin 
+    \item {\tt sort} - сортировка строк файла
+    \item {\tt uniq} - объединение одинаковых строк в одну
+    \item {\tt tr} - замена набора символов
+    \item {\tt less} - программа-пейджер
+    \item {\tt grep} - поиск строк, соответствующих регулярному выражению
+    \item {\tt cut} - выделение полей из строк stdin
+    \item {\tt awk} - небольшой язык программирования (также полезен для выделения полей)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Некоторые примеры использования}
+\begin{lstlisting}[language=bash]
+cat /proc/1/environ | tr '\0' '\n' | less
+ls  | wc -l # подсчет числа файлов
+man uniq | tr  '[:space:]' '\n' | sort | uniq -c | sort -n | less # подсчет количества слов в тексте man uniq
+history | wc -l # подсчет ранее введенных команд
+cat /etc/udev/rules.d/* | wc -l
+ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=\$1};END{print s}' 
+\end{lstlisting}
+  \pause
+  \begin{block}{Упражнение}
+    Посчитать статистику использования команд в history
+  \end{block}
+\end{frame}
+
+\begin{frame}{Дополнительный набор команд для работы с текстом}
+	\begin{itemize}
+	  \item {\tt head} -- вывести первые строки
+	  \item {\tt tail} -- вывести последние строки
+		\begin{itemize}
+			\item {\tt -f} -- отслеживать добавление данных в файл 
+		\end{itemize}
+	  \item {\tt tee} -- копировать стандартный вывод в файл
+	  \item {\tt grep} -- печать текста, соответствующего шаблону
+		\begin{itemize}
+			\item {\tt -i}	
+			\item {\tt -v}
+			\item {\tt -o}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+

@@ -1,0 +1,54 @@
+\begin{frame}{Редакторы}
+	\begin{itemize}
+		\item Интерактивные
+			\begin{itemize}
+				\item vi
+					\begin{itemize}
+						\item Есть почти везде
+					\end{itemize}
+				\item vim
+				\item emacs
+			\end{itemize}
+		\item Поточные
+			\begin{itemize}
+				\item {\tt ed}
+				\item {\tt sed}
+				\item {\tt awk}
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Метасимволы}
+	\begin{block}{grep, sed, awk}
+	\end{block}
+	\begin{itemize}
+		\item {\tt .} -- любой символ за исключением пустой строки
+		\item {\tt *} -- любоe количество символов, которые стоят перед {\tt *}
+		\item {\tt \^{}} -- начало строки
+		\item {\tt \$} -- конец строки
+		\item {\tt [...]} -- любой символ из заключенных в скобки
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{sed}
+	\begin{block}{Сценарии}
+		{\tt [ addr [ ,  addr ] ] cmd [ args ]}
+	\end{block}
+
+	\small
+	\begin{block}{Команды}
+		\begin{itemize}
+		  \item {\tt a, i} -- добавить строку после (перед) текущей
+			  \begin{verbatim} who | sed -e 'a Text' \end{verbatim}
+		  \item {\tt c} -- удалить строку и заменить на текст
+			  \begin{verbatim} who | sed -e '/altlinux/ c Юзверь' \end{verbatim}
+		  \item {\tt d} -- удалить строку
+			  \begin{verbatim} who | sed -e '2,4 d' \end{verbatim}
+			  \begin{verbatim} who | sed -e '/pts/ d' \end{verbatim}
+		  \item {\tt s} -- замена по регулярному выражению
+			  \begin{verbatim} who | sed -e 's/pts/консолька/g' \end{verbatim}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+

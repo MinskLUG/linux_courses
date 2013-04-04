@@ -1,0 +1,71 @@
+\begin{frame}{VI}
+	\begin{block}<1>{Два режима работы}
+		\begin{itemize}
+			\item все портить
+			\item бибикать
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}<2->{Два режима работы}
+		\begin{itemize}
+			\item командный 
+			\item текстового ввода
+		\end{itemize}
+	\end{block}
+
+	\begin{block}<2->{Переход между режимами}
+		\begin{itemize}
+			\item из командного в текстовый: i, a, R (вставка, добавление, замена)
+			\item из текстового в командный: ESC или Ctrl-[
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{VI: command mode}
+
+	\begin{block}{Перемещение курсора}
+		\begin{itemize}
+			\item h, j, k, l -- влево, вниз, вверх, вправо (1 элемент)
+			\item \^{} или 0 -- в начало строки
+			\item \$ -- в конец строки
+			\item w, b -- вперед, назад на слово
+			\item gg, G -- начало, конец текста (<num>G -- на строку <num>)
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Редактирование}
+		\begin{itemize}
+			\item d -- удалить (d -- текущую строку, w -- слово)
+			\item u -- отмена предыдущего изменения
+			\item . -- повтор
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{VI: command mode}
+
+	\begin{block}{Работа с неименованым буфером}
+		\begin{itemize}
+			\item y -- удалить (d -- текущую строку, w -- слово)
+			\item p -- вставить из буфера
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Командная строка}
+		: -- переход в режим командной строки
+		\begin{itemize}
+			\item :q или :q! -- выход без сохранения
+			\item :w -- сохранить изменения
+			\item :x -- выйти с сохранением (:wq)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Задание на дом}
+\begin{block}{}
+vimtutor ru
+\end{block}
+\end{frame}
+
+

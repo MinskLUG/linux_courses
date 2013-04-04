@@ -1,0 +1,83 @@
+\begin{frame}{Важные аббревиатуры внутри командной строки}
+  \begin{itemize}
+    \item Для директорий
+      \begin{itemize}
+        \item {\tt $\sim$} Домашняя директория
+        \item {\tt $\sim$<username>} Домашняя директория пользователя
+        \item {\tt ..} Родительская директория
+        \item {\tt .} Текущая директория
+      \end{itemize}
+      \pause  
+    \item Wildcards
+      \begin{itemize}
+        \item {\tt *} Любой набор символов {\tt file*txt : file1.txt filefilefiletxt}
+        \item {\tt $[$<список>$]$ } символ из заданного набора
+        \item {\tt ?} любой один символ
+      \end{itemize}
+
+  \end{itemize}
+\end{frame}       
+
+\begin{frame}{Горячие клавиши}
+  \begin{itemize}
+    \item \textbf{Tab} -- дополнение текущей команды
+      \pause
+    \item История команд
+      \begin{itemize}
+        \item Клавиши курсора -- навигация по истории
+        \item Ctrl-R -- поиск в истории по фрагменту
+        \item Ctrl-O (после выполнения вставить следующую команду из истории)
+        \item Команда {\tt history}
+      \end{itemize}
+    \item Навигация
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Переменные окружения}
+  \begin{itemize}
+    \item {\tt HOME}
+    \item {\tt PWD}
+    \item {\tt LANG}
+    \item {\tt LD\_LIBRARY\_PATH}
+    \item {\tt SHELL}
+    \item {\tt TERM}
+    \item {\tt DISPLAY}
+  \end{itemize}
+
+  Контроль
+
+  \begin{itemize}
+    \item export {\tt export VAR=value}
+    \item declare -x
+    \item echo 
+  \end{itemize}
+
+  Переменные окружения наследуются при создании нового процесса
+\end{frame}
+
+%\begin{frame}{Настройки bash и кастомизация}
+%  \begin{itemize}
+%    \item Login shell
+%      \begin{itemize}
+%        \item {\tt /etc/profile}
+%        \item {\tt $\sim$/.profile }
+%      \end{itemize}
+%    \item Обычная интерактивная shell
+%      \begin{itemize}
+%        \item {\tt /etc/bash.bashrc}
+%        \item {\tt $\sim$/.bashrc}
+%      \end{itemize}
+%  \end{itemize}
+%
+%  Полезные команды
+%  \begin{itemize}
+%    \item {\tt alias}
+%    \item {\tt export PATH=}
+%    \item {\tt Определение функции}
+%    \item {\tt shopts}
+%  \end{itemize}
+%
+%\end{frame}
+
+
