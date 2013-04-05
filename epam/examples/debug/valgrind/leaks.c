@@ -6,7 +6,7 @@ main(void)
 	int i;
 
 	for( i=0; i<100; i++)
-	    array = (char *) malloc(10*sizeof(char));
+	    array = malloc(10*sizeof(char));
 	free( array);
 	exit(0);
 }

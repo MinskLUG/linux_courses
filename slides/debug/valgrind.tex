@@ -46,7 +46,7 @@ main(void)
 {
 char *array;
 
-    array = (char *) malloc(10*sizeof(char));
+    array = malloc(10*sizeof(char));
     array[10] = 'x';
     free( array);
     exit(0);
@@ -65,7 +65,7 @@ char *array;
 int i;
 
 for( i=0; i<100; i++)
-    array = (char *) malloc(10*sizeof(char));
+    array = malloc(10*sizeof(char));
 
 free( array);
 	\end{lstlisting}
@@ -82,7 +82,7 @@ free( array);
 	\frametitle{Упражнение: объем выделенной памяти}
 
 	\begin{lstlisting}
-array = (char *) malloc(1<<31);
+array = malloc(1<<31);
 array[10000] = 0;
 	\end{lstlisting}
 

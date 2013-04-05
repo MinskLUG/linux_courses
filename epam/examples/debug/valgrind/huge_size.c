@@ -9,7 +9,7 @@ main(void)
 {
 	char *array;
 
-	array = (char *) malloc((unsigned long)(~0));
+	array = malloc((unsigned long)(~0));
 	fill( array);
 	free( array);
 	exit(0);
