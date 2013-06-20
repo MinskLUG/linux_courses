@@ -21,6 +21,14 @@ TARGET += 20-version_control.pdf
 
 TARGET += epam-Linux_courses_handbook.pdf
 
+TARGET_XML=$(TARGET:.pdf=.xml)
+
+LATEXML=latexml
+LATEXML_PARAMS=--inputencoding=utf8 --preload=beamer.cls --preload=t2aenc.def
+XMLWF=xmlwf
+XMLWF_PARAMS=
+
+.PHONY: all xml tex clean
 
 %.dvi: %.tex
 	latex $<
@@ -33,8 +41,18 @@ TARGET += epam-Linux_courses_handbook.pdf
 %.pdf: %.tex
 	pdflatex $<
 
+%.xml: %.tex
+	$(LATEXML) $(LATEXML_PARAMS) --destination=$@ $< &> $@.log
+	$(XMLWF) $(XMLWF_PARAMS) $@
 
-all:  $(TARGET)
+tex: $(TARGET)
+
+xml: $(TARGET_XML)
+
+bib: programm.aux
+	bibtex8 -s programm.aux
+
+all: tex xml
 
 clean: 
 	@rm -f *.aux
@@ -44,7 +62,5 @@ clean:
 	@rm -f *.out
 	@rm -f *.toc
 	@rm -f *.nav
+	@rm -f $(TARGET_XML)
 	@rm -f $(TARGET)
-
-bib: programm.aux
-	bibtex8 -s programm.aux
