@@ -24,7 +24,7 @@ TARGET += epam-Linux_courses_handbook.pdf
 TARGET_XML=$(TARGET:.pdf=.xml)
 
 LATEXML=latexml
-LATEXML_PARAMS=--inputencoding=utf8 --preload=beamer.cls --preload=t2aenc.def
+LATEXML_PARAMS=--inputencoding=utf8 --preload=beamer.cls --preload=t2aenc.def --nocomments
 XMLWF=xmlwf
 XMLWF_PARAMS=
 
@@ -39,7 +39,7 @@ XMLWF_PARAMS=
 	dvips -j0 -Ppdf -o $@ $<
 
 %.pdf: %.tex
-	pdflatex $<
+	pdflatex -interaction=nonstopmode $<
 
 %.xml: %.tex
 	$(LATEXML) $(LATEXML_PARAMS) --destination=$@ $< &> $@.log
