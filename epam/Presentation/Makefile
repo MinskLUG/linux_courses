@@ -60,7 +60,7 @@ pptx: $(TARGET_PPTX)
 bib: programm.aux
 	bibtex8 -s programm.aux
 
-all: tex pptx
+all: tex
 
 clean: 
 	@rm -f *.aux
