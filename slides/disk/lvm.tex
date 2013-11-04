@@ -126,7 +126,7 @@
   \begin{enumerate}
 %	\item Отмонтировать {\tt /mnt/myfs}
 	\item Создать еще один файл и отобразить его на {\tt loop3}
-	\item Увиличиваем размер группы {\tt vgextend VG0 /dev/loop3}
+	\item Увеличиваем размер группы {\tt vgextend VG0 /dev/loop3}
 		\pause
     \item  {\tt pvscan; pvmove /dev/loop0; pvscan}
     \item  {\tt vgreduce VG0 /dev/loop0; pvscan}
