@@ -8,6 +8,14 @@
 	\begin{block}{Разрешить маршрутизацию на хосте}
 		{\tt echo 1 > /proc/sys/net/ipv4/ip\_forward}
 	\end{block}
+
+	Примеры:
+	\begin{itemize}
+		\item ip route add default via 192.168.0.1
+		\item ip route add 192.168.1.0/24 dev ppp0
+		\item ip route del 192.168.1.0/24 dev ppp0
+	\end{itemize}
+
 \end{frame}
 
 
