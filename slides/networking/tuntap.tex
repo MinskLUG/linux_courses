@@ -1,0 +1,29 @@
+
+\begin{frame}{''Виртуальные'' интерфейсы}
+	\begin{block}{TUN/TAP}
+
+		{\tt modprobe tun}
+
+		\begin{itemize}
+			\item Добавить интерфейс TUN -- {\tt tunctl -n -t <ifacename>}
+			\item Добавить интерфейс TAP -- {\tt tunctl -p -t <ifacename>}
+			\item Удалить интерфейс -- {\tt tunctl -d <ifacename>}
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{Практика}
+		\begin{itemize}
+			\item Создать интерфейс TAP с именем {\tt mytap}
+			\item Создать мост с именем {\tt mybr}
+			\item Назначить интерфейсу {\tt mytap} адрес {\tt 192.168.0.<n>/24}
+			\item Добавить интерфейсы {\tt mytap} и {\tt eth0} к мосту {\tt mybr}
+			\item Запустить {\tt tcpdump} на интерфейсах {\tt mybr} и {\tt mytap}
+			\item Запустить {\tt ping} соседа
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+

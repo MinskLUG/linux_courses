@@ -1,15 +1,60 @@
 \begin{frame}{Полезные утилиты}
-
-	\begin{itemize}
-		\item telnet
-		\item netstat / ss
-		\item ping
-		\item traceroute
-		\item tcpdump
-		\item nmap
-		\item nslookup / dig
-	\end{itemize}
+	\begin{center}
+		\begin{itemize}
+			\item telnet
+			\item netstat / ss
+			\item ping
+			\item traceroute
+			\item tcpdump
+			\item nmap
+			\item nslookup / dig
+		\end{itemize}
+	\end{center}
 
 \end{frame}
 
+
+\begin{frame}{Полезные утилиты: практика}
+
+	\begin{columns}
+		\column{0.5\textwidth}
+		\begin{block}{netstat}
+
+			Узнать:
+			\begin{itemize}
+				\item список используемых сокетов
+				\item серверных сокетов
+				\item имена/pid серверов
+				\item узнать номера портов
+			\end{itemize}
+		\end{block}
+	
+		\pause
+		\column{0.5\textwidth}
+		\begin{block}{telnet/netcat}
+
+			\begin{itemize}
+				\item Чат по протоколу TCP с соседом
+				\item Чат по протоколу UDP с соседом
+				\item Передать файл
+			\end{itemize}
+	
+			При создании чата использовать {\tt netstat} и {\tt tcpdump}
+			для получения информации о соединении.
+		\end{block}
+	
+	\end{columns}
+\end{frame}
+
+nmap
+1. сканирование соседа
+2. сканирование выделенных портов у соседа (поиск сервера чата) 
+3. узнать список открытых портов на всех машинах в 505
+4. узнать список  работающих машин
+
+tcpdump
+0. pcap файлы/libpcap
+1. запуск монитора
+2. запуск чата
+3. монитор-фильтр-анализ
 

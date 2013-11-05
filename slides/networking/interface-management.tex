@@ -33,8 +33,14 @@
     \item {\tt /etc/resolv.conf}
     \item {\tt /etc/hosts}
 	\item {\tt /etc/sysconfig/network}
-    \item {\tt /etc/sysconfig/network-scripts}\\
-		{\tt /etc/sysconfig/network-scripts/ifcfg-eth0}
+    \item Расположение зависит от дистрибутива:
+		\begin{itemize}
+			\item RH-like: {\tt /etc/sysconfig/network-scripts}\\
+				{\tt /etc/sysconfig/network-scripts/ifcfg-eth0}
+			\item ALTLinux: {\tt /etc/net/ifaces}
+			\item Debian: {\tt /etc/network/interfaces}
+			\item Gentoo: {\tt /etc/conf.d/net}
+		\end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -46,18 +52,16 @@
 			\item ip addr add <ip> {\bf label} <iface>:<alias> dev <iface>
 		\end{itemize}
 	\end{block}
-\end{frame}
-
-\begin{frame}{''Виртуальные'' интерфейсы}
-	\begin{block}{TUN/TAP}
-
-		{\tt modprobe tun}
-
+	\pause
+	\begin{block}{VLAN}
 		\begin{itemize}
-			\item Добавить -- {\tt tunctl -t <ifacename>}
-			\item Удалить -- {\tt tunctl -d <ifacename>}
+			\item vconfig add <iface> <id>
+			\item vconfig rem <iface>{\bf.}<id>
+			\item ip link add {\bf link} <iface> name <vlan\_name> {\bf type vlan id <id>}
+			\item ip link delete <vlan\_name>
 		\end{itemize}
 	\end{block}
+
 \end{frame}
 
 
