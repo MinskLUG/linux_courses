@@ -1,0 +1,47 @@
+\begin{frame}
+  \frametitle{Bash против скриптовых языков}
+  \begin{itemize}
+   \item В bash трудно делать сложные структуры данных
+   \item В bash нет функций (ЕВПОЧЯ) \pause есть процедуры 
+   \item В bash нет типизации переменных
+   \item Но! В bash очень просто организовывать взаимодействие внешних программ
+   \item Stream programming \texttt{(a | b | c )}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Когда использовать bash}
+  \begin{columns}
+   \column{0.5\textwidth}
+    \begin{center}
+     {\Large Использовать}
+    \end{center}
+    \begin{itemize}
+      \item Прототипирование
+      \item Системные скрипты
+      \item Автоматизация консоли
+    \end{itemize}
+   \column{0.5\textwidth}
+    \begin{center}
+     {\Large Не использовать}
+    \end{center}
+    \begin{itemize}
+      \item Критичные по скорости
+      \item GUI
+      \item Сложные структуры данных
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Раздвоения личности}
+  \begin{itemize}
+    \item  Bash vs POSIX shell
+    \item  Внешние и встроенные команды
+    \begin{itemize}
+      \item \texttt{cd,help,type,alias,read} чисто встроенные команды
+      \item \texttt{rm,ls} внешние команды (не часть shell по сути)
+      \item \texttt{echo,pwd,test} встроены в shell, но есть как внешние
+    \end{itemize}
+  \end{itemize}
+\end{frame}
