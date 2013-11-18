@@ -23,14 +23,14 @@
 		\item Классический синаксис: 
 			\begin{lstlisting}
 function function_name {
-command...
+  command...
 } 
 			\end{lstlisting}
 		\item Портабельный (C-style):
 			\begin{lstlisting}
 function_name()
 {
-command...
+  command...
 } 
 			\end{lstlisting}
 
@@ -48,17 +48,18 @@ function_name () { command... ;}
 #!/bin/bash
 
 function help {
-	echo "Использование: $0 <string>"
-	exit 1
+  echo "Использование: $0 <string>"
+  exit 1
 }
+
 f1(){
-	echo Вызвана функция $0 с $# аргументами
+  echo Вызвана функция $0 с $# аргументами
 }
 
 f2(){
-	while read str; do
-		echo $0 прочитана строка: $str
-	done
+  while read str; do
+    echo $0 прочитана строка: $str
+  done
 }
 	\end{lstlisting}
 
@@ -75,7 +76,7 @@ f2(){
 f1 "$@"
 
 { for ((i=0;i<5;i++));do
-	echo $@
+  echo $@
 done } | f2
 
 exit
@@ -96,12 +97,12 @@ exit
 
 VAR=test
 f1(){
-	local VAR=f1
-	echo $0: VAR1=$VAR
+  local VAR=f1
+  echo $0: VAR1=$VAR
 }
 f2(){
-    VAR=f2
-    echo $0: VAR=$VAR
+  VAR=f2
+  echo $0: VAR=$VAR
 }
 		\end{lstlisting}
 		\column{0.5\textwidth}	
