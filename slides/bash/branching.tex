@@ -17,6 +17,7 @@ else
 fi
 \end{lstlisting}
 		\column{0.6\textwidth}
+	\pause
 	{\bf Практическое задание:} \\
 	\begin{itemize}
 
@@ -33,7 +34,7 @@ fi
 
 	\small
 	\begin{columns}
-		\column{0.4\textwidth}
+		\column{0.3\textwidth}
 
 		\begin{lstlisting}[language=sh,frame=single]
 case "$variable" in 
@@ -49,7 +50,7 @@ esac
 		\end{lstlisting}
 		\pause
 
-		\column{0.6\textwidth}
+		\column{0.7\textwidth}
 		{\normalsize Пример:}
 
 		\begin{lstlisting}[language=sh]
@@ -57,13 +58,13 @@ esac
 
 cmd=$1; var=$2
 case "$cmd" in 
-	--print|--echo)
-		echo "Ура, печатаем!" ;;
-	abc*|xyz*)
-		echo "Странная команда $cmd" ;;
-	*)
-		echo "Я таких команд не знаю: $cmd" 1>&2
-		exit 1 ;;
+  --print|--echo)
+    echo "Ура, печатаем!" ;;
+  abc*|xyz*)
+    echo "Странная команда $cmd" ;;
+  *)
+    echo "Я таких команд не знаю: $cmd" 1>&2
+    exit 1 ;;
 esac
 [ ! -z "$var" ] && echo "переменная \$var=$var"
 exit 0
@@ -114,20 +115,25 @@ shift $((OPTIND-1))
 \begin{frame}[fragile]
 \frametitle{case + getopt}
 	
-	Внешняя команда для обработки аргументов командной строки (расширенная).
+	Внешняя команда для обработки аргументов командной строки.
 
 	\small
 	\begin{lstlisting}
 SHORTOPTS="af:h"
-LONGOPTS="flagA, file:, help"
+LONGOPTS="flagA,file:,help"
 OPTS=$(getopt -o "$SHORTOPTS" -l "$LONGOPTS" -- "$@")
+
 eval set -- "$OPTS"
+
 while [ $# -gt 0 ]
 do
-    -a|--flagA) FLAGA=1 ;;
-    -f|--file) FILE=1
-       FILENAME=$OPTARG ;;
-    *) echo "Usage: $0 [-a|--flagA] [-h|--help] [-f|--file <filename>]";;
+  case $1 in
+    -a|--flagA) FLAGA=$1 ; shift ;;
+    -f|--file) FILE=$1; FILENAME="$2"; shift 2 ;;
+    -h|--help) echo "Usage:$0 [-a|--flagA] [-h|--help] [-f|--file <filename>]"; exit 0;;
+    --) shift; break ;; # skip this one
+    *) ;;
+  esac
 done
 	\end{lstlisting}
 
@@ -143,17 +149,17 @@ done
 
 	\small
 	\begin{columns}
-		\column{0.4\textwidth}
+		\column{0.3\textwidth}
 
 		\begin{lstlisting}[language=sh,frame=single]
 select variable [in list]
 do
-	command...
-	break
+  command...
+  break
 done 
 		\end{lstlisting}
 		\pause
-		\column{0.6\textwidth}
+		\column{0.7\textwidth}
 		{\normalsize Пример:}
 
 		\begin{lstlisting}
