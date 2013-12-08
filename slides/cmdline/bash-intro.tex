@@ -22,15 +22,24 @@
   \begin{itemize}
     \item \textbf{Tab} -- дополнение текущей команды
       \pause
-    \item История команд
+    \item История команд (Команда {\tt history})
       \begin{itemize}
         \item Клавиши курсора -- навигация по истории
         \item Ctrl-R -- поиск в истории по фрагменту
         \item Ctrl-O (после выполнения вставить следующую команду из истории)
-        \item Команда {\tt history}
       \end{itemize}
-    \item Навигация
-
+    \item Редактирование командной строки
+      \begin{itemize}
+        \item Ctrl-W, Ctrl-U -- удалить, начиная от курсора, слово или строку до начала строки
+        \item Alt-D, Ctrl-K -- удалить, начиная от курсора, слово или строку до конца строки
+      \end{itemize}
+    \item Управление терминалом
+      \begin{itemize}
+        \item Shift-PgUp, Shift-PgDown -- прокрутка терминала
+        \item Ctrl-S -- заморозка терминала
+        \item Ctrl-Q -- разморозка терминала
+        \item Ctrl-L -- очистка терминала
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -48,7 +57,7 @@
   Контроль
 
   \begin{itemize}
-    \item export {\tt export VAR=value}
+    \item {\tt export VAR=value}
     \item declare -x
     \item echo 
   \end{itemize}
