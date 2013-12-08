@@ -90,12 +90,10 @@ echo -e "test \v test \v test"
 	\end{itemize}
 	\pause
 	\begin{block}{Задание}
-
 		Присвоить переменной LIST результат выполнения команды {\tt ls -1} \\
 		Вывести на экран переменную LIST
 	\end{block}
 \end{frame}
-
 
 \begin{frame}[fragile]
 	\frametitle{Коды возврата}
@@ -125,6 +123,28 @@ echo -e "test \v test \v test"
 	Часто используется для переназначения файловых дескрипторов.
 
 \end{frame}
+
+\begin{frame}
+	\frametitle{Управление заданиями}
+	
+	\begin{itemize}
+		\item {\tt bg} -- поместить задачу в фоновое исполнение
+		\item {\tt fg} -- ''переключиться'' на задачу
+		\item {\tt jobs} -- список активных задач
+	\end{itemize}
+	\pause
+	\begin{block}{Задание}
+		\begin{itemize}
+			\item Запустить задачу ''{\tt sleep 100 \&}'' в фоновом режиме
+			\item Запустить задачу ''{\tt sleep 100}'' на текущей косоли и остановить ее (Ctrl-Z)
+			\item С помощью команды ''{\tt jobs}'' посмотреть статус активных задач
+			\item С помощью команды ''{\tt bg}'' перевести остановленную задачу в фоновый режим
+			\item С помощью команды ''{\tt fg}'' переключиться на одну из фоновых задач
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
 
 \begin{frame}[fragile]
 	\frametitle{Группировка}
