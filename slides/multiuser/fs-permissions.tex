@@ -124,6 +124,31 @@
 	\end{itemize}
 \end{frame}
 
-% End of 5-th lecture
+\begin{frame}{UMASK}
+
+	\begin{block}{umask}
+		маска режима создания пользовательских файлов
+	\end{block}
+
+	Права доступа файлов, вычисляются c помощью побитовых операций:
+	побитовое И между унарным дополнением аргумента (используя побитовое НЕ) и режимом полного доступа.
+
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Упражнение}
+		\begin{enumerate}
+			\item Создать от имени \tt{root} директорию \tt{/stick} с установленными битами \tt{sticky} и \tt{SGID}, а также разрешениями на чтение, запись и выполнение для всех
+			\item От имени пользователя \tt{root} создать пустой файл \tt{testroot}
+			\item Изменить \tt{umask} пользователя \tt{root} на 002
+			\item От имени пользователя \tt{root} создать пустой файл \tt{testroot2}
+			\item От имени пользователя \tt{altlinux} создать пустой файл \tt{testuser}
+			\item Посмотреть получившиеся права и принадлежность файлов
+			\item Отредактировать файл \tt{testroot2}
+			\item Попробовать удалить файл \tt{testroot2}
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
 
 
