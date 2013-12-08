@@ -1,0 +1,21 @@
+\begin{frame}[fragile]{Мультистрочный ввод (Here-документ)}
+
+\begin{verbatim}
+program <<LABEL
+Тут
+    много
+	     строк
+LABEL
+\end{verbatim}
+
+	\pause
+	\begin{block}{Пример}
+	Передадим несколько строк в COM-порт 1
+\begin{lstlisting}[language=bash]
+cat >/dev/ttyS0 <<E_O_F
+ATZ
+ATDT 8w0170123456
+E_O_F
+\end{lstlisting}
+	\end{block}
+\end{frame}
