@@ -6,14 +6,71 @@
 
 	\large\center{Нетипизированные!!!}
 
+	Для прямого обращения необходимо использовать префикс \\
+	\center{\Large{\tt \$}}
+
+	{\it Можно} использовать фигурные скобки:\\
+	\center{\tt \$VARrest != \$\{VAR\}rest}
+
+	\bigskip
+	
+	\begin{alertblock}{Без префикса}
+		\begin{itemize}
+			\item Объявление или присвоение
+			\item unset -- удаление
+			\item В арифметических операциях {\tt (( ... ))}
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение}
+
+	\begin{lstlisting}
+#!/bin/bash
+
+VAR=string
+echo $VAR
+	\end{lstlisting}
+
+
+	\begin{block}{Присвоение значения переменной}
+		\begin{itemize}
+			\item Измените присвоение значения с помощью пробелов до и/или после знака ''{\tt =}''
+			\item Присвойте переменной VAR значение: I love \$\$\$!
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Косвенное обращение к переменной}
+
+	Косвенное (indirect) обращение к переменной: {\tt \$\{!VARIABLE\}}
+
+	\begin{block}{Пример}
+		\begin{lstlisting}
+#!/bin/bash 
+num=$# 
+lastarg=${!num} 
+echo $num $lastarg
+		\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Область видимости переменных}
 	\begin{itemize}
 		\item Локальные\\
-		    Область видимости -- текущая программа или функция
+		    Область видимости -- текущая программа, функция или субшелл
 		\item Окружения
 		\item Позиционные параметры
 	\end{itemize}
 
 \end{frame}
+
 
 
 \begin{frame}
@@ -22,36 +79,12 @@
 	\center{Наследование внешней переменной}
 
 	\begin{itemize}
-		\item  export
+		\item export
 		\item Переданное в командной строке \\
 			\begin{block}{Пример}
 				{\tt TEST=123 make}
 			\end{block}
 	\end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile]
-	\frametitle{Обращения к переменной}
-
-	\begin{itemize}
-		\item Прямые \\
-	    С использованием имени переменной и символа \$\\
-			\begin{block}{Пример}
-				{\tt TEST=test ; echo \$TEST}
-			\end{block}
-		\item Косвенные \\
-			\begin{block}{Пример}
-				\begin{lstlisting}
-#!/bin/bash 
-num=$# 
-lastarg=${!num} 
-echo $num $lastarg
-				\end{lstlisting}
-			\end{block}
-	\end{itemize}
-
-
 \end{frame}
 
 
@@ -62,6 +95,11 @@ echo $num $lastarg
 
 	\begin{itemize}
 		\item Разделитель \$IFS
+		\item Директории -- домашняя \$HOME и текущая \$PWD
+		\item UID пользователя -- \$UID
+		\item ID процесса -- \$\$
+		\item Имя хоста -- \$HOSTNAME
+		\item Вид командной строки: \$PS1 -- \$PS4
 		\item Локализация
 			\begin{itemize}
 				\item Используемый язык \$LANG
@@ -73,7 +111,6 @@ LC_ALL=C ls -l
 						\end{lstlisting}
 					\end{block}
 			\end{itemize}
-		\item ID процесса -- \$\$
 	\end{itemize}
 
 \end{frame}
