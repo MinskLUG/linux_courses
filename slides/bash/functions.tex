@@ -53,12 +53,12 @@ function help {
 }
 
 f1(){
-  echo Вызвана функция $0 с $# аргументами
+  echo Вызвана функция $FUNCNAME с $# аргументами
 }
 
 f2(){
   while read str; do
-    echo $0 прочитана строка: $str
+    echo ${FUNCNAME}: прочитана строка: $str
   done
 }
 	\end{lstlisting}
@@ -97,12 +97,12 @@ exit
 
 VAR=test
 f1(){
-  local VAR=f1
-  echo $0: VAR1=$VAR
+  local VAR=test1
+  echo Function ${FUNCNAME}: VAR=$VAR
 }
 f2(){
-  VAR=f2
-  echo $0: VAR=$VAR
+  VAR=test2
+  echo Function ${FUNCNAME}: VAR=$VAR
 }
 		\end{lstlisting}
 		\column{0.5\textwidth}	
@@ -121,7 +121,7 @@ exit
 \end{frame}
 
 \begin{frame}
-	\frametitle{Практическое задание}
+	\frametitle{Домашнее задание}
 	\begin{itemize}
 		\item Создать библиотеку функций:
 			\begin{itemize}
