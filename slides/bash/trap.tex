@@ -1,0 +1,41 @@
+\begin{frame}[fragile]
+	\frametitle{Обработка сигналов}
+	
+	Для перехвата и обработки сигналов\footnote{man 7 signal} используется команда:\\
+	{\tt trap <cmd_catcher> <LIST OF SIGNALS>}.
+
+	\begin{block}{Пример}
+		Выполните в консоли:
+			\begin{lstlisting}[language=sh]
+trap 'echo Catched SIGUSR1' SIGUSR1
+kill -SIGUSR1 $$
+trap -p
+trap -l
+			\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Перехват Ctrl-C и {\tt kill PID}}
+	
+	\begin{block}{Пример}
+		\begin{lstlisting}[language=sh]
+#!/bin/bash
+
+i=0
+catcher(){
+  echo Script worked $SECONDS seconds
+  echo Commands entered: ${cmd[@]}
+  exit 0
+}
+
+trap catcher SIGINT SIGTERM
+
+while true; do
+  echo -n "[root] # " ; read cmd[$i] ; ((i++))
+done
+		\end{lstlisting}
+	\end{block}
+\end{frame}
+
+
