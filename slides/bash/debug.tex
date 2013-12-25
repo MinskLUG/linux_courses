@@ -31,7 +31,18 @@ echo ~/.*
 set -o
 echo ~/.*
 \end{lstlisting} 
+		\framebreak
+		\item {\tt set -e} -- остановка выполнения скрипта, если какая-либо команда 
+		возвращяет errorstatus не равный 0
+			\begin{lstlisting}[language=sh]
+#!/bin/bash
 
+set -e
+false || true
+echo Working
+false
+echo Still working
+			\end{lstlisting} 
 	\end{itemize}
 \end{frame}
 

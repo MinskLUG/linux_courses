@@ -2,7 +2,7 @@
 	\frametitle{Обработка сигналов}
 	
 	Для перехвата и обработки сигналов\footnote{man 7 signal} используется команда:\\
-	{\tt trap <cmd_catcher> <LIST OF SIGNALS>}.
+	{\tt trap <catcher> <LIST OF SIGNALS>}.
 
 	\begin{block}{Пример}
 		Выполните в консоли:
@@ -16,7 +16,7 @@ trap -l
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Перехват Ctrl-C и {\tt kill PID}}
+	\frametitle{Перехват Ctrl-C и {\tt kill}}
 	
 	\begin{block}{Пример}
 		\begin{lstlisting}[language=sh]
