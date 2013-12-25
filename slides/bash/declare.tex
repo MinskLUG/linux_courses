@@ -1,0 +1,37 @@
+\begin{frame}[fragile,allowframebreaks]
+	\frametitle{Атрибуты переменных}
+	Функции \verb+ declare/typeset + позволяют присвоить дополнительные атрибуты переменной.
+
+	Атрибут устанавливается знаком ''-'', а снимается знаком ''+''.
+
+	\begin{itemize}
+		\item {\tt declare -a} -- массив
+			\begin{lstlisting}[language=sh]
+declare -a # Список всех массивов
+			\end{lstlisting} 
+		\item {\tt declare -i} -- число
+			\begin{lstlisting}[language=sh]
+a="yyy"; echo $a
+declare -i a
+echo $a
+
+declare +i a
+echo $a
+			\end{lstlisting}
+		\item {\tt declare -r} -- readonly для переменной
+			\begin{lstlisting}[language=sh]
+a="yyy"
+declare -r a
+a="zzz"
+			\end{lstlisting}
+		\item {\tt declare -x} -- наследуются, как часть окружения
+			\begin{lstlisting}[language=sh]
+declare -x
+declare -x a # the same as 'export a'
+			\end{lstlisting}
+
+		\item {\tt declare -f [name]} -- вывод всех функций (либо задается аргументами)
+
+	\end{itemize}
+\end{frame}
+
