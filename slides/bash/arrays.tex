@@ -1,31 +1,151 @@
-\begin{frame}[fragile]
-\frametitle{Основные операции с массивами}
-\begin{itemize}
-\item Присвоение значений
- \begin{itemize}
-   \item \verb+ a=( "aaa" "bbb ccc" 2 ) +
-   \item \verb+ a[1]="aaaa"; a[3]="bb bb";   +
-   \item \verb+ a=( [1]="aaa" [10]="bbb"); +
- \end{itemize}
-\item Доступ к значениям \verb+ echo ${a[10]} +
-\end{itemize}
+\begin{frame}[fragile]{Массивы}
+
+	\center{\large{Массивы в bash являются одномерными!!!}}
+
+	\bigskip
+
+	\begin{block}{Создание массива/Присвоение значений}
+
+		{\tt name[index]=value}
+	\end{block}
+	
+	\begin{block}{Примеры}
+		\begin{itemize}
+			\item \verb+ array=( "aaa" "bbb ccc" 2 ) +
+			\item \verb+ a[1]="aaaa"; a[3]="bb bb";   +
+			\item \verb+ b=( [1]="aaa" [10]="bbb"); +
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{Пример: загрузить файл в массив}
+		\begin{itemize}
+			\item \verb+ array=(${cat filename)) +
+		\end{itemize}
+	\end{block}
+
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Аттрибуты переменных}
-Функция \verb+ declare +
-\begin{itemize}
-\item {\tt declare -a}
-\begin{lstlisting}[language=sh]
-declare -a # Список всех массивов
-\end{lstlisting} 
-\item {\tt declare -i}
-\begin{lstlisting}[language=sh]
-a="yyy"; echo $a; declare -i a; echo $a;
-declare +i a; echo $a
-\end{lstlisting}
-\item {\tt declare -r}
-\item {\tt declare -x}
-\item {\tt declare -f}
-\end{itemize}
+\begin{frame}[fragile]{Массивы}
+	\begin{block}{Доступ к значениям элементов}
+		{\tt \$\{name[index]\}}
+	\end{block}
+	
+	\begin{block}{Примеры}
+		\begin{itemize}
+			\item По индексу: \\
+				\verb+ echo ${array[3]} +
+			\item Ко всем элементам массива: \\
+				\verb+ echo ${array[@]} + \\
+				\verb+ echo ${array[*]} + 
+		\end{itemize}
+	\end{block}
 \end{frame}
+
+\begin{frame}[fragile]{Массивы}
+
+	\begin{block}{Добавление элементов}
+
+		{\tt name=(\$name[@] value)}
+
+		\begin{itemize}
+			\item \verb+ array=( ${array[@]} "new element" 120 ) +
+			\item \verb+ array[100]="hundred"   +
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Удаление элементов}
+
+		{\tt unset name[index]}
+
+		\begin{itemize}
+			\item \verb+ unset array[0] +
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Массивы}
+	\begin{block}{Количество элементов}
+		{\tt \$\{{\bf \#}name[@]\}}
+	\end{block}
+
+	\pause
+
+	\begin{alertblock}{Размер одного элемента}
+		\begin{itemize}
+			\item {\tt \$\{{\bf \#}name[2]\}} -- размер 2-го элемента
+			\item {\tt \$\{{\bf \#}name\}} -- размер 0-го элемента
+		\end{itemize}
+	\end{alertblock}
+
+	\pause
+	\begin{alertblock}{Проблема размерности разреженного массива}
+		\begin{lstlisting}
+array[100]="hundred"
+echo ${#array[@]}
+		\end{lstlisting}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Массивы}
+	\begin{block}{ID элементов массива}
+
+		{\tt \$\{{\bf !}name[@]\}}
+
+		\begin{lstlisting}
+echo ${array[@]}
+echo ${!array[@]}
+
+for i in ${!array[@]}
+do
+  echo "array[$i] = ${array[$i]}"
+done
+		\end{lstlisting}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{Массивы}
+	\begin{block}{Срезы}
+		{\tt \$\{name[@]:index:size\}}
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{itemize}
+			\item \verb+ echo ${array[@]:1:2} +
+			\item \verb+ echo ${array[@]:1} +
+			\item \verb+ echo ${array[@]::2} +
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{alertblock}{Срез в одном элементе}
+		\begin{itemize}
+			\item \verb+ echo ${array[1]:1:2} +
+			\item \verb+ echo ${array[1]:1} +
+			\item \verb+ echo ${array[1]::2} +
+		\end{itemize}
+
+	\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Массивы}
+	\begin{block}{Замена подстроки во всех элементах}
+		{\tt \$\{name[@]/old/new\}}
+
+		{\tt \$\{name[@]//old/new\}} -- ''жадное'' поведение
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{itemize}
+			\item \verb+ echo ${array[@]/a/b} +
+			\item \verb+ echo ${array[@]//a/b} +
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
