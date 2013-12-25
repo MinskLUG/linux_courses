@@ -1,0 +1,73 @@
+\begin{frame}[fragile,allowframebreaks]
+	\frametitle{Отладка скриптов с помощью set}
+	
+	Используется команда {\tt set} для активизации различных режимов работы {\tt bash}.
+
+	Включение режима производится с помощью ''-'',\\
+	а отключение -- ''+''.
+
+	\begin{itemize}
+		\item {\tt set -v} -- вывод на экран исполняемой строки
+			\begin{lstlisting}[language=sh]
+set -v
+echo $HOME
+			\end{lstlisting}
+
+		\item {\tt set -x} -- вывод на экран исполняемой строки с автоматической подстановкой значений переменных
+\begin{lstlisting}[language=sh]
+set -x
+echo $HOME
+\end{lstlisting}
+
+		\item {\tt set -n} -- проверка синтаксиса скрипта
+\begin{lstlisting}[language=sh]
+bash -n test.sh
+\end{lstlisting} 
+
+
+		\item {\tt set -o} -- отключение генерации имен файлов с использованием метасимволов (globbing)
+\begin{lstlisting}[language=sh]
+echo ~/.*
+set -o
+echo ~/.*
+\end{lstlisting} 
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Полезные переменные}
+
+	\begin{itemize}
+		\item {\tt LINENO} -- номер текущей строки
+		\item {\tt FUNCNAME} -- вывод на экран исполняемой строки с автоматической подстановкой значений переменных
+		\item {\tt SHLVL} -- уровень вложенности интерпретатора
+		\item {\tt PIPESTATUS} -- массив статусов завершения всех команд в pipe
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Стек вызовов}
+
+	\begin{itemize}
+		\item {\tt caller [N]} -- функция выводит на экран номер строки, имена функции и файла вызывающего скрипта
+	\end{itemize}
+
+	\begin{block}{backtrace}
+		\begin{lstlisting}[language=sh]
+#!/bin/bash
+backtrace() {
+  echo Backtrace:
+  for((i=$SHLVL;i>=0;i--)); do
+    caller $i
+  done
+}
+f1() {
+  echo Function $FUNCNAME at $LINENO && backtrace
+}
+f1
+		\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
