@@ -12,10 +12,10 @@ declare -a # Список всех массивов
 		\item {\tt declare -i} -- число
 			\begin{lstlisting}[language=sh]
 a="yyy"; echo $a
-declare -i a
+declare -i a ; a="zzz"
 echo $a
 
-declare +i a
+declare +i a ; a="zzz"
 echo $a
 			\end{lstlisting}
 		\item {\tt declare -r} -- readonly для переменной

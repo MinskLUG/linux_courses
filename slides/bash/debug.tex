@@ -25,10 +25,10 @@ bash -n test.sh
 \end{lstlisting} 
 
 
-		\item {\tt set -o} -- отключение генерации имен файлов с использованием метасимволов (globbing)
+		\item {\tt set -f} -- отключение генерации имен файлов с использованием метасимволов (globbing)
 \begin{lstlisting}[language=sh]
 echo ~/.*
-set -o
+set -f
 echo ~/.*
 \end{lstlisting} 
 		\framebreak
