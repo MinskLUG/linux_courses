@@ -42,8 +42,8 @@ echo ${VAR:-test} # test
 
 	\begin{block}{\$\{parameter=default\} и \$\{parameter:=default\}}
 	\begin{itemize}
-		\item '-' устанавливает, если переменная не проинициализирована
-		\item ':-' устанавливает, если переменная не проинициализирована либо пустая
+		\item '=' устанавливает, если переменная не проинициализирована
+		\item ':=' устанавливает, если переменная не проинициализирована либо пустая
 	\end{itemize}
 	\begin{lstlisting}
 unset VAR
@@ -51,7 +51,7 @@ ${VAR=}
 echo ${VAR} # 
 ${VAR=test}
 echo ${VAR} # 
-${VAR=test1}
+${VAR:=test1}
 echo ${VAR} # test1
 	\end{lstlisting}
 	\end{block}
