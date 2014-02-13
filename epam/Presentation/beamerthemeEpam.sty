@@ -46,16 +46,16 @@
 
 % some lengths (the height of the lines)
 \newlength{\beamer@decolines@lineup}
-\setlength{\beamer@decolines@lineup}{.025\paperheight}
+\setlength{\beamer@decolines@lineup}{.015\paperheight}
 
 \newlength{\beamer@decolines@linemid}
-\setlength{\beamer@decolines@linemid}{.04\paperheight}
+\setlength{\beamer@decolines@linemid}{.025\paperheight}
 
 \newlength{\beamer@decolines@linebottom}
-\setlength{\beamer@decolines@linebottom}{.015\paperheight}
+\setlength{\beamer@decolines@linebottom}{.007\paperheight}
 
 \newlength{\beamer@decolines@headline}
-\setlength{\beamer@decolines@headline}{.015\paperheight}
+\setlength{\beamer@decolines@headline}{.019\paperheight}
 
 % String used between the current page and the total page count.
 \def\beamer@decolines@pageofpages{/}
@@ -80,19 +80,18 @@
   % Second line.
   \hbox{%
   \begin{beamercolorbox}[wd=.15\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
-    \small{<}\large{epam}\small{>}
+    \bfseries{\slshape{\tiny{{\raisebox{0.2ex}{<}}}{\footnotesize{epam}}{\tiny{\raisebox{0.2ex}{>}}}}}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.01\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.6\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,left]{epamlinestring}%
-    \vspace*{\fill}
+  \begin{beamercolorbox}[wd=.64\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,left]{epamlinestring}%
 
-    \tiny{Excellence in Software Engineering}
+        \tiny{\sffamily{Excellence in Software Engineering}}
 
-    \vspace*{\fill}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.2\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
-    \hbox{\usebeamerfont{palette primary}\footnotesize\insertframenumber{} \beamer@decolines@pageofpages{} \inserttotalframenumber\hspace*{2ex}}%
+%    \hbox{\usebeamerfont{palette primary}\scriptsize\insertframenumber{} \beamer@decolines@pageofpages{} \inserttotalframenumber\hspace*{2ex}}%
+    \hbox{\usebeamerfont{palette primary}\scriptsize\insertframenumber{} \hspace*{2ex}}%
   \end{beamercolorbox}%
   } %
   % Third line.
