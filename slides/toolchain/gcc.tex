@@ -1,3 +1,25 @@
+\begin{frame}[fragile]
+	\frametitle{GCC}
+
+	\begin{block}{GNU Compiler Collection}
+
+		Языки:
+
+		\begin{itemize}
+			\item C
+			\item C++
+			\item Objective-C
+			\item Objective-C++
+			\item Java
+			\item Fortran
+			\item Ada
+			\item Go
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
 
 \begin{frame}[fragile]
 \frametitle{Компоненты gcc}
@@ -28,12 +50,32 @@ gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Важные флаги gcc}
-\begin{itemize}
-  \item Debug {\tt -g}
-  \item Предупреждения компилятора {\tt -Wall}
-  \item Оптимизация {\tt -O -O1 -O2 -O3 -Os}
-\end{itemize}
+\frametitle{Флаги gcc}
+
+	\begin{block}{Позитивные и негативные формы}
+		\begin{itemize}
+			\item -ffoo / -fno-foo ({\tt -fno-builtin})
+			\item -Wbar / -Wno-bar ({\tt -Wunused-variable})
+		\end{itemize}
+	\end{block}
+
+
+	\begin{itemize}
+	  \item Debug {\tt -g}
+	  \item Предупреждения компилятора {\tt -Wall, -Werror}
+	  \item Оптимизация {\tt -O -O1 -O2 -O3 -Os}
+	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Упражнение}
+	\begin{itemize}
+		\item Добавить в код неиспользуемую переменную
+		\item Скомпилировать объектный файл с установленной опцией {\tt -Wall}
+		\item Скомпилировать объектный файл с установленными опциями {\tt -Wall -Werror}
+	\end{itemize}
+\end{frame}
+
 

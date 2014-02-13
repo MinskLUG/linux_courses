@@ -1,3 +1,19 @@
+\begin{frame}[fragile]
+	\frametitle{Бинарная совместимость}
+
+	\begin{block}{Application binary interface (ABI)}
+		\begin{itemize}
+				\item размер и выравнивание данных
+				\item расположение структур
+				\item соглашения по вызовам
+				\item соглашения по использованию регистров
+				\item форматы объектных файлов
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+
 \begin{frame}
  \frametitle{Статическая и динамическая линковка}
  \begin{itemize}
@@ -44,16 +60,79 @@
     \item{Линковка во время выполнения}
  \end{itemize}
 \end{frame}
+
 \begin{frame}[fragile]
  \frametitle{Создание статических библиотек}
 \begin{lstlisting}[language=sh]
 gcc -g -Wall -c  file1.c
 gcc -g -Wall -c  file2.c
 ar rcs libmylib.a file1.o file2.o
-#ranlib libmylib.a
+#ranlib libmylib.a = ar s libmylib.a
 gcc -o file3 file3.c -L. -lmylib # Использование
 \end{lstlisting}
+
 \end{frame}
+
+\begin{frame}
+	\frametitle{Упражнение: статическая библиотека}
+
+	\begin{enumerate}
+		\item Создать "библиотеку" ({\tt liba.c})
+			с функцией {\tt void test(void)}, выводящей строку {\tt ``LibA''} на экран
+		\item Создать статическую библиотеку {\tt liba.a} с помощью {\tt ar}
+		\item Создать программу ({\tt main.c}), которая будет использовать 
+			библиотечную функцию {\tt test()}
+		\item Слинковать {\tt main.o} со статической библиотекой:
+			\begin{itemize}
+				\item {\tt gcc -o main -L. -la main.o }
+				\item {\tt gcc -o main main.o -L. -la }
+			\end{itemize}
+		\item Создать статически исполняемый файл: 
+			\begin{itemize}
+				\item {\tt gcc -o main main.o -L. -la -static}
+			\end{itemize}
+
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Разделяемые библиотеки}
+
+	\begin{block}{Именование}
+	
+		{\bf Soname}:
+		\begin{itemize}
+				\item Префикс {\tt lib}
+				\item Имя
+				\item Суффикс {\tt .so}
+				\item Версия
+		\end{itemize}
+
+		{\bf Real name}: soname, но версия включает в себя минорные изменения.
+
+		{\bf Link name}: soname, но без версии
+
+	\end{block}
+
+	\begin{block}{Упражнение}
+		Проанализировать файлы, находящиеся в {\tt /usr/lib}\footnote{Зависит от архитектуры}
+	\end{block}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Поиск динамических библиотек}
+  \begin{itemize}
+	\item {\tt ldconfig}
+	\item {\tt /etc/ld.so.conf}
+	\item {\tt /etc/ld.so.cache}
+	\item {\tt /etc/ld.so.preload}
+	\item {\it Опция линкера} {\tt -rpath}
+  \end{itemize}
+\end{frame}
+
 
 \begin{frame}[fragile]
   \frametitle{Создание динамических разделяемых библиотек}
@@ -64,7 +143,35 @@ cp libmylib.so.0.0 /usr/local/lib/
 ldconfig 
 gcc -g -o file3 file3.o -lmylib
 \end{lstlisting}
+
+	\begin{block}{Флаги}
+	
+		{\bf -fpic} или {\bf -fPIC} -- создание позиционно-независимого кода в объектных файлах.
+
+		{\bf -shared} -- создание разделяемой библиотеки
+
+		{\bf -Wl,-soname,libmylib.so.0} -- присвоение ``soname'' имени библиотеке
+
+	\end{block}
+
 \end{frame}
+
+\begin{frame}
+	\frametitle{Упражнение: динамическая библиотека}
+
+	\begin{enumerate}
+		\item Скомпилировать объектный файл {\tt liba.o} с опцией {\tt -fPIC}
+		\item Создать динамическую библиотеку {\tt libalib.so.0} 
+		\item Слинковать {\tt main.o} с динамической библиотекой\footnote{Hint: link name}
+			\begin{itemize}
+				\item {\tt gcc -o main main.o -L. -lalib }
+			\end{itemize}
+		\item запустить бинарный файл
+
+	\end{enumerate}
+\end{frame}
+
+
 
 \begin{frame}
  \frametitle{Проблемы при линковке}
@@ -77,27 +184,53 @@ gcc -g -o file3 file3.o -lmylib
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Поиск динамических библиотек}
-  \begin{itemize}
-    \item {\tt -rpath} Опция линкера
-    \item \verb+ LD_LIBRARY_PATH +
-    \item {\tt ldconfig}
-    \item {\tt /etc/ld.so.conf}
-    \item {\tt /etc/ld.so.cache}
-  \end{itemize}
+	\frametitle{GCC environment variables}
+
+	\begin{block}{Компилятор}
+		\begin{itemize}
+			\item {\tt CC} -- (пере)определение компилятора
+			\item {\tt CFLAGS} -- флаги для компилтора
+			\item {\tt CPATH, C\_INCLUDE\_PATH} -- расположение включаемых файлов для {\tt -I}
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Линкер}
+		\begin{itemize}
+			\item {\tt LDFLAGS} -- флаги для линкера
+			\item {\tt LIBRARY\_PATH} -- расположение динамически линкуемых библиотек {\tt -l} (link time)
+			\item {\tt LD\_LIBRARY\_PATH} -- расположение динамически линкуемых библиотек (runtime)
+			\item {\tt LD\_PRELOAD} -- пути к библиотекам, загружаемым до программы
+		\end{itemize}
+	\end{block}
+
 \end{frame}
 
 \begin{frame}
-  \frametitle{Упражнение}
-  \begin{itemize}
-    \item Оформить функцию {\tt hello(char * user) } которая приветствует пользователя в отдельный файл
-    \item Скомпилировать этот файл и создать из него разделяемую динамическую библиотеку {\tt (libhello.so)}
-    \item Создать программу вызывающую функцию {\tt hello()} и слинковать ее с динамической библиотекой
-  \end{itemize}
+	\frametitle{Упражнение: запуск с динамической библиотекой}
+
+	\begin{enumerate}
+		\item Переопределить переменную {\tt LD\_LIBRARY\_PATH}\footnote{Hint: soname}:\\
+			{\tt LD\_LIBRARY\_PATH=\$PWD ./main}
+		\item Переопределить переменную {\tt LD\_PRELOAD}:\\
+			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 ./main}
+		\item Добавить опцию {\tt -rpath} при линковке:\\
+			{\tt gcc hello.o -L. -lalib -Wl,-rpath=\$PWD -o hello}
+	\end{enumerate}
 \end{frame}
 
+
+%\begin{frame}
+%  \frametitle{Упражнение}
+%  \begin{itemize}
+%    \item Оформить функцию {\tt hello(char * user) } которая приветствует пользователя в отдельный файл
+%    \item Скомпилировать этот файл и создать из него разделяемую динамическую библиотеку {\tt (libhello.so)}
+%    \item Создать программу вызывающую функцию {\tt hello()} и слинковать ее с динамической библиотекой
+%  \end{itemize}
+%\end{frame}
+
+
 \begin{frame}
-	\frametitle{Пример: последовательность линковки библиотек}
+	\frametitle{Упражнение: последовательность линковки библиотек}
 
 	\begin{enumerate}
 		\item Создать 2 библиотеки ({\tt liba.c} и {\tt libb.c})
@@ -113,3 +246,6 @@ gcc -g -o file3 file3.o -lmylib
 			\end{itemize}
 	\end{enumerate}
 \end{frame}
+
+
+
