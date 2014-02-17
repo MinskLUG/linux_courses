@@ -23,6 +23,8 @@ _Disclaimer_: поскольку некоторые материалы либо 
 
 * epam/Presentation/ -- курсы по Linux для программистов (Epam)
 * epam/BashScripting/ -- отдельный курс по программированию в Bash (Epam)
+* epam/Python/ -- отдельный курс по программированию на Python (pptx) (Epam)
+* epam/C/ -- отдельный курс по программированию на C (PDF пока идет первое прочтение)(Epam)
 * sam-solutions/ -- введение в Linux для QA (SaM-Solutions)
 * promwad/ -- курс "Программирование встраиваемых систем" (Promwad)
 
