@@ -25,7 +25,7 @@ char* get_name()
 	\begin{center}
 	Чего не хватает в хидере? А ещё?
 \end{center}
-
+\pause
 	\begin{lstlisting}
 gcc --shared -o libname.so name.c -DLIB_NAME=\"libname.so\"
 	\end{lstlisting}
@@ -42,7 +42,7 @@ gcc --shared -o libname.so name.c -DLIB_NAME=\"libname.so\"
 
 int main(int argc, char** argv)
 {
-    printf("Hello, %s", get_name());
+    printf("Hello, %s\n", get_name());
     return 0;
 }
 	\end{lstlisting}
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 	Сборка:
 
 	\begin{verbatim}
-gcc hello.c -c -fPIC -o hello.o
+gcc hello.c -c -o hello.o
 gcc hello.o -L=. -lname -o hello
 	\end{verbatim}
 \end{frame}
@@ -76,6 +76,7 @@ gcc hello.o -L=. -lname -o hello
 	\frametitle{Makefile}
 
 	\begin{lstlisting}[language=make]
+.PHONY release
 release: hello
 hello: hello.o libname.so
     gcc hello.o -L=. -lname -o hello
@@ -92,19 +93,6 @@ hello.c: name.h
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Автоматические зависимости}
-
-	Создание зависимостей средствами gcc:
-
-	\begin{verbatim}
-gcc -M -MM -MD -MMD
-	\end{verbatim}
-
-	\begin{lstlisting}[language=make]
-include $(wildcard *.d)
-	\end{lstlisting}
-\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Переменные в Makefile}
@@ -118,7 +106,6 @@ show-flags:
     echo $(linker_flags)
 	\end{lstlisting}
 \end{frame}
-
 \begin{frame}[fragile]
 	\frametitle{Псевдонимы и шаблонные правила}
 
@@ -136,6 +123,27 @@ VPATH := . somedir
 	\end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Скрытые (implicit) правила}
+\begin{block}{Упражнение}
+В пустой директории создайте файл hello.c, который выводит hello, world
+\begin{lstlisting}[language=bash]
+make hello
+\end{lstlisting}
+\end{block}
+\pause
+\begin{center}
+Некоторые скрытые правила
+\end{center}
+\begin{lstlisting}[language=make]
+%.o:%.c
+        $(CC) -c $(CPPFLAGS) $(CFLAGS) $^
+%.o:%.cc
+        $(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $^
+%:%.o
+        $(CC) -o $@ $(LDFLAGS) $^ $(LOADLIBES) 
+\end{lstlisting}
+\end{frame}
 \begin{frame}[fragile]
 	\frametitle{Функции в make}
 
@@ -155,6 +163,19 @@ $(patsubst %.c, %.o, $(wildcard *.c))
 
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Автоматические зависимости}
+
+	Создание зависимостей средствами gcc:
+
+	\begin{verbatim}
+gcc -M -MM -MD -MMD
+	\end{verbatim}
+
+	\begin{lstlisting}[language=make]
+include $(wildcard *.d)
+	\end{lstlisting}
+\end{frame}
 \begin{frame}[fragile]
 	\frametitle{Практическое задание}
 
