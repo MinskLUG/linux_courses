@@ -141,7 +141,8 @@
  \begin{itemize}
    \item \texttt{help}
    \item \texttt{version}
-   \item \texttt{with-smth}, \texttt{without-smth}
+   \item \texttt{with-smth}, \texttt{without-smth} \\
+		 \texttt{enable-smth}, \texttt{disable-smth}
   \end{itemize}
 \end{frame}
 
@@ -162,10 +163,20 @@
 
 \begin{frame}
  \frametitle{Упражнение}
+ Для упражнения понадобится проект GNU/Hello \url{http://www.gnu.org/software/hello/}.
+
   \begin{itemize}
-    \item Установить GNU Go в \texttt{/home/altlinux/usr/}
+    \item Распаковать архив и перейти в созданный каталог
+    \item Указать префикс установки GNU/Hello в \texttt{\$HOME/usr/}
+	\item Скомпилировать, проверить и установить проект
+	\item Запустить c опцией {\tt -{}-help}
     \item Удалить результаты инсталляции
-    \item Установить все файлы GNU Go в /home/altlinux/go
+	\item Удалить все автоматически созданные файлы в проекте
+	\item Создать в дереве исходников директорию {\tt build} и перейти в нее
+	\item Пересобрать проект без поддержки локализации, добавив суффикс
+	\item Установить {\it архитектурно-зависимые} файлы GNU/Hello 
+		в \texttt{\$HOME/test/} с использованием переменной {\tt DESTDIR}
+	\item Запустить c опцией {\tt -{}-help}
   \end{itemize}
 \end{frame}
 
@@ -233,6 +244,7 @@
 }
 \end{tikzpicture}
 \end{center}}
+
 \footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
 \end{frame}
 
@@ -305,49 +317,121 @@
 \end{tikzpicture}
 \end{frame}
 
+\begin{frame}
+ \frametitle{Как работают \texttt{autotools}: \texttt{m4}}
+
+ \begin{block}{m4}
+	 Макропроцессор m4,  разработанный в 1977 году программистами Брайаном Керниганом и Денисом Ритчи,  
+	 предназначен для макрогенерации на предварительном проходе в различных языках. 
+	 Макрогенерация означает копирование входного символьного потока в выходной с подстановкой макросов 
+	 по мере их появления. Макросы могут быть встроенными или определенными пользователями,
+	 и принимать произвольное число аргументов. Имеется множество встроенных функций для включения файлов, 
+	 запуска внешних команд,  выполнения целочисленной арифметики,  
+	 манипуляции строками. 
+	 
+	 Название «m4» раскрывается как «macro»,  то есть «m» + ещё 4 буквы.
+ \end{block}
+\end{frame}
+
+
 \begin{frame}[fragile]
  \frametitle{Возможный алгоритм использования autotools}
  \begin{itemize}
   \item Запустить \texttt{autoscan}
   \item Заполнить сгенерированный шаблон \texttt{configure.scan} и сохранить как \texttt{configure.ac}
   \item Заполнить Makefile.am в каждой поддиректории
-  \item Запустить \texttt{autoreconf --install --force}
+  \item Запустить \texttt{autoreconf -{}-install -{}-force}
   \item Починить проблемы
   \item \verb+./configure && make && make install+
  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
+\frametitle{Практическая задача}
+
+Создадим переносимый пакет {\tt hello\_world}
+
+	\begin{block}{На входе}
+	\begin{itemize}
+		\item Проект типа Hello,World с отдельным файлом, который будет содержать функцию \texttt{helloworld} 
+	\end{itemize}
+	\end{block}
+
+	\begin{block}{На выходе}
+	\begin{itemize}
+		\item Бинарный файл содержащий собственную реализацию печати сообщения
+		\item Разделяемую библиотеку для печати сообщения
+		\item Бинарный файл, использующий библиотеку
+	\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Исходники}
+
+	\begin{itemize}
+		\item Считаем, что исходники находятся в {\tt src/}
+		\item Добавить в список необходимых заголовочных файлов {\tt config.h}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
 \frametitle{Пример \texttt{configure.ac}}
+
+	\begin{itemize}
+		\item Запускаем {\tt autoscan} для получения шаблона
+		\item Копируем шаблон в \texttt{configure.ac} и редактируем его
+		\item[] Обратить внимание на {\tt config.h}
+		\item Запускаем {\tt autoreconf -vfi}
+	\end{itemize}
+
 \begin{lstlisting}[language=sh]
-AC_PREREQ(2.60)
 AC_INIT([my-package],[1.0.0],[me@maintainer.org])
-AC_CONFIG_AUX_DIR(autotools)
-
-AC_CONFIG_SRCDIR(src/my_package_main.c)
-
-AC_CONFIG_HEADER(config.h)
-AC_CONFIG_FILES([Makefile src/Makefile])
-
-AC_PROG_CC
-AC_PROG_LIBTOOL
-
-AM_INIT_AUTOMAKE([foreign -Wall -Werror])
-AC_OUTPUT
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Пример \texttt{Makefile.am}}
+	\frametitle{Пример \texttt{configure.ac}: добавляем {\tt automake}}
+
+	\begin{itemize}
+		\item Добавляем инициализацию {\tt automake} в шаблон
+		\item Запускаем {\tt autoreconf -vfi}
+	\end{itemize}
+
 \begin{lstlisting}[language=sh]
-bin_PROGRAMS = myprogram
-lib_LTLIBRARIES = libmylibrary.la
-myprogram_SOURCES = myprogram.c myprogram.h somefunction.c somefunction.h
-myprogramm_LDADD = libmylibrary.la 
-libmylibrary_la_SOURCES = mylibfun1.c mylibfun2.c libmylibrary.h
-include_HEADERS = libmylibrary.h
+AC_INIT([my-package],[1.0.0],[me@maintainer.org])
+AM_INIT_AUTOMAKE([foreign -Wall -Werror])
 \end{lstlisting}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример \texttt{configure.ac}: добавляем {\tt Makefile}}
+	\begin{block}{Корневой \texttt{Makefile.am}}
+\begin{lstlisting}[language=sh]
+SUBDIRS = src
+\end{lstlisting}
+
+	Hint: {\tt VPATH} в {\tt Makefile}
+\end{block}
+
+	\begin{block}{\texttt{Makefile.am} в {\tt src}}
+\begin{lstlisting}[language=sh]
+bin_PROGRAMS = hello
+hello_SOURCES  = hello.c libhello.c
+\end{lstlisting}
+	\end{block}
+
+	\begin{block}{\texttt{configure.ac}}
+\begin{lstlisting}[language=sh]
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_FILES([Makefile src/Makefile])
+\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{lib LTLIBRARIES и libtool}
@@ -361,18 +445,45 @@ include_HEADERS = libmylibrary.h
 \end{itemize}
 \end{frame}
 
-\begin{frame}
- \frametitle{Упражнение}
- \begin{itemize}
-  \item Создать проект типа Hello,World с отдельным файлом, который будет содержать функцию \texttt{sayhelloworld} и \texttt{sayhello(char *user)} 
-  \item Создать configure.ac и Makefile.am для случая, когда hello компилируется сразу в один файл
-  \item То же самое, когда компилируется в динамическую разделяемую библиотеку и конечную программу
- \end{itemize}
+\begin{frame}[fragile,allowframebreaks]
+	\frametitle{Пример: добавляем библиотеку}
+	\begin{block}{\texttt{Makefile.am} в {\tt src}}
+\begin{lstlisting}[language=sh]
+bin_PROGRAMS = hello
+lib_LTLIBRARIES = libhello-lib.la
+hello_SOURCES  = hello.c
+hello_LDADD = libhello-lib.la
+libhello_lib_la_SOURCES = libhello.c
+\end{lstlisting}
+	\end{block}
+
+	\begin{block}{Корневой \texttt{Makefile.am}}
+\begin{lstlisting}[language=sh]
+SUBDIRS = src
+ACLOCAL_AMFLAGS = -I m4
+\end{lstlisting}
+	\end{block}
+
+	\begin{block}{\texttt{configure.ac}}
+\begin{lstlisting}[language=sh]
+# Checks for libraries.
+LT_INIT
+\end{lstlisting}
+	\end{block}
+
+	\begin{itemize}
+		\item Запускаем {\tt libtoolize} 
+	\end{itemize}
+
 \end{frame}
 
-\begin{frame}
- \frametitle{Как работают \texttt{autotools}: \texttt{m4}}
+\begin{frame}[fragile]
+	\frametitle{Пример: автоматическая магия}
+	\begin{block}{Сборка без библиотек}
+	\center{\tt ./configure -{}-disable-shared}
+	\end{block}
 \end{frame}
+
 
 \begin{frame}
  \frametitle{Альтернативы autotools}
