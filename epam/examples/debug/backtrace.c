@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
 #include <execinfo.h>
 
 
@@ -29,14 +30,19 @@ static void signal_error(int sig, siginfo_t *si, void *ptr){
 
 	trace_size = backtrace(trace, TRACEDEPTH);
 
+	printf("Backtrace symbols with backtrace_symbols_fd():\n");
+
+	backtrace_symbols_fd( trace, trace_size, STDERR_FILENO);
+
+	/* May not work with memory corruption due internal malloc() */
+	printf("Backtrace symbols with backtrace_symbols():\n");
+
 	trace_msg = backtrace_symbols( trace, trace_size);
 
-	printf("Backtrace symbols:\n");
 	for( i=0; i<trace_size; i++)
 		printf("%s\n", trace_msg[i]);
 
 	free( trace_msg);
-
 	exit( 1);
 }
 
@@ -63,7 +69,7 @@ int main(int argc, char *argv[]){
   sigemptyset(&sigset);
 
   buf=malloc(BUF_SIZE*sizeof(char));
-  if(buf==NULL){
+  if(buf=NULL){
     printf("Buffer allocation failed!\n");
     exit(1);
   }
