@@ -28,3 +28,48 @@
     \end{itemize}
  \end{columns}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Подготовка}
+
+	\begin{block}{Заготовка {\tt trace.c}}
+	
+	\begin{lstlisting}
+#include <stdio.h>
+
+void second (void) {
+}
+
+void first (void) {
+  second();
+}
+
+int main (void) {
+  first();
+  return 0;
+}
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Полезные макросы}
+
+	\begin{itemize}
+		\item {\tt \_\_FILE\_\_}
+		\item {\tt \_\_LINE\_\_}
+		\item {\tt \_\_func\_\_}
+	\end{itemize}
+
+	\begin{block}{Задание}
+		Добавить макрос печатающий на экран текущее имя файла, номер строки и имя функции.
+
+		Вставить макрос в начало каждой функции.
+	\end{block}
+
+\end{frame}
+
+
+
