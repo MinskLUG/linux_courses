@@ -4,10 +4,10 @@
 	\frametitle{Инфраструктура для разработчика}
 	
 	\begin{itemize}
-		\item Конфигурация
+		\item Подготовка окружения
 			\begin{enumerate}
 				\item {\tt ~/.rpmmacros} -- информация о пакетировщике, локальные настройки
-				\item {\tt ~/RPM/} -- дерево для внутреннего использования RPM
+				\item {\tt ~/RPM/} -- дерево для внутреннего использования RPM (rpmdev-setuptree)
 					\begin{enumerate}
 						\item {\tt BUILD/}
 						\item {\tt BUILDROOT/}
@@ -39,11 +39,11 @@
 
 	\begin{itemize}
 		\item Макросы -- {\tt \%define FOO bar}
-		\item Заголовок (Тэги) -- {\tt Tag: value}
-		\item Подготовка -- {\tt \%prep + \%setup}
-		\item Сборка -- {\tt \%build}
-		\item Проверка -- {\tt \%check}
+		\item Тэги -- {\tt Tag: value}
+		\item Подготовка -- {\tt \%prep + \%setup} 
+		\item Сборка -- {\tt \%build} 
 		\item Установка -- {\tt \%install}
+		\item Проверка -- {\tt \%check}
 		\item Файлы --{\tt \%files}
 		\item Скрипты, выполняемые в различных условиях\\
 			{\tt pre-,post-install, uninstall, trigger}
@@ -55,7 +55,7 @@
 \begin{frame}
 	\frametitle{Зависимости}
 
-	\begin{block}{ Зависимости}
+	\begin{block}{Зависимости}
 		\begin{itemize}
 			\item {\tt BuildRequires:}
 			\item {\tt Requires:}
@@ -69,7 +69,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{версии}
+	\frametitle{Версии}
 
 	\Large{Чтение правил дистрибутива строго обязательно!}
 
@@ -118,7 +118,7 @@
 	\frametitle{Пример 2}
 
 	\begin{block}{Подпакеты, скрипты, зависимости и обновление}
-		На примере {\tt template.spec}
+		На примере {\tt template.spec}:
 
 		\begin{itemize}
 			\item Собрать пакет с помощью {\tt rpmbuild -ba template.spec}
