@@ -1,86 +1,69 @@
 \begin{frame}
 %damn tilde, best that i found
 \def~{$\sim$}
-	\frametitle{Инфраструктура для разработчика}
-	
-	\begin{itemize}
-		\item Подготовка окружения
-			\begin{enumerate}
-				\item {\tt ~/.rpmmacros} -- информация о пакетировщике, локальные настройки
-				\item {\tt ~/RPM/} -- дерево для внутреннего использования RPM (rpmdev-setuptree)
-					\begin{enumerate}
-						\item {\tt BUILD/}
-						\item {\tt BUILDROOT/}
-						\item {\tt RPMS/\%arch/}
-						\item {\tt SOURCES/}
-						\item {\tt SPECS/}
-						\item {\tt SRPMS/}
-					\end{enumerate}
-			\end{enumerate}
-		\item Исходники
-			\begin{enumerate}
-				\item Исходный код ПО 
-				\item {\tt spec} -- файл описания процесса сборки, установки, а также метаинформация
-				\item Патчи при необходимости
-			\end{enumerate}
-
-		\item На выходе
-			\begin{enumerate}
-				\item {\tt *.\%arch.rpm} -- пакеты, готовые для установки
-				\item {\tt *.srpm} -- пакет с исходниками
-			\end{enumerate}
-
-	\end{itemize}
+	\frametitle{Подготовка окружения для сборки}	
+			\begin{itemize}
+				\item {\tt rpmdevtools} -- разные полезные помощники
+				\item {\tt rpmdev-setuptree} -- создает структуру каталогов
+				\item {\tt ~/.rpmmacros} -- информация о пакетировщике, локальные
+			\end{itemize}			
+				\begin{table}
+					\begin{tabular}{l | l | l }
+					Каталог & Макрос & Описание\\
+					\hline
+					~/rpmbuild/SPECS/ & \%\_specdir & Сборочные .spec файлы\\
+					~/rpmbuild/SOURCES/ & \%\_sourcedir & Исходные архивы и патчи\\
+					\hline
+					~/rpmbuild/BUILD/ & \%\_builddir	& Сборка\\		
+					~/rpmbuild/BUILDROOT/ & \%\_buildrootdir & Установка\\
+					\hline
+					~/rpmbuild/RPMS/ & \%\_rpmdir & Собранные .rpm\\
+					~/rpmbuild/SRPMS/ & \%\_srcrpmdir & ``Собранный'' .srpm \\
+					\end{tabular}
+				\end{table}			
+			\begin{block}{Выполнить команды}
+				{\tt rpmdev-setuptree ; cd ~/rpmbuild/SPECS ; vim program.spec }
+			\end{block}			
 \end{frame}
 
-
 \begin{frame}
-	\frametitle{Структура типового spec-файла}
-
+	\frametitle{Структура spec-файла}	
 	\begin{itemize}
-		\item Макросы -- {\tt \%define FOO bar}
 		\item Тэги -- {\tt Tag: value}
-		\item Подготовка -- {\tt \%prep + \%setup} 
-		\item Сборка -- {\tt \%build} 
-		\item Установка -- {\tt \%install}
-		\item Проверка -- {\tt \%check}
-		\item Файлы --{\tt \%files}
-		\item Скрипты, выполняемые в различных условиях\\
-			{\tt pre-,post-install, uninstall, trigger}
-		\item Изменения -- {\tt \%changelog }
-	\end{itemize}
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{Зависимости}
-
-	\begin{block}{Зависимости}
 		\begin{itemize}
+		\item Все из открытого шаблона .spec файла
+		\item Отсутствующие в шаблоне
+			\begin{itemize}
+			\item {\tt Patch0: } имя файла с патчем
+			\item {\tt BuildArch/ExcludeArch/ExclusiveArch: } архитектура (noarch)
+			\item {\tt BuildRoot: } BUILDROOT каталог устарело
+			\end{itemize}
+		\item Зависимости
+			\begin{itemize}
 			\item {\tt BuildRequires:}
 			\item {\tt Requires:}
 			\item {\tt Provides:}
 			\item {\tt Conflicts:}
 			\item {\tt Obsoletes:}
 			\item {\tt AutoReqProv: (0|1)}
+			\end{itemize}
 		\end{itemize}
-	\end{block}
-
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Версии}
 
 	\Large{Чтение правил дистрибутива строго обязательно!}
-
+	
 	Hint: {\tt rpmdev-vercmp (rpmdevtools)}
 	\begin{block}{ Версия -- составная}
 		{\tt \%name-\%epoch:\%version-\%release}
 		\begin{itemize}
-			\item {\tt \%name}
-			\item {\tt \%epoch}
-			\item {\tt \%version}
-			\item {\tt \%release}
+			\item {\tt Name: == \%name}
+			\item {\tt Epoch: == \%epoch}
+			\item {\tt Version: == \%version}
+			\item {\tt Release: == \%release}
 			\begin{itemize}
 				\item Release:
 				\item \%\{?dist\} tag
@@ -91,7 +74,41 @@
 
 \end{frame}
 
+\begin{frame}
+	\frametitle{Структура spec-файла}
 
+	\begin{itemize}
+		\item Секции --  {\tt \%prep, \%build, \%install, \%check, \%files, \%changelog} 
+		\item Макросы -- {\tt \%define FOO bar} 
+		\item Скриптлеты, выполняемые в различных условиях\\
+			{\tt (pre-,post-)install, uninstall, trigger}
+		\item Подпакеты -- {\tt \%package}
+		\item Условности -- {\tt \%ifarch ARCH\_NAME, \%if TRUE\_OR\_FALSE}
+	\end{itemize}
+	\begin{block}{Hint:}
+		 {\tt rpm -\-showrc }
+	\end{block}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Шаги сборки}	
+	
+			\begin{table}
+				\begin{tabular}{l | l | l | l }
+				Шаг & Чтение & Запись & Описание \\
+				\hline 
+				\%prep & \%\_sourcedir & \%\_builddir & Подготовка\\
+				\%build & \%\_builddir & \%\_builddir & Сборка (configure, make)\\
+				\%install & \%\_builddir & \%\_buildrootdir & Установка (make install)\\
+				\%check &	\%\_builddir & \%\_builddir & Проверка (make test)\\
+				\hline 
+				bin & \%\_buildrootdir	&\%\_rpmdir & Упаковка RPM\\
+				src & \%\_sourcedir & \%\_srcrpmdir & Упаковка SRPM\\
+				\end{tabular}
+			\end{table}			
+\end{frame}
 
 \begin{frame}
 	\frametitle{Пример 1: Hello, World!}
@@ -131,7 +148,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Пример 3}
+	\frametitle{Пример 3: Пакетируем linking}
 
 	\begin{block}{Задача:}
 		Создать и установить пакеты для примера с созданием библиотек
