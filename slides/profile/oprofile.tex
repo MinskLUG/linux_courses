@@ -8,6 +8,22 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{Инструменты для сбора статистики}
+\begin{itemize}
+\item oprofile
+\item perf
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Устройство perf}
+  \begin{itemize}
+    \item Внутриядерные компоненты (обеспечивают syscall)
+    \item Утилита perf (user space)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
  \frametitle{Компоненты oprofile}
   \begin{itemize}
     \item Модуль ядра oprofile
@@ -16,11 +32,10 @@
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}[fragile]
- \frametitle{Запуск oprofile: Проверка поддержки в ядре}
+ \frametitle{Проверка поддержки perf в ядре}
  \begin{itemize}
-   \item \verb+ grep OPROFILE <configure>+
+   \item \verb+ grep PERF <configure>+
    \item Где найти \texttt{.configure}
      \begin{itemize}
       \item \texttt{.configure} В исходниках ядра
@@ -30,23 +45,41 @@
   \end{itemize}
 \end{frame} 
 
+\begin{frame}[fragile]
+ \frametitle{Запуск oprofile: Проверка поддержки в ядре}
+ \begin{itemize}
+   \item \verb+ grep OPROFILE <configure>+
+ \end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+ \frametitle{Основные команды perf}
+ \begin{itemize}
+   \item \verb+ perf record <program> <args>+
+   \item \verb+ perf report+
+   \item \verb+ perf annotate -d <program file>+
+   \item \verb+ perf top+
+   \item \verb+ perf stat+
+ \end{itemize}
+\end{frame}
 
 \begin{frame}[fragile]
  \frametitle{Запуск oprofile: Работа}
  \begin{itemize}
-  \item \verb+ opcontrol --vmlinux=/boot/vmlinux-3.2.xxx+ 
+  \item \verb+ opcontrol --no-vmlinux+ 
   \item \verb+ opcontrol --init+
   \item \verb+ opcontrol --start; ./my_program ; opcontrol --dump;  opcontrol --stop+
   \item \verb+ opannotate --source ./my_program +
  \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
  \frametitle{Упражнение}
  \begin{enumerate}
-  \item Проверить, что в конфигурации ядра есть поддержка oprofile
+  \item Проверить, что в конфигурации ядра есть поддержка perf
+  \item Установить perf \verb+apt-get update; apt-get install perf +
   \item Скомпилировать программу с \texttt{-g}
-  \item Запустить под oprofile
+  \item Запустить под perf
   \item Посмотреть статистику вызовов
   \item Запустить еще раз
   \item Посмотреть статистику еще раз, сравнить
