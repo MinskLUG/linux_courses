@@ -1,0 +1,127 @@
+% Copyright 2013 by Denis Pynkin <denis_pynkin@epam.com>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackage{beamerthemeEpam}
+  [2013/12/08 v0.1 beamer 'Epam' theme]
+ 
+\mode<presentation>
+
+\usefonttheme{default}
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{shadow}
+
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{EpamBlue}{HTML}{006699}
+\definecolor{EpamPink}{HTML}{FF3366}
+\definecolor{EpamAzure}{HTML}{3F9ABF}
+\definecolor{Epam4box}{HTML}{7EBBD4}
+\definecolor{EpamBlueLight}{HTML}{BFDDE9}
+
+
+\setbeamercolor*{lineup}{parent=palette primary}
+\setbeamercolor*{linemid}{parent=palette secondary}
+\setbeamercolor*{linebottom}{parent=palette tertiary}
+
+\setbeamercolor{epamline1}{fg=black,bg=EpamPink}
+\setbeamercolor{epamline2}{fg=black,bg=EpamBlue}
+\setbeamercolor{epamline3}{fg=black,bg=EpamAzure}
+\setbeamercolor{epamline4}{fg=black,bg=Epam4box}
+\setbeamercolor{epamline5}{fg=black,bg=EpamBlueLight}
+
+\setbeamercolor{epamlinestring}{fg=EpamBlue,bg=white}
+
+% system colors redefination
+\setbeamercolor{structure}{fg=EpamBlue}
+\setbeamercolor{frametitle}{bg=EpamBlue}
+\setbeamercolor{frametitle right}{bg=EpamBlueLight}
+
+
+
+% some lengths (the height of the lines)
+\newlength{\beamer@decolines@lineup}
+\setlength{\beamer@decolines@lineup}{.025\paperheight}
+
+\newlength{\beamer@decolines@linemid}
+\setlength{\beamer@decolines@linemid}{.04\paperheight}
+
+\newlength{\beamer@decolines@linebottom}
+\setlength{\beamer@decolines@linebottom}{.015\paperheight}
+
+\newlength{\beamer@decolines@headline}
+\setlength{\beamer@decolines@headline}{.015\paperheight}
+
+% String used between the current page and the total page count.
+\def\beamer@decolines@pageofpages{/}
+
+% Footline
+\defbeamertemplate*{footline}{decolines theme}
+{
+  \leavevmode%
+  % First line.
+  \hbox{%
+  \begin{beamercolorbox}[wd=.05\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline1}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.10\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline2}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.16\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline3}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.26\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline4}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.43\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline5}%
+  \end{beamercolorbox}%
+  } %
+  % Second line.
+  \hbox{%
+  \begin{beamercolorbox}[wd=.15\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
+    \small{<}\large{epam}\small{>}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.01\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,left]{epamlinestring}%
+    \vspace*{\fill}
+
+    \tiny{Excellence in Software Engineering}
+
+    \vspace*{\fill}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
+    \hbox{\usebeamerfont{palette primary}\footnotesize\insertframenumber{} \beamer@decolines@pageofpages{} \inserttotalframenumber\hspace*{2ex}}%
+  \end{beamercolorbox}%
+  } %
+  % Third line.
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@linebottom,dp=0pt]{}%
+  \end{beamercolorbox}%
+  } %
+}
+
+% colors for headline
+% headline
+\setbeamertemplate{headline}{%
+\leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@headline,dp=1.125ex]{epamline2}%
+    \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+    \end{beamercolorbox}%
+  }
+}
+
+\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!black}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!black}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!5!white}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+
+\makeatother
+
+\mode <all>
