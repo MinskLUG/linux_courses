@@ -19,21 +19,6 @@
 \end{frame}
 
 \begin{frame}[fragile]
- \frametitle{Образец комментариев для Doxygen}
-\begin{lstlisting}[language=C]
-/**
-  \brief Краткое описание функции
-
-  Детальное описание
-  @param parameter1 Описание первого параметра
-  @see Ссылка на другую функцию
-
-*/
-int function(int parameter1) 
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
  \frametitle{Некоторые важные параметры в конфигурационном файле}
  \begin{itemize}
   \item \verb+PROJECT_NAME+
@@ -45,6 +30,61 @@ int function(int parameter1)
   \item \verb+EXTRACT_ALL+
  \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Образец комментариев для файла}
+\begin{lstlisting}[language=C]
+/**
+  @file filename
+  @brief Краткое описание
+
+  Детальное описание
+  @author Автор (может быть несколько)
+  @bug Нет известных багов
+*/
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Образец комментариев для функции}
+\begin{lstlisting}[language=C]
+/**
+  @brief Краткое описание функции
+
+  Детальное описание
+  @param[in] parameter1 Описание первого параметра
+  @param[out] parameter2 Описание второго параметра
+  @see Ссылка на другую функцию
+  @return Что возвращает
+
+*/
+int function(int parameter1, char *parameter2) 
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Образец комментариев для данных}
+\begin{lstlisting}[language=C]
+/** 
+* Описание структуры 
+*/
+typedef struct { 
+	/*@{*/ 
+  double x ; /**< the x coordinate*/ 
+  double y ; /**< the y coordinate */
+  double z ; /**< the z coordinate */
+  /*@}*/
+  /** 
+  * @name group 2 
+  */
+  /*@{*/
+  char * name ; /**< the name of the point */
+  int namelength ; /**< the size of the point name */
+  /*@}*/
+  } point3d
+\end{lstlisting}
+\end{frame}
+
 
 \begin{frame}
  \frametitle{Упражнение}
