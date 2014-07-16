@@ -1,5 +1,5 @@
-TARGET = 
-TARGET +=
+TARGET = 01-intro.pdf
+TARGET += 02-command_line_intro.pdf
 
 LATEXML=latexml
 LATEXML_PARAMS=--inputencoding=utf8 --preload=beamer.cls --preload=t2aenc.def --nocomments
