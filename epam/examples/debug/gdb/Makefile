@@ -1,8 +1,6 @@
 CFLAGS = -g -Wall 
-<<<<<<< HEAD:epam/examples/debug/gdb/Makefile
 .PHONY: all
 all: counter segfault
-=======
 
 .PHONY: all dist
 all: counter segfault backtrace
