@@ -41,12 +41,12 @@
 		  \item {\tt a, i} -- добавить строку после (перед) текущей
 			  \begin{verbatim} who | sed -e 'a Text' \end{verbatim}
 		  \item {\tt c} -- удалить строку и заменить на текст
-			  \begin{verbatim} who | sed -e '/altlinux/ c Юзверь' \end{verbatim}
+			  \begin{verbatim} who | sed -e "/$USER/ c Юзверь" \end{verbatim}
 		  \item {\tt d} -- удалить строку
 			  \begin{verbatim} who | sed -e '2,4 d' \end{verbatim}
 			  \begin{verbatim} who | sed -e '/pts/ d' \end{verbatim}
 		  \item {\tt s} -- замена по регулярному выражению
-			  \begin{verbatim} who | sed -e 's/pts/консолька/g' \end{verbatim}
+			  \begin{verbatim} who | sed -e "s/$USER/Юзверь/g" \end{verbatim}
 		\end{itemize}
 	\end{block}
 \end{frame}

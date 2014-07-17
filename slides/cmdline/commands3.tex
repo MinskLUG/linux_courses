@@ -1,0 +1,59 @@
+\begin{frame}[fragile]{Поиск файлов}
+	\begin{block}{find}
+		\begin{itemize}
+			\item {\tt -type} -- тип файлового объекта
+			\item {\tt -size} -- размер
+			\item {\tt -maxdepth} -- глубина рекурсии
+			\item {\tt -exec} -- выполнить команду
+			\item {\tt -printf} -- форматированный вывод
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size +100k  -exec ls -l {} \;
+		\end{verbatim}
+
+		\begin{verbatim}
+find -type d -user altlinux
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{xargs}
+	\begin{block}{xargs}
+			Утилита для создания и запуска команд из стандартного потока ввода:
+		\begin{verbatim}
+xargs [options] command [command options]
+		\end{verbatim}
+
+		\begin{itemize}
+			\item {\tt -d} -- разделитель
+			\item {\tt -0} -- null-terminated строки
+			\item {\tt -I text} -- подстановка
+			\item {\tt -n N} -- максимальное количество аргументов
+			\item {\tt -P N} -- максимальное количество процессов
+		\end{itemize}
+
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{xargs}
+	\begin{block}{Примеры}
+		\begin{verbatim}
+find /etc -type f -size -100k | xargs tar -czf /tmp/archive-100k.tar.gz
+		\end{verbatim}
+
+		\begin{verbatim}
+find /etc -type f | xargs -I {} echo "Найден {} файл"
+		\end{verbatim}
+
+		\begin{verbatim}
+find . -type f -name "*.mp3" -print0 | xargs -0 -n 1 -P 0 -I mp3 avconv -i mp3 mp3.ogg
+		\end{verbatim}
+	
+	\end{block}
+\end{frame}
+
+
