@@ -56,16 +56,24 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{}
 	\begin{block}{Упражнения}
 		\begin{enumerate}
-			\item Создать директорию без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями (для пользователя altlinux)
+			\item Создать директорию без r разрешения но с x разрешением, внутри нее создать поддиректорию с rwx разрешениями (для пользователя \defaultuser)
 			\item Создать нового пользователя testuser.
-			\item Скопировать {\tt /bin/bash} (под именем mysh) в домашнюю директорию пользователя altlinux  и поставить r-x разрешение только для other
-			\item Попробовать выполнить скопированный файл от имени пользователя altlinux, затем от имени пользователя testuser
+			\item Скопировать {\tt /bin/bash} (под именем mysh) в домашнюю директорию пользователя \defaultuser  и поставить r-x разрешение только для other
+			\item Попробовать выполнить скопированный файл от имени пользователя \defaultuser, затем от имени пользователя testuser
+       \end{enumerate}
+    \end{block}
+\end{frame}
+\begin{frame}
+    \frametitle{}
+	\begin{block}{Упражнения}
+		\begin{enumerate}
 			\item Создать новую группу testgroup
-			\item Изменить группу владеющую mysh на testgroup и сделать {\tt chmod 464 mysh}
-			\item Попробовать выполнить mysh от имени altlinux и root. 
-			\item Добавить пользователя altlinux в группу testgroup и попробовать выполнить mysh еще раз
+			\item Изменить группу владеющую mysh на testgroup и сделать {\tt chmod 474 mysh}
+			\item Попробовать выполнить mysh от имени \defaultuser и root. 
+			\item Добавить пользователя \defaultuser в группу testgroup и попробовать выполнить mysh еще раз
 			\item Получить список групп которым принадлежат устройства в {\tt /dev}
 		\end{enumerate}
 	\end{block}
@@ -88,7 +96,7 @@
 		\begin{itemize}
 			\item Под root создать копию утилиты {\tt id} (назвать, например, {\tt id2}) в директории /usr/bin/
 			\item Установить suid бит для этой утилиты
-			\item Запустить {\tt id2} от имени пользователя altlinux
+			\item Запустить {\tt id2} от имени пользователя \defaultuser
 			\item То же с sgid битом
 		\end{itemize}
 	\end{block}
@@ -120,18 +128,28 @@
 	\begin{itemize}
 		\item sgid для директорий -- все поддиректории и файлы внутри имеют тот же group id
 		\item suid -- игнорируется
-		\item Зато есть sticky bit 
+		\item Sticky bit (\tt{chmod +t mydir})
+          \begin{itemize}
+            \item Файлы из обычной директории может удалять любой пользователь с правами на запись в \emph{директорию}
+            \item Файлы из директории со sticky bit может удалять только владелец директории, владелец файла или root.
+          \end{itemize} 
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{UMASK}
+\begin{frame}[fragile]
+ \frametitle{UMASK}
 
 	\begin{block}{umask}
 		маска режима создания пользовательских файлов
 	\end{block}
 
 	Права доступа файлов, вычисляются c помощью побитовых операций:
-	побитовое И между унарным дополнением аргумента (используя побитовое НЕ) и режимом полного доступа.
+    \begin{itemize}
+      \item библиотечный вызов \tt{fopen} создает файл с разрешениями 
+     \verb+ 0666 & ~umask +
+      \item Системный вызов \tt{open(pathname,flags,mode)} создает файл с разрешениями \verb+ mode & ~umask +
+   \end{itemize}
+        
 
 \end{frame}
 
@@ -142,7 +160,7 @@
 			\item От имени пользователя \tt{root} создать пустой файл \tt{testroot}
 			\item Изменить \tt{umask} пользователя \tt{root} на 002
 			\item От имени пользователя \tt{root} создать пустой файл \tt{testroot2}
-			\item От имени пользователя \tt{altlinux} создать пустой файл \tt{testuser}
+			\item От имени пользователя \tt{\defaultuser} создать пустой файл \tt{testuser}
 			\item Посмотреть получившиеся права и принадлежность файлов
 			\item Отредактировать файл \tt{testroot2}
 			\item Попробовать удалить файл \tt{testroot2}
