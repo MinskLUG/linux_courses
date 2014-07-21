@@ -43,25 +43,3 @@
 		\end{itemize}
   \end{itemize}
 \end{frame}
-
-\begin{frame}{Дополнительные интерфейсы}
-	\begin{block}{Алиасы}
-		\begin{itemize}
-			\item ifconfig <iface>:<alias> <ip> up
-			\item ifconfig <iface> add <ip> up
-			\item ip addr add <ip> {\bf label} <iface>:<alias> dev <iface>
-		\end{itemize}
-	\end{block}
-	\pause
-	\begin{block}{VLAN}
-		\begin{itemize}
-			\item vconfig add <iface> <id>
-			\item vconfig rem <iface>{\bf.}<id>
-			\item ip link add {\bf link} <iface> name <vlan\_name> {\bf type vlan id <id>}
-			\item ip link delete <vlan\_name>
-		\end{itemize}
-	\end{block}
-
-\end{frame}
-
-

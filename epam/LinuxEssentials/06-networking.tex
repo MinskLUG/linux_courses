@@ -1,0 +1,56 @@
+\input{common}
+
+\title{Введение в GNU/Linux}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Основы работы с сетевой подсистемой}
+
+\mode<all>{\input{../../slides/networking/intro}}
+
+\subsection{Управление интерфейсами}
+\mode<all>{\input{../../slides/networking/interface-management}}
+
+\subsection{Полезные программы}
+\mode<all>{\input{../../slides/networking/useful-progs}}
+
+\section{Дополнительные типы интерфейсов}
+
+\subsection{alias, vlan}
+\mode<all>{\input{../../slides/networking/alias_vlan}}
+\subsection{Мосты}
+\mode<all>{\input{../../slides/networking/bridge}}
+\subsection{Тоннели}
+\mode<all>{\input{../../slides/networking/tuntap}}
+
+\section{Маршрутизация}
+\mode<all>{\input{../../slides/networking/routing}}
+
+\section{iptables}
+\mode<all>{\input{../../slides/networking/iptables}}
+
+%\mode<all>{\input{../../slides/networking/practice}}
+
+\end{document}
