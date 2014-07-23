@@ -1,0 +1,26 @@
+\begin{frame}{ssh}
+
+	\begin{block}{ssh -- терминал}
+		{\tt ssh [user@]host[:port]}\\
+		{\tt ssh host [-l user] [-p port]}
+		\begin{itemize}
+			\item -v -- "разговорчивый" режим 
+			\item -t -- насильное назначение псевдотерминала (для автоматизации)
+		\end{itemize}
+		Вся конфигурация пользователя: {\tt \$HOME/.ssh}
+	\end{block}
+
+	\pause
+
+	\begin{block}{... и не только}
+		\begin{itemize}
+			\item -X -- "проброс" графики 
+			\item -L [bindip:]port:rhost:rport -- "пробрасывание" порта с удаленной машины на локальную
+			\item -R [bindip:]port:lhost:lport -- "пробрасывание" порта с локальной машины на удаленную
+			\item -W host:port -- stdin/stdout с указанным хостом
+			\item -D port -- динамический прокси
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
