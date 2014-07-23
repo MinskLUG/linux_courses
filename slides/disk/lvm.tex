@@ -83,39 +83,16 @@
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}{Изоляция процесса в Linux}
-  \begin{center}
-    \textbf{В порядке возрастания уровня изоляции}
-  \end{center}
-  \begin{enumerate}
-    \item {\tt chroot}
-    \item Linux containers (LXC)
-    \item KVM/QEMU
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}{Упражнение: использование изоляции процесса}
-  \begin{block}{chroot}
-    \begin{enumerate}
-      \item Выбрать из {\tt /media/nfs/pub/soft/linux/emulator/OpenVZ/precreated} систему по вкусу и распаковать {\tt tgz } файл в {\tt /mnt/myfs}
-      \item Смонтировать proc и dev файловые системы в новом окружении {\tt /mnt/myfs} \\
-		  Hints: {\tt procfs}, опция {\tt -\phantom{}-bind}
-      \item {\tt chroot /mnt/myfs /bin/bash}
-	  \item {\tt cat /etc/*release}
-	  \item {\tt uname -a}
-    \end{enumerate}
-  \end{block}
-\end{frame}
 
 \begin{frame}{Упражнение: Создание снимка LVM}
   \begin{enumerate}
+    \item Скопировать несколько файлов на { \tt /mnt/myfs}
     \item  {\tt lvcreate -\phantom{}-snapshot -l 10\%VG -n snap /dev/VG0/lv1}
     \item  {\tt lvdisplay, lvs, lvscan}
 	\item Смонтировать снимок в {\tt /mnt/snap}
 		\pause
-	\item Удалить директорию {\tt /mnt/snap/etc} или {\tt /mnt/myfs/etc}
-	\item Отмонтировать снимок и оригинал\\
-		Hint: помним про {\tt proc, dev}
+    \item Удалить один из файлов на {\tt /mnt/snap/} или {\tt /mnt/myfs/}
+	\item Отмонтировать снимок и оригинал
 		\pause
 	\item Объединяем снимок с оригиналом {\tt lvconvert -\phantom{}-merge VG0/snap}
 	\item Монтируем {\tt /dev/VG0/lv1} в {\tt /mnt/myfs} и проверяем изменения
