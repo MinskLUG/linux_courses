@@ -1,0 +1,24 @@
+
+\begin{frame}{Изоляция процесса в Linux}
+  \begin{center}
+    \textbf{В порядке возрастания уровня изоляции}
+  \end{center}
+  \begin{enumerate}
+    \item {\tt chroot}
+    \item Linux containers (LXC)
+    \item KVM/QEMU
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Упражнение: использование изоляции процесса}
+  \begin{block}{chroot}
+    \begin{enumerate}
+      \item Выбрать из {\tt /media/nfs/pub/soft/linux/emulator/OpenVZ/precreated} систему по вкусу и распаковать {\tt tgz } файл в {\tt /mnt/myfs}
+      \item Смонтировать proc и dev файловые системы в новом окружении {\tt /mnt/myfs} \\
+		  Hints: {\tt procfs}, опция {\tt -\phantom{}-bind}
+      \item {\tt chroot /mnt/myfs /bin/bash}
+	  \item {\tt cat /etc/*release}
+	  \item {\tt uname -a}
+    \end{enumerate}
+  \end{block}
+\end{frame}

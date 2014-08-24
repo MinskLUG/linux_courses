@@ -1,0 +1,187 @@
+\input{report}
+
+\newcommand{\defaultuser}{cur\_user}
+
+\title{Основы Linux}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\part{Основы Linux}
+
+\begin{frame}{Основы ОС Linux}
+
+	\begin{block}{Вопрос}
+	Почему Linux является самой популярной
+	свободной операционной системой?
+	\end{block}
+
+	\pause
+
+	\begin{block}{Ответ}
+	\begin{itemize}
+		\item \textcopyleft -- Copyleft
+		\item ``Философия'' Unix
+		\item Открытые стандарты
+	\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[Принципы]{Базовые принципы ОС Linux}
+
+\subsection{GNU/Linux}
+
+\mode<all>{\input{../../slides/intro/vocabulary}}
+
+\subsection{Лицензии}
+
+\mode<all>{\input{../../slides/intro/licenses}}
+
+\subsection{Принципы проектирования переносимых программ}
+
+\mode<all>{\input{../../slides/intro/unixway}}
+
+\section{Дистрибутивы ОС Linux}
+
+\mode<all>{\input{../../slides/intro/linux-distro}}
+
+\section{Процесс загрузки ОС Linux}
+
+\subsection{Этапы загрузки}
+
+\mode<all>{\input{../../slides/intro/linux-boot}}
+
+\subsection{Ядро Linux}
+
+\mode<all>{\input{../../slides/intro/linux-kernel}}
+
+\subsection{Userspace}
+
+\mode<all>{\input{../../slides/intro/initrd}}
+
+\mode<all>{\input{../../slides/intro/init-process}}
+
+\subsection{Практика}
+
+\mode<all>{\input{../../slides/intro/practice01.tex}}
+
+
+
+
+\part{Командная строка}
+
+\section{Командная оболочка (shell)}
+
+\mode<all>{\input{../../slides/cmdline/shell-intro}}
+
+\section{Don't panic! Получение помощи}
+
+\mode<all>{\input{../../slides/cmdline/help}}
+
+\section{Навигация по файловой системе}
+
+\mode<all>{\input{../../slides/cmdline/fs-navigation-cmd}}
+
+\mode<all>{\input{../../slides/fs/fs-structure}}
+
+\section{Полезные инструменты bash}
+\mode<all>{\input{../../slides/cmdline/bash-intro}}
+
+\part{Управление процессами и перенаправления}
+
+\section{Процессы}
+\mode<all>{\input{../../slides/cmdline/process-intro}}
+
+\section{Перенаправление ввода-вывода}
+\mode<all>{\input{../../slides/cmdline/pipes.tex}}
+\mode<all>{\input{../../slides/cmdline/io-redirection}}
+\mode<all>{\input{../../slides/cmdline/io-redirection-here.tex}}
+
+\part{Полезные команды}
+
+\section{Полезные команды-1}
+
+\mode<all>{\input{../../slides/cmdline/commands1.tex}}
+
+\subsection{Архиваторы}
+\mode<all>{\input{../../slides/cmdline/commands2}}
+
+\subsection{find и xargs}
+\mode<all>{\input{../../slides/cmdline/commands3}}
+
+\subsection{Редакторы}
+\mode<all>{\input{../../slides/cmdline/editors-intro}}
+
+\part{Система управления пакетами}
+\section{}
+\mode<all>{\input{../../slides/packaging/intro}}
+
+\mode<all>{\input{../../slides/packaging/intro1}}
+
+\mode<all>{\input{../../slides/packaging/rpm}}
+
+\mode<all>{\input{../../slides/packaging/repo}}
+
+\part{Пользователи и привилегии}
+
+\section{Многопользовательская модель UNIX}
+\mode<all>{\input{../../slides/multiuser/multiuser-model.tex}}
+
+\mode<all>{\input{../../slides/multiuser/fs-permissions.tex}}
+\section{Внутренний механизм управления пользователями}
+\mode<all>{\input{../../slides/multiuser/account_files.tex}}
+
+\mode<all>{\input{../../slides/multiuser/pam.tex}}
+
+\part{Сетевая подсистема}
+
+\section{Основы работы с сетевой подсистемой}
+
+\mode<all>{\input{../../slides/networking/intro}}
+
+\subsection{Управление интерфейсами}
+\mode<all>{\input{../../slides/networking/interface-management}}
+
+\subsection{Полезные программы}
+\mode<all>{\input{../../slides/networking/useful-progs}}
+
+\section{ssh}
+\mode<all>{\input{../../slides/networking/ssh}}
+
+
+\section{Дополнительные типы интерфейсов}
+
+\subsection{alias, vlan}
+\mode<all>{\input{../../slides/networking/alias_vlan}}
+\subsection{Мосты}
+\mode<all>{\input{../../slides/networking/bridge}}
+\subsection{Тоннели}
+\mode<all>{\input{../../slides/networking/tuntap}}
+
+\section{Маршрутизация}
+\mode<all>{\input{../../slides/networking/routing}}
+
+\section{iptables}
+\mode<all>{\input{../../slides/networking/iptables}}
+
+\part{Дисковая подсистема}
+
+\section{Блочные устройства}
+\mode<all>{\input{../../slides/disk/disk-intro.tex}}
+\section{Основные команды}
+\mode<all>{\input{../../slides/disk/disk-simple_management.tex}}
+\section{GPT}
+\mode<all>{\input{../../slides/disk/disk-gpt.tex}}
+\section{LVM}
+\mode<all>{\input{../../slides/disk/lvm.tex}}
+
+
+\end{document}
