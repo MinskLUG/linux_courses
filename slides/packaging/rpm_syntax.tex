@@ -52,6 +52,25 @@
 \end{frame}
 
 \begin{frame}
+	\frametitle{Разработка и использование в реальной системе}
+	
+	\begin{block}{Build-time vs Run-time}
+
+		\begin{enumerate}
+			\item Не все, что нужно во время компиляции, должно быть установлено в конечной системе.
+			\item Не все, что нужно для работы программы, необходимо устанавливать на сборочной системе.
+		\end{enumerate}
+	\end{block}
+	\begin{block}{Чистое сборочное окружение}
+		\begin{itemize}
+			\item Воспроизводимость сборки 
+			\item Контроль зависимостей
+			\item Контроль автоматически "подхваченных" зависимостей
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Версии}
 
 	\Large{Чтение правил дистрибутива строго обязательно!}
@@ -119,7 +138,7 @@
 			\item Посмотреть список зависимостей {\tt rpm -qRp hello*.rpm}
 			\item Установить полученный пакет
 			\item Удалить исходники и spec-файл
-			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.srpm}
+			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.src.rpm}
 		\end{itemize}
 	\end{block}
 
