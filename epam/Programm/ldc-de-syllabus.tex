@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper,oneside]{article}
+
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[usenames, dvipsnames]{xcolor}
+
+\usepackage{listingsutf8}
+\lstloadlanguages{C, make, bash}
+
+\lstset{escapechar=`,
+	language=C, 
+	tabsize=2, 
+	columns=fullflexible, 
+	basicstyle=\ttfamily, 
+	keywordstyle=\color{blue}, 
+	commentstyle=\itshape\color{brown},
+%	identifierstyle=\ttfamily, 
+	stringstyle=\mdseries\color{OliveGreen}, 
+	showstringspaces=false, 
+	numbers=left, 
+	numberstyle=\tiny, 
+	breaklines=true, 
+	inputencoding=utf8/latin1, 
+	morekeywords={u\_short, u\_char, u\_long, in\_addr}
+	}
+
+\usepackage{verbatim}
+\usepackage{moreverb}
+
+\usepackage{longtable}
+\usepackage[nottoc,numbib]{tocbibind}
+
+\usepackage{html}   %  *always* load this for LaTeX2HTML
+\begin{htmlonly}
+\providecommand{\lstinputlisting}[2][]{\verbatiminput{#2}}
+\end{htmlonly}
+
+\bibliographystyle{unsrt}
+
+\begin{document}
+
+% Формируем титульную страницу
+\title{Linux Development Courses\\Development environment}
+\author{Epam Low Level Linux Department}
+%\date{2011}
+\maketitle
+
+
+
+%\renewcommand{\contentsname}{Оглавление}
+
+%\tableofcontents
+%\setcounter{tocdepth}{2}
+%\newpage
+
+\section{Description}
+%\addcontentsline{toc}{chapter}{Цель}
+
+In this training attendees will learn how to deal with Linux command line
+starting from Linux kernel booting to debug and profiling end user applications.
+
+\subsection{Modules}
+\begin{itemize}
+	\item Linux Essentials (18h)
+	\item Bash scripting (12h)
+	\item Development tools (16h)
+\end{itemize}
+
+\subsection{Trainers}
+\begin{itemize}
+	\item Denis Pynkin
+	\item Yuri Adamov
+	\item Vikentsi Lapa
+\end{itemize}
+
+\subsection{Audience}
+\begin{itemize}
+	\item Students
+	\item Junior Software Engineers
+	\item Software Engineers
+\end{itemize}
+
+\subsubsection{Requirements}
+\begin{itemize}
+	\item Any programming language (C preferable)
+	\item OS theory
+	\item Understanding of networking (optional)
+\end{itemize}
+
+
+\section{Module: Linux Essentials}
+
+Here attendees will learn the principals and basics of Linux system.
+
+\subsection{Agenda}
+
+\begin{longtable}{|p{0.3\linewidth}|p{0.6\linewidth}|p{0.1\linewidth}|}
+        \hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
+		\endfirsthead
+		\multicolumn{2}{c}%
+		{\tablename\ \thetable\ -- \textit{Continue}} \\
+		\hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
+		\endhead
+		\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+        Intro & Licenses; ''Unixway''; Linux distributives. & 2 \\ \hline
+		Linux OS boot & Boot sequence; Bootloader; Kernel parameters; initrd; init; userspace. & 2 \\ \hline
+		Command line & Shells; command line basics; man; file system navigation & 2 \\ \hline
+		Command line & Process management; pipes; I/O redirection; Text processing & 2 \\ \hline
+		Command line & Archivers; find; xargs; stream editors & 2 \\ \hline
+		User management & Multiuser model; permissions; utilities; account files; PAM & 2 \\ \hline
+		Basic networking & Interfaces, aliases, bridges, TUN/TAP; routing; iptables; ssh & 3 \\ \hline
+		Disk management & Block devices; partitioning; GPT; LVM & 3 \\ \hline
+		\textbf{Итого:} & & 18 \\ \hline
+
+\end{longtable}
+
+
+
+
+\subsection{Командная оболочка и язык сценариев Bash}
+\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+        \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endfirsthead
+		\multicolumn{4}{c}%
+		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\hline
+ 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endhead
+		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+
+
+        Синтаксис \cite{abs01} & Переменные. Операторы. Экранирование. Коды возврата. Тесты и сравнения.	Ветвления. Циклы. Арифметические операции. Массивы & 2 & 3 \\ \hline
+        Регулярные выражения \cite{abs01} & Использование. Awk. & 1 & 1 \\ \hline
+        Сценарии \cite{abs01} & Функции. Встроенные и внешние команды. Подстановка результатов выполнения команд. Фильтры. Перенаправление ввода/вывода.	exec & 2 & 3 \\ \hline
+		\textbf{Итого:} & 12         & 5 & 7 \\ \hline
+
+\end{longtable}
+
+\cite{abs01}
+
+\newpage
+\subsection{Инструменты разработчика}
+\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+        \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endfirsthead
+		\multicolumn{4}{c}%
+		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\hline
+ 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\endhead
+		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\endfoot
+		\hline
+		\endlastfoot
+
+
+        GNU Toolchain  & Компилятор. Линкер. Статические и динамические приложения и библиотеки. & 1 & 1 \\ \hline
+        Управление сборкой проекта & Make. Введение в синтаксис makefile. Обзор autotools. & 1 & 1 \\ \hline
+        Базовый инструментарий & Работа с исходным кодом. Анализ исполняемого файла. Утилиты. Изоляция процесса. & 1 & 2 \\ \hline
+	    Профайлинг \cite{best2006linux}, \cite{tgs-perftools01} & Определение узких мест. Утилиты для определения узких мест. & 1.5 & 1 \\ \hline
+	    Отладка \cite{best2006linux}, \cite{gdb01} & GDB. Valgrind. Дампы. & 1.5 & 2 \\ \hline
+        Совместная разработка & Централизованные и распределенные системы контроля версий. SVN. GIT. История изменений. Бранчи, слияния, тэги. & 1.5 & 1.5 \\ \hline
+        Установка ПО & Установка из исходников. Введение в пакетирование RPM. Run-time и build-time окружения. & 1.5 & 1.5 \\ \hline
+		\textbf{Итого:} & 20         & 8 & 10 \\ \hline
+
+
+\end{longtable}
+
+\cite{best2006linux}
+\cite{tgs-perftools01}
+\cite{gdb01}
+
+\newpage
+%\addcontentsline{toc}{section}{Литература}
+%\bibliographystyle{plain-annote}
+\bibliography{biblio}
+
+\end{document}
+
