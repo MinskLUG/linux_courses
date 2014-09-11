@@ -45,7 +45,7 @@
 % Формируем титульную страницу
 \title{Linux Development Courses\\Development environment}
 \author{Epam Low Level Linux Department}
-%\date{2011}
+\date{2014-2015}
 \maketitle
 
 
@@ -93,7 +93,20 @@ starting from Linux kernel booting to debug and profiling end user applications.
 
 \section{Module: Linux Essentials}
 
+\subsection{Description}
+
 Here attendees will learn the principals and basics of Linux system.
+
+\subsection{Training Objectives}
+
+By the end of the course,  attendees will be able to:
+\begin{itemize}
+	\item effectively work with command line in Linux environment;
+	\item use command line utilities for everyday needs;
+	\item understand and manipulate system boot process;
+	\item manage own Linux workstation;
+	\item understand principles of Open Source development.
+\end{itemize}
 
 \subsection{Agenda}
 
@@ -117,40 +130,60 @@ Here attendees will learn the principals and basics of Linux system.
 		Command line & Process management; pipes; I/O redirection; Text processing & 2 \\ \hline
 		Command line & Archivers; find; xargs; stream editors & 2 \\ \hline
 		User management & Multiuser model; permissions; utilities; account files; PAM & 2 \\ \hline
-		Basic networking & Interfaces, aliases, bridges, TUN/TAP; routing; iptables; ssh & 3 \\ \hline
+		Basic networking & Interfaces, aliases, bridges, TUN/TAP; routing; iptables; ssh & 2 \\ \hline
+		Package management & "DLL hell"; RPM; yum & 1 \\ \hline
 		Disk management & Block devices; partitioning; GPT; LVM & 3 \\ \hline
-		\textbf{Итого:} & & 18 \\ \hline
+		\textbf{Total:} & & 18 \\ \hline
 
 \end{longtable}
 
 
+\section{Module: Bash scripting}
+
+\subsection{Description}
+
+In this module  attendees will learn the basics of usage and script programming with Bash
+(environment,  variables,  arrays,  exit statuses,  tests,  loops,  branches,  functions,  arithmetics,  strings manipulation,  I/O redirection,  debugging)
+
+\subsection{Training Objectives}
+
+By the end of the course,  attendees will be able to:
+\begin{itemize}
+	\item  create and run shell scripts;
+	\item define custom functions and call built-in functions;
+	\item use I/O redirection for files and programs;
+	\item use arithmetic operations;
+	\item manipulate strings;
+	\item handle exceptions;
+	\item debug programs.
+\end{itemize}
 
 
-\subsection{Командная оболочка и язык сценариев Bash}
-\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+\subsection{Agenda}
+
+\begin{longtable}{|p{0.3\linewidth}|p{0.6\linewidth}|p{0.1\linewidth}|}
         \hline
-		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
 		\endfirsthead
-		\multicolumn{4}{c}%
-		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\multicolumn{2}{c}%
+		{\tablename\ \thetable\ -- \textit{Continue}} \\
 		\hline
- 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
 		\endhead
-		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
 		\endfoot
 		\hline
 		\endlastfoot
 
-
-
-        Синтаксис \cite{abs01} & Переменные. Операторы. Экранирование. Коды возврата. Тесты и сравнения.	Ветвления. Циклы. Арифметические операции. Массивы & 2 & 3 \\ \hline
-        Регулярные выражения \cite{abs01} & Использование. Awk. & 1 & 1 \\ \hline
-        Сценарии \cite{abs01} & Функции. Встроенные и внешние команды. Подстановка результатов выполнения команд. Фильтры. Перенаправление ввода/вывода.	exec & 2 & 3 \\ \hline
-		\textbf{Итого:} & 12         & 5 & 7 \\ \hline
+        Intro & Overview; Runtime environment; Syntax; I/O redirection & 2 \\ \hline
+		 & Variables; Parameters; Tests & 2 \\ \hline
+		 & Arithmetic; Loops & 2 \\ \hline
+		 & Branches; Functions & 2 \\ \hline
+		 & Strings; Parameters substitution & 2 \\ \hline
+		 & Arrays; Signal traps; Debugging & 2 \\ \hline
+		\textbf{Total:} & & 12 \\ \hline
 
 \end{longtable}
-
-\cite{abs01}
 
 \newpage
 \subsection{Инструменты разработчика}
