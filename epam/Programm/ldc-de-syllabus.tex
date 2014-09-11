@@ -6,32 +6,9 @@
 
 \usepackage[usenames, dvipsnames]{color}
 \usepackage[usenames, dvipsnames]{xcolor}
-
-\usepackage{listingsutf8}
-\lstloadlanguages{C, make, bash}
-
-\lstset{escapechar=`,
-	language=C, 
-	tabsize=2, 
-	columns=fullflexible, 
-	basicstyle=\ttfamily, 
-	keywordstyle=\color{blue}, 
-	commentstyle=\itshape\color{brown},
-%	identifierstyle=\ttfamily, 
-	stringstyle=\mdseries\color{OliveGreen}, 
-	showstringspaces=false, 
-	numbers=left, 
-	numberstyle=\tiny, 
-	breaklines=true, 
-%	inputencoding=utf8/latin1, 
-	morekeywords={u\_short, u\_char, u\_long, in\_addr}
-	}
-
-\usepackage{verbatim}
-\usepackage{moreverb}
+\usepackage{array}
 
 \usepackage{longtable}
-\usepackage[nottoc,numbib]{tocbibind}
 
 \usepackage{html}   %  *always* load this for LaTeX2HTML
 \begin{htmlonly}
@@ -62,12 +39,18 @@
 In this training attendees will learn how to deal with Linux command line
 starting from Linux kernel booting to debug and profiling end user applications.
 
-\subsection{Modules}
-\begin{itemize}
-	\item Linux Essentials (18h)
-	\item Bash scripting (12h)
-	\item Development tools (16h)
-\end{itemize}
+\subsection{Agenda}
+
+\begin{longtable}{|p{0.3\linewidth}|>{\centering}p{0.25\linewidth}|>{\centering}p{0.25\linewidth}|p{0.1\linewidth}|}
+        \hline
+		\textbf{Topic} & \textbf{Dates} & \textbf{Times per week} & \textbf{Hours} \\ \hline
+
+		Linux Essentials  & Oct-Nov 2014 & 2 & 18h  \\ \hline
+		Bash scripting    & Nov-Dec 2014 & 2 & 12h \\ \hline
+		Development tools & Feb-Apr 2015 & 1 & 20h \\ \hline
+		\textbf{Total:}   &  & & 50h \\ \hline
+
+\end{longtable}
 
 \subsection{Trainers}
 \begin{itemize}
