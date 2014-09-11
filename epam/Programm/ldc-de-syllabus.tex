@@ -1,8 +1,8 @@
 \documentclass[12pt,a4paper,oneside]{article}
 
-\usepackage[russian]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+%\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
 
 \usepackage[usenames, dvipsnames]{color}
 \usepackage[usenames, dvipsnames]{xcolor}
@@ -23,7 +23,7 @@
 	numbers=left, 
 	numberstyle=\tiny, 
 	breaklines=true, 
-	inputencoding=utf8/latin1, 
+%	inputencoding=utf8/latin1, 
 	morekeywords={u\_short, u\_char, u\_long, in\_addr}
 	}
 
@@ -52,9 +52,9 @@
 
 %\renewcommand{\contentsname}{Оглавление}
 
-%\tableofcontents
-%\setcounter{tocdepth}{2}
-%\newpage
+\tableofcontents
+\setcounter{tocdepth}{2}
+\newpage
 
 \section{Description}
 %\addcontentsline{toc}{chapter}{Цель}
@@ -90,6 +90,7 @@ starting from Linux kernel booting to debug and profiling end user applications.
 	\item Understanding of networking (optional)
 \end{itemize}
 
+\newpage
 
 \section{Module: Linux Essentials}
 
@@ -149,13 +150,13 @@ In this module  attendees will learn the basics of usage and script programming 
 
 By the end of the course,  attendees will be able to:
 \begin{itemize}
-	\item  create and run shell scripts;
+	\item create and run shell scripts;
 	\item define custom functions and call built-in functions;
 	\item use I/O redirection for files and programs;
 	\item use arithmetic operations;
 	\item manipulate strings;
 	\item handle exceptions;
-	\item debug programs.
+	\item debug scripts.
 \end{itemize}
 
 
@@ -175,53 +176,66 @@ By the end of the course,  attendees will be able to:
 		\hline
 		\endlastfoot
 
-        Intro & Overview; Runtime environment; Syntax; I/O redirection & 2 \\ \hline
-		 & Variables; Parameters; Tests & 2 \\ \hline
-		 & Arithmetic; Loops & 2 \\ \hline
-		 & Branches; Functions & 2 \\ \hline
-		 & Strings; Parameters substitution & 2 \\ \hline
-		 & Arrays; Signal traps; Debugging & 2 \\ \hline
+        Intro & Overview; Runtime environment; I/O redirection & 2 \\ \hline
+		Syntax & Variables; Parameters; Tests & 2 \\ \hline
+		Syntax & Arithmetic; Loops & 2 \\ \hline
+		Syntax & Branches; Functions & 2 \\ \hline
+		Advanced & Strings; Parameters substitution & 2 \\ \hline
+		Advanced & Arrays; Signal traps; Debugging & 2 \\ \hline
 		\textbf{Total:} & & 12 \\ \hline
 
 \end{longtable}
 
-\newpage
-\subsection{Инструменты разработчика}
-\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+
+\section{Module: Development tools}
+
+\subsection{Description}
+
+
+\subsection{Training Objectives}
+
+By the end of the course,  attendees will be able to:
+\begin{itemize}
+	\item use GNU Toolchain for development;
+	\item use static and dynamic linking for programs;
+	\item read and create build rules with make and autotools;
+	\item debug and profiling programs;
+	\item use version control systems;
+	\item software reference documentation generation from source code;
+	\item understand the difference between run- and build-time environments;
+	\item basic packaging.
+\end{itemize}
+
+
+\subsection{Agenda}
+
+\begin{longtable}{|p{0.3\linewidth}|p{0.6\linewidth}|p{0.1\linewidth}|}
         \hline
-		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
 		\endfirsthead
-		\multicolumn{4}{c}%
-		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
+		\multicolumn{2}{c}%
+		{\tablename\ \thetable\ -- \textit{Continue}} \\
 		\hline
- 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Topic} & \textbf{Description} & \textbf{Hours} \\ \hline
 		\endhead
-		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
+		\hline \multicolumn{2}{r}{\textit{Continued on next page}} \\
 		\endfoot
 		\hline
 		\endlastfoot
 
-
-        GNU Toolchain  & Компилятор. Линкер. Статические и динамические приложения и библиотеки. & 1 & 1 \\ \hline
-        Управление сборкой проекта & Make. Введение в синтаксис makefile. Обзор autotools. & 1 & 1 \\ \hline
-        Базовый инструментарий & Работа с исходным кодом. Анализ исполняемого файла. Утилиты. Изоляция процесса. & 1 & 2 \\ \hline
-	    Профайлинг \cite{best2006linux}, \cite{tgs-perftools01} & Определение узких мест. Утилиты для определения узких мест. & 1.5 & 1 \\ \hline
-	    Отладка \cite{best2006linux}, \cite{gdb01} & GDB. Valgrind. Дампы. & 1.5 & 2 \\ \hline
-        Совместная разработка & Централизованные и распределенные системы контроля версий. SVN. GIT. История изменений. Бранчи, слияния, тэги. & 1.5 & 1.5 \\ \hline
-        Установка ПО & Установка из исходников. Введение в пакетирование RPM. Run-time и build-time окружения. & 1.5 & 1.5 \\ \hline
-		\textbf{Итого:} & 20         & 8 & 10 \\ \hline
-
+        GNU Toolchain & Compiler; Linker; static and dynamic applications and libraries  & 3 \\ \hline
+        Make & Make, Makefile syntax & 2 \\ \hline
+        Autotools & Autotools intro; simple rules & 1 \\ \hline
+        ELF analysis & structure; bintools; ELF analysis & 2 \\ \hline
+        Debug & debug techniques; core dump; backtrace; debug utilities & 4 \\ \hline
+        Profiling & profiling utilities; code test coverage  & 2 \\ \hline
+        VCS & centralized vs distributed; SVN; GIT & 2 \\ \hline
+        SW documentation & Doxygen; syntax & 1 \\ \hline
+        Package management & Installation from source; RPM packaging intro. Run- and Build-time environment. & 3 \\ \hline
+		\textbf{Total:} & & 20h \\ \hline
 
 \end{longtable}
 
-\cite{best2006linux}
-\cite{tgs-perftools01}
-\cite{gdb01}
-
-\newpage
-%\addcontentsline{toc}{section}{Литература}
-%\bibliographystyle{plain-annote}
-\bibliography{biblio}
 
 \end{document}
 
