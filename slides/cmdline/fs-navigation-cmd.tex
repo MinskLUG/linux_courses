@@ -1,9 +1,65 @@
-\begin{frame}{Навигация по файловой системе}
+\begin{frame}[fragile]{Путь к файлу.}
       \begin{itemize}
-		  \item {\tt ls} -- список файлов в (текущей по умолчанию) директории (man ls)
-		  \item {\tt cd} -- смена текущей директории (help cd)
-		  \item {\tt pwd} -- имя текущей директории (help pwd)
+        \item Имя файла
+                \begin{itemize}
+                    \item чувствительно к регистру
+                    \item / разделяет директории
+                    \item - \textbackslash <Space> специальные символы 
+                    \item . скрытый файл
+                \end{itemize}
+        \item \alert{Полное имя файла} (absolute pathname) начинается с /
+        \item \alert{Относительное имя файла} (relative pathname) начинается с
+        любого другого символа. Поиск файла производится относительно
+        \alert{текущей директории} (current working directory).
       \end{itemize}
+
+      \begin{block}{Примеры}
+        ./ - текущая директория
+
+        ../ - предыдущая директория
+
+        ../../usr/bin/ls
+
+        /usr/bin/ls
+      \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Навигация по файловой системе}
+      \begin{itemize}
+		  \item {\tt pwd} -- имя текущей директории (help pwd)
+		  \item {\tt ls} -- список файлов в директории. По умолчанию в текущей (man ls)
+		  \item {\tt cd} -- смена текущей директории (help cd)
+      \end{itemize}
+      \begin{block}{Упражнение. Заходим в /usr/bin/ и просматриваем список доступных команд.}
+	\begin{lstlisting}
+	pwd
+	cd /usr/bin/
+	pwd
+	ls
+	cd -	
+	pwd
+	\end{lstlisting}
+      \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Просмотр типов файлов}
+      \begin{block}{Упражнение. Символьное обозначение типа файла.}
+Первая буква вывода команды ls -l обозначает тип файла. 
+Tip. Команды file позволяет определить тип файла. Ключ -d для работы с
+директорией. 
+
+/dev/zero
+
+/dev/sda 
+
+.. 
+
+/bin/sh 
+
+/dev/log
+
+/dev/stdout
+      \end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Команды для работы с файлами}
