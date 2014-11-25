@@ -20,6 +20,23 @@
 		
 \end{frame}
 
+\begin{frame}{Apt: команды}
+	\begin{block}{Установка/обновление пакета}
+		{\tt apt-get install pkgname }
+
+                {\tt apt-get -f install}
+	\end{block}
+	\begin{block}{Обновление данных о пакетах}
+		{\tt apt-get update }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt apt-get remove pkgname }
+	\end{block}
+	\begin{block}{Поиск}
+		{\tt apt-cache search pkgname }
+	\end{block}
+\end{frame}
+
 \begin{frame}{YUM: команды}
 	\begin{block}{Установка/обновление пакета}
 		{\tt yum install pkgname }
@@ -38,33 +55,34 @@
 
 
 \begin{frame}[fragile]{Упражнение}
+%  \begin{enumerate}
+%      \item Создать на {\tt /dev/sda} раздел размером примерно 10Gb
+%      \item Создать на этом разделе ext3 ФС и смонтировать раздел в {\tt /mnt/chroot}
+%      \item Развернуть {\tt /media/nfs/pub/CentOS/precreated/centOS.tar.gz} в {\tt /mnt/chroot}
+%      \item Смонтировать {\tt proc, sysfs} а также {\tt /dev} в соответствующие места {\tt /mnt/chroot}
+%      \item {\tt chroot /mnt/chroot}
+%      \item Отредактировать {\tt /etc/resolv.conf} -- скопировать туда информацию из {\tt resolv.conf} основной системы
+%      \item Отредактировать {\tt /etc/yum.conf} Добавить следующий раздел
+%\begin{minipage}{0.5\textwidth}
+%\begin{verbatim}
+%[base]
+%  name = CentOS 6
+%  baseurl = ftp://192.168.11.15/CentOS
+%  gpgcheck = 0
+%\end{verbatim}
+%\end{minipage}
+%\setcounter{tmpc}{\theenumi}
+%\end{enumerate}
+%\end{frame}
+%\begin{frame}{Продолжение упражнения}
   \begin{enumerate}
-      \item Создать на {\tt /dev/sda} раздел размером примерно 10Gb
-      \item Создать на этом разделе ext3 ФС и смонтировать раздел в {\tt /mnt/chroot}
-      \item Развернуть {\tt /media/nfs/pub/CentOS/precreated/centOS.tar.gz} в {\tt /mnt/chroot}
-      \item Смонтировать {\tt proc, sysfs} а также {\tt /dev} в соответствующие места {\tt /mnt/chroot}
-      \item {\tt chroot /mnt/chroot}
-      \item Отредактировать {\tt /etc/resolv.conf} -- скопировать туда информацию из {\tt resolv.conf} основной системы
-      \item Отредактировать {\tt /etc/yum.conf} Добавить следующий раздел
-\begin{minipage}{0.5\textwidth}
-\begin{verbatim}
-[base]
-  name = CentOS 6
-  baseurl = ftp://192.168.11.15/CentOS
-  gpgcheck = 0
-\end{verbatim}
-\end{minipage}
-\setcounter{tmpc}{\theenumi}
-\end{enumerate}
-\end{frame}
-\begin{frame}{Продолжение упражнения}
-  \begin{enumerate}
-      \setcounter{enumi}{\thetmpc}
-      \item {\tt yum update}
-      \item Установить пакет vim
-      \item Посмотреть списки файлов для пакетов {\tt yum, rpm}
-      \item Найти пакет предоставляющий сервис ssh и установить его
+      %\setcounter{enumi}{\thetmpc}
+      \item {\tt apt-get update}
       \item Удалить пакет vim
+      \item Установить заново пакет vim
+      \item Посмотреть списки файлов для пакетов {\tt rpm, vim}
+      \item Найти, к какому пакету относится команда {\tt ls, top}
+      \item Найти пакет предоставляющий сервис ssh и установить его
     \end{enumerate}
 \end{frame}
 
