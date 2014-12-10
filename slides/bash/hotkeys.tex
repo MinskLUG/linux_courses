@@ -1,0 +1,44 @@
+\begin{frame}{Горячие клавиши}
+  \begin{itemize}
+    \item \textbf{Tab} -- дополнение текущей команды
+      \pause
+    \item История команд (Команда {\tt history})
+      \begin{itemize}
+        \item Клавиши курсора -- навигация по истории
+        \item Ctrl-R -- поиск в истории по фрагменту
+        \item Ctrl-O (после выполнения вставить следующую команду из истории)
+      \end{itemize}
+    \item Редактирование командной строки
+      \begin{itemize}
+        \item Ctrl-W, Ctrl-U -- удалить, начиная от курсора, слово или строку до начала строки
+        \item Alt-D, Ctrl-K -- удалить, начиная от курсора, слово или строку до конца строки
+      \end{itemize}
+    \item Управление терминалом
+      \begin{itemize}
+        \item Shift-PgUp, Shift-PgDown -- прокрутка терминала
+        \item Ctrl-S -- заморозка терминала
+        \item Ctrl-Q -- разморозка терминала
+        \item Ctrl-L -- очистка терминала
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Alias}
+  \begin{block}{Bash alias}
+    Alias в Bash -- это не более, чем клавиатурное сокращение или своего рода аббревиатура, 
+    позволяющая сократить количество нажимаемых клавиш для ввода длинных команд.
+
+    \begin{itemize}
+        \item {\tt alias} -- просмотр сокращений
+	\item {\tt alias <name>=''cmd1;cmd2''} -- добавление/модификация сокращений \\
+	      {\tt alias tls=''netstat -lpnt | grep 127.0.0.1''}
+        \item {\tt unalias <cmd>} -- удаление сокращений
+    \end{itemize}
+  \end{block}
+
+  \pause
+  \begin{block}{Практическое задание}
+  Создать сокращение для команды {\tt ls} так, чтобы она всегда вызывалась с параметрами {\tt -l} и {\tt -a}.
+  \end{block}
+
+\end{frame}

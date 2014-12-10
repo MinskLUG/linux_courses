@@ -10,7 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
+%\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
 
 \usepackage{textcomp}
 
@@ -63,3 +63,22 @@
 
 %\institution[EPAM]{EPAM}
 %\logo{\includegraphics[width=1cm]{logo.png}}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{}
+    \tableofcontents[
+        sectionstyle=show/shaded, hideallsubsections ]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+\AtBeginSubsection[]{%
+  \begin{frame}<beamer>
+    \frametitle{}
+    \tableofcontents[
+        sectionstyle=show/hide,
+        subsectionstyle=show/shaded/hide, ]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
