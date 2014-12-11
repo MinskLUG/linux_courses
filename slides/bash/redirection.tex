@@ -1,0 +1,80 @@
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+		\item ``>'' -- Перенаправление в файл
+			\begin{block}{Пример}
+				\begin{lstlisting}
+echo stdout > test.txt
+				\end{lstlisting}
+			\end{block}
+		\item ``>\&'' -- Перенаправление в другой дескриптор
+			\begin{block}{Пример}
+				\begin{lstlisting}
+(echo stdout; echo stderr >&2) > test.txt
+				\end{lstlisting}
+			\end{block}
+	\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+
+		\item ``\&>''
+			\begin{block}{Пример}
+				\begin{lstlisting}
+(echo stdout; echo stderr >&2) &> test.txt
+				\end{lstlisting}
+			\end{block}
+		
+		\item ``>{}>'' -- Добавление в файл
+			\begin{block}{Пример}
+				\begin{lstlisting}
+echo stdout >> test.txt
+				\end{lstlisting}
+			\end{block}
+
+		\item ``<'' -- Чтение из файла
+			\begin{block}{Пример}
+				\begin{lstlisting}
+cat < test.txt
+				\end{lstlisting}
+			\end{block}
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Перенаправление ввода/вывода}
+
+	\begin{itemize}
+
+		\item ``<<'' -- Here-документ
+
+		\item ``<>'' -- Открывает файловый дескриптор из файла/другого дескритора
+			\begin{block}{Пример}
+				\begin{lstlisting}
+exec 3<>test.txt; echo test >&3;  cat <test.txt
+				\end{lstlisting}
+			\end{block}
+			
+		\item ``n<\&-'' -- Закрывает файловый дескриптор
+			\begin{block}{Пример}
+				\begin{lstlisting}
+exec 3<&-; echo test >&3
+				\end{lstlisting}
+			\end{block}
+			
+		\item ``|'' -- pipe
+	\end{itemize}
+
+\end{frame}
+
+

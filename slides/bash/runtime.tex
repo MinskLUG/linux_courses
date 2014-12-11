@@ -1,22 +1,5 @@
 
 
-\begin{frame}[fragile]
-	\frametitle{Введение}
-
-	\begin{block}{Sha-Bang}
-		\begin{lstlisting}
-#!/bin/bash
-		\end{lstlisting}
-	\end{block}
-
-	\begin{block}{Режим совместимости с POSIX}
-		\begin{lstlisting}
-#!/bin/sh
-		\end{lstlisting}
-
-	\end{block}
-
-\end{frame}
 
 
 \begin{frame}
@@ -47,6 +30,23 @@
 
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Введение}
+
+	\begin{block}{Sha-Bang}
+		\begin{lstlisting}
+#!/bin/bash
+		\end{lstlisting}
+	\end{block}
+
+	\begin{block}{Режим совместимости с POSIX}
+		\begin{lstlisting}
+#!/bin/sh
+		\end{lstlisting}
+
+	\end{block}
+
+\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Экранирование}
@@ -124,29 +124,6 @@ echo -e "test \v test \v test"
 
 \end{frame}
 
-\begin{frame}
-	\frametitle{Управление заданиями}
-	
-	\begin{itemize}
-		\item {\tt bg} -- поместить задачу в фоновое исполнение
-		\item {\tt fg} -- ''переключиться'' на задачу
-		\item {\tt jobs} -- список активных задач
-		\item {\tt wait [pid|id]} -- ждать завершения всех, либо конкретных задач
-	\end{itemize}
-	\pause
-	\begin{block}{Задание}
-		\begin{itemize}
-			\item Запустить задачу ''{\tt sleep 100 \&}'' в фоновом режиме
-			\item Запустить задачу ''{\tt sleep 100}'' на текущей косоли и остановить ее (Ctrl-Z)
-			\item С помощью команды ''{\tt jobs}'' посмотреть статус активных задач
-			\item С помощью команды ''{\tt bg}'' перевести остановленную задачу в фоновый режим
-			\item С помощью команды ''{\tt fg}'' переключиться на одну из фоновых задач
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-
-
 \begin{frame}[fragile]
 	\frametitle{Группировка}
 	
@@ -166,85 +143,6 @@ echo -e "test \v test \v test"
 TEST=42; (echo $TEST; TEST=0; echo $TEST ); echo $TEST
 		\end{lstlisting}
 	\end{block}
-
-\end{frame}
-
-
-\begin{frame}[fragile]
-	\frametitle{Перенаправление ввода/вывода}
-
-	\begin{itemize}
-		\item ``>'' -- Перенаправление в файл
-			\begin{block}{Пример}
-				\begin{lstlisting}
-echo stdout > test.txt
-				\end{lstlisting}
-			\end{block}
-		\item ``>\&'' -- Перенаправление в другой дескриптор
-			\begin{block}{Пример}
-				\begin{lstlisting}
-(echo stdout; echo stderr >&2) > test.txt
-				\end{lstlisting}
-			\end{block}
-	\end{itemize}
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]
-	\frametitle{Перенаправление ввода/вывода}
-
-	\begin{itemize}
-
-		\item ``\&>''
-			\begin{block}{Пример}
-				\begin{lstlisting}
-(echo stdout; echo stderr >&2) &> test.txt
-				\end{lstlisting}
-			\end{block}
-		
-		\item ``>{}>'' -- Добавление в файл
-			\begin{block}{Пример}
-				\begin{lstlisting}
-echo stdout >> test.txt
-				\end{lstlisting}
-			\end{block}
-
-		\item ``<'' -- Чтение из файла
-			\begin{block}{Пример}
-				\begin{lstlisting}
-cat < test.txt
-				\end{lstlisting}
-			\end{block}
-	\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}[fragile]
-	\frametitle{Перенаправление ввода/вывода}
-
-	\begin{itemize}
-
-		\item ``<<'' -- Here-документ
-
-		\item ``<>'' -- Открывает файловый дескриптор из файла/другого дескритора
-			\begin{block}{Пример}
-				\begin{lstlisting}
-exec 3<>test.txt; echo test >&3;  cat <test.txt
-				\end{lstlisting}
-			\end{block}
-			
-		\item ``n<\&-'' -- Закрывает файловый дескриптор
-			\begin{block}{Пример}
-				\begin{lstlisting}
-exec 3<&-; echo test >&3
-				\end{lstlisting}
-			\end{block}
-			
-		\item ``|'' -- pipe
-	\end{itemize}
 
 \end{frame}
 
