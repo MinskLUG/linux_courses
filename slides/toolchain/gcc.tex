@@ -69,6 +69,18 @@ gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{GCC environment variables}
+
+	\begin{block}{Компилятор}
+		\begin{itemize}
+			\item {\tt CC} -- (пере)определение компилятора
+			\item {\tt CFLAGS} -- флаги для компилтора
+			\item {\tt CPATH, C\_INCLUDE\_PATH} -- расположение включаемых файлов для {\tt -I}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Упражнение}
 	\begin{itemize}

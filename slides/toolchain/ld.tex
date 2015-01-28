@@ -137,7 +137,7 @@ gcc -o file3 file3.c -L. -lmylib # Использование
 \begin{frame}[fragile]
   \frametitle{Создание динамических разделяемых библиотек}
 \begin{lstlisting}[language=sh]
-gcc -g -fpic -c -Wall   file1.c; gcc -g -Wall -fpic -c  file2.c
+gcc -g -fPIC -c -Wall   file1.c; gcc -g -Wall -fPIC -c  file2.c
 gcc -g -shared -Wl,-soname,libmylib.so.0 -o libmylib.so.0.0 
 cp libmylib.so.0.0 /usr/local/lib/
 ldconfig 
@@ -155,23 +155,6 @@ gcc -g -o file3 file3.o -lmylib
 	\end{block}
 
 \end{frame}
-
-\begin{frame}
-	\frametitle{Упражнение: динамическая библиотека}
-
-	\begin{enumerate}
-		\item Скомпилировать объектный файл {\tt liba.o} с опцией {\tt -fPIC}
-		\item Создать динамическую библиотеку {\tt libalib.so.0} 
-		\item Слинковать {\tt main.o} с динамической библиотекой\footnote{Hint: link name}
-			\begin{itemize}
-				\item {\tt gcc -o main main.o -L. -lalib }
-			\end{itemize}
-		\item запустить бинарный файл
-
-	\end{enumerate}
-\end{frame}
-
-
 
 \begin{frame}
  \frametitle{Проблемы при линковке}
@@ -203,48 +186,6 @@ gcc -g -o file3 file3.o -lmylib
 		\end{itemize}
 	\end{block}
 
-\end{frame}
-
-\begin{frame}
-	\frametitle{Упражнение: запуск с динамической библиотекой}
-
-	\begin{enumerate}
-		\item Переопределить переменную {\tt LD\_LIBRARY\_PATH}\footnote{Hint: soname}:\\
-			{\tt LD\_LIBRARY\_PATH=\$PWD ./main}
-		\item Переопределить переменную {\tt LD\_PRELOAD}:\\
-			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 ./main}
-		\item Добавить опцию {\tt -rpath} при линковке:\\
-			{\tt gcc hello.o -L. -lalib -Wl,-rpath=\$PWD -o hello}
-	\end{enumerate}
-\end{frame}
-
-
-%\begin{frame}
-%  \frametitle{Упражнение}
-%  \begin{itemize}
-%    \item Оформить функцию {\tt hello(char * user) } которая приветствует пользователя в отдельный файл
-%    \item Скомпилировать этот файл и создать из него разделяемую динамическую библиотеку {\tt (libhello.so)}
-%    \item Создать программу вызывающую функцию {\tt hello()} и слинковать ее с динамической библиотекой
-%  \end{itemize}
-%\end{frame}
-
-
-\begin{frame}
-	\frametitle{Упражнение: последовательность линковки библиотек}
-
-	\begin{enumerate}
-		\item Создать 2 библиотеки ({\tt liba.c} и {\tt libb.c})
-			с одинаковой функцией {\tt void test(void)}, но разным функционалом\\
-			(например вывести разные строки на экран)
-		\item Создать программу ({\tt main.c}), которая будет использовать 
-			библиотечную функцию {\tt test()}
-		\item Линковать с библиотеками в различной последовательности и 
-			посмотреть результат выполнения команды
-			\begin{itemize}
-				\item {\tt -lb -la -L.}
-				\item {\tt -la -lb -L.}
-			\end{itemize}
-	\end{enumerate}
 \end{frame}
 
 

@@ -1,0 +1,124 @@
+\begin{frame}[fragile]
+	\frametitle{Задача}
+
+	\begin{enumerate}
+		\item Создать исходный файл({\tt libtesta.c}), реализующий функцию {\tt void test(void)}
+		\item Создать исходный файл программы ({\tt main.c}), которая будет использовать функцию {\tt test()}
+		\item Создать исполняемый бинарный файл
+		\item Создать статическую библиотеку ({\tt libtesta.a})
+			и статически связать ее c исполняемым бинарным файлом
+		\item Создать динамическую библиотеку ({\tt libtesta.so.0.1.0})
+			и связать ее c исполняемым бинарным файлом
+		\item Создать исходный файл({\tt libtestb.c}), также реализующий функцию {\tt void test(void)},
+			и создать динамическую библиотеку ({\tt libtestb.so.0.1.0})
+		\item Изучить влияние переменных окружения и опций линковки
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: исполняемый бинарный файл}
+
+\begin{verbatim}
+gcc -c -o libtesta.o libtesta.c
+gcc -c -o main.o main.c
+gcc -o main-classic main.o libtesta.o
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: статическая библиотека}
+
+	\begin{enumerate}
+		\item Создать статическую библиотеку {\tt libtesta.a} с помощью {\tt ar}
+
+\begin{verbatim}
+gcc -c -o libtesta.o libtesta.c
+ar rcs libtesta.a libtesta.o
+\end{verbatim}
+			
+		\item Создать статическую программу программу, которая будет использовать 
+			библиотечную функцию {\tt test()} из статической библиотеки: 
+
+\begin{verbatim}
+gcc -c -o main.o main.c
+gcc -o main-classic-ar main.o -L. -ltesta
+\end{verbatim}
+
+		\item Создать статически исполняемый файл: 
+
+\begin{verbatim}
+gcc -o main-static main.o -L. -ltesta -static
+\end{verbatim}
+
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: динамическая библиотека}
+
+	\begin{enumerate}
+		\item Скомпилировать объектный файл {\tt libtesta.o} с опцией {\tt -fPIC}
+		
+\begin{verbatim}
+gcc -c -fPIC libtesta.c -o libtesta.o
+gcc -shared -Wl,-soname,libtesta.so.0 -o libtesta.so.0.0 libtesta.o
+ln -s libtesta.so.0.0 libtesta.so
+\end{verbatim}
+		\item Создать динамически исполняемый файл с использованием динамической библиотеки\footnote{Hint: link name}
+\begin{verbatim}
+gcc -c -o main.o main.c
+gcc -o main main.o -L. -ltesta
+\end{verbatim}
+
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: запуск с динамической библиотекой}
+
+	\begin{enumerate}
+		\item Переопределить переменную {\tt LD\_LIBRARY\_PATH}\footnote{Hint: soname}:\\
+			{\tt LD\_LIBRARY\_PATH=\$PWD ./main}
+		\item Переопределить переменную {\tt LD\_PRELOAD}:\\
+			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 ./main}
+		\item Добавить опцию {\tt -rpath} при линковке:\\
+			{\tt gcc hello.o -L. -lalib -Wl,-rpath=\$PWD -o hello}
+		\item Переместить библитеку в системную область ({\tt /lib64, /usr/lib64, /usr/local/lib64}
+	\end{enumerate}
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Упражнение}
+%  \begin{itemize}
+%    \item Оформить функцию {\tt hello(char * user) } которая приветствует пользователя в отдельный файл
+%    \item Скомпилировать этот файл и создать из него разделяемую динамическую библиотеку {\tt (libhello.so)}
+%    \item Создать программу вызывающую функцию {\tt hello()} и слинковать ее с динамической библиотекой
+%  \end{itemize}
+%\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Упражнение: последовательность линковки библиотек}
+
+	\begin{enumerate}
+		\item Создать 2 библиотеки ({\tt libtesta} и {\tt libtesta})
+			с одинаковой функцией {\tt void test(void)}, но разным функционалом\\
+			(например вывести разные строки на экран)
+		\item Создать программу ({\tt main.c}), которая будет использовать 
+			библиотечную функцию {\tt test()}
+		\item Линковать с библиотеками в различной последовательности и 
+			посмотреть результат выполнения команды
+
+\begin{verbatim}
+gcc -L. -Wl,-rpath,. -Wl,--no-as-needed main.o -ltesta -ltestb -o main-A_B
+gcc -L. -Wl,-rpath,. -Wl,--no-as-needed main.o -ltestb -ltesta -o main-B_A
+\end{verbatim}
+	\end{enumerate}
+\end{frame}
+
+
+
