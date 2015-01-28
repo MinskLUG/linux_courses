@@ -7,7 +7,7 @@ TARGET += 02-linker_intro.pdf
 
 all: tex
 
-%.pdf: %.tex
+%.pdf: %.tex common.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
