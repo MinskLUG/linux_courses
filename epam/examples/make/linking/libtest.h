@@ -1,4 +1,4 @@
-// Used both guards as an example
+/* Used both guards as an example */
 #pragma once
 
 #ifndef libtest
