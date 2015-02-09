@@ -55,6 +55,18 @@ gcc hello.o -L=. -lname -o hello
 	\end{verbatim}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Задачи Make}
+  \begin{itemize}
+     \item Набор правил для сборки сложных проектов одной командой
+     \item Поддержание зависимостей
+       \begin{itemize}
+         \item Пересборка только изменившихся частей
+         \item Определение необходимости пересборки
+       \end{itemize}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{Правила make}
 
@@ -94,16 +106,21 @@ hello.c: name.h
 \end{frame}
 
 
+
 \begin{frame}[fragile]
 	\frametitle{Переменные в Makefile}
 	\begin{lstlisting}[language=make]
+all_flags = $(compiler_flags) $(linker_flags)
+no_flags := $(compiler_flags) $(linker_flags)
 compiler_flags = -Wall -O3
 linker_flags := -fPIC
 compiler_flags += -pipe
 
 show-flags:
-    echo $(compiler_flags)
-    echo $(linker_flags)
+    @echo "Compiler flags" $(compiler_flags)
+    @echo "Linker flags" $(linker_flags)
+    @echo "All flags" $(all_flags)
+    @echo "No flags" $(no_flags)
 	\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
