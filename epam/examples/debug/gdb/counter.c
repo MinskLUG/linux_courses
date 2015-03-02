@@ -4,19 +4,24 @@
 #include <errno.h>
 #include <limits.h>
 
+void usage(const char *reason){
+    fprintf(stderr,"Ошибка:%s\n",reason);
+    fprintf(stderr,"Использование %s [howmany]\n","counter");
+    exit(1);
+}    
+
+
 int main(int argc, char *argv[]){
   long howmany=100;
   char *leak;
 
-  if(argc>2){
-    printf("Использование %s [howmany]\n",argv[0]);
-    exit(1);
+  if(argc>2 || argc<2){
+    usage("Неправильное число аргументов");
   }else if(argc==2){
     errno=0;
     howmany=strtol(argv[1],NULL,10);
     if(errno != 0 || howmany<=0 || howmany>=LONG_MAX){
-      printf("Неправильное начальное число %s !\n",argv[1]);
-      exit(1);
+      usage("Неправильное начальное число");
     }
   }
   long i;
