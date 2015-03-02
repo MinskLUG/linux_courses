@@ -1,8 +1,7 @@
-#include <stdlib.h>
 #include "libtest.h"
 
 main(void)
 {
     test();
-    exit(0);
+    return 0;
 }
