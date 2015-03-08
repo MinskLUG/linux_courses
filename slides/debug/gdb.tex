@@ -123,6 +123,39 @@
   \end{itemize}
 \end{frame}  
 
+\begin{frame}
+  \frametitle{gdb server: preparation}
+  \begin{center}
+    {\large Подготовка ядра:компиляция с debug символами}
+  \end{center}
+  \begin{itemize}
+    \item Взять исходники ядра с kernel.org
+    \item Развернуть исходники \texttt{tar -Jxvf linux-....tar.xz}
+    \item В директории исходников \texttt{cp arch/x86/configs/x86\_64\_defconfig ./.config}
+    \item \texttt{make menuconfig}
+    \item Kernel hacking->Compile-time checks and compiler options->Compile kernel with debug info
+    \item \texttt{make}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{gdb server: запуск}
+\begin{itemize}
+    \item Запустить процесс ядра в kvm
+
+      \texttt{ kvm -m 256M -S -gdb tcp::2345 -kernel linux-3.19.1/arch/x86\_64/boot/bzImage }
+    \item Запустить gdb \texttt{gdb linux-3.19.1/vmlinux}
+    \begin{itemize}
+      \item target remote localhost:2345
+      \item c
+      \item Остановить с помощью ловкости рук и Ctrl-C
+      \item \texttt{set arch i386:x86-64:intel}
+      \item Начать пошагово выполнять код ядра
+    \end{itemize}
+\end{itemize}
+\end{frame}
+  
+
 %\begin{frame}
 % \frametitle{gdb server}
 %\end{frame}
