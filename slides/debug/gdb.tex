@@ -97,7 +97,7 @@
 	   {\small Для некоторых дистрибутивов:\\ {\tt sysctl -w kernel.core\_pattern=/tmp/core-\%e-\%p}}
    \item Запустить segfault, дождаться segmentation fault
    \item Запустить \texttt{gdb ./segfault /tmp/core-....}
-   \item Изучить значения переменных в текущем стековом фрейме
+   \item Изучить значения переменных в текущем стековом фрейме \texttt{info locals}
    \item Изучить значения переменных в предыдущем стековом фрейме
   \end{enumerate}
 %+core dump
