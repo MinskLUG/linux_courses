@@ -187,6 +187,7 @@
     \item \verb+ disass + -- дизассемблирование текущей функции
     \item \verb+ si, stepi + -- шаг на инструкцию
     \item \verb+ ni, nexti + -- шаг на инструкцию с обходом
+    \item \verb+ break *<address> +
   \end{itemize}
 \end{frame}
 
@@ -214,6 +215,24 @@ gdb -write -q <program name>
   \end{verbatim}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Упражнение}
+  \begin{itemize}
+    \item Запустить testtimer
+    \item Запустить testtimer в gdb, поставить breakpoint в функции time
+    \item Найти точку возврата из этой функции в main
+    \item Обойти проверку
+  \end{itemize}
+  \begin{tabular}{ll}
+    инструкция & opcode \\
+    jle        & 7e ... \\
+    jle        & 0f 8e .. \\
+    jg         & 7f ... \\
+    jg         & 0f 8f ...\\
+    setg       & 0f 9f ... \\
+    setle      & 0f 9e ... \\
+  \end{tabular}
+\end{frame}
 
 
 
