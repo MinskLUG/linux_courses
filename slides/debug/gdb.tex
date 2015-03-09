@@ -1,3 +1,4 @@
+\subsection[intro]{Основы gdb}
 \begin{frame}
   \frametitle{Базовые команды gdb}
   \begin{columns}
@@ -30,6 +31,7 @@
   \end{columns}
 \end{frame}
 
+\subsection[breakpoints]{Точки останова}
 \begin{frame}
  \frametitle{Обращение с точками останова}
  \begin{columns}
@@ -97,9 +99,26 @@
    \item Запустить \texttt{gdb ./segfault /tmp/core-....}
    \item Изучить значения переменных в текущем стековом фрейме
    \item Изучить значения переменных в предыдущем стековом фрейме
-   \item Исправить код
   \end{enumerate}
 %+core dump
+\end{frame}
+
+\begin{frame}
+  \frametitle{Watchpoint}
+  \begin{itemize}
+    \item \texttt{watch} <переменная, выражение, *адрес>
+    \item \texttt{rwatch} 
+    \item \texttt{awatch}
+  \end{itemize}
+  \begin{center}
+    Продолжение предыдущего упражнения
+  \end{center}
+  \begin{itemize}
+    \item Запустить segfault под gdb
+    \item Остановиться в main и поставить watchpoint на buf
+    \item Найти место в котором портится buf
+    \item Исправить программу
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -122,6 +141,8 @@
     \item Запустить gdb на файле counter и убедиться, что все работает
   \end{itemize}
 \end{frame}  
+
+\section[gdb server]{gdb server}
 
 \begin{frame}
   \frametitle{gdb server: preparation}
@@ -155,9 +176,45 @@
 \end{itemize}
 \end{frame}
   
+\section[gdb disasm]{Работа с программами без исходников}
+\begin{frame}[fragile]
+  \frametitle{Основные команды для дизассемблирования}
+  \begin{itemize}
+    \item \verb+ info registers {pc, rax, ebp} +
+    \item \verb+ print $pc +,etc
+    \item \verb+ x/i $pc + -текущая инструкция
+    \item \verb+ x/10i $pc-30 + -- предыдущие инструкции
+    \item \verb+ disass + -- дизассемблирование текущей функции
+    \item \verb+ si, stepi + -- шаг на инструкцию
+    \item \verb+ ni, nexti + -- шаг на инструкцию с обходом
+  \end{itemize}
+\end{frame}
 
-%\begin{frame}
-% \frametitle{gdb server}
-%\end{frame}
+\begin{frame}
+  \frametitle{Команда x}
+  Основные ключи
+  \begin{itemize}
+    \item \texttt{x/i <address>} объект по адресу как инструкция (\texttt{x/10i} 10 инструкций)
+    \item \texttt{x/s <address>} как строка
+    \item \texttt{x/d <address>} как десятичное число
+    \item \texttt{x/a <address>} как pointer
+    \item \texttt{x/x <address>} как 16-ричное число
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Патчинг программы}
+  \begin{verbatim}
+gdb -write -q <program name>
+  \end{verbatim}
+\pause
+\vspace{2ex}
+  \begin{verbatim}
+(gdb) set {unsigned char}<address>=<value>
+  \end{verbatim}
+\end{frame}
+
+
+
 
 
