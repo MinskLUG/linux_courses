@@ -2,6 +2,9 @@ TARGET  = 01-gcc_intro.pdf
 TARGET += 02-linker_intro.pdf
 TARGET += 03-make.pdf
 TARGET += 04-elf.pdf
+TARGET += 05-debug.pdf
+TARGET += 06-debug.pdf
+TARGET += 07-valgrind.pdf
 
 #TARGET += epam-Linux_courses_handbook.pdf
 

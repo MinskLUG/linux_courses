@@ -46,7 +46,7 @@
 	\begin{block}{Компиляция}
 		Флаги {\tt -g} и {\tt -O0}!
 
-		Hint: {\tt export CFLAGS="-g}
+		Hint: {\tt export CFLAGS=''-g''}
 	\end{block}
 
 	\begin{block}{Запуск}
@@ -177,7 +177,7 @@ array[10000] = 0;
 	\begin{lstlisting}
     int a;
     if ( a)
-        (...};
+        {...};
 	\end{lstlisting}
 
 	Пример: {\tt uninit\_var.c}
@@ -203,6 +203,7 @@ array[10000] = 0;
 
 	\begin{itemize}
 		\item {\tt VALGRIND\_MAKE\_MEM\_NOACCESS( *addr, size)}
+		\item {\tt VALGRIND\_DO\_LEAK\_CHECK} -- производит проверку утечки памяти
 		\item для работы с собственным аллокатором:\\
 		\begin{itemize}
 			\item {\tt VALGRIND\_MALLOCLIKE\_BLOCK}
