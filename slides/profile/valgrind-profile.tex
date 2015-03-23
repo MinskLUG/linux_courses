@@ -8,12 +8,29 @@
       \item \texttt{callgrind\_annotate}
     \end{itemize}
  \end{itemize}
- \begin{center}
-  Упражнение
- \end{center}
- \begin{enumerate}
-  \item Скомпилировать ту же самую программу с ключами \verb+-g+
-  \item Запустить под valgrind
-  \item Изучить callgraph и относительное время в функциях
- \end{enumerate}
+% \begin{center}
+%  Упражнение
+% \end{center}
+% \begin{enumerate}
+%  \item Скомпилировать ту же самую программу с ключами \verb+-g+
+%  \item Запустить под valgrind
+%  \item Изучить callgraph и относительное время в функциях
+% \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Упражнение}
+    \begin{enumerate}
+        \item Создаем рандомный файл с необходимым размером: {\tt dd if=/dev/urandom of=input bs=5M count=1}
+        \item {\tt time gzip input -c >/dev/null}
+        \item Запускаем с помощью valgrind: \\
+	    {\tt time valgrind --tool=callgrind gzip input} \\
+	    Ждем.
+        \item Сравниваем результаты по времени.
+        \item Смотрим появившийся файл callgrind.out.\$PID
+        \item Запускаем: kcachegrind callgrind.out.\$PID
+	\item Смотрим получившийся callgraph и относительное время в функциях.
+        \item Запускаем: callgrind\_annotate callgrind.out.\$PID
+    \end{enumerate}
 \end{frame}

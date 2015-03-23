@@ -5,6 +5,7 @@ TARGET += 04-elf.pdf
 TARGET += 05-debug.pdf
 TARGET += 06-debug.pdf
 TARGET += 07-valgrind.pdf
+TARGET += 08-profile.pdf
 
 #TARGET += epam-Linux_courses_handbook.pdf
 

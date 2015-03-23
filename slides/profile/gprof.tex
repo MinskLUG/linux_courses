@@ -8,11 +8,11 @@
    \item Создается файл gmon.out
    \item Просмотр статистики (плоский профиль, flat profile) 
 \begin{lstlisting}[language=sh]
-gprof program -p
+gprof program -p -b
 \end{lstlisting}
     \item Просмотр графа вызовов со статистикой
 \begin{lstlisting}[language=sh]
-gprof program -q
+gprof program -q -b
 \end{lstlisting}
     \item Аннотация исходного кода
 \begin{lstlisting}[language=sh]
@@ -23,9 +23,16 @@ gprof program -A
 
 \begin{frame}
   \frametitle{Упражнение}
+
   \begin{enumerate}
-    \item Изменить Makefile для primefactors.c, так, чтобы включить профилирование
-    \item Просмотреть информацию профайлером
+%    \item Изменить Makefile для primefactors.c, так, чтобы включить профилирование
+%    \item Просмотреть информацию профайлером
+    \item Посмотреть статистику в режиме Flat Profile:\\
+        {\tt gprof -b -p ./gzip }
+    \item Посмотреть граф вызовов:\\
+        {\tt gprof -b -q ./gzip}
+    \item Посмотреть код с аннотациями:\\
+        {\tt gprof -A ./gzip}
   \end{enumerate}
 \end{frame}
 
