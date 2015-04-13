@@ -11,23 +11,53 @@
 					\begin{tabular}{l | l | l }
 					Каталог & Макрос & Описание\\
 					\hline
-					~/rpmbuild/SPECS/ & \%\_specdir & Сборочные .spec файлы\\
-					~/rpmbuild/SOURCES/ & \%\_sourcedir & Исходные архивы и патчи\\
+					~/RPM/SPECS/ & \%\_specdir & Сборочные .spec файлы\\
+					~/RPM/SOURCES/ & \%\_sourcedir & Исходные архивы и патчи\\
 					\hline
-					~/rpmbuild/BUILD/ & \%\_builddir	& Сборка\\		
-					~/rpmbuild/BUILDROOT/ & \%\_buildrootdir & Установка\\
+					~/RPM/BUILD/ & \%\_builddir	& Сборка\\		
+					~/RPM/BUILDROOT/ & \%\_buildrootdir & Установка\\
 					\hline
-					~/rpmbuild/RPMS/ & \%\_rpmdir & Собранные .rpm\\
-					~/rpmbuild/SRPMS/ & \%\_srcrpmdir & ``Собранный'' .srpm \\
+					~/RPM/RPMS/ & \%\_rpmdir & Собранные .rpm\\
+					~/RPM/SRPMS/ & \%\_srcrpmdir & ``Собранный'' .srpm \\
 					\end{tabular}
 				\end{table}			
-			\begin{block}{Выполнить команды}
-				{\tt rpmdev-setuptree ; cd ~/rpmbuild/SPECS ; vim program.spec }
-			\end{block}			
 \end{frame}
 
 \begin{frame}
-	\frametitle{Структура spec-файла}	
+\def~{$\sim$}
+\frametitle{Пример 0: Hello, World!}
+
+	\begin{block}{Упражнение: hello.spec}
+		\begin{itemize}
+			\item Скопировать файл описания сборки {\tt hello.spec} в {\tt ~/RPM/SPECS/}
+			\item Скопировать файл c исходным кодом в {\tt ~/RPM/SOURCES/}
+			\item Собрать пакет с помощью {\tt rpmbuild -ba ~/RPM/SPECS/hello.spec}
+			\item Посмотреть получившуюся файловую структуру {\tt find ~/RPM/}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Шаги сборки}
+	
+			\begin{table}
+				\begin{tabular}{l | l | l | l }
+				Шаг & Чтение & Запись & Описание \\
+				\hline 
+				\%prep & \%\_sourcedir & \%\_builddir & Подготовка\\
+				\%build & \%\_builddir & \%\_builddir & Сборка (configure, make)\\
+				\%install & \%\_builddir & \%\_buildrootdir & Установка (make install)\\
+				\%check &	\%\_builddir & \%\_builddir & Проверка (make test)\\
+				\hline 
+				bin & \%\_buildrootdir	&\%\_rpmdir & Упаковка RPM\\
+				src & \%\_sourcedir & \%\_srcrpmdir & Упаковка SRPM\\
+				\end{tabular}
+			\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Структура spec-файла}
 	\begin{itemize}
 		\item Тэги -- {\tt Tag: value}
 		\begin{itemize}
@@ -50,6 +80,48 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Структура spec-файла}
+
+	\begin{itemize}
+		\item Секции --  {\tt \%prep, \%build, \%install, \%check, \%files, \%changelog} 
+		\item Макросы -- {\tt \%define FOO bar} 
+		\item Скриптлеты, выполняемые в различных условиях\\
+			{\tt (pre-,post-)install, uninstall, trigger}
+		\item Подпакеты -- {\tt \%package}
+		\item Условности -- {\tt \%ifarch ARCH\_NAME, \%if TRUE\_OR\_FALSE}
+	\end{itemize}
+	\begin{block}{Hint:}
+		 {\tt rpm -\-showrc }
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Пример 1: Hello, World!}
+
+	\begin{block}{Упражнение: hello.spec}
+		\begin{itemize}
+			\item Собрать пакет с помощью {\tt rpmbuild -ba hello.spec}
+			\item Посмотреть список зависимостей {\tt rpm -qRp hello*.rpm}
+			\item Установить полученный пакет
+			\begin{itemize}
+				\item {\tt apt-cache dotty template > template.dot}
+				\item {\tt dot -Tpng template.dot -o template.png}
+			\end{itemize}
+			\item Удалить исходники и spec-файл
+			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.src.rpm}
+		\end{itemize}
+	\end{block}
+
+	\pause
+
+	\begin{block}{Упражнение: расширяем функционал}
+		Добавить компиляцию, установку и пакетирование для CPP-примера.
+	\end{block}
+
+\end{frame}
+
 
 \begin{frame}
 	\frametitle{Разработка и использование в реальной системе}
@@ -93,62 +165,6 @@
 
 \end{frame}
 
-\begin{frame}
-	\frametitle{Структура spec-файла}
-
-	\begin{itemize}
-		\item Секции --  {\tt \%prep, \%build, \%install, \%check, \%files, \%changelog} 
-		\item Макросы -- {\tt \%define FOO bar} 
-		\item Скриптлеты, выполняемые в различных условиях\\
-			{\tt (pre-,post-)install, uninstall, trigger}
-		\item Подпакеты -- {\tt \%package}
-		\item Условности -- {\tt \%ifarch ARCH\_NAME, \%if TRUE\_OR\_FALSE}
-	\end{itemize}
-	\begin{block}{Hint:}
-		 {\tt rpm -\-showrc }
-	\end{block}
-\end{frame}
-
-
-
-\begin{frame}
-	\frametitle{Шаги сборки}	
-	
-			\begin{table}
-				\begin{tabular}{l | l | l | l }
-				Шаг & Чтение & Запись & Описание \\
-				\hline 
-				\%prep & \%\_sourcedir & \%\_builddir & Подготовка\\
-				\%build & \%\_builddir & \%\_builddir & Сборка (configure, make)\\
-				\%install & \%\_builddir & \%\_buildrootdir & Установка (make install)\\
-				\%check &	\%\_builddir & \%\_builddir & Проверка (make test)\\
-				\hline 
-				bin & \%\_buildrootdir	&\%\_rpmdir & Упаковка RPM\\
-				src & \%\_sourcedir & \%\_srcrpmdir & Упаковка SRPM\\
-				\end{tabular}
-			\end{table}			
-\end{frame}
-
-\begin{frame}
-	\frametitle{Пример 1: Hello, World!}
-
-	\begin{block}{Упражнение: hello.spec}
-		\begin{itemize}
-			\item Собрать пакет с помощью {\tt rpmbuild -ba hello.spec}
-			\item Посмотреть список зависимостей {\tt rpm -qRp hello*.rpm}
-			\item Установить полученный пакет
-			\item Удалить исходники и spec-файл
-			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.src.rpm}
-		\end{itemize}
-	\end{block}
-
-	\pause
-
-	\begin{block}{Упражнение: расширяем функционал}
-		Добавить компиляцию, установку и пакетирование для CPP-примера.
-	\end{block}
-
-\end{frame}
 
 \begin{frame}
 	\frametitle{Пример 2}
@@ -161,13 +177,14 @@
 			\item Посмотреть список зависимостей {\tt rpm -qRp template*.rpm}
 			\item Установить полученные пакеты
 			\item Изменить версию, пересобрать и обновить в системе
+			\item Построить дерево зависимостей:
 			\item Удалить полученные пакеты
 		\end{itemize}
 	\end{block}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Пример 3: Пакетируем linking}
+	\frametitle{Задача на дом: Пакетируем linking}
 
 	\begin{block}{Задача:}
 		Создать и установить пакеты для примера с созданием библиотек
