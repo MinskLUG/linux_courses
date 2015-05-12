@@ -10,6 +10,14 @@ CNT=0
 CRAPFLAG=0
 NUM=0
 
+echo " __________________________________________________________"
+echo "|                                                          |"
+echo "|      !!! ATTENTION !!!                                   |"
+echo "|                                                          |"
+echo "|  DO NOT FORGET INITIALIZE: git config --global user.name |"
+echo "|                                                          |"
+echo " ---------------------------------------------------------" 
+
 git init
 touch $OUT
 git add $OUT

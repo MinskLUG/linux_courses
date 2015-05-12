@@ -147,8 +147,18 @@
       \item Обратить внимание на строку "Taken at least once 50\% of 2"
       \item Объяснить полученый результат\footnote{Дополнительная информация: \url{http://stackoverflow.com/questions/7199360/what-is-the-branch-in-the-destructor-reported-by-gcov}}
   \end{enumerate}
-
 \end{frame}
+
+\begin{frame}{Пример 5 (когда 100\% != все строки кода)}
+  \begin{enumerate}
+      \item Перейт в каталог hello100 
+      \item make 
+      \item ./hello100 1 
+      \item gcov hello100 
+      \item Обратить внимание на строку "Lines executed:100.00\%"
+  \end{enumerate}
+\end{frame}
+
 
 \begin{frame}{Пример: NFSTrace}
   \begin{center}
