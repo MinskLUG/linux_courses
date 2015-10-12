@@ -15,3 +15,96 @@
 		\end{itemize}
 	\end{block}
 \end{frame}
+
+\begin{frame}{SysVInit}
+	\begin{block}{Управление}
+		\begin{itemize}
+			\item kernel boot parameters: <N> -- runlevel
+			\item утилита {\tt runlevel}
+			\item утилита {\tt init}
+		\end{itemize}
+	\end{block}
+
+	\scriptsize
+	\begin{block}{Runlevel}
+		\begin{table}
+			\begin{tabular}{| c | l | }
+			\hline
+			Runlevel & Описание\\
+			\hline
+			0	& Выключить систему \\
+			1,s,single & Однопользовательский режим \\
+			2	& Многопользовательский режим без графики. Без сетевых сервисов.\\
+			3	& Многопользовательский режим без графики. Полноценная сеть. \\
+			4	& Определяется на хосте\\
+			5	& Многопользовательский режим с графикой.\\
+			6	& Перезагрузка\\
+			emergency & Аварийная оболочка \\
+			\hline
+			\end{tabular}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}{SysVInit: сервисы}
+	\begin{block}{Управление}
+		\begin{itemize}
+			\item утилита {\tt service}
+			\item утилита {\tt chkconfig}
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Сервисы}
+		\begin{itemize}
+			\item {\tt /etc/rc.d/init.d}
+			\item {\tt /etc/rc.d/rc.N}\footnote{N=runlevel}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{systemd}
+	\begin{block}{Управление}
+		\begin{itemize}
+			\item kernel boot parameters\\
+				{\tt systemd.unit=rescue.target} \\
+			\item утилита {\tt systemctl} \\
+				{\tt systemctl isolate multi-user.target} \\
+				{\tt systemctl set-default single.target}
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{targets}
+		\tiny
+		\begin{table}
+			\begin{tabular}{| c | l | l | }
+			\hline
+			Runlevel & Описание\\
+			\hline
+			0	& poweroff.target & Выключить систему \\
+			1,s,single & rescue.target  & Однопользовательский режим \\
+			2	& multi-user.target & Многопользовательский режим без графики. Без сетевых сервисов.\\
+			3	& multi-user.target & Многопользовательский режим без графики. Полноценная сеть. \\
+			4	& multi-user.target & Определяется на хосте\\
+			5	& graphical.target & Многопользовательский режим с графикой.\\
+			6	& reboot.target & Перезагрузка\\
+			emergency & emergency.target & Аварийная оболочка \\
+			\hline
+			\end{tabular}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}{systemd: сервисы}
+	\begin{block}{Управление}
+		\begin{itemize}
+			\item утилита {\tt systemctl}
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{Сервисы}
+		\begin{itemize}
+			\item {\tt /lib/systemd/system/}
+			\item {\tt /etc/systemd/system/}
+		\end{itemize}
+	\end{block}
+\end{frame}
