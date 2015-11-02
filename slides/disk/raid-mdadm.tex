@@ -1,0 +1,37 @@
+\begin{frame}{Программный RAID}
+  \begin{center}
+    \textbf{Уровни RAID поддерживающиеся софтверно}
+   \end{center}
+   \begin{enumerate}
+     \item RAID 0 (длинный диск)
+     \pause
+     \item RAID 1 (зеркалирование)
+     \pause 
+     \item RAID 4 (отдельный диск на проверку четности)
+     \pause
+     \item RAID 5 (данные о четности распределены по дискам)
+     \pause
+     \item RAID 6 (устойчив при потере двух дисков из 4+)
+     \pause
+     \item RAID 10 (RAID0 поверх RAID1)
+     \pause
+     \item RAID 0+1 (RAID1 поверх RAID0)
+   \end{enumerate}
+   \pause
+   Утилита для работы с RAID --\textbf{\tt mdadm}
+\end{frame}
+
+\begin{frame}{Упражнения с mdadm}
+    \begin{enumerate}
+      \item Создать 4 файла по 20Mb из нулей и привязать их к /dev/loop[0-3]
+      \item {\tt mdadm -\phantom{}-create /dev/md0 -\phantom{}-level=mirror -\phantom{}-raid-devices=2 /dev/loop0 /dev/loop1}
+      \item Создать файловую систему ext3 на /dev/md0. Создать несколько файлов на ней.
+      \item {\tt mdadm -\phantom{}-detail /dev/md0}
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-fault /dev/loop0 } Проверить доступность файловой системы
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-add /dev/loop2} Проверить доступность файлов на файловой системе
+      \item {\tt mdadm -\phantom{}-manage /dev/md0 -\phantom{}-fault /dev/loop1} Проверить доступность
+      \item Добавить /dev/loop3
+      \item {\tt umount /dev/md0; mdadm -\phantom{}-stop /dev/md0; mdadm -\phantom{}-remove /dev/md0; mdadm -\phantom{}-zero-superblock /dev/loop[0-2]}
+    \end{enumerate}
+\end{frame}
+
