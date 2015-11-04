@@ -19,7 +19,7 @@ ls  | wc -l # подсчет числа файлов
 man uniq | tr  '[:space:]' '\n' | sort | uniq -c | sort -n | less # подсчет количества слов в тексте man uniq
 history | wc -l # подсчет ранее введенных команд
 cat /etc/udev/rules.d/* | wc -l
-ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=\$1};END{print s}' 
+ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=`\$1`};END{print s}' 
 \end{lstlisting}
   \pause
   \begin{block}{Упражнение}

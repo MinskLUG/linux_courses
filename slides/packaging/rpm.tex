@@ -13,7 +13,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{RPM: часто используемые опции опроса}
+\begin{frame}{RPM -q: часто используемые опции опроса}
 
 	\begin{itemize}
 		\item {\tt pkgname} -- выбор пакета, установленного в системе
@@ -27,12 +27,12 @@
 			{\tt rpm -q -i glibc }
 		\item {\tt -l} -- показать список файлов пакета \\
 			{\tt rpm -q -l glibc }
-		\item {\tt --whatprovides} -- \\
+		\item {\tt -{}-whatprovides} -- \\
 			{\tt rpm -q --whatprovides java}
-		\item {\tt --whatrequires} -- \\
+		\item {\tt -{}-whatrequires} -- \\
 			{\tt rpm -q --whatrequires /bin/bash}
-		\item {\tt --queryformat} -- формат вывода\\
-			{\tt rpm -q --whatrequires /bin/bash --queryformat ''\%\{name\} ''}
+		\item {\tt -{}-queryformat} -- формат вывода\\
+			{\tt rpm -q -{}-whatrequires /bin/bash -{}-queryformat ''\%\{name\} ''}
 
 	\end{itemize}
 

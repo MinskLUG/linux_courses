@@ -16,8 +16,8 @@
 \begin{frame}
 	\frametitle{Подготовка дисковой подсистемы}
 			\begin{itemize}
-				\item Создать пустой файл размером в 1.5 GB и отобразить на устройство
-					/dev/loop ({\tt dd, losetup})
+				\item Создать пустой файл размером от 1.5 GB и отобразить на устройство
+					/dev/loop0 ({\tt dd, losetup})
 				\item Создать группу томов на базе этого устройства ({\tt pvcreate, vgcreate})
 				\item Выделить 1 GB под логический диск ({\tt lvcreate})
 				%\item Скопировать образ виртуального диска в полученный логический том ({\tt dd})
@@ -27,10 +27,10 @@
 
 \begin{frame}[fragile]{Установка системы}
         \begin{itemize}
-			\item Установить centos-minimal на  машину из iso файла.
-            \item Создать два снимка логического тома виртуальной машины
-			\item Убедиться в наличии tap интерфейсов
-		\end{itemize}
+		\item Установить centos-minimal на  машину из iso файла.
+		\item Создать два снимка логического тома виртуальной машины
+		\item Убедиться в наличии tap интерфейсов
+	\end{itemize}
 
 \end{frame}
 
@@ -84,5 +84,3 @@ kvm -enable-kvm -cdrom centos-minimal.iso -hda /dev/loop0 -m 512M   \
 				\item Проверить доступность хостов из ''внешней'' сети {\tt ping/nmap}
 			\end{itemize}
 \end{frame}
-
-
