@@ -21,10 +21,10 @@ _Disclaimer_: поскольку некоторые материалы либо 
 
 На данный момент созданы и доступны для использования следующие материалы:
 
-* epam/Presentation/ -- курсы по Linux для программистов (EPAM Systems)
+* epam/LinuxEssentials/ -- введение в Linux, ежедневные навыки работы в консоли (EPAM Systems)
+* epam/DevelopmentToolchain/ -- курс для программистов по использованию различных утилит для разработки (EPAM Systems)
 * epam/BashScripting/ -- отдельный курс по программированию в Bash (EPAM Systems)
 * epam/Python/ -- отдельный курс по программированию на Python (pptx) (EPAM Systems)
-* epam/C/ -- отдельный курс по программированию на C (PDF пока идет первое прочтение)(EPAM Systems)
 * sam-solutions/ -- введение в Linux для QA (SaM-Solutions)
 * promwad/ -- курс "Программирование встраиваемых систем" (Promwad)
 

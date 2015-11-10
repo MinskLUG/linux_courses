@@ -1,20 +1,22 @@
-\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+%\documentclass[ignorenonframetext, professionalfonts, hyperref={pdftex, unicode}]{beamer}
+\documentclass[pdftex,12pt,a4paper]{report}
+\usepackage{beamerarticle}
 
-\usetheme{Epam}
-%\usecolortheme{wolverine}
+\usetheme{Copenhagen}
+\usecolortheme{wolverine}
 
 %Packages to be included
-%\usepackage{graphicx}
+\usepackage{graphicx}
 
-\usepackage[russian]{babel}
+\usepackage[T2A,T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage[russian]{babel}
 
-%\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
+%%\usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
 
 \usepackage{textcomp}
 
-\usepackage{beamerthemesplit}
+%\usepackage{beamerthemesplit}
 
 \usepackage{ulem}
 
@@ -22,6 +24,7 @@
 
 \usepackage{ucs}
 
+\usepackage{url}
 
 \usepackage{listings}
 \lstloadlanguages{bash}
@@ -62,23 +65,16 @@
 \author[Epam]{{\bf Epam}\\Low Level Programming Department}
 
 %\institution[EPAM]{EPAM}
-%\logo{\includegraphics[width=1cm]{logo.png}}
+\logo{\includegraphics[width=1cm]{logo.png}}
 
-\AtBeginSection[]{%
-  \begin{frame}<beamer>
-    \frametitle{}
-    \tableofcontents[
-        sectionstyle=show/shaded, hideallsubsections ]
-  \end{frame}
-  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
-}
-
-\AtBeginSubsection[]{%
-  \begin{frame}<beamer>
-    \frametitle{}
-    \tableofcontents[
-        sectionstyle=show/hide,
-        subsectionstyle=show/shaded/hide, ]
-  \end{frame}
-  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+    pdfkeywords={Linux},
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    colorlinks=true,
+    pdfstartview=Fit,
+    pdfpagemode=UseOutlines,
+    pdfpagelayout=TwoPageRight
 }

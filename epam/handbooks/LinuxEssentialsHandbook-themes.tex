@@ -1,14 +1,3 @@
-\input{report}
-
-\newcommand{\defaultuser}{cur\_user}
-
-\title{Основы Linux}
-
-\begin{document}
-\maketitle
-
-\tableofcontents
-
 \chapter{Основы Linux}
 
 \begin{frame}{Основы ОС Linux}
@@ -31,11 +20,7 @@
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
-%%%%%%%%%% Content starts here %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section[Принципы]{Базовые принципы ОС Linux}
+\chapter[Принципы]{Базовые принципы ОС Linux}
 
 \subsection{GNU/Linux}
 
@@ -128,7 +113,7 @@
 \mode<all>{\input{../../slides/packaging/repo}}
 
 \chapter{Пользователи и привилегии}
-
+\newcommand{\defaultuser}{USER}
 \section{Многопользовательская модель UNIX}
 \mode<all>{\input{../../slides/multiuser/multiuser-model.tex}}
 
@@ -137,6 +122,18 @@
 \mode<all>{\input{../../slides/multiuser/account_files.tex}}
 
 \mode<all>{\input{../../slides/multiuser/pam.tex}}
+\let\defaultuser\undefined
+
+\chapter{Дисковая подсистема}
+
+\section{Блочные устройства}
+\mode<all>{\input{../../slides/disk/disk-intro.tex}}
+\section{Основные команды}
+\mode<all>{\input{../../slides/disk/disk-simple_management.tex}}
+\section{GPT}
+\mode<all>{\input{../../slides/disk/disk-gpt.tex}}
+\section{LVM}
+\mode<all>{\input{../../slides/disk/lvm.tex}}
 
 \chapter{Сетевая подсистема}
 
@@ -169,18 +166,5 @@
 \section{iptables}
 \mode<all>{\input{../../slides/networking/iptables}}
 
-\chapter{Дисковая подсистема}
-
-\section{Блочные устройства}
-\mode<all>{\input{../../slides/disk/disk-intro.tex}}
-\section{Основные команды}
-\mode<all>{\input{../../slides/disk/disk-simple_management.tex}}
-\section{GPT}
-\mode<all>{\input{../../slides/disk/disk-gpt.tex}}
-\section{LVM}
-\mode<all>{\input{../../slides/disk/lvm.tex}}
-
 \chapter{Самостоятельная работа}
 \mode<all>{\input{../../slides/networking/practice}}
-
-\end{document}
