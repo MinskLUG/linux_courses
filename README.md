@@ -24,6 +24,7 @@ _Disclaimer_: поскольку некоторые материалы либо 
 * epam/LinuxEssentials/ -- введение в Linux, ежедневные навыки работы в консоли (EPAM Systems)
 * epam/DevelopmentToolchain/ -- курс для программистов по использованию различных утилит для разработки (EPAM Systems)
 * epam/BashScripting/ -- отдельный курс по программированию в Bash (EPAM Systems)
+* epam/handbooks/ -- слайды в виде методичек (EPAM Systems)
 * epam/Python/ -- отдельный курс по программированию на Python (pptx) (EPAM Systems)
 * sam-solutions/ -- введение в Linux для QA (SaM-Solutions)
 * promwad/ -- курс "Программирование встраиваемых систем" (Promwad)
