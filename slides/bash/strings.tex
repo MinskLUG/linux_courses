@@ -47,7 +47,7 @@ echo ${string:9:8}  # Solution
 \begin{frame}[fragile]
 	\frametitle{Удаление части строки}
 
-	\begin{block}{\$\{string\#substring\}}
+	\begin{block}{\$\{string\#substring\} с начала}
 	\begin{lstlisting}
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
@@ -57,7 +57,7 @@ echo ${entry#*:} # x:500:500:d4s:/home/d4s:/bin/bash
 
 	\pause
 
-	\begin{block}{\$\{string\%substring\}}
+	\begin{block}{\$\{string\%substring\} c конца}
 	\begin{lstlisting}
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
@@ -154,8 +154,7 @@ echo ${entry/%\/bin\/bash/\/bin\/sh} # user:x:500:500:user:/home/user:/bin/sh
 VARS=${!BASH*}
 for VAR in $VARS
 do
-    eval VALUE=\$$VAR
-    echo $VAR=$VALUE
+    echo $VAR=${!VAR}
 done
 	\end{lstlisting}
 	\end{block}

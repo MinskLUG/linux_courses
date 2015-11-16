@@ -5,6 +5,7 @@
    \item for
    \item until
    \item break, continue 
+   \item внешние команды find, xargs 
   \end{itemize}
 \end{frame}
 
@@ -21,26 +22,101 @@
 \end{lstlisting}
     \item Арифметическая форма
 \begin{lstlisting}[language=sh,frame=single]
-  for ((i=0;i<10;i++)) 
-  do
+  for (( expr1 ; expr2 ; expr3 )) 
+  do 
     op1
     op2
   done
 \end{lstlisting}
   \end{enumerate}
 \end{frame}
+
 \begin{frame}[fragile]
-\frametitle{}
-  \begin{block}{Примеры}
+\frametitle{ Циклы for. Примеры.}
+  \begin{block}{Действие над файлами.}
 \begin{lstlisting}[language=sh,frame=single]
 for file in *
  do md5sum $file
 done
+\end{lstlisting}
+  \end{block}
 
-for ((i=0;i<10;i++))
- do echo $i
+\begin{block}{Перечисление элементов.}
+\begin{lstlisting}[language=sh,frame=single]
+for planet in Mars Earth Mercury Saturn
+ do echo $planet 
 done
 \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ Циклы for. Примеры.}
+  \begin{block}{Перечисление цифровой последовательности.}
+\begin{lstlisting}[language=sh,frame=single]
+for num in 1 2 3 4 5 6 7 8 9 10
+ do echo $num
+done
+
+for num in $(seq 1 10)  # генерация из внешней команды
+ do echo $num
+done
+
+for num in {1..10}  # генерация встроенными средствами
+ do echo $num
+done
+
+\end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ Циклы for. Примеры.}
+  \begin{block}{Перечисление цифровой последовательности C-like }
+\begin{lstlisting}[language=sh,frame=single]
+for ((i=1;i<11;i++))
+do 
+  echo $i
+done  
+\end{lstlisting}
+  \end{block}
+
+  \begin{block}{Несколько переменных}
+    \begin{lstlisting}[language=sh,frame=single]
+for ((a=1, b=1; a <= LIMIT ; a++, b++))
+do
+  echo -n "$a-$b"
+done
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ Циклы for. Примеры.}
+  \begin{block}{Пустые выражения. Результат по умолчанию 1. }
+    \begin{lstlisting}[language=sh,frame=single]
+for (( i=1; ; i++))
+do
+  echo $i 
+  [ "$i" -eq 10 ] && break 
+done
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ Циклы for. Примеры.}
+  \begin{block}{Из аргументов.}
+    \begin{lstlisting}[language=sh,frame=single]
+for arg
+ do echo $arg 
+done
+    \end{lstlisting}
+  \end{block}
+  \begin{block}{Из переменной. Запись одной строкой.}
+    \begin{lstlisting}[language=sh,frame=single]
+for name in $users ; do echo $name ; done
+    \end{lstlisting}
   \end{block}
 \end{frame}
 
@@ -56,16 +132,28 @@ done
 
 \begin{frame}[fragile]
 \frametitle{}
-\begin{block}{Пример}
+
+\begin{block}{Пример. Перебираем аргументы.}
 \begin{lstlisting}[language=sh,frame=single]
-while ((i++))
-     read y
+while [[ -n $1 ]]
 do
- echo $i $y
+    echo $1
+    shift
 done
 \end{lstlisting}
 \end{block}
-\begin{block}{Пример}
+
+\begin{block}{Пример. Несколько команд.}
+\begin{lstlisting}[language=sh,frame=single]
+while ((i++))
+ read y
+do
+ echo $i $y
+ [[ "$y" = 'stop' ]] && break
+done
+\end{lstlisting}
+\end{block}
+\begin{block}{Пример. Бесконечный цикл.}
 \begin{lstlisting}[language=sh,frame=single]
 while :
 do
@@ -78,10 +166,57 @@ done
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Упражнения}
-\begin{enumerate}
-\item Посчитать сумму кубов чисел от 1 до 100
-\item Вывести в файл 10 случайных чисел от 0 до 80
-\item Построить гистограмму данных из предыдущего файла файла {\bf Hint:} {\tt while read, echo -n }
-\end{enumerate}
+\frametitle{ Цикл until. Пример.}
+  \begin{block}{Ожидаем хост после перезагрузки.}
+    \begin{lstlisting}[language=sh,frame=single]
+until ping -q -c 3  $host 1>/dev/null 2>&1 && nc -z $host 22
+do 
+   sleep 1
+   echo unavailable;
+done
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Перенаправление.}
+Применяется ко всем командам внутри цикла.
+  \begin{block}{Pipe}
+    \begin{lstlisting}[language=sh,frame=single]
+for name in $users ; do echo $name ; done | wc -l
+    \end{lstlisting}
+  \end{block}
+  \begin{block}{В файл}
+    \begin{lstlisting}[language=sh,frame=single]
+for name in $users ; do echo $name ; done
+(( i=10 )); while (( i > 0 )); do 
+    echo "$i"
+    (( i-- ))
+done > output.txt
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Внешние команды.}
+Массовые операции с файлами.
+  \begin{block}{Команда find}
+    \begin{lstlisting}[language=sh,frame=single]
+find . -name '*.c' -exec stat  {} \;
+    \end{lstlisting}
+  \end{block}
+  \begin{block}{Команда xargs}
+    \begin{lstlisting}[language=sh,frame=single]
+echo /dev/std* | xargs -n1 readlink
+    \end{lstlisting}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Упражнения}
+    \begin{enumerate}
+        \item Посчитать сумму кубов чисел от 1 до 100
+        \item Вывести в файл 10 случайных чисел от 0 до 80
+        \item Построить гистограмму данных из предыдущего файла файла {\bf Hint:} {\tt while read, echo -n }
+    \end{enumerate}
 \end{frame}

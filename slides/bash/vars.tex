@@ -2,21 +2,21 @@
 
 
 \begin{frame}
-	\frametitle{Переменные}
-
+	\frametitle{Переменные} 
 	\large\center{Нетипизированные!!!}
 
 	Для прямого обращения необходимо использовать префикс \\
 	\center{\Large{\tt \$}}
 
-	{\it Можно} использовать фигурные скобки:\\
+	Фигурные скобки используют для отделения от текста:\\
 	\center{\tt \$VARrest != \$\{VAR\}rest}
 
-	\bigskip
+	%\bigskip
 	
-	\begin{alertblock}{Без префикса}
+	\begin{alertblock}{Используют без префикса}
 		\begin{itemize}
-			\item Объявление или присвоение
+			\item В объявлении declare или присвоении
+			\item в командe read ip\_addr
 			\item unset -- удаление
 			\item В арифметических операциях {\tt (( ... ))}
 		\end{itemize}
@@ -24,7 +24,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Упражнение}
+	\frametitle{Задание. Присвоить переменной значение.}
 
 	\begin{lstlisting}
 #!/bin/bash
@@ -34,10 +34,12 @@ echo $VAR
 	\end{lstlisting}
 
 
-	\begin{block}{Присвоение значения переменной}
+	\begin{block}{Изменить и посмотреть на результат.}
 		\begin{itemize}
-			\item Измените присвоение значения с помощью пробелов до и/или после знака ''{\tt =}''
-			\item Присвойте переменной VAR значение: I love \$\$\$!
+			\item Добавить пробел до знака ''{\tt =}''
+			\item Добавить пробел после знака ''{\tt =}''
+			\item Присвоить переменной VAR значение: I love \$\$\$!
+			\item Создать переменные с другим именем и значением var 1var \_var var1
 		\end{itemize}
 	\end{block}
 

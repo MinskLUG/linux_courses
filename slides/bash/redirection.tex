@@ -1,5 +1,17 @@
 
 \begin{frame}[fragile]
+	\frametitle{stdin, stdout, stderr}
+     C каждым процессом связаны потоки ввода-вывода - файловые дeскрипторы stdin, stdout, stderr.
+    \begin{block}{Пример. Номера файловых дeскрипторов и устройств. }
+                    \begin{lstlisting}
+echo /dev/std*
+echo /dev/std* | xargs -n1 readlink
+lsof -ap $BASHPID -d 0,1,2
+                    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
 	\frametitle{Перенаправление ввода/вывода}
 
 	\begin{itemize}

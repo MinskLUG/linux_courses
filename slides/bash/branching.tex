@@ -75,6 +75,29 @@ exit 0
 	\end{columns}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{case + getopt}
+	Внешняя команда для обработки аргументов командной строки.
+	\small
+	\begin{lstlisting}
+SHORTOPTS="af:h"
+LONGOPTS="flagA,file:,help"
+OPTS=$(getopt -o "$SHORTOPTS" -l "$LONGOPTS" -- "$@")
+
+eval set -- "$OPTS" #  устанавливает $1 $2 ...
+
+while [ $# -gt 0 ] ; do
+  case $1 in
+    -a|--flagA) FLAGA=$1 ; shift ;;
+    -f|--file) FILE=$1; FILENAME="$2"; shift 2 ;;
+    -h|--help) echo "Usage:$0 [-a|--flagA] [-h|--help] [-f|--file <filename>]"; exit 0;;
+    --) shift; break ;; # skip this one
+    *) ;;
+  esac
+done
+	\end{lstlisting}
+\end{frame}
+
 
 \begin{frame}[fragile]
 	\frametitle{case + getopts}
@@ -96,32 +119,6 @@ shift $((OPTIND-1))
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{case + getopt}
-	
-	Внешняя команда для обработки аргументов командной строки.
-
-	\small
-	\begin{lstlisting}
-SHORTOPTS="af:h"
-LONGOPTS="flagA,file:,help"
-OPTS=$(getopt -o "$SHORTOPTS" -l "$LONGOPTS" -- "$@")
-
-eval set -- "$OPTS"
-
-while [ $# -gt 0 ]
-do
-  case $1 in
-    -a|--flagA) FLAGA=$1 ; shift ;;
-    -f|--file) FILE=$1; FILENAME="$2"; shift 2 ;;
-    -h|--help) echo "Usage:$0 [-a|--flagA] [-h|--help] [-f|--file <filename>]"; exit 0;;
-    --) shift; break ;; # skip this one
-    *) ;;
-  esac
-done
-	\end{lstlisting}
-
-\end{frame}
 
 \begin{frame}
 \frametitle{Домашнее задание}

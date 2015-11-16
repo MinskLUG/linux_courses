@@ -1,10 +1,32 @@
 \begin{frame}[fragile,allowframebreaks]
-	\frametitle{Отладка скриптов с помощью set}
-	
+	\frametitle{Включение режима отладки}
 	Используется команда {\tt set} для активизации различных режимов работы {\tt bash}.
 
 	Включение режима производится с помощью ''-'',\\
 	а отключение -- ''+''.
+
+	\begin{block}{Примеры включения режима отладки.}
+		\begin{lstlisting}[language=sh]
+bash -x ./script.sh
+
+#!/bin/bash -x
+[.. script ..]
+
+#!/usr/bin/env bash
+set -x
+
+#!/usr/bin/env bash
+[..irrelevant code..]
+set -x
+[..relevant code..]
+set +x
+[..irrelevant code..]
+		\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]
+	\frametitle{Ключи отладки команды set}
 
 	\begin{itemize}
 		\item {\tt set -v} -- вывод на экран исполняемой строки
@@ -47,14 +69,21 @@ echo Still working
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Полезные переменные}
+	\frametitle{Отладочные переменные}
 
 	\begin{itemize}
 		\item {\tt LINENO} -- номер текущей строки
-		\item {\tt FUNCNAME} -- вывод на экран исполняемой строки с автоматической подстановкой значений переменных
+		\item {\tt BASH\_SOURCE} -- массив\, содержит имена подключенных файлов source 
+		\item {\tt FUNCNAME} -- массив содержит имена всех функций из стека вызовов. 0 элемент\, имя текущей функции 
 		\item {\tt SHLVL} -- уровень вложенности интерпретатора
 		\item {\tt PIPESTATUS} -- массив статусов завершения всех команд в pipe
 	\end{itemize}
+
+	\begin{block}{Альтернативный вид PS4.}
+		\begin{lstlisting}[language=sh]
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+		\end{lstlisting}
+	\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -82,3 +111,20 @@ f1
 
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Сообщения об ошибках}
+
+	\begin{block}{Пример.}
+		\begin{lstlisting}[language=sh]
+bash: test: too many arguments
+
+script.sh: line 100: syntax error: unexpected end of file
+
+script.sh: line 50: unexpected EOF while looking for matching `"' 
+
+
+		\end{lstlisting}
+	\end{block}
+
+\end{frame}
+%

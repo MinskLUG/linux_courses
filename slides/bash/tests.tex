@@ -1,7 +1,23 @@
 %%
 \begin{frame}[fragile]
-    \frametitle{Общий синтаксис}
+    \frametitle{ Задание. Выполнить команды.}
+\begin{block}{AND}
+	\small\begin{lstlisting}
+false && echo Not running
+true && echo Running
+	\end{lstlisting}
+\end{block}
 
+\begin{block}{OR}
+	\small\begin{lstlisting}
+false || echo Running
+true || echo Not running
+	\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Общий синтаксис}
 
 	\begin{block}{Конструкции для сравнения}
 		\begin{itemize}
@@ -11,25 +27,35 @@
 	\end{block}
 
 	\begin{verbatim}
-команда1 && команда2 || команда3
-условие1 && команда2 || команда3
+команда1 && команда2  или  условие1 && команда2 
+команда1 || команда2  или  условие1 || команда2 
 команда1 && команда2 && команда3 && ... && командаN
 	\end{verbatim}
 
 \end{frame}
 
-\begin{frame}
-    \frametitle{Общий синтаксис}
 
-	\begin{block}{Условие}
+\begin{frame}[fragile]
+   \frametitle{Задание. Команды сравнения.}
+
+	\small\begin{lstlisting}
+type -a test [ [[
+	\end{lstlisting}
+
+	\small\begin{lstlisting}
+help test
+man test
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Условие}
 		\begin{itemize}
 			\item Exit status любой программы
-			\item test или $[$ ... $]$
+			\item Команда test или $[$ ... $]$
 			\item $[[$ ... $]]$
 			\item Двойные скобки {\bf (( ... ))} и конструкция {\bf let}
 		\end{itemize}
-	\end{block}
-
 \end{frame}
 
 
@@ -57,6 +83,7 @@
 
 	Написать скрипт сравнивающий переменную окружения с заранее заданным значением:
 	
+	\begin{block}{script.sh}
 	\small\begin{lstlisting}
 #!/bin/bash
 
@@ -65,14 +92,15 @@ STRING=test
 [ $STRING == $VAR ] && echo "Строки одинаковы" || echo "Строки разные"
 exit
 	\end{lstlisting}
+    \end{block}
     \normalsize
 	И запустить этот скрипт:
 	
 	\begin{enumerate}
-		\item {\tt sh script.sh string}
-		\item {\tt sh script.sh test}
-		\item {\tt sh script.sh}
-	\end{enumerate}
+	\item {\tt bash script.sh \# без параметров}
+	\item {\tt bash script.sh "test string" \# параметр с пробелом}
+	\item {\tt bash script.sh test}
+        \end{enumerate}
 
 \end{frame}
 
@@ -106,6 +134,37 @@ test -z "$DISPLAY" && echo "text mode" || echo "graphical mode"
 	    \item В случае успеха вывести "успех"
 	    \item В случае неуспеха вывести "неудача"
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{ Задание. Сравнить }
+    \begin{block}{Кавычки}
+	\small\begin{lstlisting}
+a="a b c" b="a b c"
+[ $a = $b ] && echo $?
+[[ $a = $b ]] && echo $?
+	\end{lstlisting}
+    \end{block}
+
+    \begin{block}{ AND OR}
+	\small\begin{lstlisting}
+[[ "abc" = 1 -a "b" = 2 ]]
+[[ "abc" = 1 && "b" = 2 ]]
+	\end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{ Задание. Сравнить }
+    \begin{block}{ Pattern matching}
+	\small\begin{lstlisting}
+a="a b c"
+[[ $a = a* ]] ; echo $?
+[[ $a = d* ]] ; echo $?
+[[ $a = "a*" ]] ; echo $?
+[[ $a =~ "a*" ]] ; echo $?
+	\end{lstlisting}
+    \end{block}
 \end{frame}
 
 \begin{frame}[fragile]

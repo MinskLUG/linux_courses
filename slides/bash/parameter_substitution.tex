@@ -16,12 +16,29 @@ echo ${USER}test
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Параметр по-умолчанию}
+	\frametitle{Инициализация переменных.}
 
+	\begin{block}{Неопределенная, пустая, со значением.}
+	\begin{lstlisting}
+unset a          # undefined variable
+echo ${a}
+a="" ; a=''; a=  # null variable
+echo ${a}
+a="User"         # variable with value
+echo ${a}
+	\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{ Использовать параметр по-умолчанию}
+
+                Занчение параметра остается прежним, только подстановка.
 	\begin{block}{\$\{parameter-default\} и \$\{parameter:-default\}}
 	\begin{itemize}
-		\item '-' устанавливает, если переменная не проинициализирована
-		\item ':-' устанавливает, если переменная не проинициализирована либо пустая
+		\item '-' использовать default, если переменная не проинициализирована
+		\item ':-' использовать default, если переменная не проинициализирована либо пустая
 	\end{itemize}
 	\begin{lstlisting}
 unset VAR
@@ -36,9 +53,9 @@ echo ${VAR:-test} # test
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Параметр по-умолчанию}
+	\frametitle{Установить параметр по-умолчанию}
 
-	{\bf Присваивает} переменной значение по-умолчанию.
+	Значение по-умолчанию {\bf присваевается} переменной. 
 
 	\begin{block}{\$\{parameter=default\} и \$\{parameter:=default\}}
 	\begin{itemize}
@@ -59,7 +76,7 @@ echo ${VAR} # test1
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Параметр по-умолчанию}
+	\frametitle{Заменить параметром по-умолчанию}
 
 	Устанавливает переменной альтернативное значение, если переменная уже проинициализирована.
 
@@ -79,7 +96,7 @@ echo ${VAR+test}  # test
 
 
 \begin{frame}[fragile]
-	\frametitle{Выход с ошибкой}
+	\frametitle{Проверить параметр по умолчанию.}
 
 	Выходит с {\tt errorcode=1}.
 
@@ -91,8 +108,8 @@ echo ${VAR+test}  # test
 
 	\begin{lstlisting}
 #!/bin/bash
-${VAR?"Не проинициализирована переменная \$VAR!"}
-${VAR:?}
+echo ${VAR?"Не проинициализирована переменная \$VAR!"}
+echo ${VAR:?}
 echo VAR=$VAR
 exit 0
 	\end{lstlisting}

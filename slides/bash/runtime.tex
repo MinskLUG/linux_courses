@@ -40,9 +40,12 @@
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Введение}
+	\frametitle{Начало скрипта \#!}
 
-	\begin{block}{Sha-Bang}
+        Конструкция позволяет использовать скрипты, как системные команды. 
+        Первая cтрока игнорируется интерпретатором, т.к. \# - комментарий
+
+	\begin{block}{Sha-Bang, shebang, hasbang}
 		\begin{lstlisting}
 #!/bin/bash
 		\end{lstlisting}
@@ -55,6 +58,14 @@
 
 	\end{block}
 
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Задание. Строка спецсимволов}
+Вывести символ * 10 раз.
+				\begin{lstlisting}
+echo *********
+				\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -87,6 +98,14 @@ echo -e "test \v test \v test"
 
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Задание. Обработка пробелов.}
+Сравнить результаты команд для имени, которое содержит пробелы
+				\begin{lstlisting}
+ls a long file name with spaces
+ls "a long file name with spaces" 
+				\end{lstlisting}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Подстановка команд}

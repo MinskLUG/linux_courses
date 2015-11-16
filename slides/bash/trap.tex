@@ -15,6 +15,7 @@ trap -l
 	\end{block}
 \end{frame}
 
+
 \begin{frame}[fragile]
 	\frametitle{Перехват Ctrl-C и {\tt kill}}
 	
@@ -26,8 +27,7 @@ i=0
 catcher(){
   echo Script worked $SECONDS seconds
   echo Commands entered: ${cmd[@]}
-  exit 0
-}
+  exit 0 }
 
 trap catcher SIGINT SIGTERM
 
@@ -39,3 +39,13 @@ done
 \end{frame}
 
 
+\begin{frame}[fragile]
+	\frametitle{Специальные события}
+
+	\begin{itemize}
+		\item {\tt DEBUG} -- выполнять каждый раз 
+		\item {\tt ERR} -- выполнить при ошибке команды (ключ --e)
+		\item {\tt EXIT} -- выполнить при завершении оболочки 
+		\item {\tt RETURN} -- выполнять в конце функции или . кода
+	\end{itemize}
+\end{frame}

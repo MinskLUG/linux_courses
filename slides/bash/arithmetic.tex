@@ -1,23 +1,72 @@
 %% Arithmetic
 
-\begin{frame}
-  \frametitle{}
+\begin{frame}[fragile]
+  \frametitle{Средства для арифметических действий}
+Встроенные:
   \begin{itemize}
    \item  Конструкция {\tt ((...))}
-    \begin{block}{Примеры}
-     {\tt (( a=10 )); echo \$(( a++ )); echo \$a; } 
-    \end{block}
-    \pause
    \item  {\tt let}
-    \begin{block}{Примеры}
-     {\tt let a=10; echo \$a; let a+=-2; echo \$a; echo \$(( $--$a)); echo \$a} 
-    \end{block}
-    \pause
-   \item  {\tt expr } внешняя команда 
-    \begin{block}{Пример}
-       { \tt x=\`{}expr \$x + 1\`{} }
-    \end{block}
   \end{itemize}
+Внешние:
+  \begin{itemize}
+   \item  {\tt expr }  
+   \item  {\tt awk, dc, bc } - операции с плавающей точкой
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Двойные скобки}
+  \begin{itemize}
+   \item  {\tt ((...))} bash, ksh, zsh
+   \item  {\tt \$((...))} - POSIX-compatible
+  \end{itemize}
+    \begin{block}{Пример}
+        \begin{lstlisting}[language=Bash]
+(( a = 10 )) #  пробелы
+(( a++ ))
+echo $a
+(( b=20 ))
+sum=$(( a+b ))
+echo $sum
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Команда let}
+   \begin{block}{Задание. Исправить ошибку.}
+        \begin{lstlisting}[language=Bash]
+let a=9 + 15 ; echo $a
+        \end{lstlisting}
+   \end{block}
+\pause
+   \begin{block}{Варианты исправления}
+        \begin{lstlisting}[language=Bash]
+let a="9 + 15" ; echo $a
+let 'a=9 + 15' ; echo $a
+let a=9 a+=15 ; echo $a
+        \end{lstlisting}
+   \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Команда expr}
+  {\tt expr } - внешняя команда 
+   \begin{block}{Задание. Исправить ошибку.}
+        \begin{lstlisting}[language=Bash]
+ expr 5+3
+ expr 10 * 10
+        \end{lstlisting}
+   \end{block}
+\pause
+   \begin{block}{Варианты исправления}
+        \begin{lstlisting}[language=Bash]
+expr 5 + 3
+expr 10 \* 10 ; expr 10 "*" 10
+expr "10 * 10" # не работает, один аргумент
+num=$(expr 10 \* 10) # сохранить значение в переменную
+        \end{lstlisting}
+   \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -36,15 +85,27 @@
 &=, ^=, |=  
 \end{lstlisting}
 \end{enumerate} 
-
-  
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Вычисления с плавающей точкой}
+Внешние программы, либо zsh, ksh93
+\begin{lstlisting}[language=Bash]
+echo 'scale=3; 11/3' | bc
+echo '3 k 10 3 / p' | dc
+awk 'BEGIN {printf "%.3f\n", 10 / 3}'
+\end{lstlisting}
+\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Упражнение}
  \begin{enumerate}
    \item {\bf Конец света:} Вывести дату конца юниксовых времен ( время $2^{31}-1$) {\tt date -d @<seconds> } 
    \item Проверить результат арифметической операции (( 5>10 ))
+   \item Получить результат для команд
+\begin{lstlisting}[language=Bash]
+a=010 b=3; echo $((a+b)) 
+expr $a + $b
+\end{lstlisting}
  \end{enumerate}
 \end{frame}
