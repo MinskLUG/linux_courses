@@ -1,4 +1,5 @@
 \documentclass[12pt,a4paper,oneside]{article}
+\usepackage[left=0.5cm,right=0.5cm,top=2cm,bottom=2cm,bindingoffset=0cm]{geometry}
 
 \usepackage[russian]{babel}
 \usepackage[utf8]{inputenc}
@@ -67,43 +68,45 @@
 
 \subsection{Введение в GNU/Linux}
 
-\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+\begin{longtable}{|p{0.2\linewidth}|p{0.5\linewidth}|p{0.07\textwidth}|p{0.1\textwidth}|}
         \hline
 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endfirsthead
 		\multicolumn{4}{c}%
 		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
 		\hline
- 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endhead
 		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
 		\endfoot
 		\hline
 		\endlastfoot
 
-        Введение & Дистрибутивы. Процесс загрузки ОС Linux. & 1.5 & 0.5 \\ \hline
-        Командная строка & Понятие shell, console. Окружение. Потоки ввода/вывода. Базовые утилиты. &1.5 & 2.5 \\ \hline
-        Пользовательская модель & Управление пользователями, группами & 0.5 & 0.5 \\ \hline
+        Введение & Обзор свободных лицензий. Принципы проектирования переносимых программ & 1 & 0 \\ \hline
+        ОС Linux & Дистрибутивы. Процесс загрузки ОС Linux. Управление загрузкой & 1.5 & 0.5 \\ \hline
+        Командная строка & Понятие shell, console. Окружение. Потоки ввода/вывода. Базовые утилиты. Sed. & 2.5 & 2.5 \\ \hline
+        Управление ПО & ``DLL Hell''. Пакетные менеджеры. Установка, обновление и удаление пакетов. & 1 & 1 \\ \hline
+        Пользовательская модель & Управление пользователями, группами & 1 & 1 \\ \hline
         Файловая структура & FHS. Файловые объекты. Права доступа. Утилиты. & 1 & 1 \\ \hline
         Дисковая подсистема & Блочные устройства. Файловые системы. RAID. LVM. & 1 & 1 \\ \hline
-        Сетевое администрирование & Управление интерфейсами. Iptables. Удаленный доступ. & 0.5 & 0.5 \\ \hline
-		\textbf{Итого:} & 12         & 6 & 6 \\ \hline
+        Сетевое администрирование & Управление интерфейсами. Iptables. Удаленный доступ. & 1 & 1 \\ \hline
+	\textbf{Итого:} & 18 ч.  & 10 & 8 \\ \hline
 
 \end{longtable}
 
 
 
-\newpage
+%%\newpage
 
 \subsection{Командная оболочка и язык сценариев Bash}
-\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+\begin{longtable}{|p{0.2\linewidth}|p{0.5\linewidth}|p{0.07\textwidth}|p{0.1\textwidth}|}
         \hline
 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endfirsthead
 		\multicolumn{4}{c}%
 		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
 		\hline
- 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endhead
 		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
 		\endfoot
@@ -112,25 +115,23 @@
 
 
 
-        Синтаксис \cite{abs01} & Переменные. Операторы. Экранирование. Коды возврата. Тесты и сравнения.	Ветвления. Циклы. Арифметические операции. Массивы & 2 & 3 \\ \hline
-        Регулярные выражения \cite{abs01} & Использование. Awk. & 1 & 1 \\ \hline
-        Сценарии \cite{abs01} & Функции. Встроенные и внешние команды. Подстановка результатов выполнения команд. Фильтры. Перенаправление ввода/вывода.	exec & 2 & 3 \\ \hline
-		\textbf{Итого:} & 12         & 5 & 7 \\ \hline
+        Синтаксис & Переменные. Операторы. Экранирование. Коды возврата. Тесты и сравнения.	Ветвления. Циклы. Арифметические операции. Массивы & 2 & 3 \\ \hline
+        Регулярные выражения & Использование. Awk. & 1 & 1 \\ \hline
+        Сценарии  & Функции. Встроенные и внешние команды. Подстановка результатов выполнения команд. Фильтры. Перенаправление ввода/вывода.	exec & 2 & 3 \\ \hline
+        \textbf{Итого:} & 12         & 5 & 7 \\ \hline
 
 \end{longtable}
 
-\cite{abs01}
-
-\newpage
+%%\newpage
 \subsection{Инструменты разработчика}
-\begin{longtable}{|p{0.25\linewidth}|p{0.55\linewidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+\begin{longtable}{|p{0.2\linewidth}|p{0.5\linewidth}|p{0.07\textwidth}|p{0.1\textwidth}|}
         \hline
 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endfirsthead
 		\multicolumn{4}{c}%
 		{\tablename\ \thetable\ -- \textit{Продолжение}} \\
 		\hline
- 		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
+		\textbf{Тема} & \textbf{Содержание} & \textbf{Теория} & \textbf{Практика} \\ \hline
 		\endhead
 		\hline \multicolumn{3}{r}{\textit{Продолжение на следующей странице}} \\
 		\endfoot
@@ -138,26 +139,19 @@
 		\endlastfoot
 
 
-        GNU Toolchain  & Компилятор. Линкер. Статические и динамические приложения и библиотеки. & 1 & 1 \\ \hline
-        Управление сборкой проекта & Make. Введение в синтаксис makefile. Обзор autotools. & 1 & 1 \\ \hline
-        Базовый инструментарий & Работа с исходным кодом. Анализ исполняемого файла. Утилиты. Изоляция процесса. & 1 & 2 \\ \hline
-	    Профайлинг \cite{best2006linux}, \cite{tgs-perftools01} & Определение узких мест. Утилиты для определения узких мест. & 1.5 & 1 \\ \hline
-	    Отладка \cite{best2006linux}, \cite{gdb01} & GDB. Valgrind. Дампы. & 1.5 & 2 \\ \hline
-        Совместная разработка & Централизованные и распределенные системы контроля версий. SVN. GIT. История изменений. Бранчи, слияния, тэги. & 1.5 & 1.5 \\ \hline
-        Установка ПО & Установка из исходников. Введение в пакетирование RPM. Run-time и build-time окружения. & 1.5 & 1.5 \\ \hline
-		\textbf{Итого:} & 20         & 8 & 10 \\ \hline
+        GNU Toolchain  & Компилятор. Линкер. Статические и динамические приложения и библиотеки. & 2 & 2 \\ \hline
+        Управление сборкой проекта & Make. Введение в синтаксис makefile. Autotools. & 2 & 2 \\ \hline
+        Базовый инструментарий & Работа с исходным кодом. Анализ исполняемого файла. Утилиты для анализа. & 2 & 2 \\ \hline
+        Отладка & Трассировка. Backtrace. GDB. Valgrind. Дампы. & 3 & 3 \\ \hline
+        Профайлинг & Определение ``узких мест''. Утилиты для определения ``узких мест''. & 2 & 2 \\ \hline
+        Покрытие исходного кода & gcov & 1 & 1 \\ \hline
+        Системы документирования исходного кода & Doxygen & 1 & 1 \\ \hline
+        Совместная разработка & Централизованные и распределенные системы контроля версий. SVN. GIT. История изменений. Бранчи, слияния, тэги. & 1 & 1 \\ \hline
+        Установка ПО & Установка из исходников. Введение в пакетирование RPM. Run-time и build-time окружения. & 1 & 1 \\ \hline
+        \textbf{Итого:} & 30         & 15 & 15 \\ \hline
 
 
 \end{longtable}
-
-\cite{best2006linux}
-\cite{tgs-perftools01}
-\cite{gdb01}
-
-\newpage
-%\addcontentsline{toc}{section}{Литература}
-%\bibliographystyle{plain-annote}
-\bibliography{biblio}
 
 \end{document}
 
