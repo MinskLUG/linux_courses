@@ -37,7 +37,7 @@ fi
 	\begin{columns}
 		\column{0.3\textwidth}
 
-		\begin{lstlisting}[language=sh,frame=single]
+		\begin{lstlisting}[language=bash]
 case "$variable" in 
  pattern1) command1
            command2
@@ -46,15 +46,14 @@ case "$variable" in
          command3
          command4
         ;;
-
 esac
-		\end{lstlisting}
+\end{lstlisting}
 		\pause
 
 		\column{0.7\textwidth}
 		{\normalsize Пример:}
 
-		\begin{lstlisting}[language=sh]
+		\begin{lstlisting}[language=bash]
 #!/bin/bash
 
 cmd=$1; var=$2
@@ -69,7 +68,7 @@ case "$cmd" in
 esac
 [ ! -z "$var" ] && echo "переменная \$var=$var"
 exit 0
-		\end{lstlisting}
+\end{lstlisting}
 
 
 	\end{columns}
@@ -95,7 +94,7 @@ while [ $# -gt 0 ] ; do
     *) ;;
   esac
 done
-	\end{lstlisting}
+\end{lstlisting}
 \end{frame}
 
 
@@ -168,7 +167,7 @@ do
 done
 echo "Вы -- $sex"
 exit
-		\end{lstlisting}
+\end{lstlisting}
 
 		\pause
 		\center{Удалить в select все [in *] и посмотреть на результат работы.}
