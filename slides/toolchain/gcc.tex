@@ -66,7 +66,27 @@ gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
 	  \item Debug {\tt -g}
 	  \item Предупреждения компилятора {\tt -Wall, -Werror}
 	  \item Оптимизация {\tt -O -O1 -O2 -O3 -Os}
+      \item Поиск файлов {\tt -I, -L}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Помощь по флагам и опциям}
+\begin{lstlisting}[language=sh]
+gcc --help=<smth>
+\end{lstlisting}
+\begin{block}{Некоторые виды опций у \texttt{--help}}
+  \begin{itemize}
+    \item \texttt{optimizers}
+    \item \texttt{warnings}
+    \item \texttt{params}
+    \item \texttt{targets}
+  \end{itemize}
+\end{block}
+\begin{lstlisting}[language=sh]
+gcc -Q -O2 --help=optimizers
+gcc -Q -Wall --help=warnings
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -74,11 +94,16 @@ gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
 
 	\begin{block}{Компилятор}
 		\begin{itemize}
-			\item {\tt CC} -- (пере)определение компилятора
-			\item {\tt CFLAGS} -- флаги для компилтора
-			\item {\tt CPATH, C\_INCLUDE\_PATH} -- расположение включаемых файлов для {\tt -I}
+			%\item {\tt CC} -- (пере)определение компилятора
+			%\item {\tt CFLAGS} -- флаги для компилятора
+		    \item {\tt CPATH, C\_INCLUDE\_PATH} -- расположение включаемых файлов для {\tt -I}
 		\end{itemize}
 	\end{block}
+    \begin{block}{Линкер}
+      \begin{itemize}
+          \item {\tt LIBRARY\_PATH} -- в режиме линкера, расположение библиотек {\tt -L} 
+      \end{itemize}
+    \end{block}
 \end{frame}
 
 \begin{frame}
@@ -90,4 +115,11 @@ gcc -o myprogram file1.o file2.o -lmylib1 -lmylib2
 	\end{itemize}
 \end{frame}
 
-
+\begin{frame}
+  \frametitle{Доп. упражнение для желающих}
+  \begin{itemize}
+    \item Скомпилировать \texttt{helloworld.c} в ассемблерный код с опцией \texttt{-fno-builtin} и посмотреть отличия
+    \item Выяснить какие флаги оптимизации отличаются при -O2 и -O3 (hint: \texttt{gcc -Q - -help=} и \texttt{diff}
+    \item Скомпилировать \texttt{helloworld.c} с \texttt{-fdump-passes}
+  \end{itemize}
+\end{frame}
