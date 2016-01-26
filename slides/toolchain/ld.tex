@@ -124,6 +124,12 @@ gcc -o file3 file3.c -L. -lmylib # Использование
 
 \begin{frame}[fragile]
   \frametitle{Поиск динамических библиотек}
+  \begin{block}{Динамический загрузчик}
+     \begin{itemize}
+	\item {\tt ld.so} -- для формата {\tt a.out}
+	\item {\tt ld-linux.so} -- для формата {\tt ELF}
+    \end{itemize}
+  \end{block}
   \begin{itemize}
 	\item {\tt ldconfig}
 	\item {\tt /etc/ld.so.conf}
@@ -160,7 +166,7 @@ gcc -g -o file3 file3.o -lmylib
  \frametitle{Проблемы при линковке}
  \begin{itemize}
    \item Underlinking
-   \item Зависимость от порядка при опции {\tt --as-needed} 
+   \item Зависимость от порядка при опции {\tt -{}-as-needed} 
    \item Overlinking
    \item Несовместимость версий (soname etc.)
  \end{itemize}
@@ -169,22 +175,24 @@ gcc -g -o file3 file3.o -lmylib
 \begin{frame}[fragile]
 	\frametitle{GCC environment variables}
 
-	\begin{block}{Компилятор}
+	\begin{block}{Build time}
 		\begin{itemize}
 			\item {\tt CC} -- (пере)определение компилятора
-			\item {\tt CFLAGS} -- флаги для компилтора
 			\item {\tt CPATH, C\_INCLUDE\_PATH} -- расположение включаемых файлов для {\tt -I}
+			\item {\tt LIBRARY\_PATH} -- расположение динамически линкуемых библиотек {\tt -l} (link time)
 		\end{itemize}
 	\end{block}
 
-	\begin{block}{Линкер}
+	\begin{block}{Runtime}
 		\begin{itemize}
-			\item {\tt LDFLAGS} -- флаги для линкера
-			\item {\tt LIBRARY\_PATH} -- расположение динамически линкуемых библиотек {\tt -l} (link time)
 			\item {\tt LD\_LIBRARY\_PATH} -- расположение динамически линкуемых библиотек (runtime)
+			\item {\tt /lib64/ld-linux-x86-64.so.2 -{}-library-path PATH} -- 
+			      расположение динамически линкуемых библиотек (runtime)
 			\item {\tt LD\_PRELOAD} -- пути к библиотекам, загружаемым до программы
 		\end{itemize}
 	\end{block}
+%			\item {\tt CFLAGS} -- флаги для компилтора
+%			\item {\tt LDFLAGS} -- флаги для линкера
 
 \end{frame}
 
