@@ -105,24 +105,52 @@ hello.c: name.h
 	\end{lstlisting}
 \end{frame}
 
-
-
 \begin{frame}[fragile]
-	\frametitle{Переменные в Makefile}
-	\begin{lstlisting}[language=make]
-all_flags = $(compiler_flags) $(linker_flags)
-no_flags := $(compiler_flags) $(linker_flags)
-compiler_flags = -Wall -O3
-linker_flags := -fPIC
-compiler_flags += -pipe
+    \frametitle{Переменные в Makefile}
+    \begin{columns}
+    \column{0.5\textwidth}
+    \begin{block}{Определение}
+    \begin{itemize}
+	\item {\tt VAR = value}
+	\item {\tt VAR := value}
+	\item {\tt VAR ?= value}
+	\item {\tt VAR += value}
+    \end{itemize}
+    \end{block}
 
-show-flags:
-    @echo "Compiler flags" $(compiler_flags)
-    @echo "Linker flags" $(linker_flags)
-    @echo "All flags" $(all_flags)
-    @echo "No flags" $(no_flags)
+    \column{0.5\textwidth}
+    \begin{block}{Использование}
+	\begin{lstlisting}[language=make]
+TARGET = main
+OBJS = hello.o name.o
+$(TARGET): $(OBJS)
 	\end{lstlisting}
+    \end{block}
+    \end{columns}
+
+    \pause
+    \begin{columns}
+    \column{0.5\textwidth}
+	\begin{lstlisting}[language=make]
+VAR  = test
+VAR2 := $(VAR)
+VAR = new
+all:
+	@echo $(VAR) $(VAR2)
+	\end{lstlisting}
+
+    \column{0.5\textwidth}
+	\begin{lstlisting}[language=make]
+VAR  = test
+VAR2 = $(VAR)
+VAR = new
+all:
+	@echo $(VAR) $(VAR2)
+	\end{lstlisting}
+    \end{columns}
+    
 \end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{Псевдонимы и шаблонные правила}
 
@@ -192,6 +220,14 @@ gcc -M -MM -MD -MMD
 	\begin{lstlisting}[language=make]
 include $(wildcard *.d)
 	\end{lstlisting}
+
+	\begin{lstlisting}[language=make]
+include hello.d
+
+main.d: hello.c
+	gcc -MM -MF $@ $<
+	\end{lstlisting}
+
 \end{frame}
 \begin{frame}[fragile]
 	\frametitle{Практическое задание}
