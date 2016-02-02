@@ -1,4 +1,4 @@
-\begin{frame}[fragile]
+\begin{frame}[fragile,allowframebreaks]
 	\frametitle{Задача}
 
 	\begin{enumerate}
@@ -7,10 +7,12 @@
 		\item Создать исполняемый бинарный файл
 		\item Создать статическую библиотеку ({\tt libtesta.a})
 			и статически связать ее c исполняемым бинарным файлом
-		\item Создать динамическую библиотеку ({\tt libtesta.so.0.1.0})
+		\item Создать динамическую библиотеку ({\tt libtesta.so.0.0})
 			и связать ее c исполняемым бинарным файлом
+		\framebreak
+		\item Добавить код для инициализации и деинициализации библиотеки
 		\item Создать исходный файл({\tt libtestb.c}), также реализующий функцию {\tt void test(void)},
-			и создать динамическую библиотеку ({\tt libtestb.so.0.1.0})
+			и создать динамическую библиотеку ({\tt libtestb.so.0.0})
 		\item Изучить влияние переменных окружения и опций линковки
 	\end{enumerate}
 \end{frame}
@@ -71,10 +73,25 @@ ln -s libtesta.so.0.0 libtesta.so
 gcc -c -o main.o main.c
 gcc -o main main.o -L. -ltesta
 \end{verbatim}
-
 	\end{enumerate}
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Упражнение: (де-)инициализация библиотки}
+
+	\begin{enumerate}
+		\item Добавить в код библиотеки 2 функции: init и fini
+		\item Скомпилировать объектный файл {\tt libtesta.o} с опцией {\tt -fPIC}
+		\item Скомпилировать библиотеку с дополнительными опциями:\\
+		  {\tt -Wl,-init,init} и {\tt -Wl,-init,fini}
+\begin{verbatim}
+gcc -c -fPIC libtesta.c -o libtesta.o
+gcc -shared -Wl,-soname,libtesta.so.0 -Wl,-init,init \
+    -Wl,-fini,fini -o libtesta.so.0.0 libtesta.o
+ln -s libtesta.so.0.0 libtesta.so
+\end{verbatim}
+	\end{enumerate}
+\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Упражнение: запуск с динамической библиотекой}
@@ -83,7 +100,8 @@ gcc -o main main.o -L. -ltesta
 		\item Переопределить переменную {\tt LD\_LIBRARY\_PATH}\footnote{Hint: soname}:\\
 			{\tt LD\_LIBRARY\_PATH=\$PWD ./main}
 		\item Переопределить переменную {\tt LD\_PRELOAD}:\\
-			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 ./main}
+			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 ./main}\\
+			{\tt LD\_PRELOAD=\$PWD/libmylib.so.0.0 /bin/bash}
 		\item Добавить опцию {\tt -rpath} при линковке:\\
 			{\tt gcc hello.o -L. -lalib -Wl,-rpath=\$PWD -o hello}
 		\item Переместить библитеку в системную область ({\tt /lib64, /usr/lib64, /usr/local/lib64}
@@ -101,21 +119,27 @@ gcc -o main main.o -L. -ltesta
 %\end{frame}
 
 
-\begin{frame}[fragile]
+\begin{frame}[fragile,allowframebreaks]
 	\frametitle{Упражнение: последовательность линковки библиотек}
 
 	\begin{enumerate}
-		\item Создать 2 библиотеки ({\tt libtesta} и {\tt libtesta})
+		\item Создать 2 библиотеки ({\tt libtesta} и {\tt libtestb})
 			с одинаковой функцией {\tt void test(void)}, но разным функционалом\\
 			(например вывести разные строки на экран)
 		\item Создать программу ({\tt main.c}), которая будет использовать 
 			библиотечную функцию {\tt test()}
-		\item Линковать с библиотеками в различной последовательности и 
-			посмотреть результат выполнения команды
-
+		\item Линковать с библиотеками в различной последовательности и различными опциями.
+	\framebreak
 \begin{verbatim}
-gcc -L. -Wl,-rpath,. -Wl,--no-as-needed main.o -ltesta -ltestb -o main-A_B
-gcc -L. -Wl,-rpath,. -Wl,--no-as-needed main.o -ltestb -ltesta -o main-B_A
+gcc -L. -Wl,-rpath,. -Wl,--no-as-needed \
+    main.o -ltesta -ltestb -o main-A_B
+gcc -L. -Wl,-rpath,. -Wl,--as-needed \
+    main.o -ltesta -ltestb -o main-A_B-1
+
+gcc -L. -Wl,-rpath,. -Wl,--no-as-needed \
+    main.o -ltestb -ltesta -o main-B_A
+gcc -L. -Wl,-rpath,. -Wl,--as-needed \
+    main.o -ltestb -ltesta -o main-B_A-1
 \end{verbatim}
 	\end{enumerate}
 \end{frame}
