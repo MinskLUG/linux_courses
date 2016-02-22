@@ -56,7 +56,7 @@ void fill_random_ascii_buffer(char *buffer,size_t size){
 }
 
 int main(int argc, char *argv[]){
-  const char *buf;
+  char *buf;
   int j=0;
   char *message = "Program finished";
   struct sigaction sigact;

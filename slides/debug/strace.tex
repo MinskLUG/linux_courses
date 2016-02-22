@@ -249,7 +249,8 @@ $ strace -e process -r -T sh -c 'kill $$'
 \end{verbatim}
 
 \begin{verbatim}
-$ strace -e process -f -q sh -c 'sleep 1 & pid=$!; sleep 0.1; kill $pid; wait'
+$ strace -e process -f -q \
+ sh -c 'sleep 1 & pid=$!; sleep 0.1; kill $pid; wait'
 execve("/bin/sh", ["sh", "-c", "sleep 1 & pid=$!; sleep 0.1; kil"...], [/* 32 vars */]) = 0
 arch_prctl(ARCH_SET_FS, 0x2ae37beef020) = 0
 clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x2ae37beef2f0) = 10001
@@ -279,7 +280,8 @@ exit_group(0)                           = ?
 \begin{frame}[fragile]{strace usage examples: -ff, -ttt, -o, strace-log-merge}
 \Tiny
 \begin{verbatim}
-$ strace -e process -ff -ttt -o log sh -c 'sleep 1 & pid=$!; sleep 0.1; kill $pid; wait'
+$ strace -e process -ff -ttt -o log \ 
+  sh -c 'sleep 1 & pid=$!; sleep 0.1; kill $pid; wait'
 sh: line 1: 10001 Terminated              sleep 1
 \end{verbatim}
 
