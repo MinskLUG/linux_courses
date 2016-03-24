@@ -18,6 +18,7 @@
  \end{itemize}
 \end{frame}
 
+
 \begin{frame}[fragile]
  \frametitle{Некоторые важные параметры в конфигурационном файле}
  \begin{itemize}
@@ -32,14 +33,53 @@
 \end{frame}
 
 \begin{frame}[fragile]
- \frametitle{Образец комментариев для файла}
+ \frametitle{Краткий комментарий}
+ \begin{block}{До кода}
+   Добавить дополнительный символ "/"
+   \begin{lstlisting}[language=C]
+/// Краткое описание
+void function(void);
+\end{lstlisting}
+ \end{block}
+ \begin{block}{После кода}
+   Добавить дополнительный символ "/<"
+   \begin{lstlisting}[language=C]
+void function(void); ///< краткое описание
+\end{lstlisting}
+ \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Детальный комментарий}
+ \begin{block}{До кода}
+   Добавить дополнительный символ "*":
+   \begin{lstlisting}[language=C]
+/** Детальное описание
+  * функции */
+void function(void);
+\end{lstlisting}
+ \end{block}
+ \begin{block}{После кода}
+   Добавить дополнительный символ "*<":
+    \begin{lstlisting}[language=C]
+void function(void); /**< Детальное 
+  * описание
+  * функции */
+\end{lstlisting}
+ \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Пример комментариев для файла}
 \begin{lstlisting}[language=C]
 /**
   @file filename
   @brief Краткое описание
 
   Детальное описание
-  @author Автор (может быть несколько)
+  @author Автор
+  @copyright Copyright (c) 2016, Author/Company
+  @license This file is released under the GNU Public License.
   @bug Нет известных багов
 */
 \end{lstlisting}
@@ -66,17 +106,17 @@ int function(int parameter1, char *parameter2)
  \frametitle{Образец комментариев для данных}
 \begin{lstlisting}[language=C]
 /** 
-* Описание структуры 
-*/
+ * Описание структуры 
+ */
 typedef struct { 
-	/*@{*/ 
+  /** 
+  * @name Coordinates
+  */
+  /*@{*/
   double x ; /**< the x coordinate*/ 
   double y ; /**< the y coordinate */
   double z ; /**< the z coordinate */
   /*@}*/
-  /** 
-  * @name group 2 
-  */
   /*@{*/
   char * name ; /**< the name of the point */
   int namelength ; /**< the size of the point name */
@@ -90,6 +130,6 @@ typedef struct {
  \frametitle{Упражнение}
   \begin{itemize}
     \item В проекте helloworld откомментировать каждую функцию в стиле doxygen
-    \item Сгенерировать документацию в формате pdf
+    \item Сгенерировать документацию
   \end{itemize}
 \end{frame} 
