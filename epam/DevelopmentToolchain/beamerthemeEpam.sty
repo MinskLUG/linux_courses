@@ -1,4 +1,5 @@
-% Copyright 2013 by Denis Pynkin <denis_pynkin@epam.com>
+% Copyright 2013,2016 by Denis Pynkin <denis_pynkin@epam.com>
+% Copyright 2016 by Andrej Zacharevicz <andrej_zacharevicz@epam.com>
 %
 % This file may be distributed and/or modified
 %
@@ -8,7 +9,7 @@
 % See the file doc/licenses/LICENSE for more details.
 
 \ProvidesPackage{beamerthemeEpam}
-  [2013/12/08 v0.1 beamer 'Epam' theme]
+  [2016/03/16 v0.2 beamer 'Epam' theme]
  
 \mode<presentation>
 
@@ -18,109 +19,135 @@
 
 \setbeamertemplate{navigation symbols}{}
 
-\definecolor{EpamBlue}{HTML}{006699}
-\definecolor{EpamPink}{HTML}{FF3366}
-\definecolor{EpamAzure}{HTML}{3F9ABF}
-\definecolor{Epam4box}{HTML}{7EBBD4}
-\definecolor{EpamBlueLight}{HTML}{BFDDE9}
+\definecolor{EpamBlue}{HTML}{39C2D7}
+\definecolor{EpamGraphite}{HTML}{464547}
+\definecolor{EpamGrayLight}{HTML}{CCCCCC}
+\definecolor{EpamWhite}{HTML}{FFFFFF}
+\definecolor{EpamGreenLime}{HTML}{A3C644}
+\definecolor{EpamRaspberry}{HTML}{B22746}
 
 
 \setbeamercolor*{lineup}{parent=palette primary}
 \setbeamercolor*{linemid}{parent=palette secondary}
 \setbeamercolor*{linebottom}{parent=palette tertiary}
 
-\setbeamercolor{epamline1}{fg=black,bg=EpamPink}
 \setbeamercolor{epamline2}{fg=black,bg=EpamBlue}
-\setbeamercolor{epamline3}{fg=black,bg=EpamAzure}
-\setbeamercolor{epamline4}{fg=black,bg=Epam4box}
-\setbeamercolor{epamline5}{fg=black,bg=EpamBlueLight}
 
-\setbeamercolor{epamlinestring}{fg=EpamBlue,bg=white}
+\setbeamercolor{epamlinestring}{fg=EpamGrayLight,bg=EpamGraphite}
 
 % system colors redefination
-\setbeamercolor{structure}{fg=EpamBlue}
-\setbeamercolor{frametitle}{bg=EpamBlue}
-\setbeamercolor{frametitle right}{bg=EpamBlueLight}
+\setbeamercolor{structure}{fg=EpamGraphite}
+\setbeamercolor{frametitle}{fg=EpamGraphite,bg=EpamWhite}
+\setbeamercolor{frametitle right}{bg=EpamWhite}
 
+\setbeamercolor*{item}{fg=EpamBlue}
+\setbeamercolor{normal text}{fg=EpamGraphite}
 
+% redifining lists marker
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[circle]
+
+% redifining TOC marker
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{section in toc shaded}[circle]
+\setbeamertemplate{subsection in toc shaded}[circle]
 
 % some lengths (the height of the lines)
 \newlength{\beamer@decolines@lineup}
-\setlength{\beamer@decolines@lineup}{.025\paperheight}
+\setlength{\beamer@decolines@lineup}{.015\paperheight}
 
 \newlength{\beamer@decolines@linemid}
-\setlength{\beamer@decolines@linemid}{.04\paperheight}
+\setlength{\beamer@decolines@linemid}{.035\paperheight}
 
 \newlength{\beamer@decolines@linebottom}
-\setlength{\beamer@decolines@linebottom}{.015\paperheight}
+\setlength{\beamer@decolines@linebottom}{.002\paperheight}
 
 \newlength{\beamer@decolines@headline}
-\setlength{\beamer@decolines@headline}{.015\paperheight}
+\setlength{\beamer@decolines@headline}{.019\paperheight}
 
 % String used between the current page and the total page count.
 \def\beamer@decolines@pageofpages{/}
 
+\setbeamerfont{frametitle}{series=\bfseries}
+%\setbeamerfont{title}{series=\bfseries}
+
 % Footline
 \defbeamertemplate*{footline}{decolines theme}
 {
-  \leavevmode%
-  % First line.
-  \hbox{%
-  \begin{beamercolorbox}[wd=.05\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline1}%
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.10\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline2}%
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.16\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline3}%
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.26\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline4}%
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.43\paperwidth,ht=\beamer@decolines@lineup,dp=0pt]{epamline5}%
-  \end{beamercolorbox}%
-  } %
-  % Second line.
-  \hbox{%
-  \begin{beamercolorbox}[wd=.15\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
-    \small{<}\large{epam}\small{>}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.01\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.6\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,left]{epamlinestring}%
-    \vspace*{\fill}
+  % Check if this is a title frame. 
+  \ifnum \insertpagenumber=1
+    %Placeholder for the title frame. If this code will be removed position of footers on all other frames will be broken
+    % Second line.
+    \begin{beamercolorbox}[ht=\beamer@decolines@linemid,dp=5pt]{}
+    \end{beamercolorbox}
+    % Third line.
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@linebottom,dp=0pt]{}%
+    \end{beamercolorbox}%
+    }
+  \else
+    % Second line.
+    \begin{beamercolorbox}[ht=\beamer@decolines@linemid]{epamlinestring}
+    \begin{beamercolorbox}[wd=.15\paperwidth,ht=\beamer@decolines@linemid,dp=5pt,right]{epamlinestring}%
+      \begin{minipage}[c]{1cm}
+      \includegraphics[height=.03\textheight]{epam_white}
+      \end{minipage}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.01\paperwidth,ht=\beamer@decolines@linemid,dp=5pt,right]{epamlinestring}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.64\paperwidth,ht=\beamer@decolines@linemid,dp=5pt,left]{epamlinestring}%
 
-    \tiny{Excellence in Software Engineering}
+          \tiny{\sffamily{Excellence in Software Engineering}}
 
-    \vspace*{\fill}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.2\paperwidth,ht=\beamer@decolines@linemid,dp=0pt,right]{epamlinestring}%
-    \hbox{\usebeamerfont{palette primary}\footnotesize\insertframenumber{} \beamer@decolines@pageofpages{} \inserttotalframenumber\hspace*{2ex}}%
-  \end{beamercolorbox}%
-  } %
-  % Third line.
-  \hbox{%
-  \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@linebottom,dp=0pt]{}%
-  \end{beamercolorbox}%
-  } %
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=\beamer@decolines@linemid,dp=5pt,right]{epamlinestring}%
+  %    \hbox{\usebeamerfont{palette primary}\scriptsize\insertframenumber{} \beamer@decolines@pageofpages{} \inserttotalframenumber\hspace*{2ex}}%
+      \hbox{\usebeamerfont{palette primary}\tiny\insertframenumber{} \hspace*{2ex}}%
+    \end{beamercolorbox}%
+    \end{beamercolorbox}
+    % Third line.
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@linebottom,dp=0pt]{}%
+    \end{beamercolorbox}%
+    }
+  \fi
 }
 
 % colors for headline
 % headline
 \setbeamertemplate{headline}{%
-\leavevmode%
-  \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@headline,dp=1.125ex]{epamline2}%
-    \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
-    \end{beamercolorbox}%
-  }
+%\leavevmode%
+%  \hbox{%
+%    \begin{beamercolorbox}[wd=\paperwidth,ht=\beamer@decolines@headline,dp=1.125ex]{epamline2}%
+%    \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+%    \end{beamercolorbox}%
+%  }
 }
 
-\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg}
-\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!black}
-\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!black}
+\setbeamercolor{block title}{use=structure,fg=EpamWhite,bg=EpamBlue}
+\setbeamercolor{block title alerted}{use=alerted text,fg=EpamWhite,bg=EpamRaspberry}
+\setbeamercolor{block title example}{use=example text,fg=EpamWhite,bg=EpamGreenLime}
 
-\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!5!white}
+\setbeamercolor{block body}{parent=normal text,use=block title,fg=EpamGraphite}
 \setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
 \setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+\setbeamercolor{subtitle}{bg=EpamBlue,fg=EpamWhite}
 
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \hspace*{-5mm}
+  \includegraphics[height=0.09\textheight,keepaspectratio]{epam_primary}\hfill\vfill\par
+  \usebeamerfont{title}{\textsc\inserttitle}\par
+  \usebeamerfont{subtitle}\MakeUppercase{\insertsubtitle}\vfill\par
+  \bigskip
+  \usebeamerfont{author}\insertauthor\par
+  \usebeamerfont{institute}\insertinstitute\vfill\par
+  \bigskip
+  \usebeamerfont{date}\insertdate\par
+  % To start frame counter from the one next to title, not from title itself
+  \addtocounter{framenumber}{-1}
+}
 
 \makeatother
 

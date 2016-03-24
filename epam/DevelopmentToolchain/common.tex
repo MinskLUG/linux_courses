@@ -9,6 +9,7 @@
 \usepackage[russian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{cmap}
 
 \usepackage[orientation=landscape, size=custom, width=16, height=9.75, scale=0.5]{beamerposter}
 
@@ -27,9 +28,11 @@
 \lstloadlanguages{bash}
 
 \lstset{escapechar=`,
+	numbersep=10pt,
+	captionpos=b,
 	extendedchars=false,
-	language=c,
-	frame=single,
+	language=sh,
+%	frame=single,
 	tabsize=2, 
 	columns=fullflexible, 
 %	basicstyle=\scriptsize,
@@ -39,7 +42,7 @@
 	stringstyle=\mdseries\color{green}, 
 	showstringspaces=false, 
 	numbers=left, 
-	numberstyle=\tiny, 
+	numberstyle=\footnotesize, 
 	breaklines=true, 
 	inputencoding=utf8,
 	keepspaces=true,
