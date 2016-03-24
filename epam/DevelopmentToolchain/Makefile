@@ -8,23 +8,21 @@ TARGET += 07-valgrind.pdf
 TARGET += 08-profile.pdf
 TARGET += 09-gcov.pdf
 TARGET += 10-doxygen.pdf
+TARGET += 11-autotools.pdf
 TARGET += 12-packaging.pdf
 
 #TARGET += epam-Linux_courses_handbook.pdf
 
-.PHONY: all tex clean 
-
-all: tex
+all: $(TARGET)
 
 %.pdf: %.tex common.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 
-tex: $(TARGET)
+.PHONY: clean .FORCE
 
-bib: programm.aux
-	bibtex8 -s programm.aux
+$(TARGET): .FORCE
 
 clean: 
 	@rm -f *.aux
