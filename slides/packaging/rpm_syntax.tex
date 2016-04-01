@@ -106,8 +106,8 @@
 			\item Посмотреть список зависимостей {\tt rpm -qRp hello*.rpm}
 			\item Установить полученный пакет
 			\begin{itemize}
-				\item {\tt apt-cache dotty template > template.dot}
-				\item {\tt dot -Tpng template.dot -o template.png}
+				\item {\tt apt-cache dotty hello > hello.dot}
+				\item {\tt dot -Tpng hello.dot -Gdpi=300 -o hello.png}
 			\end{itemize}
 			\item Удалить исходники и spec-файл
 			\item Пересобрать пакет из SRPM {\tt rpmbuild -{}-rebuild *.src.rpm}
@@ -177,21 +177,29 @@
 			\item Посмотреть список зависимостей {\tt rpm -qRp template*.rpm}
 			\item Установить полученные пакеты
 			\item Изменить версию, пересобрать и обновить в системе
-			\item Построить дерево зависимостей:
+			\item Построить дерево зависимостей
 			\item Удалить полученные пакеты
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Задача на дом: Пакетируем linking}
+%\begin{frame}
+%	\frametitle{Задача на дом: Пакетируем linking}
 
-	\begin{block}{Задача:}
-		Создать и установить пакеты для примера с созданием библиотек
-		и их использования из предыдущих лекций.
+%	\begin{block}{Задача:}
+%		Создать и установить пакеты для примера с созданием библиотек
+%		и их использования из предыдущих лекций.
+%	\end{block}
+
+%	Hint: libtestA, libtestB, libtestA-devel, libtestB-devel, mainpkg
+
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Задача на дом}
+
+	\begin{block}{Пакетируем архиватор}
+		Создать RPM и SRPM пакеты для своего архиватора
 	\end{block}
 
-	Hint: libtestA, libtestB, libtestA-devel, libtestB-devel, mainpkg
-
 \end{frame}
-
