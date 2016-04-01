@@ -403,6 +403,10 @@ AC_INIT([my-package],[1.0.0],[me@maintainer.org])
 \begin{lstlisting}[language=sh]
 AC_INIT([my-package],[1.0.0],[me@maintainer.org])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+
+AC_CONFIG_HEADERS([config.h])
+AC_CHECK_LIB([m],[floor],[],[AC_MSG_ERROR(no math library)])
+
 \end{lstlisting}
 \end{frame}
 
@@ -415,6 +419,7 @@ SUBDIRS = src
 
 	Hint: {\tt VPATH} в {\tt Makefile}
 \end{block}
+
 
 	\begin{block}{\texttt{Makefile.am} в {\tt src}}
 \begin{lstlisting}[language=sh]
@@ -501,3 +506,10 @@ LT_INIT
     \end{itemize}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+ \frametitle{Домашнее задание}
+  \begin{itemize}
+    \item Добавить правила сборки GNU Autotools в свою реализацию архиватора Хаффмана
+  \end{itemize}
+\end{frame} 
