@@ -80,7 +80,7 @@ gcc hello.o -L=. -lname -o hello
 
 	Абстрактные цели:
 	\begin{verbatim}
-.PHONY <target0> ... <targetN>
+.PHONY: <target0> ... <targetN>
 	\end{verbatim}
 \end{frame}
 
@@ -88,7 +88,7 @@ gcc hello.o -L=. -lname -o hello
 	\frametitle{Makefile}
 
 	\begin{lstlisting}[language=make]
-.PHONY release
+.PHONY: release
 release: hello
 hello: hello.o libname.so
     gcc hello.o -L=. -lname -o hello
