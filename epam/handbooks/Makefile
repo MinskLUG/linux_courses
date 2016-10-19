@@ -10,7 +10,6 @@ tex: $(TARGET)
 %.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
-	pdflatex -interaction=nonstopmode $<
 
 clean: 
 	@rm -f *.aux
