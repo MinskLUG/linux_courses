@@ -17,7 +17,22 @@
 		Описание репозтория для YUM на локальной системе хранится по пути
 		{\tt /etc/yum.repos.d/*.repo}
 	\end{block}
-		
+\end{frame}
+
+
+\begin{frame}[fragile]{Репозиторий в контейнере fedora}
+	\begin{block}{Пример: Fedora Core}
+	    Отредактировать файл \\
+		        {\tt /etc/yum.repos.d/fedora.repo}:
+		\begin{itemize}
+		    \item в описании репозотория {\tt [fedora]}
+		    \item Закомментировать переменную {\tt metalink}
+		    \item Изменить {\tt baseurl} на указанный ниже
+		\end{itemize}
+	\end{block}
+	\begin{verbatim}
+baseurl=ftp://192.168.101.10/Fedora/releases/24/Server/x86_64/os/
+	\end{verbatim}
 \end{frame}
 
 \begin{frame}{Apt: команды}
@@ -55,29 +70,8 @@
 
 
 \begin{frame}[fragile]{Упражнение}
-%  \begin{enumerate}
-%      \item Создать на {\tt /dev/sda} раздел размером примерно 10Gb
-%      \item Создать на этом разделе ext3 ФС и смонтировать раздел в {\tt /mnt/chroot}
-%      \item Развернуть {\tt /media/nfs/pub/CentOS/precreated/centOS.tar.gz} в {\tt /mnt/chroot}
-%      \item Смонтировать {\tt proc, sysfs} а также {\tt /dev} в соответствующие места {\tt /mnt/chroot}
-%      \item {\tt chroot /mnt/chroot}
-%      \item Отредактировать {\tt /etc/resolv.conf} -- скопировать туда информацию из {\tt resolv.conf} основной системы
-%      \item Отредактировать {\tt /etc/yum.conf} Добавить следующий раздел
-%\begin{minipage}{0.5\textwidth}
-%\begin{verbatim}
-%[base]
-%  name = CentOS 6
-%  baseurl = ftp://192.168.11.15/CentOS
-%  gpgcheck = 0
-%\end{verbatim}
-%\end{minipage}
-%\setcounter{tmpc}{\theenumi}
-%\end{enumerate}
-%\end{frame}
-%\begin{frame}{Продолжение упражнения}
   \begin{enumerate}
-      %\setcounter{enumi}{\thetmpc}
-      \item {\tt apt-get update}
+      \item Использовать {\tt apt-get} и {\tt yum/dnf} в 2-х разных окружениях
       \item Удалить пакет vim
       \item Установить заново пакет vim
       \item Посмотреть списки файлов для пакетов {\tt rpm, vim}

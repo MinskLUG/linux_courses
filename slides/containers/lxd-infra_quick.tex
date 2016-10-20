@@ -1,6 +1,6 @@
 \begin{frame}{LXD: старт/стоп контейнера}
 	\begin{block}{Добавление сервера образов}
-		{\tt lxc remote add amox 192.168.101.10 --public}
+		{\tt lxc remote add amox 192.168.101.10 -{}-public}
 	\end{block}
 	\begin{block}{Список доступных образов}
 		{\tt lxc image list amox: }
@@ -13,7 +13,7 @@
 	\end{block}
 
 	\begin{block}{Остановка и удаление контейнера}
-		{\tt lxc stop fedora}
+		{\tt lxc stop fedora}\\
 		{\tt lxc delete fedora}
 	\end{block}
 \end{frame}
