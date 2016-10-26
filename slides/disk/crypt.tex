@@ -1,0 +1,32 @@
+\begin{frame}{Криптография}
+  \begin{itemize}
+    \item LUKS
+    \item TrueCrypt
+    \item VeraCrypt
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Создание раздела LUKS}
+ \begin{itemize}
+   \item Подготовка тома
+      \begin{itemize}
+        \item {\tt shred /dev/VG0/lv1}
+        \item или {\tt dd if=/dev/urandom of=/dev/VG0/lv1 bs=4096 }
+      \end{itemize}
+   \item {\tt cryptsetup open --type luks /dev/VG0/lv1 crlv1}
+   \item {\tt fdisk -l /dev/mapper/crlv1 }
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Важные практики}
+  \begin{itemize}
+    \item Заполнение случайными числами блочного устройства -- основы
+    \item Обязательно шифровать раздел swap
+    \item Резервные копии headerов
+      \begin{itemize}
+        \item {\tt cryptsetup luksBackupHeader --header-backup-file <file> /dev/VG0/lv1 }
+        \item {\tt cryptsetup luksRestoreHeader --header-backup-file <file> /dev/VG0/lv1 }
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+  
