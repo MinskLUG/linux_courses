@@ -12,6 +12,7 @@
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}[fragile]{Некоторые примеры использования}
 \begin{lstlisting}[language=bash]
 cat /proc/1/environ | tr '\0' '\n' | less
@@ -25,6 +26,18 @@ ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=`\$1`};END{print s}'
   \begin{block}{Упражнение}
     Посчитать статистику использования команд в history
   \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Регулярные выражения}
+	\begin{block}{grep, sed, awk}
+	\end{block}
+	\begin{itemize}
+		\item {\tt .} -- любой символ за исключением пустой строки
+		\item {\tt *} -- любоe количество символов, которые стоят перед {\tt *}
+		\item {\tt \^{}} -- начало строки
+		\item {\tt \$} -- конец строки
+		\item {\tt [...]} -- любой символ из заключенных в скобки
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Дополнительный набор команд для работы с текстом}
