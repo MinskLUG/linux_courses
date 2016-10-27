@@ -15,10 +15,8 @@
 \end{frame}
 
 
-\begin{frame}{Полезные утилиты: практика}
+\begin{frame}[allowframebreaks]{Полезные утилиты: практика}
 
-	\begin{columns}
-		\column{0.5\textwidth}
 		\begin{block}{netstat}
 
 			Узнать:
@@ -30,8 +28,7 @@
 			\end{itemize}
 		\end{block}
 	
-		\pause
-		\column{0.5\textwidth}
+		\framebreak
 		\begin{block}{telnet/netcat}
 
 			\begin{itemize}
@@ -43,15 +40,18 @@
 			При создании чата использовать {\tt netstat} и {\tt tcpdump}
 			для получения информации о соединении.
 		\end{block}
-	
-	\end{columns}
-\end{frame}
 
-nmap
-1. сканирование соседа
-2. сканирование выделенных портов у соседа (поиск сервера чата) 
-3. узнать список открытых портов на всех машинах в 505
-4. узнать список  работающих машин
+		\framebreak
+		\begin{block}{nmap}
+			\begin{itemize}
+				\item сканирование соседа
+				\item сканирование выделенных портов у соседа (поиск сервера чата) 
+				\item узнать список открытых портов на всех машинах в аудитории
+				\item узнать список работающих машин
+			\end{itemize}
+		\end{block}
+	
+\end{frame}
 
 tcpdump
 0. pcap файлы/libpcap
