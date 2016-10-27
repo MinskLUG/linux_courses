@@ -1,18 +1,29 @@
 
-\begin{frame}{''Виртуальные'' интерфейсы}
+\begin{frame}{''soft-emulated'' интерфейсы}
 	\begin{block}{TUN/TAP}
 
-		{\tt modprobe tun}
+        Интерфейсы, эмулирумые программно, позволяющие процессам ''работать'' с интерфейсом в userspace.
+		Возможно понадобится сделать: {\tt modprobe tun}
 
+	\end{block}
+
+	\begin{block}{old-style}
 		\begin{itemize}
 			\item Добавить интерфейс TUN -- {\tt tunctl -n -t <ifacename>}
 			\item Добавить интерфейс TAP -- {\tt tunctl -p -t <ifacename>}
 			\item Удалить интерфейс -- {\tt tunctl -d <ifacename>}
 		\end{itemize}
 	\end{block}
+	\begin{block}{iproute2}
+		\begin{itemize}
+			\item Добавить интерфейс tun/tap (<mode>) -- \\ {\tt ip tuntap add <ifacename> mode <mode>}
+			\item Удалить интерфейс -- \\ {\tt ip tuntap del <ifacename> mode <mode>}
+		\end{itemize}
+	\end{block}
 
-	\pause
+\end{frame}
 
+%TODO
 	\begin{block}{Практика}
 		\begin{itemize}
 			\item Создать интерфейс TAP с именем {\tt mytap}
@@ -24,6 +35,5 @@
 		\end{itemize}
 	\end{block}
 
-\end{frame}
 
 

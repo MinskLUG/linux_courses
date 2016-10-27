@@ -1,10 +1,22 @@
 \begin{frame}{Мосты}
-	\begin{itemize}
-		\item Создать -- {\tt brctl addbr <bridge>}
-		\item Удалить -- {\tt brctl delbr <bridge>}
-		\item Добавить интерфейс -- {\tt brctl addif <bridge> <device>}
-		\item Удалить интерфейс-- {\tt brctl delif <bridge> <device>}
-	\end{itemize}
+
+    \begin{block}{old-style}
+        \begin{itemize}
+            \item Создать -- {\tt brctl addbr <bridge>}
+            \item Удалить -- {\tt brctl delbr <bridge>}
+            \item Добавить интерфейс -- {\tt brctl addif <bridge> <device>}
+            \item Удалить интерфейс-- {\tt brctl delif <bridge> <device>}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{iproute2}
+        \begin{itemize}
+            \item Создать -- {\tt ip link add name <bridge> type bridge}
+            \item Удалить -- {\tt ip link del dev <bridge> }
+            \item Добавить интерфейс -- \\ {\tt ip link set dev <device> master <bridge>}
+            \item Удалить интерфейс-- \\ {\tt ip link set dev <device> nomaster}
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 
