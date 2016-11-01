@@ -1,6 +1,6 @@
 \begin{frame}{Iptables}
 
-	\center\includegraphics[width=0.9\textwidth]{../../slides/networking/06-iptables.png}
+	\center\includegraphics[width=1\textwidth]{../../slides/networking/06-iptables.png}
 
 \end{frame}
 
@@ -64,3 +64,17 @@
 \end{frame}
 
 
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{Внутренняя сеть: маскарадинг}
+        \begin{enumerate}
+            \item Добавить в netns 'A' правило для таблицы {\tt nat},
+                включающее маскарадинг для IP-адреса, использующегося в netns 'B'
+            \item Запустить {\tt ping -n <IP>} в netns 'B'\\
+                IP -- адрес соседа для {\tt ethA0}
+            \item Запустить {\tt tcpdump -i ethA0 icmp} в netns 'A'
+            \item Запустить {\tt tcpdump -i eth0 icmp} на хосте (без использования netns)
+            \item Запретить входящий ''{\tt ping}'' для {\tt ethA0}:\\
+                {\tt iptables -A INPUT -i ethA0 -p icmp -j REJECT --reject-with icmp-host-unreachable}
+        \end{enumerate}
+    \end{block}
+\end{frame}

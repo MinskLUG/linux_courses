@@ -27,13 +27,13 @@
         \begin{enumerate}
             \item Настроить маршруты по-умолчанию:
                 \begin{itemize}
-                    \item Через IP адрес соседа (для {\tt ethA1}) для netns 'A'
+                    \item Через IP адрес соседа (для {\tt ethA0}) для netns 'A'
                     \item Через IP адрес интерфейса {\tt vethA} для netns 'B'
                 \end{itemize}
             \item Разрешить IP forwarding в netns 'A'
             \item Запустить {\tt ping -n <IP>} в netns 'B'\\
-                IP -- адрес соседа для {\tt ethA1}
-            \item Запустить {\tt tcpdump -i ethA1 icmp} в netns 'A'
+                IP -- адрес соседа для {\tt ethA0}
+            \item Запустить {\tt tcpdump -i ethA0 icmp} в netns 'A'
         \end{enumerate}
     \end{block}
 \end{frame}
