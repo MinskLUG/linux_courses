@@ -7,7 +7,7 @@
 
 	\begin{block}{Разрешить маршрутизацию на хосте}
 		{\tt echo 1 > /proc/sys/net/ipv4/ip\_forward}\\
-		{\tt sysctl net.ipv4.ip\_forward=1}
+		{\tt sysctl -w net.ipv4.ip\_forward=1}
 	\end{block}
 	
 	Hint: {\tt /proc/sys/net}
@@ -22,3 +22,18 @@
 \end{frame}
 
 
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{Внутренняя сеть: маршрутизация}
+        \begin{enumerate}
+            \item Настроить маршруты по-умолчанию:
+                \begin{itemize}
+                    \item Через IP адрес соседа (для {\tt ethA1}) для netns 'A'
+                    \item Через IP адрес интерфейса {\tt vethA} для netns 'B'
+                \end{itemize}
+            \item Разрешить IP forwarding в netns 'A'
+            \item Запустить {\tt ping -n <IP>} в netns 'B'\\
+                IP -- адрес соседа для {\tt ethA1}
+            \item Запустить {\tt tcpdump -i ethA1 icmp} в netns 'A'
+        \end{enumerate}
+    \end{block}
+\end{frame}
