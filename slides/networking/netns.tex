@@ -1,0 +1,126 @@
+\begin{frame}[fragile]{netns}
+    \begin{block}{Network namespace}
+		Изолированное сетевое пространство для процесса или группы процессов,
+        которое позволяет использовать отдельные:
+
+        \begin{itemize}
+            \item сетевые устройства
+            \item таблицу маршрутизации
+            \item правила файерволла
+            \item arp-таблицу
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{ip netns}
+    \begin{block}{Управление netns}
+        \begin{itemize}
+            \item Список -- {\tt ip netns list}
+            \item Создать -- {\tt ip netns add <name>}
+            \item Удалить -- {\tt ip netns add <name>}
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Процессы и netns}
+        \begin{itemize}
+            \item Запуск процесса -- {\tt ip netns exec <name> <programm>}
+            \item Список процессов -- {\tt ip netns pids <name> }
+            \item Определение NS для процесса -- \\
+                {\tt ip netns identify <PID>}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Упражнение}
+
+    \begin{block}{Соединяем 2 netcat}
+        \begin{enumerate}
+            \item Создать netns 'A'
+            \item Запустить {\tt bash} в netns 'A'
+            \item Проверить список доступных интерфейсов
+            \item Узнать в каком netns находится текущий шелл
+            \item Запустить в netns 'A' сервер:\\
+                {\tt netcat -l 80}
+            \item Поробовать подключиться клиентом:
+                {\tt netcat 127.0.0.1 80}
+            \item Попробовать предыдущий пункт в netns 'A'
+            \item Посмотреть сетевой статус клиента и сервера\\
+                (Hint: {\tt netstat})
+            \item Получить список PID программ, находящихся в netns 'A'
+        \end{enumerate}
+    \end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Интерфейсы в netns}
+    \begin{itemize}
+        \item Переместить интерфейс в netns:\\
+            {\tt ip link set dev <interface> netns <namespace>}\\
+            {\tt ip link set dev <interface> netns <PID>}
+        \item Соединение 2 network namespaces:
+            \begin{enumerate}
+                \item Создать {\tt veth} пару
+                \item Переместить один из интерфейсов в нужный netns
+            \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{''Независимая сеть''}
+        \begin{enumerate}
+            \item Создать дополнительный интерфейс {\tt ethA0} типа {\tt macvlan} на базе {\tt eth0}
+            \item Переместить интерфейс {\tt ethA0} в netns 'A'
+            \item Назначить интерфейсу {\tt ethA0} адрес из подсети {\tt 192.168.254.0/24}
+            \item Проверить доступность соседа с помощью {\tt ping} 
+            \item Запустить сервер {\tt netcat} в netns 'A'
+            \item Подключиться клиентом {\tt netcat} к соседу
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{Внутренняя сеть}
+        \begin{enumerate}
+            \item Создать netns 'B'
+            \item Создать пару {\tt veth} интерфейсов: {\tt vethA} и {\tt vethB}
+            \item Переместить {\tt vethA} в netns 'A' и {\tt vethB} в netns 'B'
+            \item Назначить интерфейсам адреса из одного диапазона (192.168.0.0/24)
+            \item Узнать в каком netns находится текущий шелл
+            \item Запустить в netns 'A' сервер:\\
+                {\tt netcat -l 80}
+            \item Запустить клиента {\tt netcat} в netns 'B'
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{Анализ трафика}
+        \begin{enumerate}
+            \item Запустить {\tt ping} адреса {\tt vethB} в netns 'A'
+            \item Запустить {\tt tcpdump} на интерфейсе {\tt vethA}
+            \item Ограничить трафик протоколом {\tt ICMP}:\\
+                {\tt tcpdump -n icmp}
+                \begin{itemize}
+                    \item Использовать ключи {\tt -t}, {\tt -tt}, {\tt -ttt}
+                \end{itemize}
+            \item Ограничить трафик IP адресом {\tt vethB}:\\
+                {\tt tcpdump -n host <IP>}
+            \item Ограничить трафик IP адресом {\tt vethB} и портом сервера:\\
+                {\tt tcpdump -n host <IP> and port <port>}
+            \item Записать дамп соединения {\tt netcat} клиент-сервер.\\
+                Добавить ключ "-w <имя\_файла>".
+            \item "Проиграть" дамп соединения:\\
+                Добавить ключ "-r <имя\_файла>".
+        \end{enumerate}
+     \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Упражнение}
+    \begin{block}{''Визуализация'' с wireshark}
+        \begin{itemize}
+            \item Проанализировать записанную сессию с помощью {\tt wireshark}:\\
+                {\tt wireshark <имя\_файла>}
+        \end{itemize}
+     \end{block}
+\end{frame}
+
