@@ -1,0 +1,17 @@
+\begin{frame}{''Псевдо-ethernet'' интерфейсы}
+	\begin{block}{macvlan}
+        Виртуальный ethernet интерфейс.\\
+        Фактически работает, как копия физического интерфейса со своим MAC-адресом.
+	\end{block}
+
+	\begin{block}{iproute2}
+		\begin{itemize}
+			\item Добавить интерфейс macvlan -- \\
+                {\tt ip link add name <ifacename> link <parent> type macvlan}
+			\item Удалить интерфейс -- \\ 
+                {\tt ip link del <ifacename>}
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+

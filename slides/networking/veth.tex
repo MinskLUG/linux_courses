@@ -1,0 +1,16 @@
+\begin{frame}{''Виртуальные пары''}
+	\begin{block}{veth}
+        Соединение вида точка-точка, с двумя виртуальными ethernet-интерфейсами.
+	\end{block}
+
+	\begin{block}{iproute2}
+		\begin{itemize}
+			\item Создать пару интерфейсов -- \\
+                {\tt ip link add name <ifacename1> type veth peer name <ifacename2>}
+			\item Удалить (достаточно удалить любой интерфейс) -- \\
+                {\tt ip link del <ifacename> }
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
