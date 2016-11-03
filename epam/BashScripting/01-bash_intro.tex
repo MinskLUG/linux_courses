@@ -1,4 +1,4 @@
-\input{common}
+\input{../branding/common}
 \title[bash]{Bourne again shell}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,19 +27,25 @@
 %%%%%%%%%% Content starts here %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Shell}
-\mode<all>{\input{../../slides/cmdline/shell-intro}}
+%\section{Shell}
+%\mode<all>{\input{../../slides/cmdline/shell-intro}}
 
 \section[Bash intro]{Введение в Bash}
-\mode<all>{\input{../../slides/cmdline/bash-intro}}
-\mode<all>{\input{../../slides/bash/hotkeys}}
 \mode<all>{\input{../../slides/bash/description}}
 
-\section[Runtime]{Скрипты и запуск}
-
-\mode<all>{\input{../../slides/bash/runtime}}
+\section[Interactive]{Интерактивный режим}
+\mode<all>{\input{../../slides/cmdline/bash-intro}}
+\mode<all>{\input{../../slides/bash/hotkeys}}
 \mode<all>{\input{../../slides/bash/jobcontrol}}
+\section[symbols]{Специальные символы}
+\mode<all>{\input{../../slides/bash/specsymbols}}
+\section[variables]{Переменные}
+\mode<all>{\input{../../slides/bash/vars}}
+\section[redirection]{Перенаправления}
 \mode<all>{\input{../../slides/bash/redirection}}
 \mode<all>{\input{../../slides/cmdline/io-redirection-here.tex}}
+\section[Commands]{Команды}
+\mode<all>{\input{../../slides/command-grouping}}
+
 
 \end{document}
