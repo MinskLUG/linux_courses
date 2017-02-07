@@ -3,7 +3,24 @@
 
 	\begin{block}{GNU Compiler Collection}
 
-		Языки:
+        \sout{GNU C Compiler}
+
+        Модульная структура:
+
+		\begin{itemize}
+			\item оптимизаторы 
+			\item ''back ends'' -- генераторы кода под различные архитектуры
+			\item ''front ends'' -- реализация конкретного языка
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{GCC}
+
+	\begin{block}{Языки}
 
 		\begin{itemize}
 			\item C
@@ -115,11 +132,56 @@ gcc -Q -Wall --help=warnings
 	\end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{GNU Extensions}
+
+	\begin{block}{Стандарты}
+		\begin{itemize}
+            \item {\tt -{}-std=} -- включить стандарт
+			\item -Wpedandic, -pedantic -- предупреждения о несоответсвии
+		\end{itemize}
+        {\tt -Wall -pedantic -Werror} -- ''жесткое'' следование стандартам
+	\end{block}
+
+	\begin{block}{\_\_GNU\_\_}
+        Использование расширения GNU предваряется макросом {\tt \_\_GNU\_\_} или {\tt \_\_GNUC\_\_}.
+		\begin{itemize}
+            \item pragmas -- как правило, для компиляции исходников для других компиляторов\\
+                {\tt grep \_\_GNU /usr/include/ -R}
+            \item атрибуты -- для переменных, функций, типов и т.д.
+            \item многое другое 
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{GNU Extensions: примеры}
+
+\begin{lstlisting}[language=C]
+#pragma GCC diagnostic error "-Wuninitialized"
+foo(a);         /* error */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wuninitialized"
+foo(b);         /* no diagnostic */
+#pragma GCC diagnostic pop
+\end{lstlisting}
+
+\begin{lstlisting}[language=C]
+struct S { short f[3]; } __attribute__ ((aligned (8)));
+
+extern void die(const char *format,  ...)
+    __attribute__((noreturn, format(printf,  1,  2)));
+
+void stub(char c) __attribute__((weak)){}
+\end{lstlisting}
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Доп. упражнение для желающих}
   \begin{itemize}
     \item Скомпилировать \texttt{helloworld.c} в ассемблерный код с опцией \texttt{-fno-builtin} и посмотреть отличия
-    \item Выяснить какие флаги оптимизации отличаются при -O2 и -O3 (hint: \texttt{gcc -Q - -help=} и \texttt{diff}
+    \item Выяснить какие флаги оптимизации отличаются при -O2 и -O3 (hint: \texttt{gcc -Q -{}-help=} и \texttt{diff}
     \item Скомпилировать \texttt{helloworld.c} с \texttt{-fdump-passes}
   \end{itemize}
 \end{frame}
