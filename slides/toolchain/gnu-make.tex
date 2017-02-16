@@ -229,6 +229,21 @@ main.d: hello.c
 	\end{lstlisting}
 
 \end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Автоматическая генерация зависимостей}
+
+	\begin{lstlisting}[language=make]
+sources = $(wildcard *.c)
+
+include $(sources:.c=.d)
+
+%.d: %.c
+	gcc -MM -MF $@ $<
+	\end{lstlisting}
+
+\end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{Практическое задание}
 
