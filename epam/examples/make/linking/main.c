@@ -1,6 +1,6 @@
 #include "libtest.h"
 
-main(void)
+int main(void)
 {
     test();
     return 0;
