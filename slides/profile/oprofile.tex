@@ -57,7 +57,7 @@
  \begin{itemize}
    \item \verb+ perf record <program> <args>+
    \item \verb+ perf report+
-   \item \verb+ perf annotate -d <program file>+
+   \item \verb+ perf annotate+
    \item \verb+ perf top+
    \item \verb+ perf stat+
  \end{itemize}
@@ -77,7 +77,8 @@
  \frametitle{Упражнение}
  \begin{enumerate}
   \item Проверить, что в конфигурации ядра есть поддержка perf
-  \item Установить perf \verb+apt-get update; apt-get install perf +
+%  \item Установить perf \verb+apt-get update; apt-get install perf +
+  \item \verb+ apt-get install linux-perf-`uname -r`+
   \item Скомпилировать программу с \texttt{-g}
   \item Запустить под perf
   \item Посмотреть статистику вызовов

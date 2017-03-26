@@ -27,6 +27,8 @@ gprof program -A
   \begin{enumerate}
 %    \item Изменить Makefile для primefactors.c, так, чтобы включить профилирование
 %    \item Просмотреть информацию профайлером
+    \item Изменить Makefile, добавить опцию \texttt{-pg}
+    \item Запустить \texttt{time ./gzip input -c > /dev/null}
     \item Посмотреть статистику в режиме Flat Profile:\\
         {\tt gprof -b -p ./gzip }
     \item Посмотреть граф вызовов:\\
