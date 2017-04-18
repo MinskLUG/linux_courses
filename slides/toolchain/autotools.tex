@@ -57,7 +57,7 @@
 }
 \end{tikzpicture}
 \end{center}
-\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\footnotesize{ Взято из \url{http://www.lrde.epita.fr/~adl/autotools.html}}
 \end{frame}
 
 \begin{frame}
@@ -107,7 +107,7 @@
 \arr (configstatus) .. controls +(0:2cm) and +(100:.5cm) .. (configlog);
 }
 \end{tikzpicture}
-\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\footnotesize{ Взято из \url{http://www.lrde.epita.fr/~adl/autotools.html}}
 \end{center}
 
 \end{frame}
@@ -245,7 +245,7 @@
 \end{tikzpicture}
 \end{center}}
 
-\footnotesize{ Взято из http://www.lrde.epita.fr/~adl/autotools.html}
+\footnotesize{ Взято из \url{http://www.lrde.epita.fr/~adl/autotools.html}}
 \end{frame}
 
 \begin{frame}
@@ -471,6 +471,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 	\begin{block}{\texttt{configure.ac}}
 \begin{lstlisting}[language=sh]
+AC_CONFIG_MACRO_DIR([m4])
 # Checks for libraries.
 LT_INIT
 \end{lstlisting}
