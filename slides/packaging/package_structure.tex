@@ -1,0 +1,40 @@
+\begin{frame}{Структура пакета}
+	\begin{itemize}
+		\item Метаданные
+			\begin{itemize}
+				\item Имя
+				\item Версия/Релиз
+				\item Описание
+				\item ...
+			\end{itemize}
+		\item Зависимости
+			\begin{itemize}
+				\item От чего зависят
+				\item Что предоставляют
+			\end{itemize}
+		\item Архив с файлами
+			\begin{itemize}
+				\item RPM: cpio
+				\item dpkg: сжатый tar
+			\end{itemize}
+		\item Скрипты
+			\begin{itemize}
+				\item Pre Install
+				\item Post Install
+				\item Pre Uninstall
+				\item Post Uninstall \bigskip
+				\item Опционально: Triggers
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{''Пакетные'' дистрибутивы: зависимости}
+    \begin{columns}
+        \column{0.5\textwidth}
+            \Large\center{Правильные пакетные зависимости}
+            \center\includegraphics[width=1\textwidth]{../../slides/packaging/good-packaging.jpg}
+        \column{0.5\textwidth}
+            \Large\center{''Кривые'' пакетные зависимости}
+            \center\includegraphics[width=1\textwidth]{../../slides/packaging/wrong-packaging.jpg}
+    \end{columns}
+\end{frame}
