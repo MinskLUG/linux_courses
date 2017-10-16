@@ -89,7 +89,7 @@ void second (void) {
 \end{frame}
 \begin{frame}[fragile]
   \frametitle{Обработчик}
-	\begin{block}{И обработчик}
+	\begin{block}{И обработчик}\footnote{Hint: -D\_XOPEN\_SOURCE}
 	\begin{lstlisting}
 void sighandler( int signal) {
   printf("SIGSEGV received, exiting.\n");
