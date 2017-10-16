@@ -25,6 +25,9 @@ pwd
 ls -l
 cp -f helloworld %{buildroot}%{_bindir}/helloworld
 
+%check
+%{buildroot}%{_bindir}/helloworld
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
