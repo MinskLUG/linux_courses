@@ -10,14 +10,16 @@ TARGET += 08-2-networking.pdf
 
 .PHONY: all tex clean
 
-all: tex
+all: $(TARGET)
 
 %.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 
-tex: $(TARGET)
+.PHONY: clean .FORCE
+
+$(TARGET): .FORCE
 
 clean: 
 	@rm -f *.aux
