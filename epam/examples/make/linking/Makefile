@@ -1,9 +1,9 @@
-CFLAGS = -I.
+CFLAGS = -I. -g -O3
 LDFLAGS = -L.
 
 SOVERSION=0.1.0
 
-LDFLAGSLIB= -shared -Wl,-init,init -Wl,-fini,fini
+LDFLAGSLIB= $(LDFLAGS) -shared -Wl,-init,init -Wl,-fini,fini -Wl,-soname,$(SOVERSION)
 CFLAGSLIB= -fPIC $(CFLAGS)
 
 LIBS= libtesta.so libtestb.so
