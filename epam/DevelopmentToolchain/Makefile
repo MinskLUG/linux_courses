@@ -10,12 +10,13 @@ TARGET += 09-gcov.pdf
 TARGET += 10-doxygen.pdf
 TARGET += 11-autotools.pdf
 TARGET += 12-packaging.pdf
+TARGET += 13-version_control.pdf
 
 #TARGET += epam-Linux_courses_handbook.pdf
 
 all: $(TARGET)
 
-%.pdf: %.tex common.tex
+%.pdf: %.tex
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
 	pdflatex -interaction=nonstopmode $<
