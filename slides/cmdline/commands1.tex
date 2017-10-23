@@ -28,18 +28,6 @@ ls -s *.jpg | awk 'BEGIN{s=0};/^[ ]*[0-9]/{s+=`\$1`};END{print s}'
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Регулярные выражения}
-	\begin{block}{grep, sed, awk}
-	\end{block}
-	\begin{itemize}
-		\item {\tt .} -- любой символ за исключением пустой строки
-		\item {\tt *} -- любоe количество символов, которые стоят перед {\tt *}
-		\item {\tt \^{}} -- начало строки
-		\item {\tt \$} -- конец строки
-		\item {\tt [...]} -- любой символ из заключенных в скобки
-	\end{itemize}
-\end{frame}
-
 \begin{frame}{Дополнительный набор команд для работы с текстом}
 	\begin{itemize}
 	  \item {\tt head} -- вывести первые строки
