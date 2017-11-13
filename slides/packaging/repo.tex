@@ -4,67 +4,77 @@
 	\begin{block}{Репозиторий пакетов}
 		Место, где хранятся и поддерживаются пакеты, а также сопутствующая мета-информация, предназначенное для использования пакетным менеджером.
 	\end{block}
-	\begin{block}{Пример: Fedora Core}
-		\begin{itemize}
-			\item Packages/*.rpm
-			\item RPM-GPG-KEY-*
-			\item repodata
-			\begin{itemize}
-				\item множество сжатых и несжатых XML файлов для YUM
-			\end{itemize}
-		\end{itemize}
-
-		Описание репозтория для YUM на локальной системе хранится по пути
-		{\tt /etc/yum.repos.d/*.repo}
-	\end{block}
 \end{frame}
 
-
-\begin{frame}[fragile]{Репозиторий в контейнере fedora}
-	\begin{block}{Пример: Fedora Core}
-	    Отредактировать файл \\
-		        {\tt /etc/yum.repos.d/fedora.repo}:
+\begin{frame}{Репозиторий APT (Debian-based,ALTLinux)}
+		Описание репозитория для APT на локальной системе хранится по путям:
 		\begin{itemize}
-		    \item в описании репозотория {\tt [fedora]}
-		    \item Закомментировать переменную {\tt metalink}
-		    \item Изменить {\tt baseurl} на указанный ниже
+		    \item {\tt /etc/apt/sources.list}
+		    \item {\tt /etc/apt/sources.list.d/*.list}
 		\end{itemize}
-	\end{block}
-	\begin{verbatim}
-baseurl=ftp://192.168.101.10/Fedora/releases/24/Server/x86_64/os/
-	\end{verbatim}
 \end{frame}
 
 \begin{frame}{Apt: команды}
+	\begin{block}{Обновление данных о пакетах}
+		{\tt apt-get update }
+	\end{block}
+	\begin{block}{Поиск}
+		{\tt apt-cache search pkgname }
+	\end{block}
+	\begin{block}{Массовое обновление пакетов}
+		\begin{itemize}
+		    \item {\tt apt-get dist-upgrade}
+		    \item {\tt apt-get upgrade}
+		\end{itemize}
+	\end{block}
 	\begin{block}{Установка/обновление пакета}
 		{\tt apt-get install pkgname }
 
                 {\tt apt-get -f install}
 	\end{block}
-	\begin{block}{Обновление данных о пакетах}
-		{\tt apt-get update }
-	\end{block}
 	\begin{block}{Удаление пакета}
 		{\tt apt-get remove pkgname }
 	\end{block}
-	\begin{block}{Поиск}
-		{\tt apt-cache search pkgname }
+\end{frame}
+
+\begin{frame}{Репозиторий YUM/DNF (RH-based)}
+
+		Описание репозитория для YUM/DNF на локальной системе хранится по пути\\
+		{\tt /etc/yum.repos.d/*.repo}
+\end{frame}
+
+\begin{frame}[fragile]{Репозиторий в контейнере fedora}
+	\begin{block}{Пример: Fedora Core}
+	\begin{itemize}
+	    \item Проверить список включенных репозиториев: \\
+	    {\tt dnf repolist}
+	    \item При необходимости отредактировать файл \\
+		        {\tt /etc/yum.repos.d/mgts.repo}:
+		\begin{itemize}
+		    \item в описании репозотория {\tt [fedora-mgts]}
+		    \item Изменить {\tt baseurl} на ближайшее зеркало
+		\end{itemize}
+	\end{itemize}
 	\end{block}
 \end{frame}
 
-\begin{frame}{YUM: команды}
-	\begin{block}{Установка/обновление пакета}
-		{\tt yum install pkgname }
+
+\begin{frame}{DNF: команды}
+	\begin{block}{Обновление данных о пакетах}
+		{\tt dnf makecache}
 	\end{block}
-	\begin{block}{Обновление всех пакетов}
-		{\tt yum update }
-	\end{block}
-	\begin{block}{Удаление пакета}
-		{\tt yum remove pkgname }
+	\begin{block}{Массовое обновление пакетов}
+		{\tt dnf update }
 	\end{block}
 	\begin{block}{Поиск}
-		{\tt yum list pkgname }\\
-		{\tt yum search pkgname }
+		{\tt dnf list pkgname }\\
+		{\tt dnf search pkgname }
+	\end{block}
+	\begin{block}{Установка/обновление пакета}
+		{\tt dnf install pkgname }
+	\end{block}
+	\begin{block}{Удаление пакета}
+		{\tt dnf remove pkgname }
 	\end{block}
 \end{frame}
 
@@ -79,5 +89,3 @@ baseurl=ftp://192.168.101.10/Fedora/releases/24/Server/x86_64/os/
       \item Найти пакет предоставляющий сервис ssh и установить его
     \end{enumerate}
 \end{frame}
-
-
