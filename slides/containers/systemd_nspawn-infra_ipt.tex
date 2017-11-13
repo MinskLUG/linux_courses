@@ -1,0 +1,29 @@
+\begin{frame}[fragile]{systemd-nspawn: старт/стоп контейнера}
+    \begin{alert}{Disclaimer}:
+        {\tt systemd-nspawn} используется только для упрощения создания учебного окружения!
+    \end{alert}
+    \begin{block}{Запуск контейнера}
+        Использовать архив c ФС дострибутива Fedora:\\
+        {\tt tar -C /tmp/ -xf LDC-fedora26-2017.tar.gz}
+
+	\begin{lstlisting}
+systemd-nspawn -M fedora26 --network-bridge=lxcbr0 -D /tmp/rootfs
+[root@fedora26 ~]$ dhclient host0
+\end{lstlisting}
+    \end{block}
+\end{frame}
+%$
+\begin{frame}{Iptables: упражнение}
+    \begin{block}{Iptables}
+        \begin{enumerate}
+            \item Запустить {\tt ping -n <IP>} в контейнере\footnote{IP -- адрес хоста соседа}
+            \item Запустить {\tt tcpdump -i eth0 icmp} на хосте в отдельной консоли
+            \item Разрешить {\tt ip\_forwarding} на хосте
+            \item Добавить правило для таблицы {\tt nat},
+                включающее маскарадинг для IP-адреса, использующегося в контейнере
+            \item Запустить {\tt tcpdump -i eth0 icmp} на хосте
+            \item Заблокировать ''входящий'' трафик от соседа:\\
+                {\tt iptables -A INPUT -i eth0 --src <IP> -p icmp -j REJECT --reject-with icmp-host-unreachable}
+        \end{enumerate}
+    \end{block}
+\end{frame}
