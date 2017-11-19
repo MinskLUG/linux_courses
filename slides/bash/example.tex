@@ -27,13 +27,13 @@
 	\begin{lstlisting}
 cat /etc/passwd | ./script.sh
 ./script.sh < /etc/passwd
-	\end{lstlisting}
+\end{lstlisting}
 
 	\begin{lstlisting}
 #!/bin/bash
 
 exec < /etc/passwd
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}
@@ -49,7 +49,7 @@ while read string
 do
     echo $string
 done
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}
@@ -61,7 +61,7 @@ done
 
 	\begin{lstlisting}
 IFS=':'
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}
@@ -76,7 +76,7 @@ while read account password uid gid gecos homedir shell
 do
     echo $account = $homedir
 done
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}
@@ -91,7 +91,7 @@ while read account password uid gid gecos homedir shell
 do
     [ -z "${homedir/#\/dev\/null}" ] || echo $account = ${homedir}
 done
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}
@@ -106,7 +106,7 @@ while read account password uid gid gecos homedir shell
 do
     [ -z "${homedir/#\/dev\/null}" ] || echo $account = ${homedir##*/}
 done
-	\end{lstlisting}
+\end{lstlisting}
 
 	\end{block}
 \end{frame}

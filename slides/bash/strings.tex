@@ -31,7 +31,7 @@ echo Length=${#string} # Length=29
 	\begin{lstlisting}
 string="Embedded Solutions Department"
 echo ${string:19} # Department
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 	\pause
@@ -39,7 +39,7 @@ echo ${string:19} # Department
 	\begin{lstlisting}
 string="Embedded Solutions Department"
 echo ${string:9:8}  # Solution
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 \end{frame}
@@ -52,7 +52,7 @@ echo ${string:9:8}  # Solution
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry#*:} # x:500:500:d4s:/home/d4s:/bin/bash
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 	\pause
@@ -62,7 +62,7 @@ echo ${entry#*:} # x:500:500:d4s:/home/d4s:/bin/bash
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry%:*} # d4s:x:500:500:d4s:/home/d4s 
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 
@@ -79,7 +79,7 @@ echo ${entry%:*} # d4s:x:500:500:d4s:/home/d4s
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry##*:} # /bin/bash
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 	\pause
 	\begin{block}{\$\{string\%\%substring\}}
@@ -87,7 +87,7 @@ echo ${entry##*:} # /bin/bash
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry%%:*} # d4s
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 \end{frame}
 
@@ -101,7 +101,7 @@ entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry/$USER/user} # user:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry/$USER} # :x:500:500:d4s:/home/d4s:/bin/bash
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 	\pause
@@ -111,7 +111,7 @@ entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry//$USER/user} # user:x:500:500:user:/home/user:/bin/bash
 echo ${entry//$USER} # :x:500:500::/home/:/bin/bash
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 \end{frame}
@@ -126,7 +126,7 @@ echo ${entry//$USER} # :x:500:500::/home/:/bin/bash
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry/#$USER/user} # user:x:500:500:d4s:/home/d4s:/bin/bash
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 	\pause
@@ -137,7 +137,7 @@ echo ${entry/#$USER/user} # user:x:500:500:d4s:/home/d4s:/bin/bash
 entry=$(cat /etc/passwd | grep "^$USER:")
 echo $entry # d4s:x:500:500:d4s:/home/d4s:/bin/bash
 echo ${entry/%\/bin\/bash/\/bin\/sh} # user:x:500:500:user:/home/user:/bin/sh
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 
 \end{frame}
@@ -156,7 +156,7 @@ for VAR in $VARS
 do
     echo $VAR=${!VAR}
 done
-	\end{lstlisting}
+\end{lstlisting}
 	\end{block}
 \end{frame}
 
