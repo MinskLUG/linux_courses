@@ -50,7 +50,20 @@ echo $VAR
 
 	Косвенное (indirect) обращение к переменной: {\tt \$\{!VARIABLE\}}
 
-	\begin{block}{Пример}
+	\begin{block}{пример}
+		\begin{lstlisting}
+#!/bin/bash 
+var="xxx"
+var1=var
+echo ${!var1}
+		\end{lstlisting}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Косвенное обращение к переменной}
+	\begin{block}{пример}
 		\begin{lstlisting}
 #!/bin/bash 
 num=$# 
@@ -58,9 +71,7 @@ lastarg=${!num}
 echo $num $lastarg
 		\end{lstlisting}
 	\end{block}
-
 \end{frame}
-
 
 \begin{frame}
 	\frametitle{Типы переменных}
