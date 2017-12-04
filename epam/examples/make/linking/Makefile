@@ -3,7 +3,7 @@ LDFLAGS = -L.
 
 SOVERSION=0.1.0
 
-LDFLAGSLIB= $(LDFLAGS) -shared -Wl,-init,init -Wl,-fini,fini -Wl,-soname,$(SOVERSION)
+LDFLAGSLIB= $(LDFLAGS) -shared -Wl,-init,init -Wl,-fini,fini
 CFLAGSLIB= -fPIC $(CFLAGS)
 
 LIBS= libtesta.so libtestb.so
@@ -27,7 +27,7 @@ main-B_A: main.o $(LIBS)
 	$(CC) -c $(CFLAGSLIB) $< -o $@
 
 %.so: %.o
-	$(CC) $(LDFLAGSLIB) $< -o $@
+	$(CC) $(LDFLAGSLIB) -Wl,-soname,$@.$(SOVERSION) $< -o $@
 
 main-classic: main.o libtesta.o
 
