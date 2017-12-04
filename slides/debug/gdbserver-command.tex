@@ -1,0 +1,23 @@
+\begin{frame}[fragile]
+  \frametitle{gdb server}
+
+    \begin{block}{На сервере}
+    {\tt gdbserver [host]:[port] <binary>}
+
+        \begin{verbatim}
+gdbserver :2345 testtimer
+\end{verbatim}
+    \end{block}
+
+
+    \begin{block}{На машине разработчика}
+      {\tt gdb <binary>}
+        \begin{verbatim}
+gdb testtimer
+\end{verbatim}
+
+    Подключиться к серверу GDB:\\
+    {\tt target remote :2345}
+
+    \end{block}
+\end{frame}

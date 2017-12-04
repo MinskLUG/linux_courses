@@ -1,0 +1,56 @@
+\begin{frame}[fragile]
+  \frametitle{Основные команды для дизассемблирования}
+  \begin{itemize}
+    \item \verb+ info registers {pc, rax, ebp} +
+    \item \verb+ print $pc +,etc
+    \item \verb+ x/i $pc + -текущая инструкция
+    \item \verb+ x/10i $pc-30 + -- предыдущие инструкции
+    \item \verb+ disass + -- дизассемблирование текущей функции
+    \item \verb+ si, stepi + -- шаг на инструкцию
+    \item \verb+ ni, nexti + -- шаг на инструкцию с обходом
+    \item \verb+ break *<address> +
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Команда x}
+  Основные ключи
+  \begin{itemize}
+    \item \texttt{x/i <address>} объект по адресу как инструкция (\texttt{x/10i} 10 инструкций)
+    \item \texttt{x/s <address>} как строка
+    \item \texttt{x/d <address>} как десятичное число
+    \item \texttt{x/a <address>} как pointer
+    \item \texttt{x/x <address>} как 16-ричное число
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Патчинг программы}
+  \begin{verbatim}
+gdb -write -q <program name>
+  \end{verbatim}
+\pause
+\vspace{2ex}
+  \begin{verbatim}
+(gdb) set {unsigned char}<address>=<value>
+  \end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Упражнение}
+  \begin{itemize}
+    \item Запустить testtimer
+    \item Запустить testtimer в gdb, поставить breakpoint в функции time
+    \item Найти точку возврата из этой функции в main
+    \item Обойти проверку
+  \end{itemize}
+  \begin{tabular}{ll}
+    инструкция & opcode \\
+    jle        & 7e ... \\
+    jle        & 0f 8e .. \\
+    jg         & 7f ... \\
+    jg         & 0f 8f ...\\
+    setg       & 0f 9f ... \\
+    setle      & 0f 9e ... \\
+  \end{tabular}
+\end{frame}

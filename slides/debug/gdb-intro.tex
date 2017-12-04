@@ -17,6 +17,7 @@
         \item l (list)
         \item (pt) ptype
         \item watch
+        \item display
       \end{itemize}
     \end{column}
 
@@ -127,11 +128,11 @@
     Последовательность создания отдельного файла с отладочными символами
   \end{center}
   \begin{itemize}
-    \item \verb+ objcopy --only-keep-debug <exec file> <dbg file>+
-    \item \verb+ strip -g <exec file>+
-    \item \verb+ objcopy  --add-gnu-debuglink=<dbg file> <exec file> + 
+    \item \texttt{objcopy -{}-only-keep-debug <exec file> <dbg file>}
+    \item \texttt{strip -g <exec file>}
+    \item \texttt{objcopy -{}-add-gnu-debuglink=<dbg file> <exec file>}
     \item \texttt{gdb: set debug-file-directory}
-  \end{itemize} 
+  \end{itemize}
 \pause
   \begin{center}
    Упражнение
@@ -140,100 +141,4 @@
     \item Добавить к Makefile дополнительную цель counter.dbg, которая создаст \texttt{counter} (stripped) и \texttt{counter.dbg}
     \item Запустить gdb на файле counter и убедиться, что все работает
   \end{itemize}
-\end{frame}  
-
-\section[gdb server]{gdb server}
-
-\begin{frame}
-  \frametitle{gdb server: preparation}
-  \begin{center}
-    {\large Подготовка ядра:компиляция с debug символами}
-  \end{center}
-  \begin{itemize}
-    \item Взять исходники ядра с kernel.org
-    \item Развернуть исходники \texttt{tar -Jxvf linux-....tar.xz}
-    \item В директории исходников \texttt{cp arch/x86/configs/x86\_64\_defconfig ./.config}
-    \item \texttt{make menuconfig}
-    \item Kernel hacking->Compile-time checks and compiler options->Compile kernel with debug info
-    \item \texttt{make}
-  \end{itemize}
 \end{frame}
-
-\begin{frame}
-  \frametitle{gdb server: запуск}
-\begin{itemize}
-    \item Запустить процесс ядра в kvm
-
-      \texttt{ kvm -m 256M -S -gdb tcp::2345 -kernel linux-3.19.1/arch/x86\_64/boot/bzImage }
-    \item Запустить gdb \texttt{gdb linux-3.19.1/vmlinux}
-    \begin{itemize}
-      \item target remote localhost:2345
-      \item c
-      \item Остановить с помощью ловкости рук и Ctrl-C
-      \item \texttt{set arch i386:x86-64:intel}
-      \item Начать пошагово выполнять код ядра
-    \end{itemize}
-\end{itemize}
-\end{frame}
-  
-\section[gdb disasm]{Работа с программами без исходников}
-\begin{frame}[fragile]
-  \frametitle{Основные команды для дизассемблирования}
-  \begin{itemize}
-    \item \verb+ info registers {pc, rax, ebp} +
-    \item \verb+ print $pc +,etc
-    \item \verb+ x/i $pc + -текущая инструкция
-    \item \verb+ x/10i $pc-30 + -- предыдущие инструкции
-    \item \verb+ disass + -- дизассемблирование текущей функции
-    \item \verb+ si, stepi + -- шаг на инструкцию
-    \item \verb+ ni, nexti + -- шаг на инструкцию с обходом
-    \item \verb+ break *<address> +
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Команда x}
-  Основные ключи
-  \begin{itemize}
-    \item \texttt{x/i <address>} объект по адресу как инструкция (\texttt{x/10i} 10 инструкций)
-    \item \texttt{x/s <address>} как строка
-    \item \texttt{x/d <address>} как десятичное число
-    \item \texttt{x/a <address>} как pointer
-    \item \texttt{x/x <address>} как 16-ричное число
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Патчинг программы}
-  \begin{verbatim}
-gdb -write -q <program name>
-  \end{verbatim}
-\pause
-\vspace{2ex}
-  \begin{verbatim}
-(gdb) set {unsigned char}<address>=<value>
-  \end{verbatim}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Упражнение}
-  \begin{itemize}
-    \item Запустить testtimer
-    \item Запустить testtimer в gdb, поставить breakpoint в функции time
-    \item Найти точку возврата из этой функции в main
-    \item Обойти проверку
-  \end{itemize}
-  \begin{tabular}{ll}
-    инструкция & opcode \\
-    jle        & 7e ... \\
-    jle        & 0f 8e .. \\
-    jg         & 7f ... \\
-    jg         & 0f 8f ...\\
-    setg       & 0f 9f ... \\
-    setle      & 0f 9e ... \\
-  \end{tabular}
-\end{frame}
-
-
-
-

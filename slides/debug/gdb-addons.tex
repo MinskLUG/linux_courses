@@ -1,0 +1,30 @@
+\begin{frame}
+ \frametitle{Псевдографический интерфейс}
+   \begin{itemize}
+     \item {\tt help layout}
+     \item {\tt layout split}
+     \item {\tt info win}
+     \item {\tt focus \{cmd,src,asm\}}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Автоматизация}
+
+    \begin{block}{Авто-выполнение команд}
+    {\tt gdb -command <filename> <binary>}\\
+    {\tt gdb -ex "command" <binary>}\\
+        \begin{verbatim}
+gdb -command testtimer.gdb testtimer
+gdb -ex "b main" -ex "run" testtimer
+\end{verbatim}
+    \end{block}
+
+    \begin{block}{batch mode}
+    {\tt gdb --batch <binary>}
+        \begin{verbatim}
+gdb -batch -command testtimer.gdb testtimer
+\end{verbatim}
+    \end{block}
+
+\end{frame}
