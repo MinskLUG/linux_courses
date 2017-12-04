@@ -7,7 +7,7 @@
         {\tt tar -C /tmp/ -xf LDC-fedora26-2017.tar.gz}
 
 	\begin{lstlisting}
-systemd-nspawn -M fedora26 -D /tmp/rootfs
+systemd-nspawn -M fedora26 -D /tmp/rootfs --bind $HOME:$HOME
 \end{lstlisting}
     \end{block}
 \end{frame}
