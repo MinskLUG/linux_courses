@@ -32,5 +32,6 @@
         \item Запускаем: kcachegrind callgrind.out.\$PID
 	\item Смотрим получившийся callgraph и относительное время в функциях.
         \item Запускаем: callgrind\_annotate callgrind.out.\$PID
+        \item Добавить опции {\tt -{}-collect-jumps=yes -{}-dump-line=yes -{}-dump-instr=yes} для valgrind и запустить kcachegrind
     \end{enumerate}
 \end{frame}
