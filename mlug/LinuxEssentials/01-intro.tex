@@ -1,0 +1,95 @@
+\input{../branding/common}
+
+\title{Введение в GNU/Linux}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+	\tableofcontents
+	[hideallsubsections]
+\end{frame}
+
+\section{О курсах}
+
+\mode<all>{\input{../slides/trainers}}
+
+\mode<all>{\input{../slides/intro}}
+
+\section*{GNU/Linux}
+
+\begin{frame}{Основы ОС Linux}
+
+	\begin{block}{Вопрос}
+	Почему Linux является самой популярной
+	свободной операционной системой?
+	\end{block}
+
+	\pause
+
+	\begin{block}{Ответ}
+	\begin{itemize}
+		\item \textcopyleft -- Copyleft
+		\item ``Философия'' Unix
+		\item Открытые стандарты
+	\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+%%%%%%%%%% Content starts here %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section[Принципы]{Базовые принципы ОС Linux}
+
+\subsection{GNU/Linux}
+
+\mode<all>{\input{../../slides/intro/vocabulary}}
+
+\subsection{Лицензии}
+
+\mode<all>{\input{../../slides/intro/licenses}}
+
+\section{Дистрибутивы ОС Linux}
+
+\mode<all>{\input{../../slides/intro/linux-distro}}
+
+\section{Процесс загрузки ОС Linux}
+
+\subsection{Этапы загрузки}
+
+\mode<all>{\input{../../slides/intro/linux-boot}}
+
+\subsection{Ядро Linux}
+
+\mode<all>{\input{../../slides/intro/linux-kernel.tex}}
+
+\subsection{Userspace}
+
+\mode<all>{\input{../../slides/intro/initrd}}
+
+\mode<all>{\input{../../slides/intro/init-process}}
+
+\subsection{Практика}
+
+\mode<all>{\input{../../slides/intro/practice01.tex}}
+
+
+\mode<all>\input{../branding/completion}
+\end{document}

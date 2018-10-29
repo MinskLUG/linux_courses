@@ -11,7 +11,7 @@
 
 	\pause
 
-	\begin{block}{Лицензии}
+    \begin{block}{Лицензии}
 		Лицензия -- средство передать какие-либо права на продукт либо его часть.
 
 		Необходима для защиты авторских прав. 
@@ -21,7 +21,7 @@
 
 
 \begin{frame}{Лицензии: открытые и свободные}
-	\begin{block}{ Р.Столлман: 4 свободы}
+	\begin{block}{Р.Столлман: 4 свободы}
 		\begin{itemize}
 			\item Свобода 0: Свобода запускать программу в любых целях.
 			\item Свобода 1: Свобода изучения работы программы и адаптация её к вашим нуждам. 
@@ -38,7 +38,7 @@
 \begin{frame}{Лицензии: permissive}
 	\begin{columns}
 	\column{0.3\textwidth}
-		\center\includegraphics[width=2cm,natwidth=144,natheight=144]{../../slides/intro/three-arrows@2x.png}
+		\center\includegraphics[width=2cm]{../../slides/intro/three-arrows@2x}
 
 	\column{0.6\textwidth}
 
@@ -64,15 +64,27 @@
 
 	\begin{columns}
 	\column{0.3\textwidth}
-		\center\includegraphics[width=2cm,natwidth=144,natheight=138]{../../slides/intro/circular@2x.png}
+		\center\includegraphics[width=2cm]{../../slides/intro/circular@2x}
 
-	\column{0.6\textwidth}
+	\column{0.3\textwidth}
 
+	\begin{block}{Strong}
 	\begin{itemize}
-		\item GPL
-		\item LGPL
+		\item GPL v2
+        \item GPL v3
 		\item AGPL
 	\end{itemize}
+    \end{block}
+
+	\column{0.3\textwidth}
+	\begin{block}{Weak}
+	\begin{itemize}
+		\item LGPL
+		\item MPL
+		\item CDDL
+	\end{itemize}
+    \end{block}
+
 	\end{columns}
 
 
@@ -89,5 +101,62 @@
 
 \end{frame}
 
+\begin{frame}[fragile]{Использование лицензии в проекте}
+    \begin{itemize}
+        \item Рекомендуется включать файл {\ttfamily LICENSE} в проект
+        \item Использовать однозначную отсылку на лицензию в файлах:
+            \begin{itemize}
+                \item Использовать стандартный заголовок лицензии (если есть)
+                \item Использовать SPDX-License-Identifier\\
+                    \url{https://spdx.org/licenses/}
+                    \begin{lstlisting}[language=C]
+/*
+ * SPDX-License-Identifier: GPL-2.0
+ */
+\end{lstlisting}
+                \item Использовать URL для определение лицензии
+            \end{itemize}
+    \end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]{Использование \copyright в проекте}
+    \begin{block}{Формат записи}
+        \begin{verbatim}
+<a copyright indicator> <years applicable>, \
+        <copyright holder(s)>.
+        \end{verbatim}
+    \end{block}
+    \begin{itemize}
+        \item Copyright 1998, Linus Torvalds.
+        \item \copyright 2003, 2010, Free Software Foundation, Inc.
+        \item Copr. 2005-2012, 2014, John Smith, Jane Doe.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Пример}
+    \begin{block}{Das U-Boot}
+    \begin{lstlisting}[language=C]
+/*
+* (C) Copyright 2002
+* Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+*
+* (C) Copyright 2010
+* Michael Zaidman, Kodak, michael.zaidman@kodak.com
+* post_word_{load|store} cleanup.
+*
+* SPDX-License-Identifier:    GPL-2.0+
+*/
+\end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Полезные ресурсы по лицензиям}
+\begin{block}{LFC191}
+    В Linux Foundation подготовили бесплатный курс по открытым лицензиям и их применению:\\
+    \url{https://training.linuxfoundation.org/training/compliance-basics-for-developers/}
+\end{block}
+\begin{block}{Подбор лицензии для проекта}
+    \url{https://tldrlegal.com/licenses/browse}
+\end{block}
+\end{frame}
 
