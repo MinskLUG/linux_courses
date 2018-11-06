@@ -7,10 +7,10 @@
       \end{itemize}
     \item Атрибуты процесса
       \begin{itemize}
-        \item pid 
+        \item pid
         \item файловые дескрипторы
         \item environment
-        \item Рабочая директория (cwd)
+        \item рабочая директория (cwd)
         \item прочее в директории {\tt /proc/<pid>}
       \end{itemize}
   \end{itemize}
@@ -20,10 +20,11 @@
   \begin{itemize}
     \item kill (killall)
     \item top
+    \item ps
     \item pstree
     \item Команды управления процессами в bash: 
       \begin{itemize}
-        \item {\tt jobs}, {\tt fg, \tt bg}
+        \item {\tt jobs}, {\tt fg}, {\tt bg}, {\tt wait}
         \item Ctrl-C -- оборвать выполнение процесса (SIGINT)
         \item Ctrl-Z -- остановить выполнение команды (SIGTSTP)
         \item Ctrl-D -- завершить ввод
@@ -33,17 +34,16 @@
 
 
 \begin{frame}{Упражнения}
-  \begin{block}{Посмотреть вывод pstree}
-    {\tt pstree}
+  \begin{block}{Посмотреть дерево процессов}
+    {\tt pstree} \\
+    {\tt ps -AfwwH}
   \end{block}
   \pause
   \begin{block}{Ctrl-C, Ctrl-Z}
-    В графическом режиме запустить из терминала emacs
-
-    Ctrl-Z
-
-    jobs -l
-
+    Запустить из терминала: emacs \\
+    Ctrl-Z \\
+    sleep infinity & \\
+    jobs -l \\
     bg +
   \end{block}
   \pause
