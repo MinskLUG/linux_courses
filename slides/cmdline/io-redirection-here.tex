@@ -1,13 +1,25 @@
-\begin{frame}[fragile]{Мультистрочный ввод (Here-документ)}
+\begin{frame}[fragile]{Мультистрочный ввод (Here документ)}
 
+	\begin{columns}
+	\column{0.45\textwidth}
+	{\center Не экранированный}
 \begin{verbatim}
 program <<LABEL
 Тут
     много
-	     строк
+        строк
 LABEL
 \end{verbatim}
-
+	\column{0.45\textwidth}
+	{\center Экранированный}
+\begin{verbatim}
+program <<"LABEL"
+Тут
+    переменная
+        $VARIABLE
+LABEL
+\end{verbatim}
+	\end{columns}
 	\pause
 	\begin{block}{Пример}
 	Передадим несколько строк в COM-порт 1
@@ -16,6 +28,23 @@ cat >/dev/ttyS0 <<E_O_F
 ATZ
 ATDT 8w0170123456
 E_O_F
+\end{lstlisting}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Here string}
+
+\begin{verbatim}
+program <<<string
+\end{verbatim}
+
+	\begin{block}{Пример}
+	Инициализация переменных из строки:
+\begin{lstlisting}[language=bash]
+read A B C <<<"First Second Third"
+
+# echo $A $B $C
+First Second Third
 \end{lstlisting}
 	\end{block}
 \end{frame}
