@@ -1,0 +1,32 @@
+\input{../branding/common}
+\title{Пользователи и привилегии}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Begin Document  %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\defaultuser}{\$USER}
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{}
+	\titlepage
+	\vspace{-0.5cm}
+	\begin{center}
+	%\frontpagelogo
+	\end{center}
+\end{frame}
+\section{Многопользовательская модель UNIX}
+\mode<all>{\input{../../slides/multiuser/multiuser-model.tex}}
+
+\mode<all>{\input{../../slides/multiuser/fs-permissions.tex}}
+\section{Внутренний механизм управления пользователями}
+\mode<all>{\input{../../slides/multiuser/account_files.tex}}
+
+\mode<all>{\input{../../slides/multiuser/pam.tex}}
+
+\mode<all>\input{../branding/completion}
+\end{document}
