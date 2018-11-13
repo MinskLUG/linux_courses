@@ -2,9 +2,9 @@ TARGET = 01-intro.pdf
 TARGET += 02-command_line_intro.pdf
 TARGET += 03-bash_and_process.pdf
 TARGET += 04-commands.pdf
-TARGET += 05-rpm.pdf
-TARGET += 06-users.pdf
-TARGET += 07-disk.pdf
+TARGET += 05-users.pdf
+TARGET += 06-disk.pdf
+TARGET += 07-rpm.pdf
 TARGET += 08-1-networking.pdf
 TARGET += 08-2-networking.pdf
 
