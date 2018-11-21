@@ -1,0 +1,14 @@
+\begin{frame}{Iptables: упражнение}
+    \begin{block}{Iptables}
+        \begin{enumerate}
+            \item В контейнере: запустить {\tt ping -n <IP>} хоста соседа
+            \item На хосте: запустить {\tt tcpdump -i eth0 icmp} в отдельной консоли
+            \item На хосте: добавить правило для таблицы {\tt nat},\\
+                включающее маскарадинг для IP-адреса, использующегося в контейнере: \\
+                {\tt iptables -t NAT -A POSTROUTING --src <IP> -j MASQUERADE}
+            \item В контейнере: запустить {\tt ping -n <IP>} хоста соседа
+            \item На хосте: Заблокировать ''входящий'' трафик от соседа:\\
+                {\tt iptables -A INPUT -i eth0 --src <IP> -p icmp -j REJECT --reject-with icmp-host-unreachable}
+        \end{enumerate}
+    \end{block}
+\end{frame}

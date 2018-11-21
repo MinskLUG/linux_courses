@@ -3,11 +3,42 @@
         {\tt systemd-nspawn} используется только для упрощения создания учебного окружения!
     \end{alert}
     \begin{block}{Запуск контейнера}
-        Использовать архив c ФС дострибутива Fedora:\\
-        {\tt tar -C /tmp/ -xf LDC-fedora26-2017.tar.gz}
+        Использовать архив c ФС дострибутива Alpine \\ (Minimal root filesystem)
 
-	\begin{lstlisting}
-systemd-nspawn -M fedora26 -D /tmp/rootfs --bind $HOME:$HOME
-\end{lstlisting}
+	\begin{verbatim}
+mkdir -p /tmp/alpine
+tar -C /tmp/alpine \
+    -xf alpine-minirootfs-3.8.1-x86_64.tar.gz
+systemd-machine-id-setup --root=/tmp/alpine/
+\end{verbatim}
+
+	\begin{verbatim}
+systemd-nspawn -M alpine -n --network-bridge=lxcbr0 \
+    -D /tmp/alpine --bind $HOME:$HOME
+\end{verbatim}
+    \end{block}
+    {\tiny Note: На своих системах конфигурация может отличаться!}
+\end{frame}
+
+\begin{frame}[fragile]{Подготовка: очистка}
+    \begin{block}{Настройка интерфейса}
+    "Магические" команды обретут смысл позже!\\
+    Просто введите их на хосте ;)
+    \begin{verbatim}
+echo 0 > /proc/sys/net/ipv4/ip_forward
+iptables -F
+iptables -F -t nat
+\end{verbatim}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Упражнение}
+    \begin{block}{Настройка интерфейса}
+        \begin{enumerate}
+            \item В контейнере: включить интерфейс {\tt host0}
+            \item На хосте: найти IP адрес и диапазон адресов интерфейса {\tt lxcbr0}
+            \item В контейнере: установить IP адрес для интерфейса {\tt host0} из найденного диапазона
+            \item На хосте: пpоверить доступность контейнера утилитой {\tt ping}
+        \end{enumerate}
     \end{block}
 \end{frame}
