@@ -1,15 +1,21 @@
-\begin{frame}{RPM: команды}
+\begin{frame}{RPM-DEB: команды}
 	\begin{block}{Установка пакета}
 		{\tt rpm -i [rpm-file1] ... [[url://]rpm-fileN] }
+        
+        {\tt dpkg -i deb-file }
 	\end{block}
 	\begin{block}{Удаление пакета}
 		{\tt rpm -e pkgname1 ... pkgnameN }
+        
+        {\tt dpkg -r pkgname ... }
 	\end{block}
 	\begin{block}{Обновление пакета}
 		{\tt rpm -U [rpm-file1] ... [[url://]rpm-fileN] }
 	\end{block}
 	\begin{block}{Проверка пакета}
 		{\tt rpm -V pkgname1 ... pkgnameN }
+
+        {\tt dpkg -V pkgname }
 	\end{block}
 \end{frame}
 
@@ -38,4 +44,19 @@
 
 \end{frame}
 
-
+\begin{frame}{dpkg-query -- получение информации о пакетах}
+    \begin{itemize}
+        \item {\tt dpkg-query -L pkgname } Список файлов пакета 
+        \item {\tt dpkg-query -S filename } Поиск пакета, содержащего файл
+        \item {\tt dpkg-query -l } Список всех пакетов (установленные начинаются с ii)
+        \item {\tt dpkg-query -l [pattern]} Список всех пакетов соотвенствующих паттерну
+       \item {\tt dpkg-query -Wf } Для автоматизации
+    \end{itemize}
+    \begin{center}
+        Аналоги whatprovides, whatrequires, информации
+    \end{center}
+    \begin{itemize}
+        \item {\tt apt show pkgname } -- информация о пакете
+        \item {\tt apt-rdepends -r, apt-cache rdepends} - какие пакеты зависят от данного
+    \end{itemize}
+\end{frame}
